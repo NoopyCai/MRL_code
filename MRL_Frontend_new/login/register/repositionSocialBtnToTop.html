@@ -1,0 +1,241 @@
+<script>
+  (function () {
+    if (document.querySelector(".authorization-link a").innerHTML === "登出") {
+      console.log("使用者已登入");
+      return;
+    }
+    var loginLine = document.querySelectorAll(
+      "#modal-content-1 .password-login-form-contain .pslogin-spacer"
+    );
+    var displayLine = loginLine[1];
+    if (loginLine) {
+      document.querySelector(
+        "#modal-content-1 .password-login-form-contain .pslogin-spacer table > tbody > tr > td.pslogin-bordertext.w25"
+      ).textContent = "或者";
+    }
+    var registerLine = document.querySelector(
+      "#modal-content-1 #create-account-form .pslogin-spacer"
+    );
+    if (registerLine) {
+      document.querySelector(
+        "#modal-content-1 #create-account-form .pslogin-spacer table > tbody > tr > td.pslogin-bordertext.w25"
+      ).textContent = "或者";
+    }
+
+    var loginSocialLine = document.querySelectorAll(".pslogin-spacer")[0];
+    var loginForm = document.querySelector(
+      ".form-password-login .login-password"
+    );
+    var loginSocialBtnsBlock = document.querySelector(".pslogin-login");
+    var registerForm = document.querySelector(
+      "#create-account-form .register-step1"
+    );
+    var registerSocialLine = document.querySelectorAll(".pslogin-spacer")[2];
+    var registerSocialBtnsBlock = document.querySelector(".pslogin-register");
+    var loginSocialBtns = document.querySelectorAll(
+      "#modal-content-1 .pslogin-buttons .pslogin-button-icon"
+    );
+    var registerPasswordLabel = document.querySelector(
+      ".label-Block-Mobpassword"
+    );
+    var passwordStrength = document.querySelector("#password-strength-meter");
+
+    if (loginSocialBtns) {
+      loginSocialBtns.forEach(function (btn) {
+        btn.classList.remove("loginBtn_bottom");
+        btn.classList.add("loginBtn_top");
+      });
+    }
+    loginForm.parentNode.insertBefore(loginSocialLine, loginForm);
+    loginForm.parentNode.insertBefore(loginSocialBtnsBlock, loginForm);
+    registerForm.parentNode.insertBefore(registerSocialLine, registerForm);
+    registerForm.parentNode.insertBefore(registerSocialBtnsBlock, registerForm);
+    registerPasswordLabel.appendChild(passwordStrength);
+  })();
+</script>
+<style>
+  .label-Block-Mobpassword {
+    justify-content: space-between !important;
+  }
+
+  #password-strength-meter-label {
+    font-weight: 600;
+    color: #333333;
+  }
+
+  #password-login-form,
+  #create-account-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #password-login-form .pslogin-spacer,
+  #create-account-form .pslogin-spacer {
+    order: 1;
+  }
+
+  #password-login-form .pslogin-block,
+  #create-account-form .pslogin-block {
+    order: 0;
+  }
+
+  #password-login-form .fieldset,
+  #create-account-form .fieldset {
+    order: 2;
+  }
+
+  #modal-content-1 .pslogin-spacer {
+    margin: auto;
+  }
+
+  #modal-content-1 .pslogin-block {
+    margin: 20px 0 20px;
+  }
+
+  #modal-content-1 .pslogin-buttons .pslogin-button {
+    width: auto !important;
+    margin: 7px 20px !important;
+  }
+
+  #modal-content-1 .pslogin-block .pslogin-buttons .pslogin-button-auto {
+    width: 100%;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    margin: 10px 0;
+  }
+
+  .pslogin-block .pslogin-buttons ul {
+    right: 0;
+  }
+
+  .pslogin-block
+    .pslogin-buttons
+    ul
+    .pslogin-button.facebook
+    .pslogin-button-icon {
+    background: url(https://d1bbx7pumsnd9q.cloudfront.net/wysiwyg/co_IMG/fb_login_v2.png)
+      no-repeat !important;
+    left: 20% !important;
+    top: 8% !important;
+  }
+
+  .pslogin-block
+    .pslogin-buttons
+    ul
+    .pslogin-button.google
+    .pslogin-button-icon {
+    background: url(https://d1bbx7pumsnd9q.cloudfront.net/wysiwyg/co_IMG/google_login_v2.jpg)
+      no-repeat !important;
+    left: 19% !important;
+  }
+
+  .pslogin-block .pslogin-buttons ul .pslogin-button.line .pslogin-button-icon {
+    background: url(https://d1bbx7pumsnd9q.cloudfront.net/wysiwyg/co_IMG/line_login_v5.png)
+      no-repeat !important;
+    left: 18.5% !important;
+  }
+
+  #modal-content-1
+    .pslogin-block
+    .pslogin-buttons
+    .facebook
+    .pslogin-button-auto {
+    background-color: #4285f3 !important;
+  }
+
+  #modal-content-1
+    .pslogin-block
+    .pslogin-buttons
+    .google
+    .pslogin-button-auto {
+    background-color: #c34135 !important;
+  }
+
+  #modal-content-1 .pslogin-block .pslogin-buttons .line .pslogin-button-auto {
+    background-color: #06c755 !important;
+  }
+
+  #modal-content-1 .pslogin-button-icon {
+    position: relative;
+    top: 8px;
+  }
+
+  .pslogin-block .pslogin-buttons ul {
+    display: block;
+  }
+
+  .pslogin-block .pslogin-buttons ul li {
+    float: unset;
+    height: auto;
+  }
+
+  #modal-content-1 .pslogin-button-text {
+    display: block;
+    background-color: transparent;
+    width: auto;
+    margin: auto;
+    font-size: 1.4rem;
+  }
+
+  #modal-content-1 .pslogin-block {
+    margin: 0 0 0;
+  }
+
+  #create-account-form .pslogin-block .pslogin-buttons ul li a {
+    width: 100% !important;
+  }
+
+  #create-account-form
+    > fieldset.fieldset.login-password.register-step1
+    > div:nth-child(1) {
+    display: block;
+  }
+
+  .mobile_login_popup fieldset.fieldset.login-password {
+    margin: 0;
+  }
+
+  #create-account-form .pslogin-spacer {
+    display: none;
+  }
+  #modal-content-1 .frm-container {
+    margin: 25px 0 0 0 !important;
+  }
+
+  @media (max-width: 768px) {
+    #modal-content-1 .pslogin-block {
+      margin: 10px 0 0;
+    }
+
+    #modal-content-1 .pslogin-block .pslogin-buttons ul li {
+      width: 100% !important;
+      margin: 7px 0 !important;
+    }
+
+    #modal-content-1 fieldset.fieldset.login-password {
+      margin-bottom: 0;
+    }
+
+    #modal-content-1 .frm-container {
+      margin: 0 !important;
+    }
+
+    #modal-content-1 .footer-box-link {
+      margin: 40px 0 0 0;
+    }
+    #modal-content-1 .pslogin-block .pslogin-buttons .pslogin-button-auto {
+      height: 45px;
+    }
+    #modal-content-1 .pslogin-button-icon {
+      top: 0px;
+      width: 44px;
+      height: 25px;
+      background-size: contain !important;
+    }
+    #modal-content-1 .pslogin-block.pslogin-register {
+      height: 175px;
+    }
+  }
+</style>

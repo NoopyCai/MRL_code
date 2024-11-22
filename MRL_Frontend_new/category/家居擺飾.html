@@ -1,0 +1,213 @@
+<div class="catBtn-nav"><a href="{{store direct_url='about-bloomingville.html?MRL_filters_decor=441'}}">紡品/抱枕/餐巾</a></div>
+
+<div><a href="{{store direct_url='about-bloomingville.html?MRL_filters_decor=442'}}" >家飾品</a></div>
+
+<div><a href="{{store direct_url='about-bloomingville.html?MRL_filters_decor=443'}}" >餐具器皿</a></div>
+
+<div><a href="{{store direct_url='about-bloomingville.html?MRL_filters_decor=444'}}" >花器</a></div>
+
+
+<style>
+    #layered-filter-block{
+      display: none;
+    }
+    .toolbar-products{
+      display: none;
+    }
+     .category-description h1{
+      display: none;
+    }
+    .product-image-photo {
+      transform: scale(1.2);
+    }
+    .product-image-container:hover {
+      opacity: 0.8;
+    }
+    .page-main {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .page-products .columns {
+      display: flex;
+      position: relative;
+    }
+    .page-products .products-grid .product-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: start;
+      padding-inline-start: 20px;
+      margin: 0 5%;
+    }
+    .column.main .product-item {
+      display: flex;
+      justify-content: center;
+    }
+    .page-layout-2columns-left .sidebar-main {
+      width: 100%;
+      padding: 1em;
+    }
+    .page-layout-2columns-left .sidebar-additional {
+      display: none;
+    }
+    [data-content-type="row"][data-appearance="contained"] {
+      max-width: 100%;
+    }
+    .page-layout-2columns-left .main {
+      padding-left: 0;
+    }
+    .toolbar-products {
+      margin: 2% 10%;
+    }
+    #toolbar-amount {
+      display: none;
+    }
+    .filter-btn-block {
+      width: 6em;
+    }
+    .filter-btn-block button {
+      background-color: #f0f0f0;
+      display: flex;
+      padding: 4px 10px 5px 10px;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      font-size: 1.3em;
+    }
+    /* .filter-btn-block button::after{
+      content: '\f160';
+      font: normal normal normal 14px / 1 FontAwesome;
+      font-size: 14px;
+      margin-left: 4px;
+      } */
+    .filter-overlay {
+      visibility: hidden;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+      transition: visibility 0s, opacity 0.3s ease-in-out;
+      opacity: 0;
+    }
+    .filter-overlay.active {
+      z-index: 401;
+      visibility: visible;
+      opacity: 1;
+      transition-delay: 0s, 0s;
+    }
+    .filter-container {
+      visibility: hidden;
+      opacity: 0;
+      width: 40%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      right: 0;
+      /* background-color: #f0f0f0; */
+      background-color: #fff;
+      z-index: 402;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      transform: translateX(100%);
+      overflow: auto;
+    }
+    .filter-container.active {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .filter-options {
+      overflow: auto;
+    }
+    .filter-options-item {
+      padding: 1.5em 0;
+    }
+    .filter-close-btn {
+      position: absolute;
+      z-index: 5;
+      font-size: 2.5em;
+      right: 1.5%;
+      top: 15%;
+      color: #333;
+      cursor: pointer;
+    }
+    .filter .block-subtitle {
+      font-size: 1.2em;
+      position: relative;
+    }
+    @media screen and (max-width: 767px) {
+      .product-image-photo {
+        transform: scale(1);
+      }
+      .page-layout-2columns-left .sidebar-additional {
+        display: block;
+      }
+      .page-products .columns {
+        padding-top: 0;
+      }
+      .page-products .sorter {
+        position: unset;
+      }
+      .page-products .products-grid .product-items {
+        margin: 0 5%;
+      }
+      .toolbar-products {
+        margin: 5%;
+        padding: 0 0;
+      }
+      .filter-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .filter-options {
+        display: block;
+      }
+      .page-layout-2columns-left .sidebar-main {
+        padding: 0;
+        width: 90%;
+      }
+      .filter-title strong {
+        display: none;
+      }
+      .filter .block-subtitle {
+        display: block;
+        font-weight: bold !important;
+      }
+      .filter .filter-current {
+        margin: 5px 0 10px;
+        border: none;
+      }
+      .filter-options-title {
+        padding: 10px 40px 10px 10px;
+      }
+      .filter .filter-current-subtitle:after {
+        color: #fff;
+      }
+      .filter-options-item {
+        padding: 0.5em 0;
+      }
+    }
+  </style>
+ <script type="text/javascript">
+    require(["jquery"], function ($) {
+        (function () {
+            if(window.location.href.includes('MRL_filters_decor')){
+                var target_top = $(".catBtn-nav").offset().top - 300;
+                var $body = window.opera
+              ? document.compatMode == "CSS1Compat"
+                ? $("html")
+                : $("body")
+              : $("html,body");
+  
+            $body.animate(
+              {
+                scrollTop: target_top,
+              },
+              800
+            );
+            }
+        })();
+    });
+  </script>

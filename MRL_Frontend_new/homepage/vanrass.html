@@ -1,0 +1,397 @@
+<script>
+    (function() {
+      var locationUrl = window.location.toLocaleString();
+
+     if({{Page Path}}.match(/^\/(\?(.*))?$/)){
+        console.log("[ven job] 首頁");
+        ven_portal();
+        ven_recomd("p","ClickStream",10,recomd_callback);
+        ven_recomd("p2","ClickStream",10,recomd_callback_2);
+      } else if ({{js - pagetype}}==='product-page') {
+        // 產品頁
+        ven_good();
+      }else if ({{Page Path}}.indexOf('checkout/onepage/success')!= -1) {
+
+        var orderTable = document.querySelector('#my-orders-table');
+        var productDomList = orderTable.querySelectorAll('tbody');
+        var iList = [];
+
+        productDomList.forEach(function(product){
+            var productItem = {};
+            productItem['id'] = product.querySelector('tbody .col.sku').innerText;
+            iList.push(productItem);
+        })
+
+        var trans_i = {};
+
+        trans_i["id"] = {{dom - transaction id}};//購物車編號(cartload),若無購物車編號請傳空值.
+        trans_i["ilist"] = iList;
+        ven_order(trans_i);
+      }else if({{Page Path}}.indexOf('/checkout/cart')!= -1){
+        //console.log('購物車頁面');
+        //購物車頁面
+        var trans_i = {};
+          var iList = [];
+          var ProductsId = document.querySelectorAll('.input-text.qty');
+          ProductsId.forEach(function (p){
+               var item = {};
+                //console.log(p.dataset.cartItemId)
+                item["id"] = p.dataset.cartItemId;//商品編號
+                iList.push(item);
+          });
+
+          console.log(iList);
+          trans_i["id"] = '';//購物車編號(cartload),若無購物車編號請傳空值.
+          trans_i["ilist"] = iList;
+          ven_cart(trans_i);
+
+      }
+        else if ({{js - pagetype}}==='category-page') {
+        // 分類頁
+        ven_category();
+        ven_recomd("cap","ClickStream",10,recomd_callback_category);
+      }
+
+      //if found function venraasJob, execute it.
+      if (typeof venraasJob === "function") {
+        console.log("[ven job] found venraasJob, execute it!");
+        venraasJob();
+      }
+    })();
+
+
+    function jsonHandler(recomd_result, ga_action){
+          var htmlStr = '';
+          if(recomd_result != null){
+          htmlStr = '<div class="descript-content"><div class="owl-carousel owl-theme">';
+              for ( var i = 0; i < recomd_result.recomd_list.length; i++){
+                  var recomd_item = {};
+                  recomd_item.item_name=recomd_result.recomd_list[i].name;
+                  recomd_item.item_img_url=recomd_result.recomd_list[i].goods_img_url;
+                  recomd_item.item_url=recomd_result.recomd_list[i].goods_page_url;
+                  recomd_item.item_sale_price=recomd_result.recomd_list[i].sale_price;
+                  recomd_item.item_price = recomd_result.recomd_list[i].price;
+                  recomd_item.item_sku = recomd_result.recomd_list[i].id;
+                  htmlStr +=portal_process_item(recomd_item, ga_action);
+              }
+          htmlStr +='</div></div>' ;
+          return htmlStr; }
+    }
+
+
+
+  function portal_process_item(recomd_item, ga_action){
+      var newItemName = '';
+      var configurableProductReg =  /\|C$/g;;
+      if(recomd_item.item_name.endsWith('|C')){
+        newItemName = recomd_item.item_name.replace(configurableProductReg, '');
+      }else{
+        newItemName = recomd_item.item_name;
+      }
+      var htmlStr = '<div class="product-item-info" data-container="product-grid">';
+      htmlStr += '<div class="product photo product-item-photo" style="width: 100%; height: 0;">';
+      htmlStr += '<a href="' + recomd_item.item_url + '" tabindex="-1">';
+      htmlStr += '<div class="product-image-container">'
+      htmlStr += '<img class="'+ga_action+' mrl-click select-item owl-lazy product-image-photo default_image" data-src="' + recomd_item.item_img_url + '" alt="' + newItemName + '" src="' + recomd_item.item_img_url + '"  style="opacity:1; width:100%; margin: auto 0;" data-ga-category="Recomd" data-ga-item-id="'+ recomd_item.item_sku+'" loading="lazy"/></div></a>';
+      htmlStr += '</div>';
+      htmlStr += '<div class="product details product-item-details">';
+      htmlStr += '<strong class="product name product-item-name" style="margin-bottom: 24px;">';
+      htmlStr += '<a class="'+ ga_action+' mrl-click select-item product-item-link" href="' + recomd_item.item_url + '" data-ga-category="Recomd" data-ga-item-id="'+ recomd_item.item_sku+'">' + newItemName + '</a></strong>';
+      PriceFormat = new Intl.NumberFormat('en-US');
+
+      if(recomd_item.item_sale_price < recomd_item.item_price && recomd_item.item_sale_price !== 0 && recomd_item.item_price !== 0 && !recomd_item.item_name.endsWith('|C')){
+        //simple product & 有折扣
+        htmlStr += '<div class="price-box price-final_price" data-role="priceBox"><span class="price-container price-final_price tax weee"> <span data-price-type="finalPrice" class="price-wrapper "><span class="price" style="color:#C24035;">$' + PriceFormat.format(recomd_item.item_sale_price) + '</span>';
+        htmlStr += '<span class="mrl_discount_txt" style="font-size: 1.1rem; color:#666666;">(售價已折)</span>';
+        htmlStr += '<span class="old-price"><span class="price" style="text-decoration: line-through;">$';
+        htmlStr += PriceFormat.format(recomd_item.item_price) + '</span></span>';
+      }else if(recomd_item.item_sale_price === recomd_item.item_price && recomd_item.item_sale_price !== 0 && recomd_item.item_name.endsWith('|C')){
+        //config product & 無折扣
+        htmlStr += '<div class="price-box price-final_price" data-role="priceBox"><span class="price-container price-final_price tax weee"> <span data-price-type="finalPrice" class="price-wrapper "><span class="price">$' + PriceFormat.format(recomd_item.item_sale_price) + ' 起</span>';
+      }else if(recomd_item.item_sale_price < recomd_item.item_price && recomd_item.item_sale_price !== 0 && recomd_item.item_price !== 0 && recomd_item.item_name.endsWith('|C')){
+        //config product & 有折扣
+         htmlStr += '<div class="price-box price-final_price" data-role="priceBox"><span class="price-container price-final_price tax weee"> <span data-price-type="finalPrice" class="price-wrapper "><span class="price" style="color:#C24035;">$' + PriceFormat.format(recomd_item.item_sale_price) + '</span>';
+        htmlStr += '<span class="mrl_discount_txt" style="font-size: 1.1rem; color:#666666;">(售價已折)</span>';
+        htmlStr += '<span class="old-price"><span class="price" style="text-decoration: line-through;">$';
+        htmlStr += PriceFormat.format(recomd_item.item_price) + ' </span><span style="color:#333; font-weight:700;"> 起</span></span>';
+      }else if(recomd_item.item_sale_price === 0 && recomd_item.item_price === 0){
+        //0元商品不顯示
+         htmlStr += '<div class="price-box price-final_price" data-role="priceBox"><span class="price-container price-final_price tax weee"> <span data-price-type="finalPrice" class="price-wrapper "><span class="price"></span>';
+      }else{
+        // not config & 無折扣
+        htmlStr += '<div class="price-box price-final_price" data-role="priceBox"><span class="price-container price-final_price tax weee"> <span data-price-type="finalPrice" class="price-wrapper "><span class="price">$' + PriceFormat.format(recomd_item.item_sale_price) + '</span>';
+      }
+      htmlStr += '</span></div></div></div>';
+      return htmlStr;
+    }
+
+    //showItems(id)原程式碼
+    function showItems(id) {
+      require(['jquery', 'owlcarousel'], function ($) {
+        jQuery(id).owlCarousel({
+          loop: true,
+          nav: false,
+          autoWidth:false,
+          lazyLoad: true,
+          dots:true,
+          center:false,
+          autoHeight : false,
+          rewind: true,
+          dotsEach: 6,
+          navText: ['<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 2px;stroke: #333;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+                    '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 2px;stroke: #333;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
+          responsive: {
+            0: {
+              items: 2,
+              dots:false
+            },
+            768: {
+              items: 3
+            },
+            992: {
+              items: 4
+            },
+            1200: {
+              items: 5
+            },
+            1440: {
+              items: 6
+            }
+       }
+      });
+    });
+   }
+    function showItemsCategory(id) {
+      require(['jquery', 'owlcarousel'], function ($) {
+        jQuery(id).owlCarousel({
+          autoplay: false,
+          margin: 20,
+          dots: true,
+          center:false,
+          autoWidth:false,
+          nav: false,
+          loop: true,
+          lazyLoad: true,
+          autoHeight : false,
+          dotsEach: 4,
+          navText: ['<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 2px;stroke: #333;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+                    '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 2px;stroke: #333;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
+          responsive: {
+            0: {
+              items: 2,
+              dots:false
+            },
+            768: {
+              items: 3
+            },
+            992: {
+              items: 4
+            },
+            1200: {
+              items: 4
+            },
+            1440: {
+              items: 4
+            }
+       }
+      });
+    });
+   }
+
+     function recomd_callback(jsonStr){
+      var recomd_result = JSON.parse(jsonStr);
+      var htmlStr = jsonHandler(recomd_result, 'HomeRecomd_R1');
+      jQuery("#portal_venraas_rec").html(htmlStr);
+       showItems("#portal_venraas_rec .owl-carousel");
+    }
+
+
+    function recomd_callback_2(jsonStr){
+      var recomd_result_2 = JSON.parse(jsonStr);
+      var htmlStr2 = jsonHandler(recomd_result_2, 'HomeRecomd_R2');
+     jQuery("#portal_venraas_rec_02").html(htmlStr2);
+      showItems("#portal_venraas_rec_02 .owl-carousel");
+    }
+
+   function recomd_callback_category(jsonStr){
+      var recomd_result = JSON.parse(jsonStr);
+      var htmlStr = jsonHandler(recomd_result, 'CateRecomd');
+     jQuery("#category_venraas_rec").html(htmlStr);
+      showItemsCategory("#category_venraas_rec .owl-carousel");
+   }
+</script>
+<style>
+  #category_venraas_rec .owl-carousel {
+    width: 100%;
+  }
+
+  #category_venraas_rec .product-item-details {
+    width: 250px;
+    bottom: 0%;
+  }
+
+  #category_venraas_rec .owl-carousel .owl-controls .owl-nav {
+    display: none;
+  }
+
+  #category_venraas_rec .owl-carousel .owl-dots {
+    margin: 50px 0;
+  }
+  #category_venraas_rec .price-final_price {
+    padding-top: 5px;
+    padding-left: 0;
+  }
+  #category_venraas_rec .product-item-name {
+    margin: 5px 0;
+  }
+
+  .venraas_rec .owl-controls {
+    display: block;
+    margin-bottom: 60px;
+  }
+  .venraas_rec .product-image-container {
+    height: 250px;
+  }
+  .venraas_rec .product-item-info {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    justify-content: space-between;
+    width: 17.5rem;
+    margin: auto;
+  }
+  .venraas_rec .owl-carousel {
+    width: 95%;
+    margin: auto;
+  }
+  .venraas_rec .owl-carousel .owl-item {
+    margin: auto;
+  }
+  .venraas_rec .product-image-container {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    position: absolute;
+  }
+  .venraas_rec .product-item-details {
+    width: 220px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20%;
+  }
+  .venraas_rec .price {
+    font-weight: 700;
+  }
+  .venraas_rec .old-price .price {
+    font-weight: 400;
+  }
+  .venraas_rec .owl-prev {
+    left: 0px;
+    top: 50%;
+  }
+  .venraas_rec .owl-next {
+    right: 0px;
+    top: 50%;
+  }
+  .venraas_rec .owl-theme .owl-next,
+  .venraas_rec .owl-theme .owl-prev {
+    width: 25px;
+    height: 35px;
+    opacity: 0.6;
+    margin-top: -20px;
+    position: absolute;
+    transform: translateY(-50%);
+  }
+  .venraas_rec .owl-carousel .owl-stage-outer {
+    padding-bottom: 1em;
+  }
+  .venraas_rec .owl-controls {
+    position: initial;
+  }
+  .dividing-line-ven {
+    margin-top: 47.5px;
+  }
+  .venraas_rec .product-item-name {
+    margin: 5px 2.4rem;
+  }
+  .venraas_rec .price-final_price {
+    padding-left: 1.2rem;
+  }
+  .venraas_rec .owl-dots {
+    margin-bottom: 60px;
+  }
+  .venraas_rec .owl-nav {
+    display: none !important;
+  }
+
+  @media (max-width: 767px) {
+    #category_venraas_rec .product-item-details {
+      width: 220px;
+      padding-right: 0%;
+      bottom: 0%;
+    }
+    #category_venraas_rec .price-final_price {
+      display: flex;
+      letter-spacing: 0;
+      padding-left: 1.2rem;
+    }
+    #category_venraas_rec .product-item-name {
+      margin: 5px 2.4rem;
+    }
+    .venraas_rec .product-item-details {
+      margin-top: 20px;
+      width: 100%;
+      bottom: 0;
+    }
+    .dividing-line-ven {
+      margin-top: 60px;
+    }
+    .venraas_rec .product-item-info {
+      height: 356px;
+    }
+    .venraas_rec {
+      margin: 0;
+    }
+    #category_venraas_rec {
+      margin: auto;
+    }
+    .venraas_rec .owl-carousel {
+      width: 100%;
+      margin: 0;
+    }
+    .venraas_rec .owl-carousel .owl-item {
+      margin: 0;
+    }
+
+    .venraas_rec .owl-carousel .owl-stage-outer {
+      overflow: auto;
+      margin-left: 0;
+      margin-right: 0;
+      padding: 0;
+    }
+    .venraas_rec .owl-stage {
+      transform: unset !important;
+      display: flex;
+      width: fit-content !important;
+    }
+    .venraas_rec .cloned {
+      display: none;
+    }
+    .venraas_rec .owl-nav {
+      display: none;
+    }
+    .venraas_rec .product-item-name {
+      margin-left: 2%;
+      margin-bottom: 55px !important;
+    }
+    .venraas_rec .price-final_price {
+      padding-left: 0;
+    }
+  }
+  @media (min-width: 768px) {
+    .venraas_rec .product-image-container {
+      height: 300px;
+    }
+  }
+</style>

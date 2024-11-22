@@ -1,0 +1,2210 @@
+<!-- 空間佈置靈感 -->
+<style>
+  .find_inspire.nocarousel .find_inspire_carousel_initial .item img {
+    display: none !important;
+    width: 100%;
+  }
+
+  .find_inspire.nocarousel .find_inspire_carousel_initial .item:first-child img {
+    display: block !important;
+  }
+
+  .find_inspire.nocarousel .find_inspire_carousel_initial {
+    display: none;
+  }
+
+  .find_inspire.nocarousel .find_inspire_carousel_initial.active {
+    display: block;
+  }
+
+  .find_inspire_carousel_initial .owl-stage-outer {
+    height: auto;
+    margin: 5rem 0;
+  }
+
+  .find_inspire {
+    width: 100%;
+    margin: auto;
+    padding: 47px 70px 0 70px;
+    box-sizing: border-box;
+    font-family: "Noto Sans TC", sans-serif !important;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .find_inspire_main {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .find_inspire_main .find_inspire_main_pic {
+    width: 100%;
+    /* padding-right: 25px; */
+  }
+
+  .find_inspire_main .find_inspire_main_pic .owl-controls {
+    display: block !important;
+  }
+
+  .find_inspire_main .find_inspire_main_container {
+    display: grid;
+    column-gap: 25px;
+    row-gap: 4%;
+    width: 55%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    position: relative;
+  }
+
+  .find_inspire_main .find_inspire_main_container .find_inspire_item {
+    width: 100%;
+    background-color: white;
+    position: relative;
+  }
+
+  .find_inspire_main .find_inspire_main_container .find_inspire_item a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 400;
+    font-size: 1.4rem;
+    display: inline-block;
+  }
+
+  .find_inspire_main .find_inspire_main_container .find_inspire_item .find_inspire_item_bottom a {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.5em;
+    height: 3em;
+    margin-bottom: 1rem;
+  }
+
+  .find_inspire_main .find_inspire_main_container .find_inspire_item a:hover {
+    text-decoration: underline;
+  }
+
+  .find_inspire_main .find_inspire_main_container .find_inspire_item .price {
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: inline-block;
+  }
+
+  .find_inspire_main .find_inspire_main_container .find_inspire_item_bottom {
+    padding: 10px;
+    position: absolute;
+    bottom: 1px;
+  }
+
+  .find_inspire_main .find_inspire_main_container .more {
+    position: absolute;
+    right: 9px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 52px;
+    width: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #9e7756;
+    /* box-shadow: 0px 0px 200px 150px rgb(255, 255, 255);*/
+  }
+
+  .find_inspire_main .find_inspire_main_container .more a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    width: 100%;
+    text-align: center;
+    padding: 1.6rem 0;
+  }
+
+  .nav_inspire ul li {
+    margin-right: 28px;
+    margin-bottom: 20px !important;
+  }
+
+  .find_inspire_carousel_initial .itemImg {
+    width: 11rem;
+  }
+
+  .find_inspire.nocarousel .find_inspire_carousel_initial .item .check-more-btn {
+    display: none;
+    position: absolute;
+    bottom: 5%;
+    right: 3%;
+    z-index: 1;
+  }
+
+  .find_inspire.nocarousel .find_inspire_carousel_initial .item .check-more-btn.check-more-active {
+    display: block;
+  }
+
+  .find_inspire.nocarousel .find_inspire_carousel_initial .item .check-more-btn button {
+    background-color: transparent;
+    padding: 5px 7px 5px 10px;
+  }
+
+  .find_inspire.nocarousel .find_inspire_carousel_initial .item .check-more-btn button a {
+    color: #fff;
+  }
+
+  .find_inspire.nocarousel .find_inspire_carousel_initial .item .check-more-btn button a:hover {
+    text-decoration: none;
+  }
+
+  .find_inspire.nocarousel .find_inspire_carousel_initial .item .inspire-close-btn {
+    display: none;
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    top: 15px;
+    z-index: 5;
+    font-size: 3.3rem;
+    font-weight: 700;
+    line-height: 33px;
+    right: 10px;
+    color: rgb(0, 0, 0, 50%);
+    opacity: 70%;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: -1px 1px 6px 2px #5959593b;
+  }
+
+  .find_inspire.nocarousel .find_inspire_carousel_initial .item .itemImgContainer {
+    max-width: 30%;
+  }
+
+  .img-wrapper .overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+  }
+
+  .img-wrapper .overlay.o-active {
+    display: block !important;
+  }
+
+  .img1-bt1-itemInfo {
+    bottom: -62.5px;
+    left: -147px;
+  }
+
+  .img1-bt1-itemInfo::after {
+    bottom: 50%;
+    right: -5px;
+  }
+
+  .product-disPrice {
+    line-height: 35px;
+  }
+
+  .bt2-itemInfo::after {
+    top: -5px;
+  }
+
+  #find_inspire_carousel .itemInfo p {
+    font-family: "Noto Sans TC", sans-serif;
+  }
+
+  #find_inspire_carousel .itemInfo .itemInfo-text .product-title {
+    letter-spacing: 0;
+  }
+
+  #find_inspire_carousel .owl-dots {
+    margin-bottom: 50px;
+  }
+
+  /* 導構圖產品 */
+  .item-22-0143-0-19 {
+    top: 63% !important;
+    left: 76% !important;
+  }
+
+  .item-10-0105-216056-03-v2 {
+    top: 60% !important;
+    left: 23% !important;
+  }
+
+  .item-22-0144-0-19 {
+    top: 37% !important;
+    left: 29% !important;
+  }
+
+  .item-10-0403-0-26-v2 {
+    top: 46% !important;
+    left: 48% !important;
+  }
+
+  .item-1018302 {
+    top: 71% !important;
+    left: 44% !important;
+  }
+
+  .item-1018304 {
+    top: 62% !important;
+    left: 83% !important;
+  }
+
+  .item-1018009 {
+    top: 55% !important;
+    left: 23% !important;
+  }
+
+  .item-1018011 {
+    top: 70% !important;
+    left: 23% !important;
+  }
+
+  .item-1018020 {
+    top: 53% !important;
+    left: 60% !important;
+  }
+
+  .item-10-0101-203001-03 {
+    top: 50% !important;
+    left: 26% !important;
+  }
+
+  .item-11-0046-203001-03 {
+    top: 64% !important;
+    left: 67% !important;
+  }
+
+  .item-1017825 {
+    top: 53% !important;
+    left: 39% !important;
+  }
+
+  .item-20-0132-0-19 {
+    top: 68% !important;
+    left: 13% !important;
+  }
+
+  .item-10-0122-219067-03 {
+    top: 69% !important;
+    left: 80% !important;
+  }
+
+  .item-20-0070-0-19 {
+    top: 70% !important;
+    left: 41% !important;
+  }
+
+  .item-22-0050-0-19 {
+    top: 61% !important;
+    left: 74% !important;
+  }
+
+  .item-22-0142-0-19 {
+    top: 44% !important;
+    left: 83% !important;
+  }
+
+  .item-13-0035-0-19 {
+    top: 67% !important;
+    left: 45% !important;
+  }
+
+  .item-1017924 {
+    top: 46% !important;
+    left: 35% !important;
+  }
+
+  .item-22-0145-0-19 {
+    top: 41% !important;
+    left: 21% !important;
+  }
+
+  .item-1017925 {
+    top: 53% !important;
+    left: 45% !important;
+  }
+
+  .item-12-0082-0-02 {
+    top: 63% !important;
+    left: 80% !important;
+  }
+
+  .item-1017928 {
+    top: 41% !important;
+    left: 36% !important;
+  }
+
+  .itemInfoContainer .item-1017928.Notactive,
+  .itemInfoContainer .item-12-0038-0-18.Notactive,
+  .itemInfoContainer .item-1017956.Notactive,
+  .itemInfoContainer .item-21-0056-0-19.Notactive,
+  .itemInfoContainer .item-1018011.Notactive {
+    top: 25% !important;
+  }
+
+  .itemInfoContainer .item-1017965.Notactive,
+  .itemInfoContainer .item-24-0036-0-18.Notactive,
+  .itemInfoContainer .item-1017957.Notactive,
+  .itemInfoContainer .item-13-0034-0-19.Notactive,
+  .itemInfoContainer .item-1018020.Notactive {
+    top: 55% !important;
+  }
+
+  .item-1017965 {
+    top: 67% !important;
+    left: 38% !important;
+  }
+
+  .item-12-0038-0-18 {
+    top: 64% !important;
+    left: 23% !important;
+  }
+
+  .item-24-0036-0-18 {
+    top: 52% !important;
+    left: 68% !important;
+  }
+
+  .item-1017933-v2 {
+    top: 58% !important;
+    left: 80% !important;
+  }
+
+  .item-12-0036-0-17 {
+    top: 64% !important;
+    left: 60% !important;
+  }
+
+  .item-12-0037-0-17 {
+    top: 64% !important;
+    left: 27% !important;
+  }
+
+  .item-22-0049-0-19 {
+    top: 55% !important;
+    left: 65% !important;
+  }
+
+  .item-12-0059-0-19 {
+    top: 61% !important;
+    left: 42% !important;
+  }
+
+  .item-22-0052-0-19 {
+    top: 55% !important;
+    left: 27% !important;
+  }
+
+  .item-23-0103-1-19 {
+    top: 47% !important;
+    left: 65% !important;
+  }
+
+  .item-22-0139-0-19 {
+    top: 62% !important;
+    left: 35% !important;
+  }
+
+  .item-21-0057-0-19 {
+    top: 55% !important;
+    left: 19% !important;
+  }
+
+  .item-1017956 {
+    top: 46% !important;
+    left: 52% !important;
+  }
+
+  .item-1017957 {
+    top: 67% !important;
+    left: 60% !important;
+  }
+
+  .item-22-0140-0-19 {
+    top: 49% !important;
+    left: 27% !important;
+  }
+
+  .item-23-0109-1-19 {
+    top: 81% !important;
+    left: 51% !important;
+  }
+
+  .item-1017968 {
+    top: 70% !important;
+    left: 80% !important;
+  }
+
+  .item-21-0056-0-19 {
+    top: 35% !important;
+    left: 52% !important;
+  }
+
+  .item-13-0034-0-19 {
+    top: 65% !important;
+    left: 89% !important;
+  }
+
+  .item-23-0079-1-19 {
+    top: 51% !important;
+    left: 47% !important;
+  }
+
+  .item-22-0047-0-19 {
+    top: 64% !important;
+    left: 18% !important;
+  }
+
+  .find_inspire.nocarousel .find_inspire_carousel_initial .owl-nav {
+    display: none;
+  }
+
+  @media (max-width: 1600px) {
+    .find_inspire {
+      padding: 47px 50px 0 50px;
+    }
+  }
+
+  @media (max-width: 1440px) {
+    #find_inspire_carousel .itemInfo {
+      width: 250px;
+      min-width: 225px;
+      height: 70px;
+      padding: 8px 10px 8px 0;
+    }
+
+    #find_inspire_carousel .itemInfo .itemInfo-text .product-title {
+      font-size: 12px;
+    }
+
+    #find_inspire_carousel .itemInfo .itemInfo-text .product-disPrice {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .find_inspire_main {
+      flex-direction: column;
+    }
+
+    .find_inspire_main .find_inspire_main_pic {
+      width: 100%;
+    }
+
+    .find_inspire_main .find_inspire_main_container {
+      width: 100%;
+      grid-template-columns: 1fr 1fr;
+      row-gap: 0;
+      column-gap: 0;
+      padding-bottom: 5rem;
+    }
+
+    .find_inspire {
+      padding: 0;
+      background-color: unset;
+    }
+
+    .nav_inspire {
+      margin-top: 60px;
+    }
+
+    #find_inspire_carousel .itemInfo {
+      width: 250px;
+    }
+
+    #find_inspire_carousel .itemInfo .itemInfo-text .product-title {
+      font-size: 12px !important;
+    }
+
+    .product-oldPrice {
+      font-size: 10px !important;
+    }
+
+    .find_inspire_main .find_inspire_main_container .more {
+      box-shadow: none;
+      left: 0;
+      right: 0;
+      top: unset;
+      width: 96%;
+      height: 3rem;
+      border-radius: 20px;
+      background-color: #8e8481;
+      border: none;
+    }
+
+    .find_inspire_main .find_inspire_main_container .more a {
+      width: 100%;
+      text-align: center;
+      padding: 0.5rem 0;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0px;
+    }
+
+    .find_inspire_main .find_inspire_main_container .find_inspire_item {
+      padding-bottom: 6rem;
+    }
+
+    .find_inspire_main .find_inspire_main_container .find_inspire_item>a {
+      height: unset;
+    }
+
+    .find_inspire_main .find_inspire_main_container .find_inspire_item .find_inspire_item_bottom a {
+      height: 3em;
+    }
+
+    .find_inspire_carousel_initial .owl-stage-outer {
+      margin: 2.5rem 0;
+    }
+
+    .find_inspire .owl-controls {
+      display: block;
+      position: relative;
+      left: 0;
+      right: 0;
+    }
+
+    .find_inspire .owl-carousel .owl-nav {
+      display: none;
+    }
+
+    #find_inspire_carousel .owl-dots {
+      margin-bottom: 1rem;
+    }
+
+    .find_inspire .owl-dots {
+      display: block !important;
+      margin-top: 25px;
+    }
+
+    .itemInfo::after {
+      display: none;
+    }
+
+    .find_inspire.nocarousel .find_inspire_carousel_initial .item .itemImgContainer img {
+      width: 100%;
+    }
+
+    .find_inspire.nocarousel .find_inspire_carousel_initial .item .btn1.mobile-btn1,
+    .find_inspire.nocarousel .find_inspire_carousel_initial .item .btn2.mobile-btn2,
+    .find_inspire.nocarousel .find_inspire_carousel_initial .item .btn3.mobile-btn3 {
+      width: 0;
+      height: 0;
+    }
+
+    .find_inspire.nocarousel .find_inspire_carousel_initial .item .itemImgContainer {
+      width: 100%;
+      max-width: 25%;
+    }
+
+    .find_inspire.nocarousel .find_inspire_carousel_initial .item .img-container .img-wrapper img {
+      height: 310px !important;
+    }
+
+    .find_inspire.nocarousel .find_inspire_carousel_initial .item .itemInfoContainer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+    }
+
+    .find_inspire.nocarousel .find_inspire_carousel_initial .item .itemInfoContainer .itemInfo-text {
+      width: 158px;
+    }
+
+    .inspire-close-btn.active {
+      display: block !important;
+    }
+
+    .find_inspire.nocarousel .find_inspire_carousel_initial .item .check-more-btn button {
+      padding: 5px 7px 5px 10px;
+    }
+
+    .bt1-itemInfo::after {
+      bottom: -5px !important;
+
+      right: 47% !important;
+    }
+
+    .bt2-itemInfo::after {
+      right: 11% !important;
+    }
+
+    .bt3-itemInfo::after {
+      right: 30% !important;
+      bottom: 0;
+      top: -5px;
+    }
+
+    .bt4-itemInfo {
+      left: -23px;
+      bottom: 28px;
+    }
+
+    .bt4-itemInfo::after {
+      right: 30% !important;
+      bottom: -5px !important;
+    }
+
+    .item-10-0105-216056-03-v2 {
+      top: 62% !important;
+      left: 23% !important;
+    }
+
+    .item-10-0403-0-26-v2 {
+      top: 48% !important;
+      left: 48% !important;
+    }
+
+    .item-20-0070-0-19 {
+      top: 55% !important;
+    }
+
+    .item-22-0050-0-19 {
+      top: 49% !important;
+    }
+
+    .item-22-0142-0-19 {
+      top: 50% !important;
+      left: 87% !important;
+    }
+
+    .item-1017925 {
+      top: 59% !important;
+    }
+
+    .item-12-0082-0-02 {
+      top: 70% !important;
+    }
+
+    .item-12-0038-0-18 {
+      top: 67% !important;
+    }
+
+    .item-12-0037-0-17 {
+      left: 21% !important;
+    }
+
+    .item-22-0052-0-19 {
+      left: 18% !important;
+    }
+
+    .item-12-0059-0-19 {
+      top: 63% !important;
+      left: 48% !important;
+    }
+
+    .item-23-0103-1-19 {
+      top: 56% !important;
+    }
+
+    .item-22-0139-0-19 {
+      top: 65% !important;
+      left: 38% !important;
+    }
+
+    .item-1017957 {
+      top: 69% !important;
+      left: 57% !important;
+    }
+
+    .item-22-0140-0-19 {
+      top: 54% !important;
+    }
+
+    .item-1017968 {
+      top: 74% !important;
+      left: 88% !important;
+    }
+
+    .item-13-0034-0-19 {
+      left: 93% !important;
+    }
+
+    .item-11-0046-203001-03 {
+      left: 82% !important;
+    }
+
+    .remove-edges {
+      transform: scaleX(1.1);
+    }
+
+    .itemInfoContainer .item-1017928.Notactive,
+    .itemInfoContainer .item-12-0038-0-18.Notactive,
+    .itemInfoContainer .item-1017956.Notactive,
+    .itemInfoContainer .item-21-0056-0-19.Notactive,
+    .itemInfoContainer .item-1018011.Notactive {
+      top: 20% !important;
+    }
+
+    .itemInfoContainer .item-1017965.Notactive,
+    .itemInfoContainer .item-24-0036-0-18.Notactive,
+    .itemInfoContainer .item-1017957.Notactive,
+    .itemInfoContainer .item-13-0034-0-19.Notactive,
+    .itemInfoContainer .item-1018020.Notactive {
+      top: 50% !important;
+    }
+  }
+</style>
+
+<div class="container" style="width: 100%; overflow: hidden">
+  <div class="find_inspire nocarousel">
+    <div class="nav_top10 nav_inspire">
+      <h1 style="margin-top: 0">空間佈置靈感</h1>
+      <ul>
+        <li class="active">客廳空間</li>
+        <li>餐廳空間</li>
+        <li>臥室空間</li>
+      </ul>
+    </div>
+    <div class="find_inspire_carousel">
+      <div class="find_inspire_main" data-hash="vintage">
+        <div class="find_inspire_main_pic">
+          <!--客廳空間-->
+          <div class="owl-carousel owl-theme find_inspire_carousel_initial active ga-parent-item-list"
+            id="find_inspire_carousel" data-ga-item-list-id="CasaDeco" data-ga-item-list-name="空間靈感佈置_客廳空間">
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_mobile_01.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_01.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_01.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-22-0143-0-19" data-ga-item-id="22-0143-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="22-0143-0-19"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0143-0-19"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0143-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0143-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0143-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-10-0105-216056-03-v2" data-ga-item-id="10-0105-216056-03-v2">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="10-0105-216056-03-v2"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="10-0105-216056-03-v2"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="10-0105-216056-03-v2"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="10-0105-216056-03-v2"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="10-0105-216056-03-v2"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="btn btn3 item-22-0144-0-19" data-ga-item-id="22-0144-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="22-0144-0-19"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0144-0-19"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0144-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0144-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0144-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/livingroom.html'}}">更多客廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_mobile_02.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_02.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_02.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-10-0403-0-26-v2" data-ga-item-id="10-0403-0-26-v2">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="10-0403-0-26-v2"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="10-0403-0-26-v2"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="10-0403-0-26-v2"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item"  data-ga-item-id="10-0403-0-26-v2"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item"  data-ga-item-id="10-0403-0-26-v2"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-1018302" data-ga-item-id="1018302">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="1018302" data-ga-item-index="客廳空間"
+                        data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1018302" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1018302" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item"  data-ga-item-id="1018302" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item"  data-ga-item-id="1018302" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn3 item-1018304" data-ga-item-id="1018304">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="1018304" data-ga-item-index="客廳空間"
+                        data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1018304" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1018304" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1018304" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1018304" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/livingroom.html'}}">更多客廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_mobile_03.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_03.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_03.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <!-- <div class="btn btn1 item-1018009" data-ga-item-id="1018009">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item"data-ga-item-id="10-0105-216056-03-v2" data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src=""  data-ga-item-id="10-0105-216056-03-v2" data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"/>
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item"  data-ga-item-id="10-0105-216056-03-v2" data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item"></span>
+                            <span class="product-oldPrice select-item"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div> -->
+                  <!-- <div class="btn btn2 item-1018010" data-ga-item-id="1018010">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item"  data-ga-item-id="10-0105-216056-03-v2" data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src=""  data-ga-item-id="10-0105-216056-03-v2" data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"/>
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item"  data-ga-item-id="10-0105-216056-03-v2" data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item"> </span>
+                            <span class="product-oldPrice select-item"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div> -->
+
+                  <div class="btn btn1 item-1018011" data-ga-item-id="1018011">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="1018011" data-ga-item-index="客廳空間"
+                        data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1018011" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1018011" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1018011" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1018011" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="btn btn2 item-1018020" data-ga-item-id="1018020">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="1018020" data-ga-item-index="客廳空間"
+                        data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1018020" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1018020" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1018020" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1018020" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/livingroom.html'}}">更多客廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_mobile_04.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_04.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_04.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-10-0101-203001-03" data-ga-item-id="10-0101-203001-03">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="10-0101-203001-03"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="10-0101-203001-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="10-0101-203001-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="10-0101-203001-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="10-0101-203001-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-11-0046-203001-03" data-ga-item-id="11-0046-203001-03">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="11-0046-203001-03"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="11-0046-203001-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="11-0046-203001-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="11-0046-203001-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="11-0046-203001-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="btn btn3 item-22-0051-0-19" data-ga-item-id="22-0051-0-19" style="top: 28%; left: 52%;">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="22-0051-0-19"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0051-0-19"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0051-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0051-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0051-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/livingroom.html'}}">更多客廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_mobile_05.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_05.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_05.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-1017825" data-ga-item-id="1017825">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="1017825" data-ga-item-index="客廳空間"
+                        data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1017825" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1017825" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1017825" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1017825" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-20-0132-0-19" data-ga-item-id="20-0132-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="20-0132-0-19"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" id="itemInfo-1-5">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="20-0132-0-19"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="20-0132-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="20-0132-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="20-0132-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="btn btn3 item-10-0122-219067-03" data-ga-item-id="10-0122-219067-03">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="10-0122-219067-03"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="10-0122-219067-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="10-0122-219067-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="10-0122-219067-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="10-0122-219067-03"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/livingroom.html'}}">更多客廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_mobile_06.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_06.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/livingroom/livingroom_pc_06.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-22-0051-0-19" data-ga-item-id="22-0051-0-19" style="top: 29%; left: 48%">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="22-0051-0-19"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0051-0-19"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0051-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0051-0-19"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0051-0-19"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-20-0070-0-19" data-ga-item-id="20-0070-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="20-0070-0-19"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="20-0070-0-19"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="20-0070-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="20-0070-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="20-0070-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="btn btn3 item-22-0050-0-19" data-ga-item-id="22-0050-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="22-0050-0-19"
+                        data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0050-0-19"
+                            data-ga-item-index="客廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0050-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0050-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0050-0-19" data-ga-item-index="客廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/livingroom.html'}}">更多客廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+          </div>
+
+          <!--餐廳空間-->
+          <div class="owl-carousel owl-theme find_inspire_carousel_initial ga-parent-item-list"
+            id="find_inspire_carousel" data-ga-item-list-id="CasaDeco" data-ga-item-list-name="空間靈感佈置_餐廳空間">
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_mobile_01.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_01.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_01.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-22-0142-0-19" data-ga-item-id="22-0142-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="22-0142-0-19"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0142-0-19"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0142-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0142-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0142-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-13-0035-0-19" data-ga-item-id="13-0035-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="13-0035-0-19"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="13-0035-0-19"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="13-0035-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="13-0035-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="13-0035-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn3 item-1017924" data-ga-item-id="1017924">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="1017924" data-ga-item-index="餐廳空間"
+                        data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1017924" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1017924" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1017924" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1017924" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/diningroom.html'}}">更多餐廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_mobile_02.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_02.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_02.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-22-0145-0-19" data-ga-item-id="22-0145-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="22-0145-0-19"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0145-0-19"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0145-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0145-0-19"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0145-0-19"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-1017925" data-ga-item-id="1017925">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="1017925" data-ga-item-index="餐廳空間"
+                        data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1017925" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1017925" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1017925" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1017925" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn3 item-12-0082-0-02" data-ga-item-id="12-0082-0-02">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="12-0082-0-02"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="12-0082-0-02"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="12-0082-0-02" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="12-0082-0-02" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="12-0082-0-02" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/diningroom.html'}}">更多餐廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_mobile_03.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_03.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_03.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-1017928" data-ga-item-id="1017928">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="1017928" data-ga-item-index="餐廳空間"
+                        data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1017928" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1017928" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1017928" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1017928" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-1017965" data-ga-item-id="1017965">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="1017965" data-ga-item-index="餐廳空間"
+                        data-ga-label="" data-ga-category="MKT-double-11" id="bottom120">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1017965" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"/>
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1017965" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1017965" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1017965" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/diningroom.html'}}">更多餐廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_mobile_04.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_04.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_04.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-12-0038-0-18" data-ga-item-id="12-0038-0-18">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="12-0038-0-18"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="12-0038-0-18"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="12-0038-0-18" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="12-0038-0-18" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="12-0038-0-18" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-24-0036-0-18" data-ga-item-id="24-0036-0-18">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="24-0036-0-18"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="24-0036-0-18"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="24-0036-0-18" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="24-0036-0-18" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="24-0036-0-18" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/diningroom.html'}}">更多餐廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_mobile_05.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_05.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_05.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-1017933-v2" data-ga-item-id="1017933-v2">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="1017933-v2"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1017933-v2" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1017933-v2" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1017933-v2" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1017933-v2" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-12-0036-0-17" data-ga-item-id="12-0036-0-17">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="12-0036-0-17"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="12-0036-0-17"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="12-0036-0-17" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="12-0036-0-17" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="12-0036-0-17" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="btn btn3 item-12-0037-0-17" data-ga-item-id="12-0037-0-17">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="12-0037-0-17"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="12-0037-0-17"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="12-0037-0-17" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="12-0037-0-17" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="12-0037-0-17" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/diningroom.html'}}">更多餐廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_mobile_06.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_06.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/diningroom/diningroom_pc_06.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-22-0049-0-19" data-ga-item-id="22-0049-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="22-0049-0-19"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0049-0-19"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0049-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0049-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0049-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-12-0059-0-19" data-ga-item-id="12-0059-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="12-0059-0-19"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="12-0059-0-19"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="12-0059-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="12-0059-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="12-0059-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn3 item-22-0052-0-19" data-ga-item-id="22-0052-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="22-0052-0-19"
+                        data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0052-0-19"
+                            data-ga-item-index="餐廳空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0052-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0052-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0052-0-19" data-ga-item-index="餐廳空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/diningroom.html'}}">更多餐廳單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+          </div>
+
+          <!--臥室空間-->
+          <div class="owl-carousel owl-theme find_inspire_carousel_initial ga-parent-item-list"
+            id="find_inspire_carousel" data-ga-item-list-id="CasaDeco" data-ga-item-list-name="空間靈感佈置_臥室空間">
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_mobile_01.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_01.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger remove-edges" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_01.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-23-0103-1-19" data-ga-item-id="23-0103-1-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="23-0103-1-19"
+                        data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="23-0103-1-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="23-0103-1-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="23-0103-1-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="23-0103-1-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-22-0139-0-19" data-ga-item-id="22-0139-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="22-0139-0-19"
+                        data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0139-0-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0139-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0139-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0139-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="btn btn3 item-21-0057-0-19" data-ga-item-id="21-0057-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="21-0057-0-19"
+                        data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="21-0057-0-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="21-0057-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="21-0057-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="21-0057-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/bedroom.html'}}">更多臥室單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_mobile_02.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_02.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_02.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-1017956" data-ga-item-id="1017956">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="1017956" data-ga-item-index="臥室空間"
+                        data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1017956" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1017956" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1017956" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1017956" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-1017957" data-ga-item-id="1017957">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="1017957" data-ga-item-index="臥室空間"
+                        data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1017957" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1017957" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1017957" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1017957" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/bedroom.html'}}">更多臥室單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_mobile_03.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_03.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_03.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-22-0140-0-19" data-ga-item-id="22-0140-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="22-0140-0-19"
+                        data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0140-0-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0140-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0140-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0140-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-23-0109-1-19" data-ga-item-id="23-0109-1-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="23-0109-1-19"
+                        data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="23-0109-1-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="23-0109-1-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="23-0109-1-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="23-0109-1-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="btn btn3 item-1017968" data-ga-item-id="1017968">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="1017968" data-ga-item-index="臥室空間"
+                        data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="1017968" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="1017968" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="1017968" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="1017968" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/bedroom.html'}}">更多臥室單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_mobile_04.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_04.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_04.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-21-0056-0-19" data-ga-item-id="21-0056-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="21-0056-0-1"
+                        data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="21-0056-0-1"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="21-0056-0-1" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="21-0056-0-1"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="21-0056-0-1"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-13-0034-0-19" data-ga-item-id="13-0034-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item" data-ga-item-id="13-0034-0-19"
+                        data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" id="itemInfo-3-4">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="13-0034-0-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="13-0034-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item"  data-ga-item-id="13-0034-0-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item"  data-ga-item-id="13-0034-0-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/bedroom.html'}}">更多臥室單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_mobile_05.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_05.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_05.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-22-0055-0-19" data-ga-item-id="22-0055-0-19" style="top: 53%; left: 82%;">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo itemInfo-3-5-btn1 select-item" data-ga-item-id="22-0055-0-19"
+                        data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0055-0-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0055-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0055-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0055-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="btn btn2 item-23-0079-1-19" data-ga-item-id="23-0079-1-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt2-itemInfo select-item itemInfo-3-5" id="bottom130"
+                        data-ga-item-id="23-0079-1-19" data-ga-item-index="臥室空間" data-ga-label=""
+                        data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="23-0079-1-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="23-0079-1-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="23-0079-1-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"> </span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="23-0079-1-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="btn btn3 item-22-0047-0-19" data-ga-item-id="22-0047-0-19">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt3-itemInfo select-item" data-ga-item-id="22-0047-0-19"
+                        data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0047-0-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0047-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0047-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0047-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/bedroom.html'}}">更多臥室單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-container">
+                <div class="img-wrapper">
+                  <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_mobile_06.jpg}}"
+                      media="(max-width: 767px)" />
+                    <source srcset="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_06.jpg}}"
+                      media="(min-width: 768px)" />
+                    <img class="guide btn-trigger" style="margin: inherit; width: 100%"
+                      src="{{media url=wysiwyg/home_page/inspiration/bedroom/bedroom_pc_06.jpg}}" alt="" />
+                  </picture>
+                  <div class="overlay"></div>
+                </div>
+                <div class="itemInfoContainer">
+                  <div class="btn btn1 item-22-0055-0-19" data-ga-item-id="22-0055-0-19" style="top: 42%; left: 58%">
+                    <a href="" target="_blank">
+                      <div class="itemInfo bt1-itemInfo select-item" data-ga-item-id="22-0055-0-19"
+                        data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11">
+                        <div class="itemImgContainer">
+                          <img class="itemImg select-item" src="" data-ga-item-id="22-0055-0-19"
+                            data-ga-item-index="臥室空間" data-ga-label="" data-ga-category="MKT-double-11" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                          <p class="product-title select-item" data-ga-item-id="22-0055-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></p>
+                          <p>
+                            <span class="product-disPrice select-item" data-ga-item-id="22-0055-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                            <span class="product-oldPrice select-item" data-ga-item-id="22-0055-0-19" data-ga-item-index="臥室空間"
+                            data-ga-label="" data-ga-category="MKT-double-11"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="check-more-btn">
+                    <button><a href="{{store direct_url='furniture/bedroom.html'}}">更多臥室單品 ►</a></button>
+                  </div>
+                </div>
+                <div class="inspire-close-btn" id="">&#215;</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

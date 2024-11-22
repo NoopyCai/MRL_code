@@ -1,0 +1,63 @@
+{{template config_path="design/email/header_template"}}
+<!-- Begin Content -->
+<div style="width:100%;margin:0 auto;background-color:#FFF;">
+<p style="width:100%;font-size: 16px;color: #333333;">Hi  {{trans "%name" name=$order_data.customer_name}}</p>
+
+<p style="width:100%;font-size: 16px;color: #333333;">感謝您喜愛並選購 MR.LIVING 居家先生的產品，以下是您的訂單內容，備貨完成後，配送前將有專人電話聯繫或簡訊通知商品出貨，請您留意陌生來電或訊息喔～
+</p>
+<p style="width:100%;font-size: 16px;color: #333333;">
+有需要服務的地方，歡迎透過<a href="https://maac.io/1srlL">官方LINE</a> 或 線上客服專線<a href="tel: 02-66050506">02-66050506</a> 分機 9 聯絡我們！
+</p>
+<table style="width:100%;">       
+   <tr style="width:100%;" class="email-summary">
+        <td>
+            <h1>{{trans 'Your Order <span class="no-link">#%increment_id</span>' increment_id=$order.increment_id |raw}}</h1>
+        </td>
+    </tr>
+ <tr style="width:100%;background-color:#fef0d5;" class="email-information">
+                    <td>
+                        {{var comment|escape|nl2br}}
+                    </td>
+ </tr>
+    <tr style="width:100%;" class="email-information">
+        <td>
+            {{depend order.getEmailCustomerNote()}}
+    <table class="message-info" style="font-size: 16px;">
+                <tr>
+                    <td>
+                        {{var order.getEmailCustomerNote()|escape|nl2br}}
+                    </td>
+                </tr>
+    </table>
+            {{/depend}}
+                <table class="order-details">
+                <tr>
+                    <td class="address-details">
+                        <h3>訂購人資訊</h3>
+                        <p>{{var formattedBillingAddress|raw}}</p>
+                    </td>
+                    {{depend order_data.is_not_virtual}}
+                    <td class="address-details">
+                        <h3>送貨地址</h3>
+                        <p>{{var formattedShippingAddress|raw}}</p>
+                    </td>
+                    {{/depend}}
+                </tr>
+            </table>
+          {{layout handle="sales_email_order_items" order_id=$order_id area="frontend"}}
+        </td>
+    </tr>
+</table>
+{{var bss_custom_field|raw}} 
+</div>
+<div style="padding:18px;font-size: 14px;color: #333333;background-color:#d9d9d9;">
+<h4>備註</h4>
+    <ul style="font-weight: 300;">
+        <li><span style="font-size:16px;">本公司依財政部「<a href="http://gazette.nat.gov.tw/EG_FileManager/eguploadpub/eg019159/ch04/type2/gov30/num8/Eg.htm">電子發票實施作業要點</a>」開立電子發票，相關說明請參閱「<a href="https://www.einvoice.nat.gov.tw/home/Article!showArticleDetail?articleId=1386906917035&CSRT=13955753394790314412">財政部電子發票整合平台</a>」網站。依統一發票使用辦法規定：個人(二聯式)發票一經開立，無法更改或改開公司戶(三聯式)發票。</span></li>
+        <li><span style="font-size:16px;">請務必填寫正確 Email 以收取電子發票及中獎通知．我同意為加速退貨退款作業辦理，由居家先生代為處理電子發票及銷貨退回證明單。</span></li>
+        <li><span style="font-size:16px;">為預防網路/電話詐騙行為，本公司並不會透過任何簡訊或不明來電告知消費者『訂單交易失敗、提供重新匯款或線上刷卡資訊』。與交易相關的保護措施，如您有任何交易上的疑慮，請一律透過官方LINE或線上客服專線確認。
+</span></li>
+</ul>
+</div>
+
+{{template config_path="design/email/footer_template"}}

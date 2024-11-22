@@ -1,0 +1,388 @@
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+/>
+
+<div class="filter-btn-block">
+  <button>
+    篩選
+    <span class="material-symbols-outlined"> tune </span>
+  </button>
+</div>
+<div class="filter-overlay"></div>
+
+<div class="filter-container">
+  <div class="filter-close-btn">×</div>
+</div>
+
+<!-- Why -->
+<div class="why-container">
+  <div class="why-content">
+    <div class="why-icon">
+      <img
+        src="{{media url=wysiwyg/home_page/2023_Fullview/icon01_mobile_93x93px.png}}"
+        alt="全通路14日買貴退差價"
+        title="全通路14日買貴退差價"
+        loading="lazy"
+      />
+    </div>
+    <div class="why-text">
+      <p>全通路14日<br /><span class="why-header">買貴退差價</span></p>
+    </div>
+  </div>
+  <div class="why-content">
+    <div class="why-icon">
+      <img
+        src="{{media url=wysiwyg/home_page/2023_Fullview/icon02_mobile_93x93px.png}}"
+        alt="訂單滿額1萬分期0利率"
+        title="訂單滿額1萬分期0利率"
+        loading="lazy"
+      />
+    </div>
+    <div class="why-text">
+      <p>滿額1萬<br /><span class="why-header">分期0利率</span></p>
+    </div>
+  </div>
+
+  <div class="why-content">
+    <div class="why-icon">
+      <img
+        src="{{media url=wysiwyg/home_page/2023_Fullview/icon03_mobile_93x93px.png}}"
+        alt="商品結帳滿3萬8享免運"
+        title="商品結帳滿3萬8享免運"
+        loading="lazy"
+      />
+    </div>
+    <div class="why-text">
+      <p>商品結帳滿3萬8<br /><span class="why-header">享免運</span></p>
+    </div>
+  </div>
+
+  <div class="why-content">
+    <div class="why-icon">
+      <img
+        src="{{media url=wysiwyg/home_page/2023_Fullview/icon04_mobile_93x93px.png}}"
+        alt="保固保修｜沙發家具結構2年/床墊10年"
+        title="保固保修｜沙發家具結構2年/床墊10年"
+        loading="lazy"
+      />
+    </div>
+    <div class="why-text">
+      <p>結構2年/床墊10年<br /><span class="why-header">保固保修</span></p>
+    </div>
+  </div>
+</div>
+<style>
+  #layered-filter-block{
+    display: none;
+  }
+  .toolbar-products{
+    display: none;
+  }
+  .category-description h1{
+    display: none;
+  }
+  .product-image-photo {
+    transform: scale(1.2);
+  }
+  .product-image-container:hover {
+    opacity: 0.8;
+  }
+  .page-main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .page-products .columns {
+    display: flex;
+    position: relative;
+  }
+  .page-products .products-grid .product-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    padding-inline-start: 20px;
+    margin: 0 5%;
+  }
+  .column.main .product-item {
+    display: flex;
+    justify-content: center;
+  }
+  .page-layout-2columns-left .sidebar-main {
+    width: 100%;
+    padding: 1em;
+  }
+  .page-layout-2columns-left .sidebar-additional {
+    display: none;
+  }
+  [data-content-type="row"][data-appearance="contained"] {
+    max-width: 100%;
+  }
+  .page-layout-2columns-left .main {
+    padding-left: 0;
+  }
+  .toolbar-products {
+    margin: 2% 10%;
+  }
+  #toolbar-amount {
+    display: none;
+  }
+  .filter-btn-block {
+    width: 6em;
+  }
+  .filter-btn-block button {
+    background-color: #f0f0f0;
+    display: flex;
+    padding: 4px 10px 5px 10px;
+  }
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    font-size: 1.3em;
+  }
+  /* .filter-btn-block button::after{
+    content: '\f160';
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: 14px;
+    margin-left: 4px;
+    } */
+  .filter-overlay {
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+    opacity: 0;
+  }
+  .filter-overlay.active {
+    z-index: 401;
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s, 0s;
+  }
+  .filter-container {
+    visibility: hidden;
+    opacity: 0;
+    width: 40%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    /* background-color: #f0f0f0; */
+    background-color: #fff;
+    z-index: 402;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transform: translateX(100%);
+    overflow: auto;
+  }
+  .filter-container.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .filter-options {
+    overflow: auto;
+  }
+  .filter-options-item {
+    padding: 1.5em 0;
+  }
+  .filter-close-btn {
+    position: absolute;
+    z-index: 5;
+    font-size: 2.5em;
+    right: 1.5%;
+    top: 15%;
+    color: #333;
+    cursor: pointer;
+  }
+  .filter .block-subtitle {
+    font-size: 1.2em;
+    position: relative;
+  }
+  @media screen and (max-width: 767px) {
+    .product-image-photo {
+      transform: scale(1);
+    }
+    .page-layout-2columns-left .sidebar-additional {
+      display: block;
+    }
+    .page-products .columns {
+      padding-top: 0;
+    }
+    .page-products .sorter {
+      position: unset;
+    }
+    .page-products .products-grid .product-items {
+      margin: 0 5%;
+    }
+    .toolbar-products {
+      margin: 5%;
+      padding: 0 0;
+    }
+    .filter-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .filter-options {
+      display: block;
+    }
+    .page-layout-2columns-left .sidebar-main {
+      padding: 0;
+      width: 90%;
+    }
+    .filter-title strong {
+      display: none;
+    }
+    .filter .block-subtitle {
+      display: block;
+      font-weight: bold !important;
+    }
+    .filter .filter-current {
+      margin: 5px 0 10px;
+      border: none;
+    }
+    .filter-options-title {
+      padding: 10px 40px 10px 10px;
+    }
+    .filter .filter-current-subtitle:after {
+      color: #fff;
+    }
+    .filter-options-item {
+      padding: 0.5em 0;
+    }
+  }
+</style>
+<script>
+  (function () {
+    let toolbars = document.querySelectorAll(".toolbar-products");
+    let filterBlock = document.querySelector(".filter-btn-block");
+    let filterOverlay = document.querySelector(".filter-overlay");
+    let originalFilterBlock = document.querySelector(".sidebar.sidebar-main");
+    let filterContainer = document.querySelector(".filter-container");
+    let filterContainerTttle = document.querySelector(".filter-subtitle");
+    let filterCloseBtn = document.querySelector(".filter-close-btn");
+
+    //why
+    let whyBlock = document.querySelector(".why-container");
+
+    toolbars[0].appendChild(filterBlock);
+    toolbars[1].parentNode.insertBefore(
+      whyBlock,
+      toolbars[1].nextElementSibling
+    );
+    // toolbars[1].insertAdjacentElement('beforebegin', whyBlock);
+    // whyBlock.after(toolbars[1]);
+    filterContainer.appendChild(originalFilterBlock);
+    filterContainerTttle.appendChild(filterCloseBtn);
+
+    filterBlock.addEventListener("click", function () {
+      filterOverlay.classList.add("active");
+      filterContainer.classList.add("active");
+      document.querySelector(".bottom-nav-original").style.display = "none";
+      filterOverlay.addEventListener("click", closeFilter);
+      filterCloseBtn.addEventListener("click", closeFilter);
+    });
+    function closeFilter() {
+      document.querySelector(".filter-overlay").classList.remove("active");
+      filterContainer.classList.remove("active");
+      document.querySelector(".bottom-nav-original").style.display = "flex";
+    }
+  })();
+</script>
+
+<style>
+  .why-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 6em 6.4rem;
+    padding: 3em 0;
+    border-top: 1px solid #d1cfca;
+    border-bottom: 1px solid #d1cfca;
+  }
+
+  .why-content {
+    display: flex;
+    width: 100%;
+    max-width: 32rem;
+    margin: 3.2rem 0;
+    padding: 0 4.4rem;
+    border-right: 1px solid #a09c81;
+  }
+
+  .why-content:last-child {
+    border-right: none;
+  }
+
+  .why-icon {
+    max-width: 88px;
+    width: 100%;
+  }
+
+  .why-text {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: #a09c8e;
+    font-size: 19px;
+    margin-left: 3.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .why-header {
+    font-size: 25px;
+  }
+
+  .owl-carousel .owl-stage-outer {
+    padding-bottom: 1em;
+  }
+
+  @media (max-width: 1600px) {
+    .why-container {
+      margin: 6em 2.4rem;
+    }
+    .why-content {
+      padding: 0 2rem;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .why-container {
+      flex-wrap: wrap;
+      margin: 4em 1rem;
+      padding: 2em 0;
+      position: relative;
+    }
+    .why-content {
+      width: 50%;
+      margin: 2rem 0;
+      padding: 0;
+      border-right: none;
+    }
+    .why-text {
+      font-size: 1.2rem;
+      margin-left: 1.1rem;
+      padding: 0;
+      letter-spacing: 0;
+    }
+    .why-header {
+      font-size: 1.8rem;
+    }
+    .why-icon {
+      max-width: 60px;
+      width: 100%;
+    }
+    .why-container::after {
+      content: "";
+      background-color: #a09c8e;
+      position: absolute;
+      width: 100%;
+      height: 0.5px;
+      bottom: 53%;
+      transform: translateY(50%);
+    }
+  }
+</style>

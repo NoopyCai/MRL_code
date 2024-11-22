@@ -1,0 +1,54 @@
+<!--Search Page-->
+<script>
+    (function () {
+      currentURL = window.location.pathname;
+      if (currentURL.includes("catalogsearch/result")) {
+        //<--站內相關搜尋URL內符號排除-->
+        // -- "/%C7|(other patterns)/g" --//
+        var stringQs = /%7C/g;
+        allLinks = document.querySelectorAll("a");
+  
+        function changeQs(links) {
+          links.forEach(function (link) {
+            var oldURL = link.getAttribute("href");
+            if (oldURL) {
+              var replaceQs = oldURL.replace(stringQs, ""); //將query string 用空字串取代
+              link.setAttribute("href", replaceQs);
+            }
+          });
+        }
+  
+        changeQs(allLinks);
+
+        //泡芙搜尋
+        const query = decodeURIComponent(new URLSearchParams(window.location.search).get('q') || '');
+        if (/泡芙|組合沙發|pluffy|ＰＬＵＦＦＹ/i.test(query)) {
+            const searchResults = document.querySelector('#maincontent .columns');
+            const link = document.createElement('a');
+            const imgBanner = document.createElement('img');
+            
+            searchResults.style.paddingTop = '0';
+            imgBanner.id = 'outbounceBanner';
+            imgBanner.alt = '搜尋泡芙組合沙發導購嘖嘖';
+            imgBanner.style.display = 'block';
+            if(window.innerWidth < 768){
+                imgBanner.style.width = '100%';
+                imgBanner.src = '/media/catalog/category/2024/S_modular_sofa_zeczec_catgeory_M_banner.jpg';
+                
+            }else{
+                imgBanner.style.width = '70%';
+                imgBanner.src = '/media/catalog/category/2024/S_modular_sofa_zeczec_catgeory_PC_banner.jpg';
+            }
+            imgBanner.style.marginBottom = '20px';
+
+            link.href = 'https://www.zeczec.com/projects/mr-living-3'; 
+            link.target = '_blank'; 
+
+            link.appendChild(imgBanner);
+            searchResults.innerHTML = "";
+            searchResults.appendChild(link);
+        }
+      }
+    })();
+  </script>
+  

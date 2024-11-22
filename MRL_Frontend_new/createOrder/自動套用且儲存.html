@@ -1,0 +1,122 @@
+<script>
+
+    //開單業務
+  function getSales(){
+      var sales = document.querySelector('#saman');
+      var adminName = document.querySelector('.admin-user-account-text').innerText;
+      sales.value = adminName;
+  }
+  var now = new Date();
+  var offset = now.getTimezoneOffset();
+  
+  
+  //時區
+  function processTimezone(date){
+    try {
+      return new Date(date.getTime() - (offset*60*1000)).toISOString().split('T')[0];
+    }catch (error) {
+      if(!document.querySelector('#mrl_alert')){
+        var alert = document.createElement('span');
+        alert.innerHTML = "商品交期不得為空！";
+        document.querySelector('#mrl_update_attributes').after(alert);
+        setTimeout(function(){
+          alert.remove();
+        },3000);
+      }
+    }
+  }
+  
+    
+    //交期
+  function getShippingDate(){
+      var orderTable = document.querySelector('.admin__table-primary.order-tables');
+      var orderProducts = orderTable.querySelectorAll('tbody');
+      
+      var allItemRange = [];
+      var itemPos = 0;
+      orderProducts.forEach(function(item){        
+          var fromDatetime = item.querySelector('.col-row-from-date-1 input').value;
+          var toDatetime = item.querySelector('.col-row-to-date-2 input').value;
+          allItemRange.push([fromDatetime, toDatetime, itemPos]);
+          itemPos++;
+      })
+      allItemRange.sort(function(a, b) {
+          var c = new Date(a[0]);
+          var d = new Date(b[0]);
+          return c-d;
+      });
+      
+      //var orderComment = document.querySelector('#order-comment .admin__control-textarea');
+      var shipComment = document.querySelector('#shipdate');
+  
+      //取得目前的應收款項$
+      var originShipComment = shipComment.value;
+      var moneyStrReg = /應收款項\$\d*/gi;
+      var originMoneyArr = originShipComment.match(moneyStrReg);
+  
+      var memo = [];
+      var counter = 1;
+      var freeTextCollections = [];
+      allItemRange.forEach(function(item){
+          var fromDate = processTimezone(new Date(item[0]));
+          var toDate = processTimezone(new Date(item[1]));
+          var dateRange = '：'+ fromDate+' ~ '+toDate;
+          if(!memo.includes(dateRange)){
+              memo.push('※第'+ counter+'批預計', dateRange);
+              memo.push(originMoneyArr?originMoneyArr[counter-1]?originMoneyArr[counter-1]:'應收款項$':'應收款項$');
+              freeTextCollections.push([item[2],'※第'+ counter+'批']);
+          }else{
+              counter--;
+              freeTextCollections.push([item[2],'※第'+ counter+'批']);
+          }
+          counter++;
+      })
+  
+      var arrowReg = /{.*}/;
+      var result = memo.join(' ');
+      var arrowResult = '{' + result + '}';
+  
+      shipComment.value = shipComment.value && arrowReg.test(shipComment.value)? shipComment.value.replace(arrowReg,arrowResult) : shipComment.value + arrowResult;
+      //var orderCommentValue = orderComment.value && arrowReg.test(orderComment.value) ? orderComment.value.replace(arrowReg,arrowResult):orderComment.value + arrowResult;
+      //orderComment.setValue(orderCommentValue);
+    
+      var freeTextArea = document.querySelectorAll('.input-text.admin__control-text[title="Free Text"]');
+      freeTextCollections.sort(function(a, b) {
+          var c = a[0];
+          var d = b[0];
+          return c-d;
+      });
+      for(var i=0; i<freeTextArea.length; i++){
+          var orginValue = freeTextArea[i].value;
+          var freeTextValue = orginValue && arrowReg.test(orginValue)? orginValue.replace(arrowReg,'{'+freeTextCollections[i][1]+'}'): orginValue + '{'+freeTextCollections[i][1]+'}';
+          if(freeTextArea[i].value.includes("{※門市自取}")){
+            freeTextArea[i].setValue(freeTextValue + "{※門市自取}");
+          }else{
+            freeTextArea[i].setValue(freeTextValue);
+          }
+      }
+  }
+    
+    function getEinvoiceEmail(){
+      var eInvoiceEmail = document.querySelector('#einvoice_email');
+      var customerEmail = document.querySelector('#email').value;
+      if(!eInvoiceEmail.value) eInvoiceEmail.value = customerEmail;
+    }
+  
+   (function(){
+  var mrlDiv = document.createElement("div");
+  mrlDiv.setAttribute("id", "mrl-update-div");
+  mrlDiv.setAttribute("style","background-color: #c8c8c8;padding: 20px;");
+  mrlDiv.innerHTML += '<button id="mrl_update_attributes" title="Update Attributes" type="button" class="action-secondary" style="margin:auto 20px;"><span>自動套用且儲存</span></button>';
+  document.querySelector('#mrl-create-order').after(mrlDiv);
+  var mrlUpdate = document.querySelector('#mrl_update_attributes');
+  mrlUpdate.addEventListener('click',function(){
+      getSales();
+      getShippingDate();
+      getEinvoiceEmail();
+      order.itemsUpdate();
+      dataLayer.push({'event': 'click-update'});
+  })
+  }());
+
+  </script>

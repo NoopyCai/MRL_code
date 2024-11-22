@@ -1,0 +1,107 @@
+<style>
+    .search-content-container{
+      text-align: center;
+    }
+    .searchInput{
+        width: 50%;
+        height: 25%;
+        margin: 10px 0;
+        font-size: 16px;
+        padding: 0 0 0 20px;
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border: none;
+    }
+    #contentList{
+        display: flex !important;
+        flex-direction: column;
+        align-items: start;
+    }
+    @media (max-width: 768px){
+        .searchInput{
+            margin: 0;
+            font-size: 14px;
+            width: 70%;
+            height: 50%;
+        }
+        #contentList{
+            padding-inline-start: 0;
+        }
+    }
+</style>
+<div class="search-content-container">
+    <input type="text" id="searchInput" class="searchInput" onkeyup="searchFunction()" placeholder="輸入關鍵字查詢">
+    <ul id="contentList" style="list-style-type:none;">
+            <li class="C9DxTc " style="list-style-type:none;font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">1️⃣官網體驗+產品知能</li>
+            <li>
+                <a class="XqQF9c" href="https://www.youtube.com/watch?v=Qr7DYCXcGqY" target="_blank" style="color: inherit; text-decoration: none;">
+                    <span class="C9DxTc aw5Odc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆1-1 官網體驗👆🏻</span>
+                    <span class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;"><br></span>
+                </a>
+            </li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">2️⃣帳號系統&gt;網路電商夥伴</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆2-1 主線-Webservice信箱+Google帳號管理+漸強(Line)+Google雲端硬碟+Every8D簡訊</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆2-2 支線-MO/PC</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">3️⃣帳號系統&gt;門市業務夥伴</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆3-1 Google帳號管理+漸強(Line)+論壇</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆3-2 QRCODE 邀請+入LINE@</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">4️⃣VPN防火牆</li>
+            <li>
+                <a class="XqQF9c" href="https://youtu.be/cL8mCvI-3hI?t=12" target="_blank" style="color: inherit; text-decoration: none;">
+                    <span class="C9DxTc aw5Odc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆4-1 初次設定VPN👆🏻</span>
+                </a>
+            </li>
+            <li>
+                <a class="XqQF9c" href="https://youtu.be/cL8mCvI-3hI?t=22" target="_blank" style="color: inherit; text-decoration: none;">
+                    <span class="C9DxTc aw5Odc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆4-2 Iphone/Android 系統👆🏻</span>
+                </a>
+            </li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">5️⃣庫存/交易查詢系統</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆5-1 介面介紹(關鍵字/分類)</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆5-2 查詢結果說明(可挪用數量)</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆5-3 模糊搜尋，排除其他品項</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆5-4 各倉庫存查詢</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆5-5 交易查詢</li>
+            <li class="C9DxTc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">　◆5-6 申請/登記退款</li>
+            <li>
+                <a class="XqQF9c" href="https://www.youtube.com/watch?v=99UpkRUEwo4" target="_blank" style="color: inherit; text-decoration: none;">
+                    <span class="C9DxTc aw5Odc " style="font-family: 'Comic Sans MS', Arial; font-variant: normal; font-weight: 400;">6️⃣Line群組介紹👆🏻</span>
+                </a>
+            </li>
+    </ul>
+</div>
+
+<script>
+    liHideFirst();
+    function liHideFirst(){
+        ul = document.getElementById("contentList");
+        li = ul.getElementsByTagName('li');
+        ul.style.display = "block"
+        for (i = 0; i < li.length; i++) {
+            txtValue = li[i].textContent || li[i].innerText;
+            li[i].style.display = "none";
+        }
+    }
+    function searchFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('searchInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("contentList");
+        li = ul.getElementsByTagName('li');
+        if (filter === "") {
+            ul.style.display = "none";
+        }else{
+            ul.style.display = "block"
+            for (i = 0; i < li.length; i++) {
+            txtValue = li[i].textContent || li[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1 && txtValue != "")   {
+                li[i].style.display = "block";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+        }
+        
+    
+</script>

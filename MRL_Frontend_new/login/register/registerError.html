@@ -1,0 +1,15 @@
+<script>
+    var popupFooter = document.querySelector('#modal-content-1 .right-contet-part .footer-box-link');
+    var errMsg = document.querySelector('.mobile-sendotp-popup .err-msg');
+
+    if (popupFooter && errMsg) {
+        popupFooter.parentNode.insertBefore(errMsg, popupFooter);
+    }
+</script>
+<style>
+    #modal-content-1 .right-contet-part p.err-msg{
+        margin-top: 0;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+</style>

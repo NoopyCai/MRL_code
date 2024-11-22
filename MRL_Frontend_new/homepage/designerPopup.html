@@ -1,0 +1,735 @@
+<!-- 好設計，不將就Popup -->
+<style>
+    .designerCarousel.nocarousel .owl-carousel {
+        display: flex;
+        position: relative;
+    }
+    html.designerCarouselExpanded {
+        overflow: hidden;
+    }
+
+    .top-btn.designerCarouselExpanded {
+        display: none;
+    }
+
+    .designerCarousel {
+        height: fit-content !important;
+    }
+    .designerCarousel {
+        display: none;
+        margin-top: 15px;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 15px;
+    }
+    .designerCarousel.expanded .item .item-main-img .item-main-img-container img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+    }
+    .designerCarousel .designer-close-btn {
+        display: none;
+    }
+
+    .designerCarousel-title {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 108px;
+        margin-bottom: 2rem;
+    }
+
+    .designerCarousel-title .designerCarousel-title-bg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        margin: auto;
+        width: 120px;
+    }
+
+    .designerCarousel-title .designerCarousel-title-txt h1 {
+        position: relative;
+        margin: 0;
+        font-weight: 600;
+        font-size: 24px;
+    }
+
+    .designerCarousel .owl-carousel {
+        height: 100%;
+    }
+
+    .designerCarousel .owl-carousel .owl-stage-outer {
+        height: 100%;
+    }
+
+    .designerCarousel .owl-carousel .owl-stage {
+        height: 100%;
+        display: flex;
+    }
+
+    .designerCarousel .owl-item {
+        height: auto;
+        display: flex;
+        align-items: center;
+    }
+    .designerCarousel .item .item-main-img .item-main-img-container {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .designerCarousel .item .item-main-img .item-main-img-container img {
+        max-width: unset;
+        min-width: 100%;
+    }
+
+    .designerCarousel .item .item-bottom .item-bottom-photo {
+        max-width: 70px;
+        height: auto;
+        width: 20%;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .designerCarousel .item .item-bottom .item-bottom-txt {
+        margin-left: 2rem;
+        width: calc(80% - 2rem);
+    }
+
+    .designerCarousel .item .item-bottom .item-bottom-txt h2 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 1.6rem;
+    }
+
+    .designerCarousel .item .item-bottom .item-bottom-expanded {
+        display: none;
+    }
+
+    .designerCarousel .owl-controls {
+        display: block;
+    }
+
+    .designerCarousel .owl-dots {
+        display: none !important;
+    }
+
+    .designerCarousel .owl-carousel .owl-nav button.owl-prev,
+    .designerCarousel .owl-carousel .owl-nav button.owl-next {
+        width: 55px !important;
+        height: 55px !important;
+        padding-top: 8px !important;
+        padding-left: 3px !important;
+    }
+
+    .designerCarousel .owl-nav .owl-prev,
+    .designerCarousel .owl-nav .owl-next {
+        width: 41px;
+        height: 40px;
+        position: absolute;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        background-color: #916a4be3 !important;
+        padding-top: 10px !important;
+        padding-left: 8px !important;
+        opacity: 0.8 !important;
+    }
+
+    .designerCarousel .owl-prev {
+        left: 0;
+        top: 42%;
+    }
+
+    .designerCarousel .owl-next {
+        right: 0;
+        top: 42%;
+    }
+
+    .designerCarousel.expanded {
+        height: 100% !important;
+        display: block;
+        margin-top: 0;
+        overflow: hidden;
+        /* padding: 10px 0; */
+        background-color: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999999;
+    }
+
+    .designerCarousel.expanded .designer-close-btn {
+        display: block;
+        position: absolute;
+        top: 27px;
+        z-index: 5;
+        font-size: 4.5rem;
+        right: 30px;
+        color: rgb(255, 255, 255);
+        padding: 0 18px;
+        background-color: #A6A6A6;
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: -1px 1px 6px 2px #5959593b;
+    }
+
+    .designerCarousel.expanded .designerCarousel-title {
+        display: none;
+    }
+
+    .designerCarousel.expanded .item {
+        height: auto;
+        width: 100% !important;
+        display: flex;
+        margin: 20px;
+        cursor: auto;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .designerCarousel.expanded .item .item-main-img {
+        width: 100%;
+        overflow: hidden;
+        /* background-color: rgb(224,224,224); */
+        display: flex;
+        align-items: center;
+    }
+
+    .designerCarousel.expanded .item .item-bottom {
+        width: 32%;
+        background-color: white;
+        height: 100%;
+    }
+
+    .designerCarousel.expanded .item .item-bottom .item-bottom-expanded {
+        display: block;
+        width: 90%;
+        margin: auto;
+        height: calc(100% - 110px);
+    }
+
+    .designerCarousel.expanded .item .item-bottom .item-bottom-expanded .item-bottom-product .item-bottom-product-name {
+        margin-top: 1rem;
+    }
+
+    .designerCarousel.expanded .item .item-bottom .item-bottom-expanded p.content {
+        height: 35%;
+        color: #808080;
+        font-size: 1.8rem;
+        padding: 0 1.4rem;
+        border-bottom: #EAEAEA solid 2px;
+        position: relative;
+        overflow: auto;
+        background-color: white;
+    }
+
+    .designerCarousel.expanded .item .item-bottom .item-bottom-expanded .item-bottom-product {
+        height: 45%;
+        text-align: center;
+        color: #808080;
+        margin-top: -2rem;
+    }
+
+    .designerCarousel.expanded .item .item-bottom .item-bottom-expanded .item-bottom-product .item-bottom-product-img {
+        display: block;
+        height: 50%;
+        overflow: hidden;
+        margin-top: 30px;
+    }
+
+    .designerCarousel.expanded .item .item-bottom .item-bottom-expanded .item-bottom-product .item-bottom-product-img a {
+        display: block;
+        height: 100%;
+    }
+
+    .designerCarousel.expanded .item .item-bottom .item-bottom-expanded .item-bottom-product .item-bottom-product-img img {
+        height: 125%;
+        width: auto !important;
+        margin: auto;
+    }
+
+    .designer-main-info {
+        position: absolute;
+        left: 49%;
+        top: 9%;
+        width: 45%;
+    }
+
+    .designer-main-content h1 {
+        margin-bottom: 0;
+        font-weight: 700;
+        font-size: 5rem;
+    }
+
+    .designer-main-h2 {
+        position: relative;
+        right: 8%;
+    }
+
+    .designer-main-h2 h2 {
+        font-size: 3.4rem;
+        font-weight: 700;
+    }
+
+    .designer-main-content h3 {
+        font-size: 2.9rem;
+        margin-bottom: 2rem;
+    }
+
+    .designer-main-content p {
+        font-size: 1.8rem;
+        margin: 40px 0 60px 0;
+    }
+
+    .furniture-rec h3 {
+        font-size: 2.6rem;
+    }
+
+    .furniture-rec .item-container {
+        display: flex;
+        gap: 3%;
+    }
+    .furniture-rec .item-container .item1, 
+    .furniture-rec .item-container .item2, 
+    .furniture-rec .item-container .item3{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .furniture-rec .item-container picture{
+        width: 85%;
+    }
+    .furniture-rec .item-container img{
+        width: 100%;
+        height: auto;
+    }
+    #designerCarousel .item > .designer-check-more-btn {
+        width: fit-content;
+        border: 1px solid #666666;
+        border-radius: 3px;
+        margin: auto;
+        z-index: 5;
+        position: absolute;
+        bottom: 5%;
+        left: 40%;
+    }
+    #designerCarousel .item > .designer-check-more-btn button{
+        background-color: transparent;
+        padding: 0.55rem;
+    }
+    #designerCarousel .item > .designer-check-more-btn a{
+        color: #666666;
+        font-weight: bold;
+        display: block;
+        line-height: 16px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+    @media(max-width:1700px){
+        .designer-main-info{
+            top: 11%;
+        }
+    }
+    @media(max-width:1600px) {
+        /* .designer-main-info{
+            top: 21%;
+        } */
+        .designer-main-h2 h2{
+            font-size: 2.8rem;     
+        }
+        .designer-main-content h1{
+            font-size: 4rem;
+        }
+        .designer-main-content h3{
+            font-size: 1.9rem;
+        }
+        .designer-main-content p{
+            font-size: 1.6rem;
+        }
+        .furniture-rec h3{
+            font-size: 1.6rem;
+        }
+    }
+    @media(max-width:1440px) {
+        .designerCarousel .item .item-main-img .item-main-img-container img {
+            height: 300px !important;
+        }
+
+        .designerCarousel .item .item-bottom .item-bottom-container {
+            padding: 1rem 2rem;
+        }
+
+        .designerCarousel .item .item-bottom .item-bottom-txt h2 {
+            font-size: 1.4rem;
+        }
+
+        .designerCarousel .item {
+            width: 285px;
+        }
+
+        .designerCarousel.expanded .designer-close-btn {
+            font-size: 2.7rem;
+            padding: 0 10px;
+        }
+
+        .designerCarousel.expanded .item .item-bottom .item-bottom-expanded {
+            height: calc(100% - 95px);
+        }
+
+        .designerCarousel.expanded .item .item-bottom .item-bottom-expanded p.content,
+        .designerCarousel.expanded .item .item-bottom .item-bottom-expanded .item-bottom-other-buy span.title,
+        .designerCarousel.expanded .item .item-bottom .item-bottom-expanded .item-bottom-other-buy a,
+        .designerCarousel.expanded .item .item-bottom .item-bottom-expanded .item-bottom-product-price,
+        .designerCarousel.expanded .item .item-bottom .item-bottom-expanded .item-bottom-product-name a {
+            font-size: 1.3rem;
+        }
+        /* .designer-main-info {
+            top: 23%;
+        } */
+        .furniture-rec .item-container {
+            gap: 6%;
+        }
+    }
+
+    @media(max-width: 768px){
+    .designerCarousel.expanded .item{
+        height: fit-content;
+        width: 100% !important;
+        position: relative;
+        /* bottom: 6%; */
+        margin: 0;
+    }
+    .designer-main-content h1{
+        font-size: 2.5rem;
+    }
+    .designer-main-h2 h2{
+        font-size: 1.6rem;
+    }
+    .designer-main-content h3{
+        font-size: 1.4rem;
+        margin: 1.5rem 0;
+    }
+    .furniture-rec h3{
+        font-size: 1.4rem
+    }
+    .designer-main-content p{
+        font-size: 1.2rem;
+        margin: 0;
+    }
+    .furniture-rec .item-container{
+        gap: 3%;
+    }
+    .furniture-rec .item-container p{
+        font-size: 1.1rem;
+    }
+    .designer-main-info{
+        top: 29%;
+        left: 15%;
+        width: 78%;
+    }
+    .designerCarousel .owl-dots{
+        display: none !important;
+        position: fixed;
+        flex-direction: column;
+        /* left: 32%; */
+        right: 1%;
+        top: 40%;
+    }
+    .designerCarousel .owl-carousel .owl-nav{
+        display: none;
+    }
+    .designerCarousel.expanded .designer-close-btn{
+        padding: 0 5px;
+        top: 10px;
+        z-index: 5;
+        font-size: 3.5rem;
+        text-align: center;
+        line-height: 35px;
+        right: 10px;
+        color: rgb(255, 255, 255, 100%);
+        opacity: 80%;
+        background-color: #A6A6A6;
+        cursor: pointer;
+        border-radius: 53%;
+    }
+    .furniture-rec .item3{
+        display: none !important;
+    }
+  }
+</style>
+<div class="designerCarousel nocarousel">
+    <div class="designer-close-btn" id="designerCloseBtn">&#215;</div>
+    <div class="owl-carousel owl-theme" id="designerCarousel">
+        <div class="item" data-position="0">
+            <div class="item-main-img">
+                <div class="item-main-img-container">
+                    <picture>
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_Mobile_01.jpg}}" media="(max-width: 767px)">
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_PC_01.jpg}}" media="(min-width: 768px)">
+                        <img style="display: block; width: 100%; height: 360px;"
+                        src="{{media url=wysiwyg/home_page/designer/Design_PC_01.jpg}}" alt="設計師Alex Moran"
+                        loading="lazy" />
+                    </picture>
+                </div>
+                <div class="designer-main-info">
+                    <div class="designer-main-h2">
+                        <h2>英國20年資深品牌設計師</h2>
+                    </div>
+                    <div class="designer-main-content">
+                        <h1>Alex Moran</h1>
+                        <h3>北歐復古系列家具設計師</h3>
+                        <p>現為Maison 55的產品設計師，曾為英國最大家居公司設計家具；作品於美國知名設計家具品牌 Westelm、Anthropologie 販售。
+                        </p>
+                    </div>
+                    <div class="furniture-rec">
+                        <h3>Antony 系列 精選家具推薦</h3>
+                        <div class="item-container">
+                            <div class="item1">
+                                <p>Antony 實木書桌</p>
+                                 <img src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/a/n/antony_vanitydesk_v1_0424_p00.jpg}}" alt="">
+                            </div>
+                            <div class="item2">
+                                <p>Antony 翻轉化妝桌</p>
+                                <img src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/a/n/antony_vanity_p01_v1_1_.jpg}}" alt="">
+                            </div>
+                            <div class="item3">
+                                <p>Antony 實木餐邊櫃</p>
+                                <img src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/a/n/antony_sideboard_p00_v01.jpg}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="designer-check-more-btn">
+                <button><a href="{{store direct_url='furniture/bedroom.html'}}">MORE ►</a></button>
+            </div>
+        </div>
+
+        <div class="item" data-position="1">
+            <div class="item-main-img">
+                <div class="item-main-img-container">
+                    <picture>
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_Mobile_02.jpg}}" media="(max-width: 767px)">
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_PC_02.jpg}}" media="(min-width: 768px)">
+                        <img style="display: block; width: auto; height: 360px;"
+                        src="{{media url=wysiwyg/home_page/designer/Design_PC_02.jpg}}" alt="設計師Alison"
+                        loading="lazy" />
+                    </picture>
+                </div>
+            </div>
+            <div class="designer-main-info">
+                <div class="designer-main-h2">
+                    <h2>全球知名品牌御用設計師</h2>
+                </div>
+                <div class="designer-main-content">
+                    <h1>Alison</h1>
+                    <h3>北歐復古系列家具設計師</h3>
+                    <p>現為Maison 55的產品設計師，曾為英國最大家居公司設計家具；作品於美國知名設計家具品牌 Westelm、Anthropologie 販售。
+                    </p>
+                </div>
+                <div class="furniture-rec">
+                    <h3>Antony 系列 精選家具推薦</h3>
+                    <div class="item-container">
+                        <div class="item1">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 實木書桌</p>
+                        </div>
+                        <div class="item2">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 翻轉化妝桌</p>
+                        </div>
+                        <div class="item3">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 實木餐邊櫃</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="designer-check-more-btn">
+                <button><a href="{{store direct_url='furniture/bedroom.html'}}">MORE ►</a></button>
+            </div>
+        </div>
+
+        <div class="item" data-position="2">
+            <div class="item-main-img">
+                <div class="item-main-img-container">
+                    <picture>
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_Mobile_03.jpg}}" media="(max-width: 767px)">
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_PC_06.jpg}}" media="(min-width: 768px)">
+                        <img style="display: block; width: 100%; height: 360px;"
+                        src="{{media url=wysiwyg/home_page/designer/Design_PC_06.jpg}}" alt="設計師Morten Georgsen"
+                        loading="lazy" />
+                    </picture>
+                </div>
+            </div>
+            <div class="designer-main-info">
+                <div class="designer-main-h2">
+                    <h2>丹麥家具設計巨匠</h2>
+                </div>
+                <div class="designer-main-content">
+                    <h1>Morten Georgsen</h1>
+                    <h3>北歐復古系列家具設計師</h3>
+                    <p>現為Maison 55的產品設計師，曾為英國最大家居公司設計家具；作品於美國知名設計家具品牌 Westelm、Anthropologie 販售。
+                    </p>
+                </div>
+                <div class="furniture-rec">
+                    <h3>Antony 系列 精選家具推薦</h3>
+                    <div class="item-container">
+                        <div class="item1">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 實木書桌</p>
+                        </div>
+                        <div class="item2">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 翻轉化妝桌</p>
+                        </div>
+                        <div class="item3">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 實木餐邊櫃</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="designer-check-more-btn">
+                <button><a href="{{store direct_url='furniture/bedroom.html'}}">MORE ►</a></button>
+            </div>
+        </div>
+
+        <div class="item" data-position="3">
+            <div class="item-main-img">
+                <div class="item-main-img-container">
+                    <picture>
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_Mobile_04.jpg}}" media="(max-width: 767px)">
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_PC_04.jpg}}" media="(min-width: 768px)">
+                        <img style="display: block; width: auto; height: 360px;"
+                        src="{{media url=wysiwyg/home_page/designer/Design_PC_04.jpg}}" alt="設計師Nordvink"
+                        loading="lazy" />
+                    </picture>
+                </div>
+            </div>
+            <div class="designer-main-info">
+                <div class="designer-main-h2">
+                    <h2>國際FSC家具設計獎新銳</h2>
+                </div>
+                <div class="designer-main-content">
+                    <h1>Nordvink</h1>
+                    <h3>北歐復古系列家具設計師</h3>
+                    <p>現為Maison 55的產品設計師，曾為英國最大家居公司設計家具；作品於美國知名設計家具品牌 Westelm、Anthropologie 販售。
+                    </p>
+                </div>
+                <div class="furniture-rec">
+                    <h3>Antony 系列 精選家具推薦</h3>
+                    <div class="item-container">
+                        <div class="item1">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 實木書桌</p>
+                        </div>
+                        <div class="item2">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 翻轉化妝桌</p>
+                        </div>
+                        <div class="item3">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 實木餐邊櫃</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="designer-check-more-btn">
+                <button><a href="{{store direct_url='furniture/bedroom.html'}}">MORE ►</a></button>
+            </div>
+        </div>
+
+        <div class="item" data-position="4">
+            <div class="item-main-img">
+                <div class="item-main-img-container">
+                    <picture>
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_Mobile_06.jpg}}" media="(max-width: 767px)">
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_PC_03.jpg}}" media="(min-width: 768px)">
+                        <img style="display: block; width: auto; height: 360px;"
+                        src="{{media url=wysiwyg/home_page/designer/Design_PC_03.jpg}}" alt="設計師Says Who"
+                        loading="lazy" />
+                    </picture>
+                </div>
+            </div>
+            <div class="designer-main-info">
+                <div class="designer-main-h2">
+                    <h2>丹麥設計品牌合作首選</h2>
+                </div>
+                <div class="designer-main-content">
+                    <h1>Says Who</h1>
+                    <h3>北歐復古系列家具設計師</h3>
+                    <p>現為Maison 55的產品設計師，曾為英國最大家居公司設計家具；作品於美國知名設計家具品牌 Westelm、Anthropologie 販售。
+                    </p>
+                </div>
+                <div class="furniture-rec">
+                    <h3>Antony 系列 精選家具推薦</h3>
+                    <div class="item-container">
+                        <div class="item1">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 實木書桌</p>
+                        </div>
+                        <div class="item2">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 翻轉化妝桌</p>
+                        </div>
+                        <div class="item3">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 實木餐邊櫃</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="designer-check-more-btn">
+                <button><a href="{{store direct_url='furniture/bedroom.html'}}">MORE ►</a></button>
+            </div>
+        </div>
+
+        <div class="item" data-position="5">
+            <div class="item-main-img">
+                <div class="item-main-img-container">
+                    <picture>
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_Mobile_05.jpg}}" media="(max-width: 767px)">
+                        <source srcset="{{media url=wysiwyg/home_page/designer/Design_PC_05.jpg}}" media="(min-width: 768px)">
+                        <img style="display: block; width: auto; height: 360px;"
+                        src="{{media url=wysiwyg/home_page/designer/Design_PC_05.jpg}}" alt="設計師Steffensen"
+                        loading="lazy" />
+                    </picture>
+                </div>
+            </div>
+            <div class="designer-main-info">
+                <div class="designer-main-h2">
+                    <h2>德國紅點設計獎新銳</h2>
+                </div>
+                <div class="designer-main-content">
+                    <h1>Steffensen & Würtz</h1>
+                    <h3>北歐復古系列家具設計師</h3>
+                    <p>現為Maison 55的產品設計師，曾為英國最大家居公司設計家具；作品於美國知名設計家具品牌 Westelm、Anthropologie 販售。
+                    </p>
+                </div>
+                <div class="furniture-rec">
+                    <h3>Antony 系列 精選家具推薦</h3>
+                    <div class="item-container">
+                        <div class="item1">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 實木書桌</p>
+                        </div>
+                        <div class="item2">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 翻轉化妝桌</p>
+                        </div>
+                        <div class="item3">
+                            <!-- <img src="" alt=""> -->
+                            <p>Antony 實木餐邊櫃</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="designer-check-more-btn">
+                <button><a href="{{store direct_url='furniture/bedroom.html'}}">MORE ►</a></button>
+            </div>
+        </div>
+    </div>

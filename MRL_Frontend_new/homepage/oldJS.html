@@ -1,0 +1,656 @@
+<script defer>
+  require(["jquery", "owlcarousel", "Mrl_ProductElement"], function ($) {
+    jQuery("#space-product-carousel").owlCarousel({
+      autoplay: true,
+      autoplayTimeout: 6500,
+      margin: 10,
+      dots: true,
+      navRewind: true,
+      animateIn: "fadeIn",
+      animateOut: "fadeOut",
+      loop: true,
+      nav: true,
+      lazyLoad: true,
+      center: true,
+      responsive: {
+        0: {
+          items: 1.2,
+        },
+        768: {
+          items: 2,
+        },
+      },
+    });
+    document
+      .querySelector("#space-product-carousel")
+      .classList.remove("nocarousel");
+
+    jQuery("#menu-owl-carousel").owlCarousel({
+      autoplay: false,
+      autoplayTimeout: 5000,
+      margin: 20,
+      navRewind: false,
+      animateIn: "fadeIn",
+      animateOut: "fadeOut",
+      loop: true,
+      nav: false,
+      lazyLoad: true,
+      center: true,
+      responsive: {
+        0: {
+          items: 2,
+        },
+        480: {
+          items: 2.5,
+        },
+        768: {
+          items: 5.5,
+        },
+        992: {
+          items: 7.5,
+        },
+        1200: {
+          items: 9,
+          loop: false,
+          center: false,
+        },
+      },
+    });
+    document.querySelector("#menu-owl-carousel").classList.remove("nocarousel");
+
+    jQuery("#media-report-carousel").owlCarousel({
+      autoplay: false,
+      navRewind: true,
+      loop: true,
+      margin: 20,
+      nav: false,
+      lazyLoad: true,
+      center: true,
+      dots: false,
+      responsive: {
+        0: {
+          items: 1.4,
+          dots: true,
+        },
+        768: {
+          items: 5,
+        },
+      },
+    });
+
+    jQuery(".sleepcarousel_top10").owlCarousel({
+      loop: true,
+      nav: false,
+      autoWidth: false,
+      lazyLoad: true,
+      dots: true,
+      center: false,
+      autoHeight: false,
+      dotsEach: 6,
+      navText: [
+        '<svg width="100%" height="30px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 2px;stroke: #333; opacity:0.5;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+        '<svg width="100%" height="30px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 2px;stroke: #333;opacity:0.5;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>',
+      ],
+      responsive: {
+        0: {
+          items: 2,
+          dots: false,
+        },
+        768: {
+          items: 3,
+        },
+        992: {
+          items: 4,
+        },
+        1200: {
+          items: 5,
+        },
+        1440: {
+          items: 6,
+        },
+      },
+    });
+
+    jQuery(".find_inspire_carousel_initial").owlCarousel({
+      loop: false,
+      margin: 20,
+      autoWidth: false,
+      dots: true,
+      nav: false,
+      autoplay: false,
+      dotsEach: 2,
+      mouseDrag: true, 
+      touchDrag: true, 
+      dragEndSpeed: 800, 
+      smartSpeed: 800,   
+      pullDrag: false,   
+      responsive: {
+        0: {
+          items: 1,
+          dotsEach: 1,
+        },
+        996: {
+          items: 2,
+        },
+      },
+    });
+
+    
+    function initFindInspireCarousel(activeCarousel) {
+      if (!activeCarousel || jQuery(activeCarousel).length === 0) {
+            return; 
+          }
+          activeCarousel = jQuery(activeCarousel);
+          if (activeCarousel.hasClass('owl-loaded')) {
+                activeCarousel.trigger("refresh.owl.carousel")
+          }
+          window.dispatchEvent(new Event('resize'));
+    }
+
+
+    let inspireLi = document.querySelectorAll(".nav_inspire > ul > li");
+    let inspireContent = document.querySelectorAll("#find_inspire_carousel");
+
+    for (let i = 0; i < inspireLi.length; i++) {
+      inspireLi[i].addEventListener("mouseenter",function () {
+        inspireLi.forEach((li) => li.classList.remove("active"));
+        inspireLi[i].classList.add("active");
+        
+        inspireContent.forEach((car) => car.classList.remove("active"));
+        inspireContent[i].classList.add("active");
+
+        let activeCarousel = inspireContent[i];
+        initFindInspireCarousel(activeCarousel); 
+      });
+    }
+
+    document.querySelector("#menu-owl-carousel").classList.remove("nocarousel");
+
+    //首頁曬單牆
+    let KOLOwl = document.querySelector(".KOLfriendHome");
+    let ori = KOLOwl.innerHTML;
+    let $KOLOwl = $(".KOLfriendHome .owl-carousel");
+    let dataNum;
+    let KOLTempHeight;
+    let KOLOwlItem = document.querySelectorAll(".KOLfriendHome .item");
+    let yTemp;
+    let sku;
+    let tempIndex;
+    let skuList = [];
+    let isLoad = 0;
+
+    //收業曬單牆-自動取商品資料
+    function KOLfriendAutoGetItem() {
+      for (let i = 0; i < KOLOwlItem.length; i++) {
+        sku = KOLOwlItem[i]
+          .querySelector(".item-bottom-product")
+          .getAttribute("data-sku");
+        if (!skuList.includes(sku)) {
+          skuList.push(sku);
+        }
+      }
+      mrl_prductElement
+        .getProducts(
+          skuList,
+          ($fields = "sku,name,image,price,MRL_discount_price,url_key"),
+          ($page = 1),
+          ($page_size = skuList.length)
+        )
+        .done((success) => {
+          for (let i = 0; i < KOLOwlItem.length; i++) {
+            sku = KOLOwlItem[i]
+              .querySelector(".item-bottom-product")
+              .getAttribute("data-sku");
+            tempIndex = success[0].data.items.findIndex(
+              (item) => item.sku === sku
+            );
+            if (tempIndex >= 0) {
+              ori = ori.replace(
+                "{$item-bottom-product--a-1}",
+                '{{store direct_url="' +
+                  success[0].data.items[tempIndex].url_key +
+                  '.html"}}'
+              );
+              ori = ori.replace(
+                "{$item-bottom-product--src}",
+                success[0].data.items[tempIndex].image
+              );
+              ori = ori.replace(
+                "{$item-bottom-product--name-1}",
+                success[0].data.items[tempIndex].name
+              );
+              ori = ori.replace(
+                "{$item-bottom-product--a-2}",
+                '{{store direct_url="' +
+                  success[0].data.items[tempIndex].url_key +
+                  '.html"}}'
+              );
+              ori = ori.replace(
+                "{$item-bottom-product--name-2}",
+                success[0].data.items[tempIndex].name
+              );
+              if (
+                success[0].data.items[tempIndex].MRL_discount_price ==
+                "0.000000"
+              ) {
+                ori = ori.replace(
+                  "{$item-bottom-product--price}",
+                  " " +
+                    parseFloat(
+                      success[0].data.items[tempIndex].price
+                    ).toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                      minimumFractionDigits: 0,
+                    })
+                );
+                ori = ori.replace("{$item-bottom-product--disprice}", " ");
+              } else {
+                ori = ori.replace(
+                  "{$item-bottom-product--price}",
+                  parseFloat(
+                    success[0].data.items[tempIndex].MRL_discount_price
+                  ).toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    minimumFractionDigits: 0,
+                  }) + " (售價已折) "
+                );
+                ori = ori.replace(
+                  "{$item-bottom-product--disprice}",
+                  parseFloat(
+                    success[0].data.items[tempIndex].price
+                  ).toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    minimumFractionDigits: 0,
+                  })
+                );
+              }
+            } else if (tempIndex == -1) {
+              ori = ori.replace("{$item-bottom-product--a-1}", " ");
+              ori = ori.replace("{$item-bottom-product--src}", " ");
+              ori = ori.replace("{$item-bottom-product--name-1}", " ");
+              ori = ori.replace("{$item-bottom-product--a-2}", " ");
+              ori = ori.replace("{$item-bottom-product--name-2}", " ");
+              ori = ori.replace("{$item-bottom-product--price}", " ");
+              ori = ori.replace("{$item-bottom-product--disprice}", " ");
+            }
+          }
+          isLoad = 1;
+        })
+        .error((error) => {
+          console.log("error", error);
+        });
+    }
+    KOLfriendAutoGetItem();
+
+    //首頁曬單牆-初始化
+    function KOLfriendHomeInitial(dataNum, height) {
+      $("#KOLfriendHome").owlCarousel({
+        loop: true,
+        margin: 6,
+        nav: true,
+        center: true,
+        autoWidth: true,
+        startPosition: dataNum,
+        navText: [
+          '<svg width="100%" height="34px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 3px;stroke: #fff; opacity:0.9;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+          '<svg width="100%" height="34px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 3px;stroke: #fff;opacity:0.9;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>',
+        ],
+        responsive: {
+          0: {
+            loop: false,
+          },
+          768: {
+            loop: true,
+          },
+        },
+      });
+      if (window.innerWidth < 768) {
+        KOLOwl.style.height = height + "px";
+      }
+    }
+    function KOLfriendHomePopup(dataNum) {
+      $("#KOLfriendHome").owlCarousel({
+        loop: true,
+        margin: 30,
+        nav: true,
+        items: 1.4,
+        center: true,
+        startPosition: dataNum,
+        navText: [
+          '<svg width="100%" height="34px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 3px;stroke: #fff; opacity:0.9;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+          '<svg width="100%" height="34px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 3px;stroke: #fff;opacity:0.9;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>',
+        ],
+        responsive: {
+          0: {
+            loop: false,
+          },
+          768: {
+            loop: true,
+          },
+        },
+      });
+    }
+    function getHeight() {
+      return document.querySelector(".KOLfriendHome .owl-item").offsetHeight;
+    }
+
+    KOLfriendHomeInitial(0, 692);
+    KOLOwl.classList.remove("nocarousel");
+
+    //首頁曬單牆-取得點擊的位置數
+    $(document).on("click", ".owl-item>div", function () {
+      dataNum = $(this).data("position");
+    });
+
+    $(document).on("click", function (event) {
+      if ($(event.target).closest("#KOLfriendHomeMore").length) {
+        //點擊手機板more按鈕
+        if (
+          KOLOwl.clientHeight + (getHeight() * 2 + 20) >
+          108 + ((KOLOwlItem.length + 4) / 2) * (getHeight() + 10)
+        ) {
+          document.querySelector(
+            ".KOLfriendHome .KOL-more-container a"
+          ).innerHTML = "more<br>&#9660;";
+          KOLOwl.style.height = getHeight() * 2 + 158 + "px";
+          KOLOwl.scrollIntoView({ block: "start", inline: "nearest" });
+          document.querySelector(".KOLfriendHome .KOL-more").style.bottom =
+            "1rem";
+        } else if (
+          KOLOwl.clientHeight + (getHeight() * 2 + 20) >
+          108 + (KOLOwlItem.length / 2) * (getHeight() + 10)
+        ) {
+          window.scrollTo({
+            top:
+              window.scrollY +
+              KOLOwl.getBoundingClientRect().top +
+              2 *
+                (getHeight() + 10) *
+                (parseInt(KOLOwl.clientHeight / getHeight()) / 2) +
+              70,
+            behavior: "smooth",
+          });
+          KOLOwl.style.height =
+            KOLOwl.clientHeight + (getHeight() * 2 + 20) + "px";
+          document.querySelector(
+            ".KOLfriendHome .KOL-more-container a"
+          ).innerHTML = "&#9650;<br>close";
+          document.querySelector(".KOLfriendHome .KOL-more").style.bottom =
+            "-5rem";
+        } else {
+          window.scrollTo({
+            top:
+              window.scrollY +
+              KOLOwl.getBoundingClientRect().top +
+              2 *
+                (getHeight() + 10) *
+                (parseInt(KOLOwl.clientHeight / getHeight()) / 2) +
+              70,
+            behavior: "smooth",
+          });
+          KOLOwl.style.height =
+            KOLOwl.clientHeight + (getHeight() * 2 + 20) + "px";
+          document.querySelector(
+            ".KOLfriendHome .KOL-more-container a"
+          ).innerHTML = "more<br>&#9660;";
+        }
+      }
+      if (
+        $(event.target).closest(".KOLfriendHome .owl-carousel .owl-nav").length
+      ) {
+        return;
+      } else if (
+        $(event.target).closest(".KOLfriendHome .owl-carousel .owl-item")
+          .length &&
+        isLoad
+      ) {
+        //展開
+        yTemp = window.scrollY;
+        if (!$(".KOLfriendHome").hasClass("expanded")) {
+          KOLTempHeight = KOLOwl.clientHeight;
+          $KOLOwl.trigger("destroy.owl.carousel");
+          KOLOwl.innerHTML = ori;
+          KOLfriendHomePopup(dataNum);
+          $(".KOLfriendHome .owl-carousel .owl-item")
+            .eq(dataNum)
+            .addClass("mobileExpanded");
+          $(".KOLfriendHome").addClass("expanded");
+          $("html").addClass("KOLfriendHomeExpanded");
+          $(".top-btn").addClass("KOLfriendHomeExpanded");
+          if (window.innerWidth < 768) {
+            KOLOwl.style.height = "fit-content";
+            KOLOwl.scrollIntoView({ block: "start", inline: "nearest" });
+          }
+        }
+      } else if ($(event.target).closest("#KOLCloseBtn").length) {
+        //收合
+        if ($(".KOLfriendHome").hasClass("expanded")) {
+          dataNum = $(
+            ".KOLfriendHome .owl-carousel .center.owl-item .item"
+          ).data("position");
+          $(".KOLfriendHome").removeClass("expanded");
+          $("html").removeClass("KOLfriendHomeExpanded");
+          $(".top-btn").removeClass("KOLfriendHomeExpanded");
+          $(".KOLfriendHome").removeClass("open-more");
+          $KOLOwl.trigger("destroy.owl.carousel");
+          KOLOwl.innerHTML = ori;
+          KOLfriendHomeInitial(dataNum, KOLTempHeight);
+          if (window.innerWidth < 768) {
+            if (
+              KOLOwl.clientHeight + (getHeight() * 2 + 20) >
+              108 + ((KOLOwlItem.length + 4) / 2) * (getHeight() + 10)
+            ) {
+              document.querySelector(
+                ".KOLfriendHome .KOL-more-container a"
+              ).innerHTML = "&#9650;<br>close";
+              document.querySelector(".KOLfriendHome .KOL-more").style.bottom =
+                "-5rem";
+            }
+            window.scrollTo({
+              top: yTemp,
+              behavior: "smooth",
+            });
+          }
+        }
+      }
+    });
+
+    //紅藍貨架自動取商品資料
+    function RedblueCarAutoGetItem() {
+      const storedProductData = JSON.parse(
+        localStorage.getItem("productdata_1002")  
+      );
+      const DataTimestamp = JSON.parse(
+        localStorage.getItem("DataTimestamp_update")
+      );
+
+      //判斷是否已經儲存過資料or資料是否過期
+      if (!storedProductData || isDataExpired(DataTimestamp)) {
+        const redblueCarItem = document.querySelectorAll(
+          ".sleepcarousel_top10 .owl-stage .item_top10"
+        );
+        const inspireItem = document.querySelectorAll(
+          ".find_inspire_carousel_initial .item .itemInfoContainer .btn"
+        );
+        const redblueCarSkuList = getUniqueSkus(redblueCarItem);
+        const inspireSkuList = getUniqueSkus(inspireItem);
+        const combinedSkuList = [
+          ...new Set([...redblueCarSkuList, ...inspireSkuList]),
+        ];
+
+        fetchProductData(combinedSkuList);
+
+        localStorage.setItem("productdata_1002", Date.now());
+      } else {
+        const redblueCarItem = document.querySelectorAll(
+          ".sleepcarousel_top10 .owl-stage .item_top10"
+        );
+        const redblueCarSkuList = getUniqueSkus(redblueCarItem);
+        updateProductElements(storedProductData);
+        updateInspireElements(storedProductData);
+      }
+    }
+
+    //檢查資料是否過期
+    function isDataExpired(refreshTime) {
+      // const expirationTime = 24 * 60 * 60 * 1000;
+      const expirationTime = 1000;
+      const currentTime = Date.now();
+      return currentTime - refreshTime >= expirationTime;
+    }
+
+    //取商品sku
+    function getUniqueSkus(items) {
+      const skuList = [];
+      items.forEach((item) => {
+        const sku = item.getAttribute("data-ga-item-id");
+        if (!skuList.includes(sku)) {
+          skuList.push(sku);
+        }
+      });
+      return skuList;
+    }
+
+    //依照sku取商品資訊
+    function fetchProductData(skuList) {
+      mrl_prductElement
+        .getProducts(
+          skuList,
+          ($fields = "sku,name,image,price,MRL_discount_price,url_key"),
+          ($page = 1),
+          ($page_size = skuList.length)
+        )
+        //success =>更新商品資訊
+        .done((success) => {
+          const productData = success;
+          const timestamp = Date.now();
+          updateProductElements(productData);
+          updateInspireElements(productData);
+
+          localStorage.setItem("storedProductData", JSON.stringify(productData));
+          localStorage.setItem(
+            "DataTimestamp_update",
+            JSON.stringify(timestamp)
+          );
+          // console.log(productData, "第一次取得的資料");
+        })
+        .error((error) => {
+          const redBlueCartOwlDot = document.querySelectorAll(
+            ".top_10 .owl-controls"
+          );
+          redBlueCartOwlDot.forEach(function (dots) {
+            dots.style.display = "none";
+          });
+          const redBlueCartNav = document.querySelectorAll(".nav_top10 ul");
+          redBlueCartNav.forEach(function (nav) {
+            nav.style.display = "none";
+          });
+        });
+    }
+
+    //依照sku更新商品資訊
+    function updateProductElements(success) {
+      const redblueCarItem = document.querySelectorAll(
+        ".sleepcarousel_top10 .owl-stage .item_top10"
+      );
+
+      redblueCarItem.forEach((productContainer) => {
+        let redblueCarSku = productContainer.getAttribute("data-ga-item-id");
+        let skuIndex = success[0].data.items.findIndex(
+          (item) => item.sku === redblueCarSku
+        );
+
+        if (skuIndex >= 0) {
+          let product = success[0].data.items[skuIndex];
+          let productDisPrice = parseInt(
+            product.MRL_discount_price
+          ).toLocaleString();
+          let productOldPrice = parseInt(product.price).toLocaleString();
+
+          let itemImg = productContainer.querySelector(".scrolling_img");
+          let itemSource = productContainer.querySelector("source");
+          let itemName = productContainer.querySelector(".scrolling_pdname");
+          let itemPrice = productContainer.querySelector(".price");
+          let itemOldPrice = productContainer.querySelector(".oldprice");
+          let itemUrl = productContainer.querySelector("a:nth-child(1)");
+          let itemTextUrl = productContainer.querySelector("a:nth-child(2)");
+
+          itemSource.srcset = `{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667${product.image}}}`;
+          itemImg.src = `{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667${product.image}}}`;
+          itemUrl.href = `${product.url_key}.html`;
+          itemTextUrl.href = `${product.url_key}.html`;
+          itemName.innerHTML = product.name;
+          // itemPrice.innerHTML = `$${productOldPrice}`;
+          // itemPrice.style.color = "black";
+          if (productDisPrice === "0") {
+            itemPrice.innerHTML = `$${productOldPrice}`;
+            itemPrice.style.color = "black";
+          } else {
+            itemPrice.innerHTML = `$${productDisPrice}<span class="disText" style="font-size: 1.1rem; color:#666666; font-weight:400"> (售價已折) </span>`;
+            itemPrice.style.color = "#C24035";
+            itemOldPrice.innerHTML = `$${productOldPrice}`;
+          }
+        }
+      });
+    }
+
+    RedblueCarAutoGetItem();
+
+    function updateInspireElements(success) {
+      const inspireItem = document.querySelectorAll(
+        ".find_inspire_carousel_initial .item .itemInfoContainer .btn"
+      );
+
+      inspireItem.forEach((productContainer) => {
+        let inspireSku = productContainer.getAttribute("data-ga-item-id");
+        let skuIndex = success[0].data.items.findIndex(
+          (item) => item.sku === inspireSku
+        );
+
+        if (skuIndex >= 0) {
+          let product = success[0].data.items[skuIndex];
+
+          var productId = product.sku;
+          var productName = product.name;
+          var productUrl = product.url_key;
+          var productImgPath = product.image.replace(/\\/g, "");
+          var productDisPrice = parseInt(
+            product.MRL_discount_price
+          ).toLocaleString();
+          var productOldPrice = parseInt(product.price).toLocaleString();
+          var productContainers = document.querySelectorAll(
+            '.btn[data-ga-item-id="' + productId + '"]'
+          );
+
+          productContainers.forEach(function (productContainer) {
+            var productTitle = productContainer.querySelector(".product-title");
+            var productdisPrice =
+              productContainer.querySelector(".product-disPrice");
+            var productoldPrice =
+              productContainer.querySelector(".product-oldPrice");
+            var productLink = productContainer.querySelector("a");
+            var productImg = productContainer.querySelector(".itemImg");
+            var productSource = productContainer.querySelector("source");
+
+            productSource.srcset = `{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667${productImgPath}}}`;
+            productImg.src = `{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667${productImgPath}}}`;
+            productTitle.innerHTML = productName;
+            productLink.href =
+              "https://www.mrliving.com.tw/" + productUrl + ".html";
+
+            if (productDisPrice !== "0") {
+              productoldPrice.innerHTML = "$" + productOldPrice;
+              // productdisPrice.innerHTML = '$' + productDisPrice
+              productdisPrice.innerHTML = `$${productDisPrice}<span class="disText" style="font-size: 1.1rem; color:#666666; font-weight:400"> (售價已折) </span>`;
+            } else {
+              productdisPrice.innerHTML = "$" + productOldPrice;
+            }
+          });
+        }
+      });
+    }
+  });
+</script>

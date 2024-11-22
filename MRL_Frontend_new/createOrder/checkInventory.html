@@ -1,0 +1,171 @@
+<script>
+    (function(){
+        var pluffyFabric = {
+        blue: {
+            third: ['1018551', '1018558'],
+            fourth: ['1018565', '1018572'],
+            fourthBigger: ['1018551', '1018593','1018558'],
+            rhf: ['1018551', '1018586'],
+            lhf: ['1018558', '1018579'],
+            rhfBigger: ['1018551', '1018593', '1018586'],
+            lhfBigger: ['1018558', '1018593', '1018579']
+        },
+        gray:{
+            third: ['1018552', '1018559'],
+            fourth: ['1018566', '1018573'],
+            fourthBigger: ['1018552', '1018594', '1018559'],
+            rhf: ['1018552', '1018587'],
+            lhf: ['1018559', '1018580'],
+            rhfBigger: ['1018552', '1018594', '1018587'],
+            lhfBigger: ['1018559', '1018594', '1018580']
+        },
+        brown:{
+            third: ['1018553', '1018560'],
+            fourth: ['1018567', '1018574'],
+            fourthBigger: ['1018553', '1018595', '1018560'],
+            rhf: ['1018553', '1018588'],
+            lhf: ['1018560', '1018581'],
+            rhfBigger: ['1018553', '1018595', '1018588'],
+            lhfBigger: ['1018560', '1018595', '1018581']
+        },
+        white:{
+            third: ['1018554', '1018561'],
+            fourth: ['1018568', '1018575'],
+            fourthBigger: ['1018554', '1018596', '1018561'],
+            rhf: ['1018554', '1018589'],
+            lhf: ['1018561', '1018582'],
+            rhfBigger: ['1018554', '1018596', '1018589'],
+            lhfBigger: ['1018561', '1018596', '1018582']
+        },
+        chestnut:{
+            third: ['1018556', '1018563'],
+            fourth: ['1018570', '1018577'],
+            fourthBigger: ['1018556', '1018598', '1018563'],
+            rhf: ['1018556', '1018591'],
+            lhf: ['1018584', '1018563'],
+            rhfBigger: ['1018556', '1018598', '1018591'],
+            lhfBigger: ['1018584', '1018598', '1018563']
+        },
+        latte:{
+            third: ['1018557', '1018564'],
+            fourth: ['1018571', '1018578'],
+            fourthBigger: ['1018557', '1018599', '1018564'],
+            rhf: ['1018557', '1018592'],
+            lhf: ['1018585', '1018564'],
+            rhfBigger: ['1018557', '1018599', '1018592'],
+            lhfBigger: ['1018585', '1018599', '1018564']
+        },
+        milk:{
+            third: ['1018555', '1018562'],
+            fourth: ['1018569', '1018576'],
+            fourthBigger: ['1018555', '1018597', '1018562'],
+            rhf: ['1018555', '1018590'],
+            lhf: ['1018583', '1018562'],
+            rhfBigger: ['1018555', '1018597', '1018590'],
+            lhfBigger: ['1018583', '1018597', '1018562']
+        }
+    };
+    
+    switchInventoryLink();
+    
+    function switchInventoryLink(){
+        allInventoryLinks = document.querySelectorAll('.product-sap-id-block a');
+        var conditions = {
+            'pluffy-fabric-3s-210-deepblue': pluffyFabric.blue.third,
+            'pluffy-fabric-4s-250-deepblue': pluffyFabric.blue.fourth,
+            'pluffy-fabric-4s-290-deepblue': pluffyFabric.blue.fourthBigger,
+            'pluffy-fabric-rhf-210-deepblue': pluffyFabric.blue.rhf,
+            'pluffy-fabric-lhf-210-deepblue': pluffyFabric.blue.lhf,
+            'pluffy-fabric-rhf-290-deepblue': pluffyFabric.blue.rhfBigger,
+            'pluffy-fabric-lhf-290-deepblue': pluffyFabric.blue.lhfBigger,
+            'pluffy-fabric-3s-210-elephantgrey': pluffyFabric.gray.third,
+            'pluffy-fabric-4s-250-elephantgrey': pluffyFabric.gray.fourth,
+            'pluffy-fabric-4s-290-elephantgrey': pluffyFabric.gray.fourthBigger,
+            'pluffy-fabric-rhf-210-elephantgrey': pluffyFabric.gray.rhf,
+            'pluffy-fabric-lhf-210-elephantgrey': pluffyFabric.gray.lhf,
+            'pluffy-fabric-rhf-290-elephantgrey': pluffyFabric.gray.rhfBigger,
+            'pluffy-fabric-lhf-290-elephantgrey': pluffyFabric.gray.lhfBigger,
+            'pluffy-fabric-3s-210-cameltan': pluffyFabric.brown.third,
+            'pluffy-fabric-4s-250-cameltan': pluffyFabric.brown.fourth,
+            'pluffy-fabric-4s-290-cameltan': pluffyFabric.brown.fourthBigger,
+            'pluffy-fabric-rhf-210-cameltan': pluffyFabric.brown.rhf,
+            'pluffy-fabric-lhf-210-cameltan': pluffyFabric.brown.lhf,
+            'pluffy-fabric-rhf-290-cameltan': pluffyFabric.brown.rhfBigger,
+            'pluffy-fabric-lhf-290-cameltan': pluffyFabric.brown.lhfBigger,
+            'pluffy-fabric-3s-210-ivorywhite': pluffyFabric.white.third,
+            'pluffy-fabric-4s-250-ivorywhite': pluffyFabric.white.fourth,
+            'pluffy-fabric-4s-290-ivorywhite': pluffyFabric.white.fourthBigger,
+            'pluffy-fabric-rhf-210-ivorywhite': pluffyFabric.white.rhf,
+            'pluffy-fabric-lhf-210-ivorywhite': pluffyFabric.white.lhf,
+            'pluffy-fabric-rhf-290-ivorywhite': pluffyFabric.white.rhfBigger,
+            'pluffy-fabric-lhf-290-ivorywhite': pluffyFabric.white.lhfBigger,
+            'pluffy-leather-3s-210-chestnutgrey': pluffyFabric.chestnut.third,
+            'pluffy-leather-4s-250-chestnutgrey': pluffyFabric.chestnut.fourth,
+            'pluffy-leather-4s-290-chestnutgrey': pluffyFabric.chestnut.fourthBigger,
+            'pluffy-leather-rhf-210-chestnutgrey': pluffyFabric.chestnut.rhf,
+            'pluffy-leather-lhf-210-chestnutgrey': pluffyFabric.chestnut.lhf,
+            'pluffy-leather-rhf-290-chestnutgrey': pluffyFabric.chestnut.rhfBigger,
+            'pluffy-leather-lhf-290-chestnutgrey': pluffyFabric.chestnut.lhfBigger,
+            'pluffy-leather-3s-210-lattebrown': pluffyFabric.latte.third,
+            'pluffy-leather-4s-250-lattebrown': pluffyFabric.latte.fourth,
+            'pluffy-leather-4s-290-lattebrown': pluffyFabric.latte.fourthBigger,
+            'pluffy-leather-rhf-210-lattebrown': pluffyFabric.latte.rhf,
+            'pluffy-leather-lhf-210-lattebrown': pluffyFabric.latte.lhf,
+            'pluffy-leather-rhf-290-lattebrown': pluffyFabric.latte.rhfBigger,
+            'pluffy-leather-lhf-290-lattebrown': pluffyFabric.latte.lhfBigger,
+            'pluffy-fabric-3s-210-milkwhite': pluffyFabric.milk.third,
+            'pluffy-fabric-4s-250-milkwhite': pluffyFabric.milk.fourth,
+            'pluffy-fabric-4s-290-milkwhite': pluffyFabric.milk.fourthBigger,
+            'pluffy-fabric-rhf-210-milkwhite': pluffyFabric.milk.rhf,
+            'pluffy-fabric-lhf-210-milkwhite': pluffyFabric.milk.lhf,
+            'pluffy-fabric-rhf-290-milkwhite': pluffyFabric.milk.rhfBigger,
+            'pluffy-fabric-lhf-290-milkwhite': pluffyFabric.milk.lhfBigger
+        }
+        if(allInventoryLinks.length > 0){
+            allInventoryLinks.forEach(function(link){
+                var sapID = link.innerText;
+                sapID = sapID.replace(/<br>/g, " ").toLowerCase().replace(/\s+/g, "");
+                for(var condition in conditions){
+                    if(sapID.includes(condition)){
+                        var newIDs = conditions[condition].join(',');
+                        link.href = link.href.replace(condition, newIDs);
+                        link.onclick="window.open('http://dev-stock.mrl.com.tw/sbo-query-ui/www/item.php?id=" + newIDs+ ", 'popup', 'width=500,height=500');"
+                    }
+                }
+            })
+            console.log("組合沙發 Inventory links 已更新");
+            var allShippingBtn = document.getElementById('mrl_all_shipping_attributes');
+            allShippingBtn.removeAttribute('onclick');
+            allShippingBtn.addEventListener('click', function(){
+                getAllShippingModular(conditions);
+            })
+        }else{
+            return;
+        }
+    }
+    
+    function getAllShippingModular(conditions){
+            skuList = document.querySelectorAll('.product-sap-id-block');
+            var allShippingUrl = 'http://stock.mrl.com.tw/sbo-query-ui/www/item.php?id=';
+            // if(window.location.hostname.includes("dev-devbk243")){
+            //     allShippingUrl = 'http://dev-stock.mrl.com.tw/sbo-query-ui/www/item.php?id=';
+            // }
+            var skuListTemp = [];
+            skuList.forEach(function(sku){
+              var skuCode = sku.querySelector("a").innerHTML;
+              skuCode = skuCode.replace(/<br>/g, " ").toLowerCase().replace(/\s+/g, "");
+              for(var condition in conditions){
+                if(skuCode.includes(condition)){
+                  skuCode = conditions[condition].join(',');
+                }
+              }
+              skuListTemp.push(skuCode);
+            })
+            var skuListDeDup = skuListTemp.filter(function(item, index){
+              return skuListTemp.indexOf(item) === index;
+            })
+            allShippingUrl = allShippingUrl + skuListDeDup.join(',');
+              window.open(allShippingUrl,skuListDeDup.join(',') ,config='height=300,width=1200');
+          }
+    })();
+    </script>

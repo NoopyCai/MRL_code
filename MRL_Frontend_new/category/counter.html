@@ -1,0 +1,206 @@
+<style>
+  .mrl-custom-countdown-pic {
+    padding-bottom: 6px;
+  }
+  .mrl-custom-countdown-pic img {
+    width: 100%;
+  }
+  @media (min-width: 1440px) {
+    .timer-container > li {
+      font-size: 24px !important;
+    }
+    .timer li {
+      font-size: 22px !important;
+    }
+  }
+  @media (max-width: 1200px) and (min-width: 1024px) {
+    .timer-container > li {
+      font-size: 16px !important;
+    }
+    .timer li {
+      font-size: 16px !important;
+    }
+  }
+  @media (max-width: 1024px) and (min-width: 768px) {
+    .timer-container > li {
+      font-size: 12px !important;
+    }
+    .timer li {
+      font-size: 12px !important;
+      width: unset !important;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .timer-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 0;
+      display: flex;
+      margin: 5px 0 !important;
+    }
+    .timer-container > li {
+      font-size: 17px !important;
+    }
+    .timer {
+      display: flex;
+      flex-direction: row;
+      width: auto !important;
+      margin-top: 0 !important;
+      display: flex;
+      margin-top: 0;
+    }
+    .timer li {
+      font-size: 17px !important;
+      margin: auto;
+    }
+    .mrl-custom-countdown {
+      margin-left: 0 !important;
+    }
+    .mrl-custom-countdown-parent .pagebuilder-column-group {
+      flex-direction: column;
+    }
+    .pagebuilder-column-group .mrl-custom-countdown {
+      width: 100% !important;
+    }
+    .timer li:nth-child(1),
+    .timer li:nth-child(3),
+    .timer li:nth-child(5) {
+      width: auto !important;
+      margin: auto 5px !important;
+    }
+    .category-main-banner {
+      width: 100% !important;
+    }
+  }
+
+  .mrl-custom-countdown {
+    margin-left: -1px;
+    width: 8.33333% !important;
+  }
+
+  .timer {
+    width: 100%;
+    height: inherit;
+    text-align: center;
+    margin-top: 11px;
+  }
+
+  .timer-container {
+    margin-top: 11px;
+  }
+  .timer li {
+    font-size: 18px;
+    list-style: none;
+    color: white;
+    margin: 2px;
+  }
+  .timer li:nth-child(1),
+  .timer li:nth-child(3),
+  .timer li:nth-child(5) {
+    width: 52px;
+    padding: 0px 0;
+    border-radius: 10px;
+    margin: 2px auto;
+  }
+  .timer li:nth-child(2),
+  .timer li:nth-child(4),
+  .timer li:nth-child(6) {
+    color: #fff;
+    font-weight: 600;
+  }
+  .timer-container > li {
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    list-style: none;
+  }
+  .mrl-custom-countdown {
+    flex-basis: auto;
+  }
+  .mrl-custom-countdown-parent .pagebuilder-column-group {
+    flex-wrap: nowrap;
+  }
+  .category-main-banner {
+    width: 100% !important;
+  }
+</style>
+
+<div class="timer-container">
+  <li>最</li>
+  <li>後</li>
+  <li>倒</li>
+  <li>數</li>
+  <div class="timer"></div>
+</div>
+
+<script type="text/javascript">
+  //開始時間設定處(開始出現計時器時間)
+  let startTimerTime = {
+    year: "2024",
+    month: "07",
+    date: "11",
+    hour: "23",
+    min: "59",
+    sec: "59",
+  };
+  //--------------------------
+
+  //截止時間設定處
+  let deadlineTime = {
+    year: "2024",
+    month: "07",
+    date: "12",
+    hour: "23",
+    min: "59",
+    sec: "59",
+  };
+  //--------------------------
+
+  let deadlineSet = new Date(
+    deadlineTime.year +
+      "-" +
+      deadlineTime.month +
+      "-" +
+      deadlineTime.date +
+      "T" +
+      deadlineTime.hour +
+      ":" +
+      deadlineTime.min +
+      ":" +
+      deadlineTime.sec
+  ).getTime();
+  let startTimeSet = new Date(
+    startTimerTime.year +
+      "-" +
+      startTimerTime.month +
+      "-" +
+      startTimerTime.date +
+      "T" +
+      startTimerTime.hour +
+      ":" +
+      startTimerTime.min +
+      ":" +
+      startTimerTime.sec
+  ).getTime();
+  let timeNowSet = new Date().getTime();
+
+  if (timeNowSet > deadlineSet) {
+    document.querySelector(".pagebuilder-column.mrl-custom-countdown").style =
+      "display:none;";
+    document.querySelector(".pagebuilder-column").style = "width:100%;";
+  } else if (timeNowSet < startTimeSet) {
+    document.querySelector(".pagebuilder-column.mrl-custom-countdown").style =
+      "display:none;";
+    document.querySelector(".pagebuilder-column").style = "width:100%;";
+  } else if (timeNowSet < deadlineSet && timeNowSet > startTimeSet) {
+    startTimer({
+      selector: ".timer-container .timer",
+      finalTime: deadlineTime,
+      showEndTime: false,
+      showSec: false,
+    });
+  }
+</script>

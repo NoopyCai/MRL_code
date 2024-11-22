@@ -1,0 +1,585 @@
+<script defer>
+    require(["jquery", "owlcarousel", "Mrl_ProductElement","fancybox",], function ($) {
+      jQuery("#space-product-carousel").owlCarousel({   
+        autoplay: false,
+        autoplayTimeout: 6500,
+        margin: 10,
+        dots: true,
+        navRewind: true,
+        animateIn: "fadeIn",
+        animateOut: "fadeOut",
+        loop: true,
+        nav: true,
+        lazyLoad: true,
+        center: true,
+        responsive: {
+          0: {
+            items: 1.2,
+          },
+          768: {
+            items: 2,
+          },
+        },
+      });
+      
+      document.querySelector("#space-product-carousel").classList.remove("nocarousel");
+
+      jQuery("#media-report-carousel").owlCarousel({
+        autoplay: false,
+        navRewind: true,
+        loop: true,
+        margin: 20,
+        nav: false,
+        lazyLoad: true,
+        center: true,
+        dots: false,
+        responsive: {
+          0: {
+            items: 1.4,
+            dots: true,
+          },
+          768: {
+            items: 5,
+          },
+        },
+      });
+      
+      jQuery(".sleepcarousel_top10").owlCarousel({
+        loop: true,
+        nav: false,
+        autoWidth: false,
+        lazyLoad: true,
+        dots: true,
+        center: false,
+        autoHeight: false,
+        dotsEach: 6,
+        navText: [
+          '<svg width="100%" height="30px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 2px;stroke: #333; opacity:0.5;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+          '<svg width="100%" height="30px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 2px;stroke: #333;opacity:0.5;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>',
+        ],
+        responsive: {
+          0: {
+            items: 2,
+            dots: false,
+          },
+          768: {
+            items: 3,
+          },
+          992: {
+            items: 4,
+          },
+          1200: {
+            items: 5,
+          },
+          1440: {
+            items: 6,
+          },
+        },
+      });
+  
+      jQuery(".find_inspire_carousel_initial").owlCarousel({
+        loop: false,
+        margin: 20,
+        autoWidth: false,
+        dots: true,
+        nav: false,
+        autoplay: false,
+        dotsEach: 2,
+        mouseDrag: true, 
+        touchDrag: true,
+        dragEndSpeed: 800,
+        smartSpeed: 800,   
+        pullDrag: false,   
+        responsive: {
+          0: {
+            items: 1,
+            dotsEach: 1,
+          },
+          996: {
+            items: 2,
+          },
+        },
+      });
+  
+      
+      //初始化靈感空間
+      function initFindInspireCarousel(activeCarousel) {
+        if (!activeCarousel || jQuery(activeCarousel).length === 0) {
+              return; 
+            }
+            activeCarousel = jQuery(activeCarousel);
+            if (activeCarousel.hasClass('owl-loaded')) {
+                  activeCarousel.trigger("refresh.owl.carousel")
+            }
+            window.dispatchEvent(new Event('resize'));
+      }
+  
+  
+      let inspireLi = document.querySelectorAll(".nav_inspire > ul > li");
+      let inspireContent = document.querySelectorAll("#find_inspire_carousel");
+  
+      for (let i = 0; i < inspireLi.length; i++) {
+        inspireLi[i].addEventListener("mouseenter",function () {
+          inspireLi.forEach((li) => li.classList.remove("active"));
+          inspireLi[i].classList.add("active");
+          
+          inspireContent.forEach((car) => car.classList.remove("active"));
+          inspireContent[i].classList.add("active");
+  
+          let activeCarousel = inspireContent[i];
+          initFindInspireCarousel(activeCarousel); 
+        });
+      }
+  
+      //設計師牆
+      function designerCarouselPopup(designerDataNum, height) {
+        // 初始化
+        let $designerCarousel = $("#designerCarousel");
+        if ($designerCarousel.hasClass("owl-loaded")) {
+          $designerCarousel
+            .trigger("destroy.owl.carousel")
+            .removeClass("owl-loaded owl-hidden")
+            .find(".owl-stage-outer")
+            .children()
+            .unwrap();
+        }
+  
+        $("#designerCarousel").owlCarousel({
+          loop: true,
+          nav: true,
+          items: 1.4,
+          center: true,
+          startPosition: designerDataNum,
+          navText: [
+            '<svg width="100%" height="34px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 3px;stroke: #fff; opacity:0.9;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+            '<svg width="100%" height="34px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 3px;stroke: #fff;opacity:0.9;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>',
+          ],
+          responsive: {
+            0: {
+              loop: true,
+              items: 1.2,
+              center: true,
+              dots: true,
+              margin: 10,
+            },
+            768: {
+              loop: true,
+              items: 1.4,
+              margin: 0,
+              dots: true,
+            },
+          },
+        });
+      }
+  
+      //首頁設計師牆-取得點擊的位置數
+      let designerOwl = document.querySelector(".designerCarousel.nocarousel");
+      //  const $designerOwl = $(".designerCarousel .owl-carousel");
+      let designerOwlItem = document.querySelectorAll("#designerCarousel .item");
+      let designerOwlCloseBtn = document.querySelector("#designerCloseBtn");
+      let designerDataNum;
+  
+      $(document).on("click", ".designer-block-item-txt-btn", function () {
+        designerDataNum = $(this).data("position");
+        designerOwl.classList.add("expanded");
+        designerCarouselPopup(designerDataNum, 900);
+        if (window.innerWidth < 768) {
+          if(designerOwl.classList.contains("expanded")){
+            designerOwl.addEventListener("touchmove", function(e){
+              e.preventDefault();
+            });
+          }
+          document.querySelector(".designerCarousel").addEventListener("click", function(e){
+            if(!e.target.classList.contains("item-main-img-container")){
+              if (designerOwl.classList.contains("expanded")) {
+                designerOwl.classList.remove("expanded");
+              }
+            }
+          })
+        }
+        designerOwlCloseBtn.addEventListener("click",function () {
+            if (designerOwl.classList.contains("expanded")) {
+              designerOwl.classList.remove("expanded");
+            }
+          }
+        );
+      });
+  
+      //首頁曬單牆
+      let KOLOwl = document.querySelector(".KOLfriendHome");
+      // let ori = KOLOwl.innerHTML;
+      let $KOLOwl = $(".KOLfriendHome .owl-carousel");
+      let dataNum;
+      let KOLTempHeight;
+      let KOLOwlItem = document.querySelectorAll(".KOLfriendHome .item");
+      let skuList = [];
+      let isLoad = 0;
+  
+      //首頁曬單牆-初始化
+      function KOLfriendHomeInitial(dataNum, height) {
+        let $KOLfriendHomeCarousel = $("#KOLfriendHome");
+        if ($KOLfriendHomeCarousel.hasClass("owl-loaded")) {
+              $KOLfriendHomeCarousel
+              .trigger("destroy.owl.carousel")
+              .removeClass("owl-loaded owl-hidden")
+              .find(".owl-stage-outer")
+              .children()
+              .unwrap();
+            }
+        $("#KOLfriendHome").owlCarousel({
+          loop: true,
+          margin: 20,
+          nav: false,
+          autoWidth: false,
+          startPosition: dataNum,
+          slideBy: 3, // Move 6 items at a time
+          dotsEach: 3,
+          navText: [
+            '<svg width="100%" height="34px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 3px;stroke: #fff; opacity:0.9;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+            '<svg width="100%" height="34px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 3px;stroke: #fff;opacity:0.9;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>',
+          ],
+          responsive: {
+            0: {
+              items: 1.4,
+              center: true,
+            },
+            768: {
+              loop: true,
+              items: 6,
+            },
+          },
+        });
+      }
+      
+      function KOLfriendHomePopup(dataNum) {
+        let $KOLfriendHomeCarousel = $("#KOLfriendHome");
+        if ($KOLfriendHomeCarousel.hasClass("owl-loaded")) {
+          $KOLfriendHomeCarousel
+            .trigger("destroy.owl.carousel")
+            .removeClass("owl-loaded owl-hidden")
+            .find(".owl-stage-outer")
+            .children()
+            .unwrap();
+        }
+        $("#KOLfriendHome").owlCarousel({
+          loop: true,
+          margin: 30,
+          nav: true,
+          items: 1.4,
+          center: true,
+          dots: false,
+          startPosition: dataNum,
+          navText: [
+            '<svg width="100%" height="34px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 3px;stroke: #fff; opacity:0.9;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+            '<svg width="100%" height="34px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 3px;stroke: #fff;opacity:0.9;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>',
+          ],
+          responsive: {
+            0: {
+              loop: false,
+              margin: 10,
+              items: 1,
+              dots: true,
+            },
+            768: {
+              loop: true,
+            },
+          },
+        });
+        setTimeout(function(){
+         $("#KOLfriendHome").trigger("refresh.owl.carousel");
+         }, 500);
+      }
+      
+      const doneKOLfriendHomeInitial = new Promise((resolve, reject) => {
+        KOLfriendHomeInitial(0, 692);
+        resolve();
+      });
+
+      doneKOLfriendHomeInitial.then(() => {
+        setupKOLfriendHomeClickHandlers();
+        if(window.innerWidth < 768){
+          bindMoreButtonHandlers()
+        }
+      });
+
+      //居友的家 - 綁定click事件
+      function setupKOLfriendHomeClickHandlers(){
+            $(".KOLfriendHome .owl-carousel .owl-item").on("click", function (event, dataNum) {
+              dataNum = event.target.closest(".owl-item").querySelector(".item").dataset.position;
+              //展開
+              if (!$(".KOLfriendHome").hasClass("expanded")) {
+                $("body").css("overflow", "hidden"); //禁止滾動
+                $KOLOwl.trigger("destroy.owl.carousel");
+                
+                KOLfriendHomePopup(dataNum);
+                $(".KOLfriendHome").addClass("expanded");
+                $("html").addClass("KOLfriendHomeExpanded");
+
+                //收合
+                 $("#KOLCloseBtn").off("click").on("click", function (){
+                  if ($(".KOLfriendHome").hasClass("expanded")) {
+                    $("body").css("overflow", "auto"); //恢復滾動
+                    dataNum = $(".KOLfriendHome .owl-carousel .center.owl-item .item").data("position");
+                    $(".KOLfriendHome").removeClass("expanded");
+                    $("html").removeClass("KOLfriendHomeExpanded");
+
+                    KOLfriendHomeInitial(dataNum, KOLTempHeight);
+
+                    $(".KOLfriendHome .owl-carousel .owl-item").off("click");
+                    setupKOLfriendHomeClickHandlers();
+                  }
+                })
+              }
+          });
+
+        }
+        //居友的家 - 綁定more btn
+        function bindMoreButtonHandlers(){
+                  const allMoreBtns =  document.querySelectorAll(".KOL-more-container")
+                allMoreBtns.forEach(function(moreBtn){
+                  moreBtn.addEventListener('click', function(event){
+                    
+                    let parentKOLfriendHome = event.target.closest(".owl-item.active");
+                    let expandedItem = parentKOLfriendHome.querySelector(".item");
+                    let expandedItemBottomOtherBuy = parentKOLfriendHome.querySelector(".item .item-bottom .item-bottom-expanded .item-bottom-other-buy");
+                    let scrollTarget = parentKOLfriendHome.querySelector(".item-bottom-expanded p.content");
+                    
+                    if (expandedItem && expandedItemBottomOtherBuy && scrollTarget) {
+                      if (expandedItem.classList.contains("click-more-half")) {
+                        // 打開狀態
+                          expandedItemBottomOtherBuy.classList.add("click-more-half");
+                          
+                          let scrollTargetPosition = scrollTarget.getBoundingClientRect().top - expandedItem.getBoundingClientRect().top - 80;
+                          // 檢查是否可以滾動
+                          expandedItem.scrollTo({
+                            top: scrollTargetPosition,
+                            behavior: 'auto'
+                          });
+    
+                          //隱藏after的元素
+                          event.target.closest(".KOL-more").classList.add("hide-more-after");
+                          expandedItem.classList.remove("click-more-half");
+                          event.target.closest("a").innerHTML = "CLOSE<br>▲";
+                      }else{
+                          expandedItem.scrollTo({
+                            top: 0,
+                            behavior: 'auto'
+                          });
+                          // 關閉狀態
+                          expandedItemBottomOtherBuy.classList.remove("click-more-half");
+    
+                          event.target.closest(".KOL-more").classList.remove("hide-more-after");
+                          event.target.closest("a").innerHTML = "MORE<br>▼";
+                          expandedItem.classList.add("click-more-half");
+                      }
+                    }
+                    });
+                  })
+                }
+      KOLOwl.classList.remove("nocarousel");
+  
+      //自動取商品資料
+      function autoGetItemInfo() {
+        const storedProductData = JSON.parse(
+          localStorage.getItem("storedProductData")
+        );
+        const DataTimestamp = JSON.parse(
+          localStorage.getItem("DataTimestamp_update")
+        );
+  
+        //判斷是否已經儲存過資料or資料是否過期
+        if (!storedProductData || isDataExpired(DataTimestamp)) {
+          const kolItem = document.querySelectorAll(".KOLfriendHome .item .item-bottom-expanded .item-bottom-product");
+          const redblueCarItem = document.querySelectorAll(
+            ".sleepcarousel_top10 .owl-stage .item_top10"
+          );
+          const inspireItem = document.querySelectorAll(
+            ".find_inspire_carousel_initial .item .itemInfoContainer .btn"
+          );
+          const redblueCarSkuList = getUniqueSkus(redblueCarItem);
+          const inspireSkuList = getUniqueSkus(inspireItem);
+          const kolSkuList = getUniqueSkus(kolItem); 
+          const combinedSkuList = [
+            ...new Set([...redblueCarSkuList, ...inspireSkuList, ...kolSkuList]),
+          ];
+  
+          fetchProductData(combinedSkuList);
+  
+          localStorage.setItem("storedProductData", Date.now());
+        } else {
+          const redblueCarItem = document.querySelectorAll(
+            ".sleepcarousel_top10 .owl-stage .item_top10"
+          );
+          const redblueCarSkuList = getUniqueSkus(redblueCarItem);
+          updateProductElements(storedProductData);
+          updateInspireElements(storedProductData);
+          updateKolElements(storedProductData);
+        }
+      }
+  
+      //檢查資料是否過期
+      function isDataExpired(refreshTime) {
+        const expirationTime = 1000;
+        const currentTime = Date.now();
+        return currentTime - refreshTime >= expirationTime;
+      }
+  
+      //取商品sku
+      function getUniqueSkus(items) {
+        const skuList = [];
+        items.forEach((item) => {
+          const sku = item.getAttribute("data-ga-item-id");
+          if (!skuList.includes(sku)) {
+            skuList.push(sku);
+          }
+        });
+        return skuList;
+      }
+  
+      //依照sku取商品資訊
+      function fetchProductData(skuList) {
+        mrl_prductElement.getProducts(
+            skuList,
+            ($fields = "sku,name,image,price,MRL_discount_price,url_key"),
+            ($page = 1),
+            ($page_size = skuList.length)
+          )
+          //success =>更新商品資訊
+          .done((success) => {
+            const productData = success;
+            const timestamp = Date.now();
+            updateProductElements(productData);
+            updateInspireElements(productData);
+            updateKolElements(productData);
+  
+            localStorage.setItem("storedProductData", JSON.stringify(productData));
+            localStorage.setItem(
+              "DataTimestamp_update",
+              JSON.stringify(timestamp)
+            );
+            // console.log(productData, "第一次取得的資料");
+          })
+          .error((error) => {
+            const redBlueCartOwlDot = document.querySelectorAll(
+              ".top_10 .owl-controls"
+            );
+            redBlueCartOwlDot.forEach(function (dots) {
+              dots.style.display = "none";
+            });
+            const redBlueCartNav = document.querySelectorAll(".nav_top10 ul");
+            redBlueCartNav.forEach(function (nav) {
+              nav.style.display = "none";
+            });
+            console.log("error", error);
+          });
+      }
+  
+      autoGetItemInfo();
+
+      //貨架更新
+      function updateProductElements(success) {
+        updateElementsBySKU(success, ".sleepcarousel_top10 .owl-stage .item_top10", ".item_top10", (container) => ({
+          image: container.querySelector(".scrolling_img"),
+          source: container.querySelector("source"),
+          name: container.querySelector(".scrolling_pdname"),
+          discountPrice: container.querySelector(".price"),
+          oldPrice: container.querySelector(".oldprice"),
+          links: [
+            container.querySelector("a:nth-child(1)"),
+            container.querySelector("a:nth-child(2)")
+          ]
+        }));
+      }
+
+      //空間靈感更新
+      function updateInspireElements(success) {
+        updateElementsBySKU(success,".find_inspire_carousel_initial .item .itemInfoContainer .btn",".btn",
+          (container) => ({
+            image: container.querySelector(".itemImg"),
+            source: container.querySelector("source"),
+            name: container.querySelector(".product-title"),
+            discountPrice: container.querySelector(".product-disPrice"),
+            oldPrice: container.querySelector(".product-oldPrice"),
+            links: [container.querySelector("a")], 
+          })
+        );
+      }
+
+    });
+    
+    //曬單牆更新
+    function updateKolElements(success) {
+      updateElementsBySKU(success, ".KOLfriendHome .item", ".item-bottom-expanded .item-bottom-product",(container) => ({
+          image: container.querySelector(".item-bottom-expanded .item-bottom-product .item-bottom-product-img a img"),
+          name: container.querySelector(".item-bottom-product-name a"),
+          discountPrice: container.querySelector(".item-bottom-product-price-discount-span"),
+          oldPrice: container.querySelector(".item-bottom-product-price-span"),
+          links: container.querySelectorAll(".item-bottom a"),
+        })
+      );
+    }
+
+    function updateProductInfo(product, containerSelectors) {
+      let {image,url_key,name,price,MRL_discount_price} = product;
+      let productDisPrice = parseInt(MRL_discount_price).toLocaleString();
+      let productOldPrice = parseInt(price).toLocaleString();
+
+      //img
+      if (containerSelectors.image) {
+        containerSelectors.image.src = `{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667${image}}}`;
+      }
+      if (containerSelectors.source) {
+        containerSelectors.source.srcset = `{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667${image}}}`;
+      }
+
+      //link
+      if (containerSelectors.links) {
+        containerSelectors.links.forEach((link) => {
+          link.href = `${url_key}.html`;
+        });
+      }
+
+      //name
+      if (containerSelectors.name) {
+        containerSelectors.name.innerHTML = name;
+      }
+
+      //price
+      if (containerSelectors.discountPrice) {
+        if (productDisPrice === "0") {
+          containerSelectors.discountPrice.innerHTML = `$${productOldPrice}`;
+          containerSelectors.discountPrice.style.color = "black";
+        } else {
+          containerSelectors.discountPrice.innerHTML = `$${productDisPrice}<span class="disText" style="font-size: 1.1rem; color:#666666; font-weight:400"> (售價已折) </span>`;
+          containerSelectors.discountPrice.style.color = "#C24035";
+        }
+      }
+
+      // 更新原價
+      if (containerSelectors.oldPrice) {
+        if (productDisPrice !== "0") {
+          containerSelectors.oldPrice.innerHTML = `$${productOldPrice}`;
+        } else {
+          containerSelectors.oldPrice.innerHTML = "";
+        }
+      }
+    }
+
+//SKU更新
+function updateElementsBySKU(success, containerSelector, skuSelector, containerSelectorsCallback) {
+  const containers = document.querySelectorAll(containerSelector);
+  
+  containers.forEach((container) => {
+    let sku = container.getAttribute("data-ga-item-id") || container.querySelector(skuSelector).getAttribute("data-ga-item-id") ;
+    let skuIndex = success[0].data.items.findIndex((item) => item.sku === sku);
+
+    if (skuIndex >= 0) {
+      let product = success[0].data.items[skuIndex];
+      let containerSelectors = containerSelectorsCallback(container);
+
+      updateProductInfo(product, containerSelectors);
+    }
+  });
+}
+  </script>
+  

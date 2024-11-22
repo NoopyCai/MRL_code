@@ -1,0 +1,130 @@
+<script>
+    (function () {
+        var alreadyShippes = document.querySelectorAll(".order-tables .col-qty .qty-table tr td")
+        var shippeQty;
+        var itemQty;
+        var invoiceQty;
+
+        alreadyShippes.forEach(function (alreadyShippe) {
+            if (alreadyShippe.innerText == "已發貨") {
+                var nextTd = alreadyShippe.nextElementSibling;
+                var itemActionDropdown = alreadyShippe.closest(".type-order ").querySelector(".col-actions .item-action-dropdown");
+                itemActionDropdown.disabled = true;
+                shippeQty = nextTd.innerText;
+            }
+            if (alreadyShippe.innerText == "數量") {
+                var nextTd = alreadyShippe.nextElementSibling;
+                if (nextTd && nextTd.tagName.toLowerCase() === 'td') {
+                    itemQty = nextTd.innerText;
+                }
+            }
+            if (alreadyShippe.innerText == "已開票") {
+                var nextTd = alreadyShippe.nextElementSibling;
+                if (nextTd && nextTd.tagName.toLowerCase() === 'td') {
+                    invoiceQty = nextTd.innerText;
+                }
+            }
+        })
+
+        if (shippeQty == itemQty || shippeQty == invoiceQty) {
+          
+        }
+    }());
+</script>
+
+<script>
+    (function () {
+        var qtyTables = document.querySelectorAll(".order-tables .col-qty .qty-table");
+        if (qtyTables.length === 0) return;
+    
+            qtyTables.forEach(function (qtyTable) {
+            var rows = qtyTable.querySelectorAll("tr");
+            var shippeQty, itemQty, invoiceQty
+    
+            Array.from(rows).forEach(function(row) {
+                var label = row.querySelector("td:first-child");
+                var value = row.querySelector("td:last-child");
+                
+                if (!label || !value) return;
+    
+                var labelText = label.innerText.trim();
+                var valueText = value.innerText.trim();
+    
+                if (labelText === "已發貨" || labelText === "Shipped") {
+                    shippeQty = valueText;
+                } else if (labelText === "數量" || labelText === "Ordered") {
+                    itemQty = valueText;
+                } else if (labelText === "已開票" || labelText === "Invoiced") {
+                    invoiceQty = valueText;
+                } else if (labelText === "新建" || labelText === "New") {
+                    var newQtyInput = row.querySelector("input.validate-number.qty_input");
+                    newQtyInput.addEventListener("input", function(){
+                        var createCount = event.target.value;
+                        var minAllowedQty = parseInt(shippeQty);
+                        if(createCount < parseInt(shippeQty)){
+                            event.preventDefault();
+                            alert("「修改數量」少於「已發貨」數量，因此無法修改。 ");
+                            event.target.value = minAllowedQty;
+                        }
+                    })
+                }
+            });
+    
+            // console.log(qtyTable, itemQty, invoiceQty, shippeQty);
+            if (shippeQty && (shippeQty === itemQty || shippeQty === invoiceQty)) {
+                var currentRow = qtyTable.closest("tr");
+                if (currentRow) {
+                    processRow(currentRow);
+                }
+            }
+        });
+    
+        function processRow(row) {
+            var rowInputs = row.querySelectorAll("input");
+            var rowTextArea = row.querySelector("textarea");
+            // var actionTables = row.querySelectorAll("td:last-child table");
+            var actionCol = row.querySelector(".col-actions");
+            var actionDropdown = row.querySelector(".col-actions .item-action-dropdown");
+    
+            Array.from(rowInputs).forEach(function (rowInput) {
+                rowInput.readOnly = true;
+                rowInput.style.backgroundColor = "#f0f0f0";
+            });
+    
+            if (rowTextArea) {
+                rowTextArea.readOnly = true;
+                rowTextArea.style.backgroundColor = "#f0f0f0";
+            }
+    
+            // Array.from(actionTables).forEach(function (actionTable) {
+            //     actionTable.style.display = "none";
+            // });
+            if (actionCol) {
+                var disableEditText = document.createElement("p");
+                disableEditText.innerText = "{※此行已全數銷貨\n無法變更}";
+                disableEditText.style.fontWeight = "bold";
+                disableEditText.style.textAlign = "left";
+                disableEditText.style.color = "red";
+                disableEditText.style.marginTop = "10px";
+                actionCol.appendChild(disableEditText);
+            }
+            if (actionDropdown) {
+                actionDropdown.style.backgroundColor = "#f0f0f0";
+                actionDropdown.style.color = "#999";  
+                actionDropdown.style.border = "1px solid #ccc"; 
+                actionDropdown.style.backgroundImage = "none";
+                actionDropdown.addEventListener('mousedown', function (event) {
+                    event.preventDefault();
+                });
+            }
+    
+            setTimeout(function () {
+                var actionButtons = row.querySelectorAll("button");
+                Array.from(actionButtons).forEach(function (actionButton) {
+                    actionButton.style.display = "none";
+                });
+            }, 500);
+        }
+        
+    })();
+    </script>

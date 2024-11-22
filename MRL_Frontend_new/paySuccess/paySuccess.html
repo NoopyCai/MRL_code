@@ -1,0 +1,53 @@
+<style>
+    .page-main{
+        position: relative;
+    }
+    .banner-container{
+        position: absolute;
+        right: 0;
+        top: -25px;
+        width: 50%;
+    }
+
+    .checkout-success .success-messages{
+        margin-bottom: 29rem;
+    }
+    .message.success{
+        width: 313px;
+    }
+    @media(min-width:1900px){
+        .banner-container{
+            width: 45%;
+        }
+    }
+    @media(max-width:1510px){
+        .checkout-success .success-messages{
+            margin-bottom: 20rem;
+        }
+    }
+    @media(max-width:1080px){
+        .banner-container{
+            width: 48%;
+        }
+        .checkout-success .success-messages{
+            margin-bottom: 40px;
+        }
+    }
+    @media(max-width:768px){
+        .banner-container{
+            margin-top: 0.7rem;
+            margin-bottom: 2rem;
+            position: relative;
+            width: 100%;
+        }
+        .message.success{
+            width: auto;
+        }
+    }
+</style>
+<div class="banner-container"><img style="display: block; width: 100%;" src="/media/wysiwyg/home_page/2024_11M/2024_11M_double11_paySuccess.jpg" alt="雙11優惠"/>
+</div>
+
+<script>
+    document.querySelector('.page-main .page-title-wrapper').before(document.querySelector('.banner-container'));
+</script>

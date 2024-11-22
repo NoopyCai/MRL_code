@@ -1,0 +1,382 @@
+<style>
+    .checkout .item p.fadeOut {
+      animation: fadeOut 1.5s linear 0s;
+    }
+    .checkout .item p.fadeIn {
+      animation: fadeIn 1.5s linear 0s;
+      text-align: start;
+    }
+  
+    .goTobuy {
+      display: none;
+      font-size: 15px;
+      width: 100%;
+      text-align: start;
+      margin: 10px 0 0 20px;
+    }
+    .label-title {
+      color: #323232;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-left: 18px;
+    }
+    .allow {
+      background-color: #f0d9cd;
+      color: #c34135;
+      font-size: 13px;
+      font-weight: 400;
+      padding: 0 6px;
+      letter-spacing: 2px;
+    }
+    .notAllow {
+      background-color: #a6a6a6;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 400;
+      padding: 0 6px;
+    }
+    .fadeIn li {
+      text-align: start;
+      font-size: 14px;
+      color: #323232;
+      margin-left: 20px;
+      margin-top: 10px;
+      line-height: 20px;
+      font-weight: 500;
+      width: 85%;
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .noFee {
+      color: #808080;
+      font-size: 13px;
+      letter-spacing: 2px;
+      font-weight: 400;
+    }
+  
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+  
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  
+    @media (max-width: 1600px) {
+      .fadeIn li {
+        width: 80%;
+      }
+    }
+    @media (max-width: 1440px) {
+      .fadeIn li {
+        width: 98%;
+      }
+    }
+    @media (max-width: 768px) {
+      .goTobuy {
+        display: block;
+      }
+  
+      .fadeIn li {
+        width: 83%;
+      }
+  
+      .noFee {
+        font-weight: 700;
+      }
+    }
+  </style>
+  
+  <script>
+    (function () {
+      var cartEmpty = document.querySelector(".cart-empty");
+      if (cartEmpty) {
+        emptyCartText();
+      } else {
+        var item = document.querySelector(
+          ".page-wrapper .page-main .cart-summary .item p"
+        );
+        item.innerHTML = '<strong style="font-size:1.4rem; letter-spacing:1px;">全球物料成本持續上升</br>把握優惠，現在買不買貴</strong>';
+        setTimeout(main, 2000);
+      }
+  
+      function main() {
+        var subtotalElement = document.querySelector(".grand.totals .price");
+        var sumPriceElement = document.querySelector(
+          "#cart-totals > div > table > tbody > tr.totals.sub > td > span.price"
+        );
+        var discountElement = document.querySelector(
+          "#cart-totals > div > table > tbody > tr:nth-child(2) > td > span > span.price"
+        );
+  
+        if (subtotalElement) {
+          observeSubtotalChanges(subtotalElement);
+          updateSubtotal();
+          disableGiftQuantityInputs();
+          qtyInputDisable();
+          addCreditCardIcon();
+        }
+      }
+  
+      //監聽購物車總價是否變動
+      function observeSubtotalChanges(subtotalElement) {
+        var observer = new MutationObserver(function (mutationsList) {
+          for (var i = 0; i < mutationsList.length; i++) {
+            var mutation = mutationsList[i];
+            if (
+              mutation.type === "childList" ||
+              mutation.type === "characterData"
+            ) {
+              updateSubtotal();
+              disableGiftQuantityInputs();
+              hideLoading();
+              qtyMaxInput();
+              qtyInputDisable();
+            }
+          }
+        });
+  
+        observer.observe(subtotalElement, {
+          attributes: true,
+          childList: true,
+          characterData: true,
+          subtree: true,
+        });
+      }
+  
+      //訂單總計資訊
+      function updateSubtotal() {
+        var subtotalElement = document.querySelector(".grand.totals .price");
+        var sumPriceElement = document.querySelector(
+          "#cart-totals > div > table > tbody > tr.totals.sub > td > span.price"
+        );
+        var discountElement = document.querySelector(
+          "#cart-totals > div > table > tbody > tr:nth-child(2) > td > span > span.price"
+        );
+        var item = document.querySelector(
+          ".page-wrapper .page-main .cart-summary .item p"
+        );
+    
+        var subtotal = parsePrice(subtotalElement);
+        var sumPrice = parsePrice(sumPriceElement);
+        var discount = parsePrice(discountElement);
+        sumPrice = sumPrice + discount;
+  
+        var message = updateMessage(subtotal, sumPrice);
+  
+        item.classList.add("fadeOut");
+        setTimeout(function () {
+          item.innerHTML = message;
+          item.classList.remove("fadeOut");
+          item.classList.add("fadeIn");
+        }, 1500);
+      }
+  
+      //計算分期資訊
+      function updateMessage(subtotal, sumPrice) {
+        if (isNaN(subtotal)) {
+          return "";
+        }
+  
+        var orderFee = document.querySelector("tr.totals.shipping.incl > td > span")
+        var orderFeePrice = parsePrice(orderFee);
+        if(orderFee){
+            subtotal = subtotal - orderFeePrice;
+        }
+        var message;
+        var gift = 28000 - subtotal ;
+        // var freeorder = 48000 - subtotal;
+  
+        
+  
+        gift = getFormatter(gift);
+        // freeorder = getFormatter(freeorder);
+  
+        if (subtotal < 10000) {
+          var toThree = 10000 - subtotal;
+  
+          toThree = getFormatter(toThree);
+        
+  
+          message =
+            '<span class="label-title">分期0利率</span>' +
+            '<span class="notAllow" style="margin-left:3%; padding:2px 6px">還差 $' + toThree + "</span>" +
+            '<li style="width:100%">- 滿一萬，可享3期</li>' +
+            '<li style="width:100%">- 滿四萬，可享6期</li>' +
+            '<a class="goTobuy" href="#goToBuyItem" >點我前往加選</a>';
+        } else if(subtotal > 10000 && subtotal < 40000){
+            var aveTree = Math.floor(subtotal / 3);
+            aveTree = getFormatter(aveTree);
+            message =
+            '<span class="label-title">分期0利率</span>' 
+            +
+            '<li style="width:100%">- 滿一萬，可享3期 (約$' + aveTree + "/期)</li>" +
+            '<li style="width:100%">- 滿四萬，可享6期</li>' +
+            '<a class="goTobuy" href="#goToBuyItem" >點我前往加選</a>';
+        }else if (subtotal > 40000) {
+            var aveTree = Math.floor(subtotal / 3);
+            aveTree = getFormatter(aveTree);
+            var aveSix = Math.floor(subtotal / 6);
+            aveSix = getFormatter(aveSix);
+            message =
+            '<span class="label-title">分期0利率</span>'
+            +
+            '<li style="width:100%">- 滿一萬，可享3期 (約$' +
+            aveTree +
+            "/期)</li>" +
+            '<li style="width:100%">- 滿四萬，可享6期 (約$' +
+            aveSix +
+            "/期)</li>" +
+            '<a class="goTobuy" href="#goToBuyItem" >點我前往加選</a>';
+        } else {
+          var aveTree = Math.floor(subtotal / 3);
+          aveTree = getFormatter(aveTree);
+          var aveSix = Math.floor(subtotal / 6);
+          aveSix = getFormatter(aveSix);
+  
+          message =
+          '<span class="label-title">滿額抽獎 <span class="noFee">(不含運費)</span></span>' +
+            '<li>- 週週抽Dyson吸塵器 <span class="allow" style="margin-left:3%; padding:2px 6px">已符合</span></li>'
+            +
+            '<hr>'
+            +
+            '<span class="label-title">分期0利率</span>'
+            +
+            '<li style="width:100%">- 滿一萬，可享3期 (約$' +
+            aveTree +
+            "/期)</li>" +
+            '<li style="width:100%">- 滿四萬，可享6期 (約$' +
+            aveSix +
+            "/期)</li>" +
+            '<a class="goTobuy" href="#goToBuyItem" >點我前往加選</a>';
+        }
+  
+        //設置前往加選錨點
+        var goToBuyItem = document.querySelector(".crosssell");
+  
+        if (goToBuyItem) {
+          goToBuyItem.id = "goToBuyItem";
+        }
+  
+        return message;
+      }
+  
+      //轉為num
+      function parsePrice(price) {
+        if (price && price.innerText) {
+          return parseFloat(price.innerText.replace(/[$,]/g, ""));
+        } else {
+          return 0;
+        }
+      }
+      //格式化金額
+      function getFormatter(money) {
+        var formatter = new Intl.NumberFormat("en-US");
+        var formattedNumber = formatter.format(money);
+        return formattedNumber;
+      }
+  
+      //信用卡圖示
+      function addCreditCardIcon() {
+        var checkOutBtn = document.querySelector(".item .checkout");
+        var creditCardIcon = document.createElement("div");
+  
+        creditCardIcon.innerHTML =
+          "<div>" +
+          "<br>" +
+          '<img src="/media/wysiwyg/Creditcard_icon/visa_0.png" alt="Visa" style="width:20%; padding-left:10px; padding-right:10px;">' +
+          '<img src="/media/wysiwyg/Creditcard_icon/mc_0.png" alt="MasterCard" style="width: 20%; padding-left:10px; padding-right:10px;">' +
+          '<img src="/media/wysiwyg/Creditcard_icon/jbc_0.jpg" alt="JCB" style="width: 20%; padding-left:10px; padding-right:10px;">' +
+          "</div>";
+  
+        checkOutBtn.parentNode.insertBefore(
+          creditCardIcon,
+          checkOutBtn.nextSibling
+        );
+      }
+  
+      //禁用贈品修改數量
+      function disableGiftQuantityInputs() {
+        var giftInputs = document.querySelectorAll(
+          "tr.item-info:has(.notice) > td.qty > div.qty > div.qty > label > input"
+        );
+  
+        giftInputs.forEach(function (inputElement) {
+          inputElement.disabled = true;
+        });
+      }
+  
+      //隱藏更新購物車loding轉圈
+      function hideLoading() {
+        var loadingMask = document.querySelector(".loading-mask");
+        if (loadingMask) {
+          loadingMask.style.display = "block";
+  
+          setTimeout(function () {
+            loadingMask.style.display = "none";
+          }, 3000);
+        }
+      }
+  
+      //限制修改商品數量最大值 20
+      function qtyMaxInput() {
+        var qtyInputs = document.querySelectorAll(".item-info .control input");
+        qtyInputs.forEach(function (qtyInput) {
+          qtyInput.addEventListener("input", function () {
+            var inputNumber = parseInt(qtyInput.value, 10);
+  
+            if (inputNumber > 20) {
+              qtyInput.value = "20";
+            }
+          });
+        });
+      }
+  
+      //將無法更改數量的商品顯示為Disabled
+      function qtyInputDisable() {
+        var qtyInputContainers = document.querySelectorAll(
+          ".item-info .col .field .control"
+        );
+        var cartItems = document.querySelectorAll(".cart .item-info");
+  
+        cartItems.forEach(function (cartItem) {
+          var kitItem = cartItem.querySelector(".mst-cart-item-is-product-kit");
+          var qtyInputContainer = cartItem.querySelector(".control");
+          var qtyArrow = qtyInputContainer.querySelector(".qty-changer ");
+          var qtyInputPar = qtyInputContainer.closest(".field ");
+  
+          if (kitItem) {
+            var qtyInput = qtyInputContainer.querySelector("input");
+            qtyInputPar.style.display = "flex";
+            qtyInputPar.style.justifyContent = "center";
+            qtyInputPar.style.marginTop = "10px";
+            qtyInput.disabled = true;
+            qtyArrow.style.display = "none";
+          }
+        });
+      }
+  
+      //購物車為空時文案
+      function emptyCartText() {
+        var item_empty = document.querySelector(
+          ".page-wrapper .page-main .cart-empty p:last-child"
+        );
+        item_empty.innerHTML =
+          '<strong style="font-size:1.4rem; letter-spacing:1px;">全球物料成本持續上升</br><span;">把握優惠，現在買不買貴</span></strong>';
+      }
+    })();
+  </script>
+  
+  

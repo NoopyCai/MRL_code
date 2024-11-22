@@ -1,0 +1,9 @@
+<script>
+    var otpCheckBtn = document.querySelector("#forget-form > fieldset.fieldset.forgot-pass-step2 > div.actions-toolbar-otp > div > button.forgot-btn-verify.withresend.pop-bnt");
+    var otpInput = document.querySelector("#forgototp");
+    otpInput.addEventListener('input', function(){
+        if(this.value.length === 6){
+            otpCheckBtn.click();
+        }
+    })
+</script>

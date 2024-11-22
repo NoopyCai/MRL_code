@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=check_circle" />
+<script>
+    var container = document.querySelector(".page-wrapper .page-main #checkout .amcheckout-main-container .amcheckout-column .-summary");
+    var paragraph = document.createElement('P');
+    var paragraph_2 = document.createElement('P');
+    paragraph.textContent = '';
+    paragraph_2.textContent = '年度最大優惠，錯過再等一年\r\n';
+    //paragraph_2.textContent += '即將漲價 漲幅5~15％\r\n';
+    paragraph_2.textContent += '現在買 最划算';
+    paragraph.style.cssText = 'color: #ae0000; font-size:1.4rem; letter-spacing:1px; text-align:   center; width: 80%;font-weight: 600; margin: 20px auto 0 ;white-space: pre;';
+    paragraph_2.style.cssText = 'color: #ae0000; font-size:1.4rem; letter-spacing:1px;text-align:   center;width: 80%;font-weight: 600; margin: 0 auto 20px ;white-space: pre;';
+    container.appendChild(paragraph);
+    container.appendChild(paragraph_2);
+
+
+    var sumPrice =  document.querySelector("tr.grand.totals > td > strong > span")
+    var subtotal = document.querySelector("tr.totals.sub > td.amount > span.price")
+    var shippingTake = document.querySelector("tr.totals.shipping > td > span")
+    var warrantyExist = false;
+    checkWarrantyExist();
+
+    
+    var ticketCount;
+    if(sumPrice){
+        sumPrice = parsePrice(sumPrice);
+    }
+    if(subtotal){
+        subtotal = parsePrice(subtotal);
+    }
+    shippingTake = parsePrice(shippingTake);
+    if(shippingTake){
+        sumPrice = sumPrice - shippingTake;
+    }
+    ticketCount = Math.floor(sumPrice / 5000);
+    var warrantyValue = 1;
+    if(warrantyExist === true){
+        if(subtotal >= 200000 && subtotal <= 299999){
+            warrantyValue = 2;
+        }else if(subtotal >= 300000 && subtotal <= 399999){
+            warrantyValue = 3;
+        }else if(subtotal >= 400000 && subtotal <= 499999){
+            warrantyValue = 4;
+        }else if(subtotal >= 500000 && subtotal <= 599999){
+            warrantyValue = 5;
+        }else if(subtotal >= 600000 && subtotal <= 699999){
+            warrantyValue = 6;
+        }else if(subtotal >= 700000 && subtotal <= 799999){
+            warrantyValue = 7;
+        }   
+    }
+    if(sumPrice > 5000){
+        insertPromotionText();
+    }
+
+    function  insertPromotionText(){
+        var message = '';
+        if(ticketCount > 0 && warrantyExist === true){
+            message += 
+             "<p class='promotion-text'><span class='material-symbols-outlined'>check_circle</span> 送價值 "+"<span class='promotion-text-value'>"+warrantyValue+"</span>"+" 萬元延長保固一年</p>"
+             +
+            "<p class='promotion-text'><span class='material-symbols-outlined'>check_circle</span> 豪華家電抽獎券 "+"<span class='promotion-text-value'>"+ticketCount+"</span>"+" 張</p>"
+
+            document.querySelector(".table-totals").insertAdjacentHTML('beforeend', message)
+        }
+        else if(ticketCount > 0){
+            message +="<p class='promotion-text'><span class='material-symbols-outlined'>check_circle</span> 豪華家電抽獎券 "+"<span class='promotion-text-value'>"+ticketCount+"</span>"+" 張</p>"
+            document.querySelector(".table-totals").insertAdjacentHTML('beforeend', message)
+        }
+    }
+
+    function checkWarrantyExist(){
+        var productNames = document.querySelectorAll(".minicart-items .product-item .product-item-details strong.product-item-name")
+        productNames.forEach(function(productName){
+          if(productName.innerText.includes("送延長保固")){
+            return warrantyExist = true;
+          }
+        })
+      }
+
+    
+    //轉為num
+    function parsePrice(price) {
+        if (price && price.innerText) {
+          return parseFloat(price.innerText.replace(/[$,]/g, ""));
+        } else {
+          return 0;
+        }
+    }
+
+    function getFormatter(money) {
+        var formatter = new Intl.NumberFormat("en-US");
+        var formattedNumber = formatter.format(money);
+        return formattedNumber;
+    }
+      
+  </script>
+
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+      color: rgb(174, 0, 0);
+      font-size: 20px;
+      margin-right: 5px;
+    }
+    .promotion-text{
+        color: rgb(174, 0, 0);
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+    }
+    .promotion-text-value{
+        font-size: 15px;
+        margin: 0 5px;
+    }
+</style>

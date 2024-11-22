@@ -1,0 +1,39 @@
+<script>
+  let sendToLineBtn = document.createElement("button");
+  let skuList = [];
+  let combinedSkuList;
+  sendToLineBtn.id = "send-to-line-btn";
+  sendToLineBtn.innerHTML = "發送到 Line";
+
+  insertLineBtn();
+  getProductSku();
+
+  sendToLineBtn.addEventListener("click", () => {
+    combinedSkuList = skuList.join(",");
+    window.open("line://msg/text/" + encodeURIComponent(combinedSkuList));
+  });
+
+  function insertLineBtn() {
+    document
+      .querySelector("div.d-flex > div.mr-auto.p-2")
+      .appendChild(sendToLineBtn);
+  }
+  function getProductSku() {
+    let productSkuElems = document.querySelectorAll(
+      'span[ng-bind="item.ItemCode"]'
+    );
+    productSkuElems.forEach((item) => {
+      skuList.push(item.textContent.trim());
+    });
+  }
+</script>
+<style>
+  #send-to-line-btn {
+    background-color: #28a745;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    padding: 3px 10px 3px 10px;
+  }
+</style>

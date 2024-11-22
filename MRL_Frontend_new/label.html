@@ -1,0 +1,167 @@
+<div>
+  <a href="{{store direct_url='sofa-fur.html'}}"
+    >絕版品出清<span class="cat-account-label">8折起</span></a
+  >
+</div>
+
+<div>
+  <a href="{{store direct_url='one-shipfree.html'}}">單件即免運</a>
+</div>
+<!-- Categories_btn_style -->
+<style>
+  .catBtnRow > .pagebuilder-column-group > .pagebuilder-column {
+    width: 100% !important;
+    display: flex;
+    justify-content: center !important;
+    margin: 2.8rem 0.5rem 0 0;
+    flex-direction: inherit !important;
+  }
+  .catBtnRow > .pagebuilder-column-group > .pagebuilder-column > div {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .catBtnRow > .pagebuilder-column-group > .pagebuilder-column > div > div > a {
+    text-decoration: none;
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #535350 !important;
+    display: block;
+    width: 100%;
+    margin: 10px 18px;
+    line-height: 1;
+    letter-spacing: 3px;
+    white-space: nowrap;
+  }
+  .catBtnRow
+    > .pagebuilder-column-group
+    > .pagebuilder-column
+    > div
+    > div
+    > a::after {
+    content: "|";
+    color: #535350;
+    position: absolute;
+    margin: 0 13px;
+    font-weight: 400;
+  }
+  .catBtnRow
+    > .pagebuilder-column-group
+    > .pagebuilder-column
+    > div
+    > div
+    > a:hover {
+    text-decoration: none;
+  }
+
+  .catBtnRow {
+    justify-content: center !important;
+    flex-direction: inherit !important;
+  }
+
+  .hideAfter::after {
+    display: none;
+  }
+  .cat-account-label {
+    background-color: #c34135;
+    color: #fff;
+    font-size: 16px;
+    padding: 4px 5px;
+    margin: 0 0 0 5px;
+    position: relative;
+    bottom: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .catBtnRow > .pagebuilder-column-group > .pagebuilder-column {
+      margin: 1.8rem 0.5rem 0 0;
+    }
+
+    .catBtnRow
+      > .pagebuilder-column-group
+      > .pagebuilder-column
+      > div
+      > div
+      > a {
+      font-size: 17px;
+      flex: 0 0 calc(33.3333% - 50px);
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin: 7px 10px;
+    }
+
+    .catBtnRow
+      > .pagebuilder-column-group
+      > .pagebuilder-column
+      > div
+      > div
+      > a::after {
+      content: "|";
+      color: #535350;
+      position: absolute;
+      margin: 0 7px;
+      font-weight: 400;
+    }
+    .cat-account-label {
+      font-size: 10px;
+      padding: 2px 5px;
+    }
+  }
+</style>
+
+<script>
+  function changeBtn() {
+    const productNavs = document.querySelectorAll(
+      ".catBtnRow >.pagebuilder-column-group >.pagebuilder-column"
+    );
+    const btnLinks = document.querySelectorAll(
+      ".catBtnRow >.pagebuilder-column-group >.pagebuilder-column>  div > div > a"
+    );
+
+    //變更btn父層
+    productNavs.forEach(function (productNav) {
+      productNav.removeAttribute("style");
+    });
+
+    //變更btn樣式
+    btnLinks.forEach(function (btnLink, index) {
+      //隱藏每一列最後一個btn的"|"
+      setTimeout(function () {
+        const nextBtnLink = btnLinks[index + 1];
+        if (nextBtnLink) {
+          const currentBottom = btnLink.getBoundingClientRect().bottom;
+          const nextTop = nextBtnLink.getBoundingClientRect().top;
+
+          if (nextTop > currentBottom) {
+            btnLink.classList.add("hideAfter");
+          } else {
+            btnLink.classList.remove("hideAfter");
+          }
+        } else {
+          btnLink.classList.add("hideAfter");
+        }
+      }, 1);
+    });
+
+    //隱藏最後一個btn的"|"
+    const lastBtnLink = btnLinks[btnLinks.length - 1];
+    lastBtnLink.classList.add("hideAfter");
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    changeBtn();
+  });
+
+  //避免過度觸發resize
+  function debounce(func, delay) {
+    let timer;
+    return function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        func();
+      }, delay);
+    };
+  }
+
+  window.addEventListener("resize", debounce(changeBtn, 200));
+</script>

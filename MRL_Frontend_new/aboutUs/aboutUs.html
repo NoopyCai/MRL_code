@@ -1,0 +1,802 @@
+<style>
+    .row {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .full-size-img {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        width: 100%;
+        height: 0;
+        padding-top: 64%;
+    }
+
+    .flex-column-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        text-align: center;
+        background-color: #e5e5e5;
+    }
+
+    .flex-row-center {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    #maincontent {
+        max-width: 100%;
+        padding: 0px;
+        padding-bottom: 0px;
+    }
+
+    .columns .column.main {
+        padding-bottom: 0px;
+    }
+
+    #main-img-carousel.owl-theme .owl-controls {
+        margin-top: 0px;
+    }
+
+    .normal-title {
+        font-size: 3em;
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+    }
+
+    .normal-second-title {
+        font-size: 2em;
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+    }
+
+    .normal-content {
+        font-size: 1.6em;
+    }
+
+    .smoothScroll::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #333;
+        position: absolute;
+        top: 50%;
+        right: -20px;
+        transform: translateY(-50%);
+        transition: all 0.3s;
+    }
+
+    .smoothScroll:hover::after {
+        transform: translateY(-50%) scale(1.3);
+        background-color: #aaaaaa;
+        position: absolute;
+        transition: all 0.3s;
+    }
+
+    .smoothScroll.active::after {
+        transform: translateY(-50%) scale(1.5);
+        background-color: #aaaaaa;
+        transition: all 0.3s;
+    }
+
+    .smoothScroll {
+        text-decoration: none;
+        color: #333 !important;
+        margin: auto 0px;
+        transition: all 0.3s;
+    }
+
+    .smoothScroll.active {
+        color: #aaaaaa !important;
+        transition: all 0.3s;
+    }
+
+    .smoothScroll:hover {
+        text-decoration: none;
+        color: #aaaaaa !important;
+        transition: all 0.3s;
+    }
+
+    .brand-course,
+    .concept-section {
+        margin: 0 10rem;
+    }
+
+    .concept-section-area1 {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .concept-section-area2 {
+        display: flex;
+        flex-direction: row;
+        flex-direction: row-reverse;
+        margin-top: 2rem;
+    }
+
+    .concept-info-container {
+        background-color: #d7d5d2;
+        display: flex;
+        justify-content: center;
+        gap: 6.4rem;
+        position: relative;
+        flex: 1;
+    }
+
+    .concept-info-container .concept-info-img {
+        text-align: center;
+    }
+
+    .concept-img-container {
+        margin-bottom: -5px;
+        flex: 1;
+    }
+
+    .concept-info-item1,
+    .concept-info-item2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+    }
+
+    .concept-section-area1 .concept-info-item2 {
+        top: 3%;
+    }
+
+    .concept-section-area2 .concept-info-item2 {
+        bottom: 2.3%;
+    }
+
+    .concept-info-text {
+        text-align: center;
+    }
+
+    .concept-info-title {
+        font-size: 2.5rem;
+        font-weight: 600;
+    }
+
+    .concept-info-content {
+        margin-top: 8px;
+        font-size: 2.1rem;
+    }
+
+    .line {
+        border-top: 1px dotted #666;
+        height: auto;
+        width: 100%;
+        max-width: 300px;
+        margin: 1.6rem 0;
+    }
+    .brand-course .brand-course-title,
+    .media-reports .media-reports-title,
+    .designer-space .designer-space-title,
+    .store-location .store-location-title,
+    .talent-recruitmen .talent-recruitmen-title {
+        margin: 80px 0 50px 0;
+    }
+
+    .brand-course .brand-course-title h2,
+    .media-reports .media-reports-title h2,
+    .designer-space .designer-space-title h2,
+    .store-location .store-location-title h2,
+    .talent-recruitmen .talent-recruitmen-title h2{
+        font-size: 3.5rem;
+    }
+
+    .media-reports #media-report-carousel {
+        margin: 10px 0 10px 0;
+    }
+
+    #media-report-carousel {
+        display: flex;
+    }
+    #media-report-carousel .owl-item .item img{
+        margin: 10px 0;
+    }
+    .mobile-content{
+        display: none;
+        text-align: center;
+    }
+    .designer-space{
+        margin: 0 10rem;
+    }
+    .designer-space-carousel .item{
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    section.store-location{
+        border-bottom: 1px solid #a6a6a6;
+        padding-bottom: 50px;
+    }
+    section.brand-course{
+        border-top: 1px solid #a6a6a6;
+        border-bottom: 1px solid #a6a6a6;
+        padding: 0 0 50px 0;
+    }
+    section.designer-space{
+        padding: 0 0 50px 0;
+        border-top: 1px solid #a6a6a6;
+    }
+    section.media-reports{
+        padding: 0 0 50px 0;
+    }
+    #designer-space-carousel .item img,
+    #store-location-carousel .store-location-img img{
+        margin: 0 0 1.5rem 0;
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        object-fit: cover;
+    }
+    .store-location-info p{
+        font-size: 1.6rem;
+    }
+    .store-name{
+        font-size: 2.1rem;
+        font-weight: 600;
+    }
+    .platform-list {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 11rem;
+    }
+    .platform-list li::after{
+        content: "";
+        border-right: #333 solid 1px;
+        position: relative;
+        left: 34%;
+        margin: 0 10px;
+        padding: 7px 0px;
+    }
+    .platform-list li:last-child::after {
+        content: none; 
+    }
+    .platform-list li a {
+        font-size: 2.5rem;
+        color: #333;
+    }
+    .platform-list li a:hover {
+        text-decoration: none;
+    }
+    .owl-controls{
+        margin: 5rem 0 0 0;
+    }
+    .page-footer{
+        margin-top: 0 !important;
+    }
+    @media(max-width: 1600px) {
+        .concept-info-title {
+            font-size: 2rem;
+        }
+
+        .concept-info-content {
+            font-size: 1.6rem;
+        }
+
+        .concept-info-img img {
+            width: 65%;
+        }
+
+        .concept-info-img .concept-info-img-icon4 {
+            width: 47%;
+        }
+
+        .line {
+            max-width: 200px;
+        }
+
+        .concept-section-area1 .concept-info-item2 {
+            top: 1%;
+        }
+
+        .media-reports {
+            margin: 0 50px;
+        }
+    }
+
+    @media(max-width: 1440px) {
+        .concept-info-title {
+            font-size: 1.8rem;
+        }
+
+        .concept-info-content {
+            font-size: 1.4rem;
+        }
+
+        .concept-section-area1 .concept-info-item2 {
+            top: 1.5%;
+        }
+
+        .concept-section-area2 .concept-info-item2 {
+            bottom: 2%;
+        }
+
+    }
+
+    @media (min-width: 768px) {
+        .media-reports {
+            width: auto;
+            margin: 0 100px;
+            overflow: hidden;
+        }
+
+        
+        .media-reports #media-report-carousel .owl-stage-outer .owl-stage,
+        #store-location-carousel .owl-stage-outer .owl-stage{
+            transform: none !important;
+        }
+        .store-location{
+            margin: 0 10rem;
+        }
+    }
+
+    @media (max-width: 996px) {
+        .normal-title {
+            font-size: 28px;
+        }
+
+        .normal-second-title {
+            font-size: 20px;
+        }
+
+        .normal-content {
+            font-size: 14px;
+        }
+
+        .concept-section {
+            margin: 0 0;
+        }
+
+        .concept-section-area1 {
+            flex-direction: column;
+        }
+
+        .concept-section-area2 {
+            flex-direction: column;
+        }
+        #media-report-carousel{
+            display: block;
+        }
+        .concept-info-container {
+            justify-content: space-around;
+            gap: 1rem;
+            padding: 4rem 1rem;
+        }
+        .concept-section-area2{
+            margin-top: 0;
+        }
+        .concept-section-area1 .concept-info-item2{
+            top: 5px;
+        }
+        .concept-section-area2 .concept-info-item2 {
+            bottom: 7px;
+        }
+        .concept-section-area1 .concept-info-item2 .concept-info-img{
+            position: relative;
+            top: 14%;
+        }
+        .concept-info-img img{
+            width: 35%;
+        }
+        .media-reports {
+            margin: 0;
+        }
+
+        .media-reports .owl-dots {
+            margin: 25px 0 0 0;
+        }
+
+        .media-reports #media-report-carousel {
+            margin: 60px 0 1rem 0;
+        }
+        .concept-info-item1, 
+        .concept-info-item2{
+            display: block;
+            padding-bottom: 30%;
+            flex: 1 1 0;
+        }
+        .concept-img-container img{
+            width: 100%;
+        }
+        .line{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 15%;
+            margin: auto;
+            height: fit-content;
+        }
+        .concept-info-img .concept-info-img-icon4 {
+            width: 24%;
+            position: relative;
+            bottom:13px;
+        }
+        .concept-info-text{
+            position: absolute;
+            top: 50%;
+            margin: auto;
+            left: 0;
+            right: 0;
+        }
+        .concept-section-area1 .concept-info-item2,
+        .concept-section-area2 .concept-info-item2 {
+            top: unset;
+            bottom: unset;
+        }
+        .pc-content{
+            display: none;
+        }
+        .mobile-content{
+            display: block;
+        }
+        .designer-space{
+            margin: 0;
+        }
+    }
+    @media (max-width: 768px){
+        section.brand-course{
+            margin: 0 0;
+        }
+        .concept-info-item1, 
+        .concept-info-item2{
+            padding-bottom: 50%;
+        }
+        .concept-info-img .concept-info-img-icon4 {
+            width: 42%;
+        }
+        .concept-info-img img{
+            width: 65%;
+        }
+        .line{
+            max-width: 160px;
+        }
+        .brand-course{
+            margin: 0 4rem;
+        }
+        .platform-list{
+            gap: 4rem;
+            padding-inline-start: 0px;
+        }
+        .platform-list li::after{
+            padding: 3px 0;
+            left: 16%;
+        }
+        .platform-list li a{
+            font-size: 1.6rem;
+        }
+    }
+</style>
+<!--主視覺-->
+<section class="claim-section">
+    <picture>
+        <source srcset="{{media url=wysiwyg/about_us/about_us_240911_M.jpg}}" media="(max-width: 996px)">
+        <img src="{{media url=wysiwyg/about_us/about_us_240911_PC.jpg}}" style="width: 100%;">
+    </picture>
+</section>
+<section class="CEO-section">
+
+    <picture>
+        <source srcset="{{media url=wysiwyg/about_us/about_us_240911_CEO_M_v2_1.png}}" media="(max-width: 996px)">
+        <img src="{{media url=wysiwyg/about_us/about_us_240911_CEO_PC.jpg}}" style="width: 100%;">
+    </picture>
+</section>
+
+<!--品牌概念-->
+<section class="concept-section">
+    <div class="concept-section-area1">
+        <div class="concept-img-container">
+            <img src="{{media url=wysiwyg/about_us/about_us_240911_concept_2.jpg}}" />
+        </div>
+        <div class="concept-info-container">
+            <div class="concept-info-item1">
+                <div class="concept-info-img">
+                    <img src="{{media url=wysiwyg/about_us/aboutus_240912_icon1.png}}" alt="">
+                </div>
+                <div class="line"></div>
+                <div class="concept-info-text">
+                    <span class="concept-info-title">物超所值</span>
+                    <p class="concept-info-content">
+                        直接連接製造商和消費者<br>
+                        沒有中間商賺差價<br>
+                        讓您以負擔得起的價格<br>
+                        擁有質感北歐設計家具
+                    </p>
+                </div>
+            </div>
+
+            <div class="concept-info-item2 ">
+                <div class="concept-info-img">
+                    <img src="{{media url=wysiwyg/about_us/aboutus_240912_icon2.png}}" alt="">
+                </div>
+                <div class="line"></div>
+                <div class="concept-info-text">
+                    <span class="concept-info-title">全球頂級製造商</span>
+                    <p class="concept-info-content">
+                        與世界北歐設計家具品牌<br>
+                        英國John Lewis 、 丹麥Bolia<br>
+                        美國West Elm 等<br>
+                        擁有相同設計家具製造商
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="concept-section-area2">
+        <div class="concept-img-container">
+            <img src="{{media url=wysiwyg/about_us/about_us_240911_concept_1.jpg}}" />
+        </div>
+        <div class="concept-info-container">
+            <div class="concept-info-item1">
+                <div class="concept-info-img">
+                    <img src="{{media url=wysiwyg/about_us/aboutus_240912_icon3.png}}" alt="">
+                </div>
+                <div class="line"></div>
+                <div class="concept-info-text">
+                    <span class="concept-info-title">嚴選用材</span>
+                    <p class="concept-info-content">
+                        使用頂級產地原料<br>
+                        北美白橡木、義大利進口牛皮等<br>
+                        符合歐美出口認證規範<br>
+                        確保沙發家具安全且使用長久
+                    </p>
+                </div>
+            </div>
+
+            <div class="concept-info-item2">
+                <div class="concept-info-img">
+                    <img class="concept-info-img-icon4" src="{{media url=wysiwyg/about_us/aboutus_240912_icon4.png}}"
+                        alt="">
+                </div>
+                <div class="line"></div>
+                <div class="concept-info-text">
+                    <span class="concept-info-title">首選設計家具品牌</span>
+                    <p class="concept-info-content">
+                        服務超過 24.1 萬名居友<br>
+                        累積全台銷售超過 13.7 億<br>
+                        北歐設計家具銷售破 15 萬件<br>
+                        <br>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="media-reports">
+    <div class="media-reports-title" style="text-align: center;">
+        <h2>媒體報導</h2>
+    </div>
+    <div id="media-report-carousel" class="media-report-carousel-first owl-carousel owl-theme">
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/media_report_1.jpg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/media_report_6.jpg}}" loading="lazy" />
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/media_report_2.jpg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/media_report_7.jpg}}" loading="lazy" />
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/media_report_3.jpg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/media_report_8.jpg}}" loading="lazy" />
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/media_report_4.jpg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/media_report_9.jpg}}" loading="lazy" />
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/media_report_5.jpg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/media_report_10.jpg}}" loading="lazy" />
+        </div>
+    </div>
+</section>
+<section class="designer-space">
+    <div class="designer-space-title" style="text-align: center;">
+        <h2 class="pc-content">設計師的信任之選｜實現理想生活的家具夥伴</h2>
+        <h2 class="mobile-content">設計師的信任之選</h2>
+    </div>
+    <div id="designer-space-carousel" class="designer-space-carousel owl-carousel owl-theme">
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_10.jpg}}" loading="lazy" />
+            <span>Photo Credit : 木日空間設計</span>
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_12.jpg}}" loading="lazy" />
+            <span>Photo Credit : 知域設計NorWe
+            </span>
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_4.jpeg}}" loading="lazy" />
+            <span>Photo Credit : 寓子設計</span>
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_5.jpeg}}" loading="lazy" />
+            <span>Photo Credit : 寓子設計</span>
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_7.jpg}}" loading="lazy" />
+            <span>Photo Credit : 寓子設計</span>
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_9.jpg}}" loading="lazy" />
+            <span>Photo Credit : 寓子設計</span>
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_1.jpg}}" loading="lazy" />
+            <span>Photo Credit : 思銳室內設計有限公司</span>
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_2.jpg}}" loading="lazy" />
+            <span>Photo Credit : 思銳室內設計有限公司</span>
+        </div>
+        <!-- <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_11.jpg}}" loading="lazy" />
+            <span>Photo Credit : 木日空間設計</span>
+        </div>
+
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_6.jpg}}" loading="lazy" />
+            <span>Photo Credit : 寓子設計</span>
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_8.jpg}}" loading="lazy" />
+            <span>Photo Credit : 寓子設計</span>
+        </div>
+        <div class="item">
+            <img src="{{media url=wysiwyg/about_us/about_us_design_3.jpg}}" loading="lazy" />
+            <span>Photo Credit : 寓子設計</span>
+        </div> -->
+    </div>
+</section>
+<section class="brand-course">
+    <div class="brand-course-title" style="text-align: center;">
+        <h2>品牌歷程</h2>
+    </div>
+    <div class="brand-course-content">
+        <div class="pc-content">
+            <img src="{{media url=wysiwyg/about_us/about_us_course_PC.png}}" style="width: 100%;">
+        </div>
+        <div class="mobile-content">
+            <img src="{{media url=wysiwyg/about_us/about_us_course_2016.png}}" style="width: 100%;">
+            <img src="{{media url=wysiwyg/about_us/about_us_course_2018.png}}" style="width: 100%;">
+            <img src="{{media url=wysiwyg/about_us/about_us_course_2021.png}}" style="width: 100%;">
+            <img src="{{media url=wysiwyg/about_us/about_us_course_2022.png}}" style="width: 48%;">
+            <img src="{{media url=wysiwyg/about_us/about_us_course_2023.png}}" style="width: 100%;">
+            <img src="{{media url=wysiwyg/about_us/about_us_course_2024.png}}" style="width: 67%;">
+        </div>
+    </div>
+</section>
+
+<section class="store-location">
+    <div class="store-location-title" style="text-align: center;">
+        <h2>門市據點</h2>
+    </div>
+    <div id="store-location-carousel" class="owl-carousel owl-theme">
+        <div class="item">
+            <div class="store-location-img">
+                <img src="{{media url=wysiwyg/store_location/store-location-taipei-pic.jpg}}" loading="lazy" />
+            </div>
+            <div class="store-location-info">
+                <p><span class="store-name">台北 內湖店</span> | 0227905750</p>
+                <p>台北市內湖區民權東路六段15巷29-33號3樓</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="store-location-img">
+                <img src="{{media url=wysiwyg/store_location/store-location-hsinchu-pic.jpg}}" loading="lazy" />
+            </div>
+            <div class="store-location-info">
+                <p><span class="store-name">新竹 竹北店</span> | 036583312</p>
+                <p>新竹縣竹北市光明六路東一段186號1樓</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="store-location-img">
+                <img src="{{media url=wysiwyg/store_location/store-location-taichung-pic.jpg}}" loading="lazy" />
+            </div>
+            <div class="store-location-info">
+                <p><span class="store-name">台中 黎明店</span> | 04-22512699</p>
+                <p>台中市南屯區黎明路二段599號</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="store-location-img">
+                <img src="{{media url=wysiwyg/store_location/store-location-tainan-picR.jpg}}" loading="lazy" />
+            </div>
+            <div class="store-location-info">
+                <p><span class="store-name">台南 崇善店</span> | 06-2689300</p>
+                <p>台南市東區崇善路23號2樓</p>
+            </div>           
+        </div>
+        <div class="item">
+            <div class="store-location-img">
+                <img src="{{media url=wysiwyg/store_location/store-location-kaosiung-picR3.jpg}}" loading="lazy" />
+            </div>
+            <div class="store-location-info">
+                <p><span class="store-name">高雄 巨蛋店</span> | 07-3100192</p>
+                <p>高雄市左營區新莊一路393號2樓</p>
+            </div>     
+        </div>
+    </div>
+</section>
+<section class="talent-recruitmen">
+    <div class="talent-recruitmen-title" style="text-align: center;">
+        <h2>人才招募</h2>
+    </div>
+    <div class="talent-recruitmen-content">
+        <ul class="platform-list">
+            <li><a href="https://www.104.com.tw/company/1a2x6bjw7g?jobsource=index_s_cs" target="_blank">104人力銀行</a></li>
+            <li><a href="https://www.yourator.co/companies/MrLiving" target="_blank">Yourator</a></li>
+            <li><a href="https://www.cake.me/companies/mrliving" target="_blank">Cake</a></li>
+        </ul>
+    </div>
+</section>
+<script>
+    require(["jquery", "owlcarousel",], function ($) {
+        jQuery("#media-report-carousel").owlCarousel({
+            autoplay: false,
+            navRewind: true,
+            loop: true,
+            margin: 10,
+            nav: false,
+            lazyLoad: true,
+            center: true,
+            dots: false,
+            responsive: {
+                0: {
+                    items: 1.4,
+                    dots: true,
+                },
+                768: {
+                    items: 5,
+                },
+            },
+        });
+        jQuery("#designer-space-carousel").owlCarousel({
+            autoplay: false,
+            navRewind: true,
+            loop: true,
+            margin: 20,
+            nav: false,
+            lazyLoad: true,
+            dots: true,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                768: {
+                    items: 2,
+                },
+            },
+        });
+        jQuery("#store-location-carousel").owlCarousel({
+            autoplay: false,
+            navRewind: true,
+            loop: true,
+            margin: 10,
+            nav: false,
+            lazyLoad: true,
+            center: true,
+            dots: false,
+            responsive: {
+                0: {
+                    items: 1.4,
+                    dots: true,
+                },
+                768: {
+                    items: 5,
+                },
+            },
+        });
+    });
+
+</script>
+

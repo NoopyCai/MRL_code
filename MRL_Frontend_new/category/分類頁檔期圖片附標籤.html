@@ -1,0 +1,56 @@
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+    .until-tuesday-label::after{
+        font-family: "Noto Serif TC", serif;
+        flex-direction: column;
+        justify-content: center;
+        content: '\53ea\5230\9031\4e8c\000d\000a';
+        color: #fff;
+        position: absolute;
+        top: 0;
+        text-align: center;
+        display: flex;
+        right: 0;
+        width: 180px;
+        height: 70px;
+        background: #a97d3c;
+        font-size: 3.3rem;
+        border-bottom-left-radius: 10px;
+        font-weight: 600;
+    }
+    .category-banner-container{
+        width: 100%;
+        position: relative;
+    }
+    .category-banner-container img{
+        width: 100%;
+    }
+    @media (max-width: 1440px){
+        .until-tuesday-label::after{
+            width: 150px;
+            height: 55px;
+            font-size: 2.8rem;
+        } 
+    }
+    @media (max-width: 768px){
+        .until-tuesday-label::after{
+            width: 100px;
+            height: 32px;
+            font-size: 2rem;
+        } 
+        .until-tuesday-label::after{
+            width: 65px;
+            height: 28px;
+            font-size: 1.4rem;
+        } 
+    }
+</style>
+
+<div class="category-banner-container">
+    <picture>
+        <source srcset="{{media url=wysiwyg/home_page/2024_10M/10M_H2_1002_catgM.jpg}}" media="(max-width: 767px)"/>
+        <source srcset="{{media url=wysiwyg/home_page/2024_10M/10M_H2_1002_catg.jpg}}" media="(min-width: 767px)"/>
+        <img src="wysiwyg/home_page/2024_10M/10M_H2_1002_catg.jpg" alt="雙10週年慶｜滿萬折千＋滿額免運">
+        <div class="promotion-schedule"></div>
+    </picture>
+</div>

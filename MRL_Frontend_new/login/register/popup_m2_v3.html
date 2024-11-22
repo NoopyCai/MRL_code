@@ -1,0 +1,1569 @@
+<link
+  href="/static/frontend/Mrl/mrl_luma/zh_Hant_TW/css/emoji.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+/>
+<span class="material-symbols-outlined" id="account-icon">account_circle</span>
+<span class="material-symbols-outlined" id="mail-icon">mail</span>
+<span class="material-symbols-outlined" id="password-icon">lock</span>
+<div class="phoneNum-begining">
+  <span class="material-symbols-outlined">phone_iphone</span>
+</div>
+<div class="otp-phoneNum-begining">
+  <span class="material-symbols-outlined">phone_iphone</span>
+</div>
+
+<div class="label-Block label-Block-Emailmobile">
+  <label for="emailmobile" id="labelEmailmobile">手機號碼 或 電子郵件</label>
+</div>
+<div class="label-Block label-Block-Mobpassword">
+  <label for="mobpassword" id="labelMobpassword">密碼</label>
+</div>
+<div class="label-Block label-Block-logpassword">
+  <label for="logpassword" id="labelLogpassword">密碼</label>
+</div>
+<div class="label-Block label-Block-Mobile_number">
+  <label for="mobile_number" id="labelMobile_number">手機號碼</label>
+</div>
+<div class="label-Block label-Block-Fogmobilenumber">
+  <label for="mobile_number" id="labelFogmobilenumber">手機號碼</label>
+</div>
+<div class="label-Block label-Block-Email">
+  <label for="email" id="labelEmail">電子郵件</label>
+</div>
+
+<div id="login-main-page" class="login-mainpage">
+  <div class="login-title-block">
+    <img src="{{media url=wysiwyg/co_IMG/login_mainpage_mainImg.jpg}}" alt="" />
+    <img src="{{media url=wysiwyg/co_IMG/mrliving_tittle_login.jpg}}" alt="" />
+    <img src="{{media url=wysiwyg/co_IMG/good_life_title_login.png}}" alt="" />
+  </div>
+  <li
+    class="mrl-click pslogin-button mrl-account-login pslogin-visible"
+    title="使用手機帳號繼續"
+  >
+    <a
+      class="pslogin-button-link"
+      href="javascript:void(0);"
+      data-width="650"
+      data-height="400"
+    >
+      <span class="pslogin-button-auto"
+        ><span class="pslogin-button-icon"></span>
+        <span class="pslogin-button-text">使用手機帳號繼續</span></span
+      >
+    </a>
+  </li>
+</div>
+
+<div class="back-to-loginMmain-block">
+  <span id="back-to-loginMmain">使用社群快速登入</span>
+</div>
+<div id="login-overlay"></div>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
+
+  .otp-phoneNum-begining,
+  .phoneNum-begining,
+  .label-Block,
+  .material-symbols-outlined {
+    display: none;
+  }
+  #login-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+  }
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+    font-size: 30px;
+    color: #d6d6d6;
+    position: absolute;
+    z-index: 3;
+    user-select: none;
+  }
+
+  #login-main-page {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: absolute;
+    right: 0%;
+    bottom: 0%;
+    z-index: 3;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    opacity: 1;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+
+  #login-main-page.loginMainHidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  /* 調整popup大小 */
+  .modal-popup._inner-scroll .modal-inner-wrap {
+    height: 650px;
+  }
+
+  .ps-login-wrapper .modal-inner-wrap {
+    height: auto !important;
+    font-family: "Noto Sans TC", sans-serif;
+  }
+
+  .ps-login-wrapper .modal-inner-wrap .modal-title {
+    font-weight: 600;
+    border-bottom: 2px solid #d6d6d6;
+  }
+
+  .ps-login-wrapper .modal-inner-wrap .pslogin-form-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+  }
+
+  .ps-login-wrapper
+    .modal-inner-wrap
+    .pslogin-authorization-wrapper
+    #modal-content-1
+    .main-title {
+    visibility: hidden;
+  }
+
+  .ps-login-wrapper .modal-inner-wrap .pslogin-state-step-1 {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .ps-login-wrapper .modal-inner-wrap .pslogin-bind-step-4,
+  .ps-login-wrapper .modal-inner-wrap .pslogin-bind-step-5 {
+    width: 100%;
+    background-color: rgb(169, 153, 140) !important;
+    border: none !important;
+    border-radius: 6px;
+    height: 49px;
+  }
+
+  .ps-login-wrapper button.action.pslogin-bind-step-4 {
+    width: 100% !important;
+  }
+
+  .ps-login-wrapper .modal-inner-wrap #pslogin_bind_pass,
+  .ps-login-wrapper .modal-inner-wrap #pslogin_bind_email {
+    border: none;
+    border-bottom: 1px solid #d6d6d6;
+    padding: 20px;
+    font-weight: 600;
+    width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .ps-login-wrapper .modal-inner-wrap .secondary {
+    text-align: center;
+    margin: 20px 0;
+    font-weight: 600;
+  }
+
+  #modal-content-1 p.success-msg {
+    text-align: center;
+  }
+
+  #modal-content-1 .pslogin-register {
+    display: none;
+  }
+
+  .modal-slide .modal-inner-wrap,
+  .modal-popup .modal-inner-wrap {
+    box-shadow: none;
+  }
+
+  .login-title-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 65%;
+  }
+
+  .login-title-block img {
+    margin: 0 0 10px 0;
+  }
+
+  .login-title-block picture:nth-of-type(2) {
+    width: 60%;
+  }
+
+  .login-title-block picture:nth-of-type(3) {
+    width: 40%;
+  }
+
+  #back-to-loginMmain {
+    font-size: 14px;
+    color: #2e90b7;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    top: 15px;
+  }
+
+  .pslogin-block .pslogin-buttons ul li span.pslogin-button-auto {
+    background-color: #fff !important;
+    border: 1px solid #d6d6d6;
+  }
+
+  .mrl-account-login {
+    display: flex;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #d6d6d6;
+  }
+
+  .mrl-account-login button {
+    background-color: #d6d6d6;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Noto Sans TC";
+    border: none;
+    padding: 10px 20px;
+    margin: 0 0 0 10px;
+    cursor: pointer;
+  }
+
+  .modal-popup._inner-scroll .modal-content {
+    overflow: auto !important;
+  }
+
+  .back-to-loginMmain-block {
+    text-align: center;
+  }
+
+  #modal-content-1,
+  #modal-content-1 .mobile-sendotp-popup {
+    height: auto;
+  }
+
+  #modal-content-1 .main-contai {
+    justify-content: center;
+  }
+
+  #modal-content-1 .left-img-part {
+    display: none;
+  }
+
+  #modal-content-1 {
+    font-family: "Noto Sans TC", sans-serif !important;
+  }
+
+  #modal-content-1 .pslogin-button-text {
+    display: none;
+  }
+
+  #modal-content-1 .pslogin-button-icon {
+    position: relative;
+    left: 17%;
+  }
+
+  #forget-form {
+    margin-top: 30px;
+  }
+
+  #forget-form > fieldset.fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #forget-form
+    > fieldset.fieldset.forgot-pass-step3
+    > div.actions-toolbar-otp
+    > .forgot-submit-password-btn {
+    background-color: rgb(169, 153, 140);
+  }
+
+  #forget-form .actions-toolbar-otp {
+    width: 100%;
+  }
+
+  #modal-content-1 .frm-container {
+    margin: 10px 0 0 0;
+  }
+
+  .mobile_login_popup fieldset.fieldset.login-password {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0 40px;
+  }
+
+  .mobile_login_popup fieldset.fieldset.login-password input,
+  .mobile_login_popup input#fogmobilenumber,
+  .mobile_login_popup input#forgototp,
+  .mobile_login_popup input#newpassword,
+  .mobile_login_popup input#confirmnewpassword {
+    font-family: "Noto Sans TC", sans-serif;
+    border: none;
+    border-bottom: 1px solid #d6d6d6;
+    padding-bottom: 10px;
+    font-weight: 500;
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .mobile_login_popup .right-contet-part .tit-item span {
+    color: #a6a6a6;
+  }
+
+  #create-account-form .register-step1 .control {
+    display: flex;
+    position: relative;
+  }
+
+  #modal-content-1 .pslogin-buttons .pslogin-button {
+    margin: 7px 30px !important;
+    width: 10% !important;
+    border: none;
+  }
+
+  #create-account-form .register-step1 .control .form-check-mark,
+  #create-account-form .register-step1 .control .form-cross-mark {
+    position: absolute;
+    color: #a9998c;
+    right: 10px;
+    z-index: 2;
+    transition: ease 0.3s;
+    font-variation-settings: "FILL" 1, "wght" 600, "GRAD" 0, "opsz" 24;
+  }
+
+  #create-account-form .register-step1 .password .control .form-check-mark,
+  #create-account-form .register-step1 .password .control .form-cross-mark {
+    top: 6%;
+    right: 10px;
+  }
+
+  #modal-content-1 #password-login-form .email .control,
+  #modal-content-1 #password-login-form .password .control {
+    position: relative;
+  }
+
+  #modal-content-1 #password-login-form .password .control #showPassword {
+    position: absolute;
+    font-size: 25px;
+    z-index: 2;
+    right: 0;
+    top: 15%;
+    cursor: pointer;
+    color: #a6a6a6;
+  }
+
+  #modal-content-1 .register-step1 .password .control #showPassword {
+    position: absolute;
+    font-size: 25px;
+    z-index: 2;
+    right: 0;
+    top: 4%;
+    cursor: pointer;
+    color: #a6a6a6;
+  }
+
+  .mobile-sendotp-popup input {
+    padding-left: 40px;
+  }
+
+  .mobile-sendotp-popup #lastname {
+    padding-left: 0;
+  }
+
+  .mobile-sendotp-popup #firstname {
+    padding-left: 0;
+  }
+
+  .mobile-sendotp-popup #lastname::placeholder {
+    color: #333333;
+  }
+
+  .mobile-sendotp-popup #firstname::placeholder {
+    color: #333333;
+  }
+
+  .mobile-sendotp-popup input#fogmobilenumbe::placeholder {
+    color: #333333;
+    padding-left: 0;
+  }
+
+  .mobile-sendotp-popup input#regmobilenumber::placeholder {
+    padding-left: 0;
+  }
+
+  .mobile-sendotp-popup input::placeholder {
+    color: #a6a6a6;
+    font-size: 14px;
+    font-size: 14px;
+  }
+
+  .right-contet-part .fieldset > .field {
+    width: 90%;
+    margin: 3% auto;
+  }
+
+  #modal-content-1 .password-strength-meter {
+    background-color: #fff;
+    color: #a6a6a6;
+    height: 28px;
+    line-height: 26px;
+    text-align: end;
+    font-weight: 400;
+  }
+
+  #modal-content-1 .password-none .password-strength-meter:before {
+    background-color: #fff;
+  }
+
+  #modal-content-1 .label-Block {
+    display: flex;
+    justify-content: start;
+    margin: 16px 0 10px 0;
+  }
+
+  #modal-content-1 .label-Block-logpassword {
+    margin-top: 40px;
+  }
+
+  #modal-content-1 .label-Block label {
+    font-weight: 600;
+    color: #333333;
+  }
+
+  #modal-content-1 .pslogin-spacer .pslogin-bordertext {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333333;
+  }
+
+  #modal-content-1 .pslogin-spacer {
+    width: 90%;
+    margin: 0;
+  }
+
+  #modal-content-1 .pslogin-spacer table td {
+    padding: 10px 10px;
+  }
+
+  #modal-content-1 .pslogin-spacer .pslogin-border {
+    border-top: 1px solid #d6d6d6;
+  }
+
+  #create-account-form
+    > fieldset.fieldset.login-password.register-step1
+    > div.field.lastname.required {
+    display: flex;
+    justify-content: space-between;
+    gap: 8%;
+  }
+
+  /* .phoneNum-begining {
+    position: absolute;
+    font-weight: 700;
+    color: #333333;
+    font-size: 14px;
+  }
+
+  .otp-phoneNum-begining {
+    position: absolute;
+    font-weight: 700;
+    color: #333333;
+    font-size: 14px;
+  } */
+  #modal-content-1 .footer-box-link {
+    display: flex !important;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  #modal-content-1 .footer-box-link .for-accout-title {
+    text-align: right;
+    padding: 0 10px 0 0;
+    border-right: 1px solid #a6a6a6;
+    margin-top: 20px;
+    letter-spacing: 1px;
+    color: #a6a6a6 !important;
+  }
+
+  #modal-content-1 .footer-box-link .for-accout-titlee {
+    width: 100%;
+    font-size: 13px;
+    text-align: left;
+    padding: 0 0 0 10px;
+    margin-top: 20px;
+    letter-spacing: 1px;
+    color: #a6a6a6 !important;
+  }
+
+  #modal-content-1 .footer-box-link .for-accout-titlee a {
+    letter-spacing: 1px;
+    color: #a6a6a6 !important;
+  }
+
+  #modal-content-1 .footer-box-link .for-accout-titlee a:hover {
+    text-decoration: none;
+  }
+
+  @media (min-width: 768px) {
+    #modal-content-1 .main-contai {
+      border-bottom: none;
+    }
+
+    /* 調整popup大小 */
+    .modal-popup._inner-scroll .modal-inner-wrap {
+      width: 500px;
+    }
+
+    .mobile_login_popup .modal-content {
+      height: 800px;
+    }
+
+    #modal-content-1 .right-contet-part {
+      height: 620px;
+      width: 500px;
+      padding-top: 30px;
+      overflow: hidden;
+    }
+
+    #modal-content-1 .left-img-part {
+      background-size: cover;
+      height: 800px;
+    }
+
+    #modal-content-1 .password-login-form-contain .password-login-btn {
+      margin: 30px 0;
+    }
+
+    .pslogin-block
+      .pslogin-buttons
+      ul
+      .pslogin-button.google
+      .pslogin-button-icon {
+      width: 31px;
+      height: 33px;
+    }
+    .ps-login-wrapper .pslogin-or-border {
+      display: none;
+    }
+  }
+
+  .mobile_login_popup .right-contet-part .tit-item {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .mobile_login_popup .right-contet-part .tit-item .login-email-title,
+  .mobile_login_popup .right-contet-part .tit-item .create-acc-title {
+    position: relative;
+    font-size: 20px;
+    z-index: 1;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .mobile_login_popup .right-contet-part .tit-item .active {
+    color: #333333;
+    border-bottom: none;
+  }
+
+  .mobile_login_popup .right-contet-part .tit-item:after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    transition: left cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.4s;
+    height: 100%;
+    border-bottom: 2px solid #a9998c;
+    width: 3em;
+    z-index: -1;
+  }
+
+  .mobile_login_popup .right-contet-part .tit-item.left:after {
+    left: 20.5%;
+  }
+
+  .mobile_login_popup .right-contet-part .tit-item.right:after {
+    left: 70.5%;
+  }
+
+  #modal-content-1 .right-contet-part button.pop-bnt {
+    background-color: #d6d6d6;
+    width: 90%;
+    color: #fff;
+    box-shadow: none;
+    height: 3.7em;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Noto Sans TC";
+  }
+
+  #modal-content-1 .right-contet-part button.resend-create-account-btn,
+  #modal-content-1 .right-contet-part button.submit-create-account-btn,
+  #modal-content-1 .right-contet-part button.resend-forgot-otp-btn,
+  #modal-content-1 .right-contet-part button.forgot-submit-password-btn,
+  #modal-content-1 .right-contet-part button.forgot-btn-verify,
+  #modal-content-1 .right-contet-part button.forgot-btn-req {
+    background-color: #a9998c;
+  }
+
+  #modal-content-1 .right-contet-part .withresend.pop-bnt {
+    width: 48% !important;
+  }
+
+  #modal-content-1 .right-contet-part button.pop-bnt:disabled {
+    opacity: 1;
+  }
+
+  #modal-content-1 .forget-form-contain .actions-toolbar-otp .primary {
+    display: flex;
+    justify-content: center;
+  }
+
+  #showPasswordBlock {
+    display: flex;
+    align-items: start;
+    margin: 10px 0 0 0;
+  }
+
+  #showPasswordBlock #showPassword {
+    height: auto;
+  }
+
+  #showPasswordBlockR {
+    display: flex;
+    align-items: start;
+  }
+
+  #showPasswordBlockR #showPasswordR {
+    height: auto;
+  }
+
+  .mobile_login_popup .modal-inner-wrap .modal-header {
+    background-color: transparent !important;
+  }
+
+  .mobile_login_popup.modal-popup.modal-slide .action-close {
+    margin: 15px 20px;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    z-index: 5;
+    font-size: 3rem;
+    text-align: center;
+    line-height: 27px;
+    right: -17px;
+    top: -115%;
+    color: rgb(255, 255, 255, 100%);
+    opacity: 100%;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 53%;
+  }
+
+  .modal-slide .modal-inner-wrap .action-close:before,
+  .mobile_login_popup.modal-popup.modal-slide .action-close::before {
+    content: "×";
+    font-size: 32px;
+    line-height: 18px;
+    color: #a6a6a6;
+    font-weight: bold;
+    display: unset;
+  }
+
+  /* //15秒快速註冊 */
+  #create-account-form
+    > fieldset.fieldset.login-password.register-step1
+    > div:nth-child(1) {
+    display: none;
+  }
+
+  .pslogin-button .pslogin-button-icon:before {
+    outline: none !important;
+  }
+
+  .right-contet-part #password-login-form .actions-toolbar-otp,
+  .right-contet-part #create-account-form .actions-toolbar-otp {
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .mobile_login_popup.modal-popup.modal-slide .action-close {
+      width: 25px;
+      height: 25px;
+      top: 64%;
+      right: -11px;
+    }
+
+    .mobile_login_popup.modal-popup.modal-slide .action-close::before {
+      font-size: 30px;
+      line-height: 18px;
+    }
+
+    #modal-content-1 .main-contai {
+      border-bottom: none;
+    }
+
+    #modal-content-1 .right-contet-part {
+      height: 77vh;
+    }
+
+    #modal-content-1 .frm-container {
+      margin: 20px 0 0 0 !important;
+    }
+
+    #modal-content-1 .pslogin-block {
+      margin: 0;
+    }
+
+    .pslogin-block .pslogin-buttons ul {
+      position: relative;
+      right: 1%;
+      margin: 0 7%;
+    }
+
+    #modal-content-1 .pslogin-block .pslogin-buttons ul li {
+      margin: 7px 30px !important;
+      width: 10% !important;
+    }
+
+    #modal-content-1 .footer-box-link {
+      padding: 0;
+    }
+
+    #modal-content-1 fieldset.fieldset.login-password {
+      margin-bottom: 50px;
+    }
+
+    #modal-content-1 #password-login-form .password .control .fa-eye,
+    #modal-content-1 #password-login-form .password .control .fa-eye-slash {
+      top: 16%;
+    }
+
+    #modal-content-1 .register-step1 .password .control .fa-eye,
+    #modal-content-1 .register-step1 .password .control .fa-eye-slash {
+      top: 10%;
+    }
+
+    .mobile_login_popup .right-contet-part .tit-item.left:after {
+      left: 19%;
+    }
+
+    .mobile_login_popup .right-contet-part .tit-item.right:after {
+      left: 69%;
+    }
+
+    .mobile_login_popup fieldset.fieldset.login-password {
+      margin: 0;
+    }
+
+    #modal-content-1 .label-Block {
+      margin: 10px 0 5px 0;
+    }
+
+    .right-contet-part .customer-create-form-contain .fieldset > .field {
+      margin: 2px auto;
+    }
+
+    #modal-content-1 .right-contet-part button.pop-bnt {
+      width: 100%;
+    }
+
+    .right-contet-part .fieldset > .field {
+      width: 100%;
+    }
+  }
+
+  /* 分割線 */
+  .label-Block-Mobpassword {
+    justify-content: space-between !important;
+  }
+
+  #password-strength-meter-label {
+    font-weight: 600;
+    color: #333333;
+  }
+
+  #password-login-form,
+  #create-account-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #password-login-form .pslogin-spacer,
+  #create-account-form .pslogin-spacer {
+    order: 1;
+  }
+
+  #password-login-form .pslogin-block,
+  #create-account-form .pslogin-block {
+    order: 0;
+  }
+
+  #password-login-form .fieldset,
+  #create-account-form .fieldset {
+    order: 2;
+  }
+
+  #modal-content-1 .pslogin-block {
+    margin: 10px 0 0 0;
+  }
+
+  #modal-content-1 .pslogin-buttons .pslogin-button {
+    width: auto !important;
+    margin: 7px 7% !important;
+  }
+
+  #modal-content-1 .pslogin-block .pslogin-buttons .pslogin-button-auto {
+    width: 100%;
+    height: 51px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    margin: 10px 0;
+    background-color: transparent !important;
+    border: 1px solid #d6d6d6;
+  }
+
+  .pslogin-block .pslogin-buttons ul {
+    right: 0;
+  }
+
+  .pslogin-block
+    .pslogin-buttons
+    ul
+    .pslogin-button.facebook
+    .pslogin-button-icon {
+    background: url(https://d1bbx7pumsnd9q.cloudfront.net/wysiwyg/co_IMG/login_facebook.jpg)
+      no-repeat !important;
+    background-size: cover !important;
+    left: 20% !important;
+    position: relative;
+  }
+
+  .pslogin-block
+    .pslogin-buttons
+    ul
+    .pslogin-button.google
+    .pslogin-button-icon {
+    background: url(https://d1bbx7pumsnd9q.cloudfront.net/wysiwyg/co_IMG/login_google.jpg)
+      no-repeat !important;
+    background-size: cover !important;
+    left: 20% !important;
+    position: relative;
+  }
+
+  .pslogin-block .pslogin-buttons ul .pslogin-button.line .pslogin-button-icon {
+    background: url(https://d1bbx7pumsnd9q.cloudfront.net/wysiwyg/co_IMG/login_line.jpg)
+      no-repeat !important;
+    background-size: cover !important;
+    left: 20% !important;
+    position: relative;
+  }
+
+  /* 手機帳號icon */
+  .pslogin-block
+    .pslogin-buttons
+    ul
+    .pslogin-button.mrl-account-login
+    .pslogin-button-icon {
+    left: 19.5% !important;
+    font-size: 35px;
+    color: #a6a6a6;
+  }
+
+  .pslogin-block .pslogin-buttons ul {
+    display: block;
+  }
+
+  .pslogin-block .pslogin-buttons ul li {
+    float: unset;
+    height: auto;
+  }
+
+  #modal-content-1 .pslogin-button-text {
+    display: block;
+    background-color: transparent;
+    width: auto;
+    margin: auto;
+    font-size: 1.4rem;
+    color: #333333;
+    font-weight: 600;
+  }
+
+  #create-account-form .pslogin-block .pslogin-buttons ul li a {
+    width: 100% !important;
+  }
+
+  .mobile_login_popup fieldset.fieldset.login-password {
+    margin: 0;
+  }
+
+  #create-account-form .pslogin-spacer {
+    display: none;
+  }
+
+  #modal-content-1 .frm-container {
+    margin: 25px 0 0 0 !important;
+  }
+  .ps-login-wrapper .pslogin-authorization-wrapper {
+    flex-direction: column;
+  }
+  .pslogin-block
+    .pslogin-buttons.pslogin-buttons-showfull
+    .pslogin-button-auto
+    .pslogin-button-text {
+    color: #333333;
+    font-weight: 600;
+  }
+  .ps-login-networks-container {
+    width: 100%;
+  }
+  .ps-login-wrapper .pslogin-block .pslogin-button-link .pslogin-button-auto {
+    height: 51px;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    #modal-content-1 .pslogin-block {
+      margin: 10px 0 0;
+    }
+
+    #modal-content-1 .pslogin-block .pslogin-buttons ul li {
+      width: 100% !important;
+      margin: 7px 0 !important;
+    }
+
+    #modal-content-1 fieldset.fieldset.login-password {
+      margin-bottom: 0;
+    }
+
+    #modal-content-1 .frm-container {
+      margin: 0 !important;
+    }
+
+    #modal-content-1 .footer-box-link {
+      margin: 20px 0 0 0;
+    }
+
+    #modal-content-1 .pslogin-block .pslogin-buttons .pslogin-button-auto {
+      height: 45px;
+    }
+
+    #modal-content-1 .pslogin-button-icon {
+      top: 0px;
+      width: 44px;
+      height: 25px;
+    }
+
+    .pslogin-block
+      .pslogin-buttons
+      ul
+      .pslogin-button.facebook
+      .pslogin-button-icon {
+      background-size: contain !important;
+    }
+
+    .pslogin-block
+      .pslogin-buttons
+      ul
+      .pslogin-button.google
+      .pslogin-button-icon {
+      background-size: contain !important;
+    }
+
+    .pslogin-block
+      .pslogin-buttons
+      ul
+      .pslogin-button.line
+      .pslogin-button-icon {
+      background-size: contain !important;
+      position: relative;
+    }
+
+    .pslogin-block
+      .pslogin-buttons
+      ul
+      .pslogin-button.mrl-account-login
+      .pslogin-button-icon {
+      left: 19% !important;
+      font-size: 30px;
+    }
+
+    .login-title-block picture:nth-of-type(2) {
+      width: 70%;
+    }
+
+    .login-title-block picture:nth-of-type(3) {
+      width: 50%;
+    }
+  }
+</style>
+<script>
+  window.addEventListener("load", function () {
+    if (document.querySelector(".authorization-link a").innerHTML === "登出") {
+      return;
+    }
+    let loginMainPage = document.querySelector("#login-main-page");
+    var loginParent = document.querySelector(
+      "#modal-content-1 .password-login-form-contain"
+    );
+    var registerParent = document.querySelector(
+      "#modal-content-1 #create-account-form"
+    );
+    var pageTab = document.querySelector(
+      ".mobile_login_popup .right-contet-part .tit-item"
+    );
+    var loginBtn = document.querySelector(
+      ".mobile_login_popup .right-contet-part .tit-item .login-email-title"
+    );
+    var registerBtn = document.querySelector(
+      ".mobile_login_popup .right-contet-part .tit-item .create-acc-title"
+    );
+    if (pageTab) {
+      //tab切換動畫
+      if (loginBtn.classList.contains("active")) {
+        pageTab.classList.add("left");
+      } else if (registerBtn.classList.contains("active")) {
+        pageTab.classList.add("right");
+      }
+      loginBtn.addEventListener("click", function () {
+        tabActiveCheck("login");
+      });
+      registerBtn.addEventListener("click", function () {
+        tabActiveCheck("register");
+        checkInputCorrect();
+      });
+    }
+    if (loginParent && registerParent) {
+      displayLoginMain();
+      showPasswordInput();
+      repositionSocialBtn();
+      addInputEvent("#regmobilenumber", limitPhoneInput);
+      insertIconInInput();
+      adjustNameInput();
+      resetPhoneMinLength(); // js限制欄位minLength
+      displayAllElem();
+      clickMrlLogin();
+      clickReturnToLoginMain();
+      editUItext();
+      insertReturnToLoginMainBtn();
+      socialLoginUIupdate();
+      document.querySelector("#password-strength-meter-label").textContent = ""; //密碼強度
+      // document.querySelector("#fogmobilenumber").addEventListener(
+      //   "change",
+      //   function (e) {
+      //     document.querySelector(".otp-phoneNum-begining").style.display =
+      //       "none";
+      //     e.target.value = "09" + e.target.value;
+      //   },
+      //   { once: true }
+      // );
+    }
+
+    //檢查註冊欄位輸入
+    function checkInputCorrect() {
+      if (registerBtn) {
+        addChangeEvent("#lastname", checkNameInput);
+        addChangeEvent("#firstname", checkNameInput);
+        addChangeEvent("#regmobilenumber", checkPhoneInput);
+        addChangeEvent("#email", checkEmailInput);
+        addChangeEvent("#password", checkPasswordInput);
+      }
+    }
+
+    function tabActiveCheck(tab) {
+      if (tab === "login") {
+        pageTab.classList.add("left");
+        pageTab.classList.remove("right");
+        document.querySelector(
+          "#modal-content-1 .footer-box-link .for-accout-title"
+        ).style.display = "block";
+        document.querySelector(
+          "#modal-content-1 .footer-box-link .for-accout-titlee"
+        ).style.display = "block";
+      } else if (tab === "register") {
+        pageTab.classList.remove("left");
+        pageTab.classList.add("right");
+        document.querySelector(
+          "#modal-content-1 .footer-box-link .for-accout-title"
+        ).style.display = "none";
+        document.querySelector(
+          "#modal-content-1 .footer-box-link .for-accout-titlee"
+        ).style.display = "none";
+      }
+    }
+
+    //顯示&隱藏密碼
+    function showPasswordInput() {
+      var passwordInput = document.querySelector(
+        "#modal-content-1 .right-contet-part .password-login-form-contain .password #logpassword"
+      );
+      var registerPasswordInput = document.querySelector(
+        "#modal-content-1 .right-contet-part .form-create-account #password"
+      );
+      if (passwordInput && registerPasswordInput) {
+        var passwordInputParent = passwordInput.parentNode;
+        var passwordInputParentR = registerPasswordInput.parentNode;
+
+        var showPasswordIcon = document.createElement("span");
+        showPasswordIcon.className = "material-symbols-outlined";
+        showPasswordIcon.id = "showPassword";
+        showPasswordIcon.innerHTML = "visibility_off";
+
+        passwordInputParent.appendChild(showPasswordIcon);
+        showPasswordIcon.addEventListener("click", function (event) {
+          if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            showPasswordIcon.innerHTML = "visibility";
+          } else {
+            passwordInput.type = "password";
+            showPasswordIcon.innerHTML = "visibility_off";
+          }
+        });
+
+        passwordInputParentR.appendChild(showPasswordIcon.cloneNode(true));
+
+        var showPasswordIconR =
+          passwordInputParentR.querySelector("#showPassword");
+        showPasswordIconR.addEventListener("click", function (event) {
+          if (registerPasswordInput.type === "password") {
+            registerPasswordInput.type = "text";
+            showPasswordIconR.innerHTML = "visibility";
+          } else {
+            registerPasswordInput.type = "password";
+            showPasswordIconR.innerHTML = "visibility_off";
+          }
+        });
+      }
+    }
+
+    //檢查姓名
+    function checkNameInput(input) {
+      if (input.target.value != "") {
+        return true;
+      }
+    }
+
+    //檢查手機號碼
+    var phoneRegex = /^\d{10}$/;
+    // var firstCheckPassed = false;
+    function checkPhoneInput(input) {
+      if (phoneRegex.test(input.target.value)) {
+        // if (!firstCheckPassed) {
+        //   phoneRegex = /^\d{10}$/;
+        //   document.querySelector(".phoneNum-begining").style.display = "none";
+        //   input.target.value = "09" + input.target.value;
+        //   firstCheckPassed = true;
+        //   document
+        //     .querySelector("#regmobilenumber")
+        //     .removeEventListener("change", checkPhoneInput);
+        // }
+        return true;
+      }
+      console.log("phone error");
+      return false;
+    }
+
+    //限制手機號碼輸入格式
+    function limitPhoneInput(input) {
+      input.target.value = input.target.value.replace(/\D/g, "");
+    }
+    //檢查信箱
+    function checkEmailInput(input) {
+      var email = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      if (email.test(input.target.value)) {
+        return true;
+      }
+    }
+    //檢查密碼
+    function checkPasswordInput(input) {
+      document.querySelector(
+        ".customer-create-form-contain #showPassword"
+      ).style.transform = "translate(-45px, 5px)"; //移動icon位置
+      //長度至少8個字元
+      if (input.target.value.length <= 8) {
+        return false;
+      }
+      var counterTrue = 0;
+      var hasLetter = /[a-zA-Z]/.test(input.target.value);
+      var hasNumber = /[0-9]/.test(input.target.value);
+      var hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(
+        input.target.value
+      );
+      //至少包含英數or符號任兩種
+      if (hasLetter) counterTrue++;
+      if (hasNumber) counterTrue++;
+      if (hasSymbol) counterTrue++;
+      if (counterTrue >= 2) {
+        return true;
+      }
+    }
+
+    //新增change事件
+    function addChangeEvent(selector, handler) {
+      var element = registerParent.querySelector(selector);
+      if (element) {
+        element.addEventListener("change", function (e) {
+          if (handler(e)) {
+            removeCrossMark(e);
+            addCheckMark(e);
+            checkCorrectMarkQty();
+            return true;
+          } else {
+            removeCheckMark(e);
+            addCrossMark(e);
+            checkCorrectMarkQty();
+          }
+        });
+      }
+    }
+    function addInputEvent(selector, handler) {
+      var element = registerParent.querySelector(selector);
+      if (element) {
+        element.addEventListener("input", function (e) {
+          handler(e);
+        });
+      }
+    }
+    //檢查欄位正確打勾
+    function addCheckMark(input) {
+      if (input.target.parentNode.querySelector(".form-check-mark")) return;
+      var checkMark = document.createElement("span");
+      checkMark.className = "material-symbols-outlined form-check-mark";
+      checkMark.innerHTML = "check_circle";
+      input.target.parentNode.appendChild(checkMark);
+      document.querySelector("#emailOptions").style.display = "none";
+      checkMark.style.display = "block";
+    }
+    function removeCheckMark(input) {
+      var checkMark = input.target.parentNode.querySelector(".form-check-mark");
+      if (checkMark) {
+        checkMark.remove();
+      }
+    }
+    //檢查欄位錯誤打叉
+    function addCrossMark(input) {
+      if (input.target.parentNode.querySelector(".form-cross-mark")) return;
+      var crossMark = document.createElement("span");
+      crossMark.className = "material-symbols-outlined form-cross-mark";
+      crossMark.innerHTML = "cancel";
+      input.target.parentNode.appendChild(crossMark);
+      crossMark.style.display = "block";
+    }
+    function removeCrossMark(input) {
+      var crossMark = input.target.parentNode.querySelector(".form-cross-mark");
+      if (crossMark) {
+        crossMark.remove();
+      }
+    }
+
+    //移動社群按鈕
+    function repositionSocialBtn() {
+      var loginLine = document.querySelectorAll(
+        "#modal-content-1 .password-login-form-contain .pslogin-spacer"
+      );
+      var displayLine = loginLine[1];
+      var mrlAccountLogin = document.querySelector(
+        "#modal-content-1 .mrl-account-login"
+      );
+      var mrlAccountLoginIcon = mrlAccountLogin.querySelector(
+        ".pslogin-button-icon"
+      );
+
+      if (loginLine) {
+        document.querySelector(
+          "#modal-content-1 .password-login-form-contain .pslogin-spacer table > tbody > tr > td.pslogin-bordertext.w25"
+        ).textContent = "快速登入，即刻打造理想的家";
+      }
+      var registerLine = document.querySelector(
+        "#modal-content-1 #create-account-form .pslogin-spacer"
+      );
+      if (registerLine) {
+        document.querySelector(
+          "#modal-content-1 #create-account-form .pslogin-spacer table > tbody > tr > td.pslogin-bordertext.w25"
+        ).textContent = "快速註冊";
+      }
+      var socialBtns = document.querySelectorAll(
+        "#modal-content-1 .pslogin-block"
+      );
+      var loginSocialBtns = document.querySelectorAll(
+        "#modal-content-1 .pslogin-buttons .pslogin-button-icon"
+      );
+
+      var loginSocialBtn;
+      var registerSocialBtn;
+
+      if (socialBtns.length >= 2) {
+        loginSocialBtn = socialBtns[0];
+      }
+      if (loginMainPage) {
+        loginMainPage.appendChild(displayLine);
+        loginMainPage.appendChild(loginSocialBtn);
+        document
+          .querySelector("#modal-content-1 ul.pslogin-clearfix")
+          .appendChild(mrlAccountLogin);
+        mrlAccountLoginIcon.classList.add("material-symbols-outlined");
+        mrlAccountLoginIcon.innerHTML = "phone_iphone";
+      }
+    }
+
+    //插入icon & label
+    function insertIconInInput() {
+      var loginAccount = document.querySelector(
+        ".mobile-sendotp-popup #emailmobilenumber"
+      );
+      var loginPasswordInput = document.querySelector(
+        ".mobile-sendotp-popup #logpassword"
+      );
+      var registerEmail = document.querySelector(
+        ".mobile-sendotp-popup #email"
+      );
+      var registerPassword = document.querySelector(
+        ".mobile-sendotp-popup #password"
+      );
+      var registerPhone = document.querySelector(
+        ".mobile-sendotp-popup #regmobilenumber"
+      );
+      var otpPhone = document.querySelector(
+        ".mobile-sendotp-popup #fogmobilenumber"
+      );
+
+      var loginAccountParent = loginAccount.parentNode;
+      var loginPasswordParent = loginPasswordInput.parentNode;
+      var registerEmailParent = registerEmail.parentNode;
+      var registerPasswordParent = registerPassword.parentNode;
+      var registerPhoneParent = registerPhone.parentNode;
+      var otpPhoneParent = otpPhone.parentNode;
+
+      var loginAccountLabel = document.querySelector(
+        ".label-Block-Emailmobile"
+      );
+      var loginPasswordLabel = document.querySelector(
+        ".label-Block-logpassword"
+      );
+      var registerPasswordLabel = document.querySelector(
+        ".label-Block-Mobpassword"
+      );
+      var registerEmailLabel = document.querySelector(".label-Block-Email");
+      var registerPhoneLabel = document.querySelector(
+        ".label-Block-Mobile_number"
+      );
+      var otpPhoneLabel = document.querySelector(
+        ".label-Block-Fogmobilenumber"
+      );
+
+      var accountIcon = document.querySelector("#account-icon");
+      var mailIcon = document.querySelector("#mail-icon");
+      var passwordIcon = document.querySelector("#password-icon");
+      var eyeIcon = document.querySelector("#eye-icon");
+      var eyeCloseIcon = document.querySelector("#eye-close-icon");
+      var phoneNumBegining = document.querySelector(".phoneNum-begining");
+      var otpPhoneNumBegining = document.querySelector(
+        ".otp-phoneNum-begining"
+      );
+
+      loginAccountParent.parentNode.insertBefore(
+        loginAccountLabel,
+        loginAccountParent
+      );
+      loginPasswordParent.parentNode.insertBefore(
+        loginPasswordLabel,
+        loginPasswordParent
+      );
+      registerEmailParent.parentNode.insertBefore(
+        registerEmailLabel,
+        registerEmailParent
+      );
+      registerPasswordParent.parentNode.insertBefore(
+        registerPasswordLabel,
+        registerPasswordParent
+      );
+      registerPhoneParent.parentNode.insertBefore(
+        registerPhoneLabel,
+        registerPhoneParent
+      );
+      otpPhoneParent.parentNode.insertBefore(otpPhoneLabel, otpPhoneParent);
+
+      loginAccount.placeholder = "手機號碼 或 電子郵件";
+      registerEmail.placeholder = "電子郵件";
+      registerPhone.placeholder = "手機號碼";
+      otpPhone.placeholder = "手機號碼";
+      loginAccount.parentNode.insertBefore(accountIcon, loginAccount);
+      loginPasswordInput.parentNode.insertBefore(
+        passwordIcon,
+        loginPasswordInput
+      );
+      registerEmail.parentNode.insertBefore(mailIcon, registerEmail);
+      registerPassword.parentNode.insertBefore(
+        passwordIcon.cloneNode(true),
+        registerPassword
+      );
+      registerPhone.parentNode.insertBefore(phoneNumBegining, registerPhone);
+      otpPhone.parentNode.insertBefore(otpPhoneNumBegining, otpPhone);
+    }
+
+    //姓&名排版調整
+    function adjustNameInput() {
+      var firstNameBlock = document.querySelector(
+        "#create-account-form > fieldset.fieldset.login-password.register-step1 > div.field.firstname.required"
+      );
+      var lastNameBlock = document.querySelector(
+        "#create-account-form > fieldset.fieldset.login-password.register-step1 > div.field.lastname.required"
+      );
+      lastNameBlock.appendChild(firstNameBlock);
+    }
+
+    //檢查登入欄位，enable登入按鈕
+    function updateLoginButtonColor() {
+      var loginAccount = document.querySelector(
+        "#modal-content-1 .password-login-form-contain #emailmobilenumber"
+      );
+      var loginPassword = document.querySelector(
+        "#modal-content-1 .password-login-form-contain #logpassword"
+      );
+      var loginButton = document.querySelector(
+        "#modal-content-1 .password-login-form-contain .password-login-btn"
+      );
+
+      var isBothFilled =
+        loginAccount.value !== "" && loginPassword.value !== "";
+      loginButton.style.backgroundColor = isBothFilled ? "#A9998C" : "#D6D6D6";
+      loginButton.disabled = !isBothFilled;
+    }
+
+    document
+      .querySelector("#modal-content-1 #emailmobilenumber")
+      .addEventListener("input", updateLoginButtonColor);
+    document
+      .querySelector("#modal-content-1 #logpassword")
+      .addEventListener("input", updateLoginButtonColor);
+
+    //檢查註冊欄位格式是否正確，enable註冊按鈕
+    function checkCorrectMarkQty() {
+      var allCorrectMark = document.querySelectorAll(
+        ".customer-create-form-contain .form-check-mark"
+      );
+      var isEnbled = allCorrectMark.length >= 5;
+      var goRegisterBtn = document.querySelector(
+        ".customer-create-form-contain .create-account-btn"
+      );
+      goRegisterBtn.disabled = !isEnbled;
+      goRegisterBtn.style.backgroundColor = isEnbled ? "#A9998C" : "#D6D6D6";
+    }
+
+    // js限制欄位minLength
+    function resetPhoneMinLength() {
+      document.querySelector("#regmobilenumber").setAttribute("minlength", "8");
+      document.querySelector("#fogmobilenumber").setAttribute("minlength", "8");
+    }
+
+    //一開始隱藏自己寫的html元素
+    function displayAllElem() {
+      loginMainPage.style.display = "flex";
+      document.querySelector(".otp-phoneNum-begining").style.display = "block";
+      document.querySelector(".phoneNum-begining").style.display = "block";
+      document.querySelectorAll(".label-Block").forEach((elem) => {
+        elem.style.display = "flex";
+      });
+      document
+        .querySelectorAll(".material-symbols-outlined")
+        .forEach((elem) => {
+          elem.style.display = "block";
+        });
+    }
+
+    //顯示登入主頁
+    function displayLoginMain() {
+      let oldLoginPage = document.querySelector(
+        "#modal-content-1 .right-contet-part"
+      );
+      oldLoginPage.appendChild(loginMainPage);
+    }
+
+    //點擊手機號碼登入
+    function clickMrlLogin() {
+      var mrlAccountLogin = document.querySelector(
+        "#modal-content-1 .mrl-account-login"
+      );
+      mrlAccountLogin.addEventListener("click", function (e) {
+        loginMainPage.classList.add("loginMainHidden");
+        document.querySelector(
+          "#modal-content-1 .main-title"
+        ).style.visibility = "visible";
+      });
+    }
+    //使用社群快速登入
+    function clickReturnToLoginMain() {
+      var returnBtn = document.querySelector("#back-to-loginMmain");
+      returnBtn.addEventListener("click", function (e) {
+        loginMainPage.classList.remove("loginMainHidden");
+        document.querySelector(
+          "#modal-content-1 .main-title"
+        ).style.visibility = "hidden";
+      });
+    }
+    //修改介面文字
+    function editUItext() {
+      document.querySelector(".footer-box-link .for-accout-title").textContent =
+        "OTP重設密碼";
+      document.querySelector(
+        ".footer-box-link .for-accout-titlee a"
+      ).textContent = "Email重設密碼";
+      document.querySelectorAll(
+        ".pslogin-block .pslogin-buttons .facebook .pslogin-button-auto .pslogin-button-text"
+      )[1].textContent = "使用Facebook帳號繼續";
+      document.querySelectorAll(
+        ".pslogin-block .pslogin-buttons .google .pslogin-button-auto .pslogin-button-text"
+      )[1].textContent = "使用Google帳號繼續";
+      document.querySelectorAll(
+        ".pslogin-block .pslogin-buttons .line .pslogin-button-auto .pslogin-button-text"
+      )[1].textContent = "使用LINE帳號繼續";
+    }
+
+    //使用社群快速登入按鈕
+    function insertReturnToLoginMainBtn() {
+      let returnBtn = document.querySelector(".back-to-loginMmain-block");
+      document
+        .querySelector("#modal-content-1 .right-contet-part .main-title")
+        .appendChild(returnBtn);
+    }
+
+    //點擊社群登入按鈕時，顯示遮幕
+    function socialLoginUIupdate() {
+      let socialLoginBtns = document.querySelectorAll(
+        "#login-main-page .pslogin-button-link"
+      );
+      for (let i = 0; i < socialLoginBtns.length - 1; i++) {
+        socialLoginBtns[i].addEventListener("click", function () {
+          document.querySelector("#login-overlay").style.display = "block";
+          window.onfocus = function () {
+            document.querySelector("#login-overlay").style.display = "none";
+          };
+          window.onbeforeunload = function () {
+            document.querySelector("#login-overlay").style.display = "block";
+          };
+        });
+      }
+    }
+  });
+</script>

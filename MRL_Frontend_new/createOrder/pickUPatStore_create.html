@@ -1,0 +1,124 @@
+<style>
+    .pick-up-at-store-table{
+        width: 100%;
+        margin-top: 15px;
+    }
+    .pick-up-at-store-table td{
+        padding: 0 !important;
+    }
+    .pick-up-at-store-table td:nth-child(2){
+        text-align: right;
+        padding: 1rem 0;
+    }
+    .pick-up-at-store-table td:nth-child(2) label{
+        background-color: #e63900;
+        border: 1px solid #e6e6e6;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .05), inset 0px -15px 10px -12px rgba(0, 0, 0, .05);
+        padding: 7px;
+        border-radius: 3px;
+        display: inline-block;
+        position: relative;
+    }
+    .pick-up-at-store-table td:nth-child(2) label.pick-up-exist::after{
+        content: '\2714';
+        font-size: 12px;
+        position: absolute;
+        top: -2px;
+        left: 3px;
+        color: #fff;
+    }
+    .pick-up-at-store-table input.pick-up-at-store{
+        display: none;
+    }
+    .remind-text{
+        color: red;
+        font-size: 12px;
+        font-weight: 600;
+        transition: 0.3s ease-in-out;
+    }
+</style>
+<script>
+    (function(){
+        insertPickUPtableToEdit();
+
+        function insertPickUPtableToEdit(){
+            var allActions = document.querySelectorAll("#order-items_grid .col-actions");
+
+            allActions.forEach(function(action) {
+                if(action.querySelector(".pick-up-at-store-table")){
+                    return;
+                }
+                var pickUPtable = document.createElement("table");
+                pickUPtable.className = "pick-up-at-store-table";
+
+                var pickUPtableTr = document.createElement("tr");
+                var pickUPtableTd1 = document.createElement("td");
+                var pickUPtableTd2 = document.createElement("td");
+                var pickUPtableCheckbox = document.createElement("input");
+                var pickUPtableCheckboxLabel = document.createElement("label");
+                var remindText = document.createElement("span");
+                remindText.className = "remind-text";
+
+
+                pickUPtableTd1.textContent = "門市自取";
+                pickUPtableCheckbox.type = "checkbox";
+                pickUPtableCheckbox.className = "pick-up-at-store";
+
+                pickUPtableTd2.appendChild(pickUPtableCheckbox);
+                pickUPtableTd2.appendChild(pickUPtableCheckboxLabel);
+
+                pickUPtableTr.appendChild(pickUPtableTd1);
+                pickUPtableTr.appendChild(pickUPtableTd2);
+                pickUPtable.appendChild(pickUPtableTr);
+
+                remindText.innerHTML = "請點擊「自動套用且儲存」<br>按鈕以儲存門市自取資訊！";
+
+                action.appendChild(pickUPtable);
+
+                var orderRemark = action.parentElement.querySelector('.col-row-free-text textarea.input-text');
+
+                checkPickUPexist(pickUPtableCheckbox, pickUPtableCheckboxLabel, orderRemark, remindText, action);
+            });
+
+        }
+
+        function checkPickUPexist(pickUPtableCheckbox, pickUPtableCheckboxLabel, orderRemark, remindText, action){
+            if(orderRemark){
+                if(orderRemark.value.includes("{※門市自取}")){
+                    pickUPtableCheckbox.checked = true;
+                    pickUPtableCheckboxLabel.classList.add("pick-up-exist");
+                }
+
+                pickUPtableCheckboxLabel.addEventListener("click", function(){
+                    if(pickUPtableCheckbox.checked){
+                        removePicUPinRemark(orderRemark, pickUPtableCheckbox, pickUPtableCheckboxLabel);
+                    } else {
+                        addPicUPinRemark(orderRemark, pickUPtableCheckbox, pickUPtableCheckboxLabel);
+                        action.appendChild(remindText);
+                        setTimeout(function(){
+                            remindText.remove();
+                        }, 3000);
+                        
+                    }
+                });         
+            }
+        }
+
+        function addPicUPinRemark(orderRemark, pickUPtableCheckbox, pickUPtableCheckboxLabel){
+            orderRemark.value += "{※門市自取}";
+            orderRemark.dispatchEvent(new Event('change'));
+            pickUPtableCheckboxLabel.classList.add("pick-up-exist");
+            pickUPtableCheckbox.checked = true;
+        }
+
+        function removePicUPinRemark(orderRemark, pickUPtableCheckbox, pickUPtableCheckboxLabel){
+            if (orderRemark.value.includes("{※門市自取}")) {
+                orderRemark.value = orderRemark.value.replace("{※門市自取}", "");
+                orderRemark.dispatchEvent(new Event('change'));
+            }
+            pickUPtableCheckboxLabel.classList.remove("pick-up-exist");
+            pickUPtableCheckbox.checked = false;
+        }
+
+    })();
+</script>

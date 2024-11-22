@@ -1,0 +1,63 @@
+xc<script>
+    var skuList = [];    
+      function getAllShipping(){
+        skuList = document.querySelectorAll('.product-sap-id-block');
+        var allShippingUrl = 'http://stock.mrl.com.tw/sbo-query-ui/www/item.php?id=';
+        if(window.location.hostname.includes("dev-devbk243")){
+            allShippingUrl = 'http://dev-stock.mrl.com.tw/sbo-query-ui/www/item.php?id=';
+        }
+        var skuListTemp = [];
+        skuList.forEach(function(sku){
+          var skuCode = sku.querySelector("a").innerHTML;
+          skuListTemp.push(skuCode);
+        })
+        var skuListDeDup = skuListTemp.filter(function(item, index){
+          return skuListTemp.indexOf(item) === index;
+        })
+        allShippingUrl = allShippingUrl + skuListDeDup.join(',');
+          window.open(allShippingUrl,skuListDeDup.join(',') ,config='height=300,width=1200');
+      }
+  
+      function updateQuoteCustomerId() {
+        var order_id = document.querySelector('[name="order_id"]').value;
+        var formKey = document.querySelector('[name="form_key"]').value;
+        var formData = new FormData();
+        formData.append("order_id", order_id);
+        formData.append("form_key", formKey);
+        formData.append("action", 'updateQuoteCustomerId');
+  
+        var request = jQuery.ajax({
+          url: '/backend/ordereditor/form/load/updateQuoteCustomerId',
+          method: "POST",
+          processData: false,
+          contentType: false,
+          data: formData
+        }).done(function( response ) {
+          alert('update quote\'s customer id finished, please reload page.');
+        }).fail(function( jqXHR, textStatus ) {
+          alert("[error]update quote\'s customer id. " + textStatus);
+        });
+    }
+      
+  
+    
+     (function(){
+        allShipBtn = '<button id="mrl_all_shipping_attributes" title="Get All Shipping" type="button" class="action-secondary" style="margin:auto 20px;" onclick="getAllShipping()"><span>全部庫存狀態</span></button>';
+        if(location.pathname.includes('sales/order_create')){
+            var mrlShippingDiv = document.createElement("div");
+            mrlShippingDiv.setAttribute("id", "mrl-shipping-div");
+            mrlShippingDiv.setAttribute("style","background-color: #c8c8c8;padding: 20px;");
+            mrlShippingDiv.innerHTML += allShipBtn;
+        
+           document.querySelector('#mrl-create-order').before(mrlShippingDiv);
+        }else if(location.pathname.includes('sales/order/view')){
+          var updateQuoteCustomerBtn = '';
+          var adminUserName = document.querySelector('.admin-user-name').innerText;
+          if(adminUserName == 'diohsu' || adminUserName == 'uflin' || adminUserName == 'allenzhang' || adminUserName == 'shrak') {
+              updateQuoteCustomerBtn = '<button id="updateQuoteCustomerId" title="Update Quote Customer ID" type="button" class="action-secondary" style="margin:auto 10px;" onclick="updateQuoteCustomerId()"><span>更新Quote客戶</span></button>';
+          }
+          document.querySelector('.order-gift-options+.admin__page-section .admin__page-section-title').innerHTML += allShipBtn + updateQuoteCustomerBtn;
+    
+        }
+    }());
+    </script>

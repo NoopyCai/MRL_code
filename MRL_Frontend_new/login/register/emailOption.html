@@ -1,0 +1,97 @@
+<script>
+  var emailInput;
+  // var currentUrl = window.location.href;
+  // console.log(currentUrl);
+  document.querySelector(".register-step1");
+  function emailAutoComplete(emailInputSelector, containerSelector) {
+    emailInput = document.querySelector(emailInputSelector);
+    var AddNewCusForm = document.querySelector(containerSelector);
+    var AddNewCusEmailPos = AddNewCusForm.querySelector(".email");
+    var currentText = "";
+    var formContainer = document.createElement("div");
+
+    formContainer.id = "emailOptions";
+    formContainer.classList.add("email-options");
+    AddNewCusForm.insertBefore(formContainer, AddNewCusEmailPos.nextSibling);
+
+    emailInput.addEventListener("input", function (e) {
+      if (e.target === emailInput) {
+        showDomainOptions(emailInput);
+      }
+    });
+  }
+
+  //輸入"@"後出現網域選項
+  function showDomainOptions(emailInput) {
+    var emailOptions = document.getElementById("emailOptions");
+    var atIndex = emailInput.value.indexOf("@");
+
+    if (atIndex !== -1) {
+      currentText = emailInput.value.substring(0, atIndex + 1);
+      var domains = [
+        "gmail.com",
+        "yahoo.com.tw",
+        "hotmail.com",
+        "icloud.com",
+        "msn.com",
+      ];
+      var optionsHTML = "";
+
+      domains.forEach(function (domain) {
+        optionsHTML +=
+          '<div class="' +
+          domain.split(".")[0] +
+          '" onclick="fillEmailOption(emailInput, \'' +
+          domain +
+          "')\">" +
+          currentText +
+          domain +
+          "</div>";
+      });
+
+      emailOptions.innerHTML = optionsHTML;
+      emailOptions.style.display = "block";
+    } else {
+      emailOptions.style.display = "none";
+    }
+  }
+
+  //選擇網域後代入
+  function fillEmailOption(emailInput, domain) {
+    var currentText = emailInput.value;
+    var atIndex = currentText.indexOf("@");
+    var newText = currentText.substring(0, atIndex + 1) + domain;
+
+    emailInput.value = newText;
+    var event = new Event("change", {
+      bubbles: true,
+      cancelable: true,
+    });
+    emailInput.dispatchEvent(event);
+
+    var emailOptions = document.getElementById("emailOptions");
+    emailOptions.style.display = "none";
+  }
+
+  emailAutoComplete("#email", ".register-step1");
+</script>
+
+<style>
+  .email-options {
+    cursor: pointer;
+    display: none;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 10px;
+    margin: 0 0 10px;
+  }
+
+  .gmail:hover,
+  .yahoo:hover,
+  .hotmail:hover,
+  .icloud:hover,
+  .msn:hover {
+    color: aliceblue;
+    background-color: #386bd6;
+    transition: linear 0.2s;
+  }
+</style>
