@@ -1,0 +1,62 @@
+<!-- 媒體報導 -->
+
+<style>
+    .media-reports{
+        width: 100%;
+        background-color: #E4E4E4
+    }
+    .media-reports .media-reports-container{
+        width: 100%;
+        overflow: auto;
+    }
+    .media-reports .media-reports-flex{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .media-reports .media-reports-container .item{
+        width: 19%;
+    }
+    @media(max-width:768px){
+        .media-reports .media-reports-flex{
+            width: 460%;
+            flex-wrap: nowrap;
+        }
+
+        .media-reports .media-reports-container .item{
+            width: 20%;
+        }
+    }
+    
+</style>
+
+<div class="media-reports">
+    <div class="media-reports-title" style="text-align: center;"><p style="font-weight: 600; font-size: 24px; margin:0;">媒體報導</p></div>
+    <div class="media-reports-container">
+        <div class="media-reports-flex">
+            <div class="item">
+                <img 
+              src="{{media url=wysiwyg/about_us/media_reports_01.png}}" loading="lazy"/>
+            </div>
+            <div class="item">
+                <img 
+              src="{{media url=wysiwyg/about_us/media_reports_02.png}}" loading="lazy"/>
+            </div>
+            <div class="item">
+                <img 
+              src="{{media url=wysiwyg/about_us/media_reports_03.png}}" loading="lazy"/>
+            </div>
+            <div class="item">
+                <img 
+              src="{{media url=wysiwyg/about_us/media_reports_04.png}}" loading="lazy"/>
+            </div>
+            <div class="item">
+                <img 
+              src="{{media url=wysiwyg/about_us/media_reports_05.png}}" loading="lazy"/>
+            </div>
+
+        </div>
+
+    </div>
+</div>

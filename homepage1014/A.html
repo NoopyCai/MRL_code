@@ -1,0 +1,421 @@
+<!-- 購買指南Ａ北歐復古風實木家具 -->
+
+<style>
+
+    .find_inspire.nocarousel .find_inspire_carousel_initial .item img{
+        display: none !important;
+    }
+    .find_inspire.nocarousel .find_inspire_carousel_initial .item:first-child img{
+        display: block !important;
+    }
+    .find_inspire{
+        width: 100%;
+        margin: auto;
+        background-color: #F6F4F4;
+        box-sizing: border-box;
+        padding-left:29px;
+        padding-bottom: 30px;
+    }
+    .find_inspire_title{
+        display: flex;
+        align-items: center;
+        padding: 14px;
+        padding-left: 25px;
+    }
+
+    .find_inspire_title h1{
+        color: #9E7756;
+        font-weight: 600;
+        margin-bottom: 0;
+        position: relative;
+        font-size: 26px;
+    }
+
+    .find_inspire_title h1::before{
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 100%;
+        top: 0;
+        left: -30px;
+        background-color: #9E7756;
+    }
+
+    .find_inspire_title ul{
+        display: flex;
+        margin-bottom: 0;
+    }
+
+    .find_inspire_title ul li{
+        padding: 0 15px;
+        list-style: none;
+        position: relative;
+        margin-bottom: 0;
+    }
+
+    .find_inspire_title ul li::before{
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 2px;
+        width: 2px;
+        height: 80%;
+        background-color: #9E7756;
+    }
+
+    .find_inspire_title ul li:last-child::before{
+        background-color: transparent;
+    }
+
+    .find_inspire_title ul li a{
+        text-decoration: none;
+        font-size: 20px;
+        color: #9E7756;
+        padding: 2px 5px;
+        border-radius: 15px;
+        font-weight: 500;
+    }
+
+    .find_inspire_title ul li a.active{
+        background-color: #9E7756;
+        color: white;
+        padding: 3px 20px;
+    }
+
+    .find_inspire_main{
+        display: flex;
+        justify-content: space-between;
+    }
+    .find_inspire_main .find_inspire_main_pic{
+        width: 45%;
+        padding-right: 25px;
+    }
+
+    .find_inspire_main .find_inspire_main_pic .owl-controls{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -2rem;
+        display: block !important;
+    }
+
+    .find_inspire_main .find_inspire_main_container{
+        display:grid;
+        column-gap: 25px;
+        row-gap: 4%;
+        width: 55%;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        position: relative;
+    }
+    .find_inspire_main .find_inspire_main_container .find_inspire_item{
+        width: 100%;
+        background-color: white;
+        position: relative;
+    }
+    .find_inspire_main .find_inspire_main_container .find_inspire_item a{
+        text-decoration: none;
+        color: #333;
+        font-weight: 400;
+        font-size: 1.4rem;
+        display: inline-block;
+    }
+    .find_inspire_main .find_inspire_main_container .find_inspire_item .find_inspire_item_bottom a{
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        line-height: 1.5em;
+        height: 3em;
+        margin-bottom: 1rem;
+    }
+    .find_inspire_main .find_inspire_main_container .find_inspire_item a:hover{
+        text-decoration:underline;
+    }
+
+    .find_inspire_main .find_inspire_main_container .find_inspire_item .price{
+        font-weight: 700;
+        font-size: 1.4rem;
+        display: inline-block;
+    }
+
+    .find_inspire_main .find_inspire_main_container .find_inspire_item_bottom{
+        padding: 10px;
+        position: absolute;
+        bottom: 1px;
+    }
+    .find_inspire_main .find_inspire_main_container .more{
+        position: absolute;
+        right: 9px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 52px;
+        width: 88px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #9E7756;
+       /* box-shadow: 0px 0px 200px 150px rgb(255, 255, 255);*/
+    }
+    .find_inspire_main .find_inspire_main_container .more a{
+        text-decoration: none;
+        color: white;
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+        width: 100%;
+        text-align: center;
+        padding: 1.6rem 0;
+    }
+    @media(max-width:1240px){
+        .find_inspire_title{
+            white-space: nowrap;
+        }
+        .find_inspire_title ul{
+            font-size: 18px;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+    }
+    @media(max-width:768px){
+        
+        .find_inspire_title{
+            padding: 0;
+        }
+
+        .find_inspire_title img{
+            display: block !important;
+        }
+        .find_inspire_title ul{
+            display: none;
+        }
+        .find_inspire_title h1{
+            display: none;
+        }
+
+        .find_inspire_main{
+            flex-direction: column;
+        }
+
+        .find_inspire_main .find_inspire_main_pic{
+            width: 100%;
+        }
+        .find_inspire_main .find_inspire_main_container{
+            width: 100%;
+            grid-template-columns: 1fr 1fr;
+            row-gap: 0;
+            column-gap: 0;
+            padding-bottom: 5rem;
+        }
+        .find_inspire{
+            padding: 0;
+            background-color: unset;
+
+        }
+        .find_inspire_main .find_inspire_main_container .more{
+            box-shadow: none;
+            left: 0;
+            right: 0;
+            top: unset;
+            width: 96%;
+            height: 3rem;
+            border-radius: 20px;
+            background-color: #8e8481;
+            border: none;
+        }
+        .find_inspire_main .find_inspire_main_container .more a{
+            width: 100%;
+            text-align: center;
+            padding: 0.5rem 0;
+            color: white;
+            font-weight: 600;
+            letter-spacing: 0px;
+        }
+        .find_inspire_main .find_inspire_main_container .find_inspire_item{
+            padding-bottom: 6rem;
+
+        }
+        .find_inspire_main .find_inspire_main_container .find_inspire_item>a{
+            height: unset;
+        }
+        .find_inspire_main .find_inspire_main_container .find_inspire_item .find_inspire_item_bottom a{
+            height: 3em;
+        }
+        .find_inspire .owl-controls{
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+        }
+        .find_inspire .owl-carousel .owl-nav{
+            display: none;
+        }
+        .find_inspire .owl-dots{
+            display: block !important;
+        }
+
+        
+    }
+
+</style>
+
+<div class="container" style="width: 100%; overflow: hidden;">
+    <div class="find_inspire nocarousel">
+        <div class="find_inspire_title">
+            <h1>找靈感</h1>
+            <ul>
+                <li><a href="{{store direct_url='hotsales/mcm-series.html'}}" class="active">北歐復古風家具</a></li>
+            </ul>
+            <img style="display: none; width: 100%;" src="{{media url=wysiwyg/home_page/2023_Fullview/homepage_dalicat_findinspire_mobile_box.png}}" alt="找靈感 手機板 北歐復古" loading="lazy"/>
+        </div>
+        <div class="find_inspire_carousel">
+            <div class="find_inspire_main" data-hash="vintage">
+                <div class="find_inspire_main_pic">
+                    <div class="owl-carousel owl-theme find_inspire_carousel_initial" id="find_inspire_carousel">
+                        <div class="item">
+                                <img style="display: block; width: 100%;" src="{{media url=wysiwyg/home_page/2023_Fullview/HS-mcm_v1_0216_p01.jpg}}" alt="北歐復古全牛皮沙發，搭配大理石圓茶几，與擺放實木展示收納櫃，打造復古質感客廳" loading="lazy" width="390" height="330"/>
+                        </div>
+                        <div class="item">
+                                <img style="display: block; width: 100%;" src="{{media url=wysiwyg/home_page/2023_Fullview/HS-mcm_v1_0216_p02.jpg}}" alt="Antony實木客廳家具(電視櫃&茶几&展示收納櫃)，展現復古沉穩氛圍" loading="lazy" width="390" height="330"/>
+                        </div>
+                        <div class="item">
+                                <img style="display: block; width: 100%;" src="{{media url=wysiwyg/home_page/2023_Fullview/HS-mcm_v1_0217_p03.jpg}}" alt="赤栗棕色餐桌椅與實木收納櫃，營造復古摩登餐廳空間" loading="lazy" width="390" height="330"/>
+                        </div>
+                        <div class="item">
+                                <img style="display: block; width: 100%;" src="{{media url=wysiwyg/home_page/2023_Fullview/HS-mcm_v1_0217_p04.jpg}}" alt="Antony實木寢室家具(原木床架&抽屜床頭櫃&收納斗櫃)，展現復古沉穩氛圍" loading="lazy" width="390" height="330"/>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="find_inspire_main_container ga-parent-item-list" data-ga-item-list-id="HS-mcmP" data-ga-item-list-name="北歐復古風家具">
+                    <div class="find_inspire_item">
+                        <a href="{{store direct_url='bryant-3s-russet-f.html'}}">
+                            <img class="mrl-click HS-mcmP1 select-item" data-ga-category="MKT-mcm" data-ga-item-id="10-0101-203001-03" data-ga-item-index="1" data-ga-label="Bryant 三人全牛皮沙發(Charme Russett)" style="display: block; width: 100%;" src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/b/r/bryant_3s_chrame-russet_v1_0915_p00.jpg}}" alt="Bryant 三人全牛皮沙發(Charme Russett)" width="195" height="195" loading="lazy">
+                        </a>
+                        <div class="find_inspire_item_bottom">
+                            <a class="mrl-click HS-mcmP1 select-item" data-ga-category="MKT-mcm" data-ga-item-id="10-0101-203001-03" data-ga-item-index="1" data-ga-label="Bryant 三人全牛皮沙發(Charme Russett)" href="{{store direct_url='bryant-3s-russet-f.html'}}">
+                                Bryant 三人全牛皮沙發(Charme Russett)
+                            </a>
+                            <span class="price" style="color: #C24035;font-weight: 700; ">$54,990</span>
+                            <span class="disText" style="font-size: 1.1rem; color:#666666; font-weight:400">(售價已折) </span>
+                            <span class="oldprice">$59,990</span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="find_inspire_item">
+                        <a href="{{store direct_url='antony-tvstand.html'}}">
+                            <img class="mrl-click HS-mcmP2 select-item" data-ga-category="MKT-mcm" data-ga-item-id="22-0050-0-19" data-ga-item-index="2" data-ga-label="【北歐復古】Antony 實木電視櫃 (右抽) 赤栗棕" style="display: block; width: 100%;" src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/a/n/antony_tvstand_v2_0618_p00.jpg}}" alt="Antony 實木電視櫃 赤栗棕" loading="lazy" width="195" height="195">
+                        </a>
+                        <div class="find_inspire_item_bottom">
+                            <a class="mrl-click HS-mcmP2 select-item" data-ga-category="MKT-mcm" data-ga-item-id="22-0050-0-19" data-ga-item-index="2" data-ga-label="【北歐復古】Antony 實木電視櫃 (右抽) 赤栗棕" href="{{store direct_url='antony-tvstand.html'}}">
+                                Antony 實木電視櫃</br>赤栗棕
+                            </a>
+                            <span class="price" style="color: #C24035;font-weight: 700; ">$27,990</span>
+                            <span class="disText" style="font-size: 1.1rem; color:#666666; font-weight:400">(售價已折) </span>
+                            <span class="oldprice">$29,990</span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="find_inspire_item">
+                        <a href="{{store direct_url='antony-centertable01.html'}}">
+                            <img class="mrl-click HS-mcmP3 select-item" data-ga-category="MKT-mcm" data-ga-item-id="20-0070-0-19" data-ga-item-index="3" data-ga-label="【北歐復古】Antony 實木抽屜茶几 赤栗棕" style="display: block; width: 100%;" src="{{media url=catalog/product/cache/804a86e25a95667105da151c406f212a/a/n/antony_centertable_v2_0621_p00.jpg}}" alt="Antony 實木抽屜茶几 赤栗棕" loading="lazy" width="195" height="195">
+                        </a>
+                        <div class="find_inspire_item_bottom">
+                            <a class="mrl-click HS-mcmP3 select-item" data-ga-category="MKT-mcm" data-ga-item-id="20-0070-0-19" data-ga-item-index="3" data-ga-label="【北歐復古】Antony 實木抽屜茶几 赤栗棕" href="{{store direct_url='antony-centertable01.html'}}">
+                                Antony 實木抽屜茶几</br>赤栗棕
+                            </a>
+                            <span class="price" style="color: #C24035;font-weight: 700; ">$16,990</span>
+                            <span class="disText" style="font-size: 1.1rem; color:#666666; font-weight:400">(售價已折) </span>
+                            <span class="oldprice">$17,990</span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="find_inspire_item">
+                        <a href="{{store direct_url='antony-bedframe-double.html'}}">
+                            <img class="mrl-click HS-mcmP4 select-item" data-ga-category="MKT-mcm" data-ga-item-id="23-0079-1-19" data-ga-item-index="4" data-ga-label="【北歐復古】Antony 實木雙人床架/雙人標準 (5x6.2) 赤栗棕" style="display: block; width: 100%;" src="{{media url=catalog/product/cache/804a86e25a95667105da151c406f212a/a/n/antony_bed_5x6.2_p01_v2_0429.jpg}}" alt="Antony 實木雙人床架 赤栗棕" loading="lazy" width="195" height="195">
+                        </a>
+                        <div class="find_inspire_item_bottom">
+                            <a class="mrl-click HS-mcmP4 select-item" data-ga-category="MKT-mcm" data-ga-item-id="23-0079-1-19" data-ga-item-index="4" data-ga-label="【北歐復古】Antony 實木雙人床架/雙人標準 (5x6.2) 赤栗棕" href="{{store direct_url='antony-bedframe-double.html'}}">
+                                Antony 實木雙人床架</br>赤栗棕
+                            </a>
+                            <span class="price" style="color: #C24035;font-weight: 700; ">$27,990</span>
+                            <span class="disText" style="font-size: 1.1rem; color:#666666; font-weight:400">(售價已折) </span>
+                            <span class="oldprice">$29,990</span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="find_inspire_item">
+                        <a href="{{store direct_url='antony-dresser01.html'}}">
+                            <img class="mrl-click HS-mcmP5 select-item" data-ga-category="MKT-mcm" data-ga-item-id="22-0055-0-19" data-ga-item-index="5" data-ga-label="【北歐復古】Antony 實木六斗櫃 (矮櫃) 赤栗棕" style="display: block; width: 100%;" src="{{media url=catalog/product/cache/804a86e25a95667105da151c406f212a/a/n/antony_dresser_p00_v01.jpg}}" alt="Antony 實木六斗櫃 赤栗棕" loading="lazy" width="195" height="195">
+                        </a>
+                        <div class="find_inspire_item_bottom">
+                            <a class="mrl-click HS-mcmP5 select-item" data-ga-category="MKT-mcm" data-ga-item-id="22-0055-0-19" data-ga-item-index="5" data-ga-label="【北歐復古】Antony 實木六斗櫃 (矮櫃) 赤栗棕" href="{{store direct_url='antony-dresser01.html'}}">
+                                Antony 實木六斗櫃</br>赤栗棕
+                            </a>
+                            <span class="price" style="color: #C24035;font-weight: 700; ">$27,990</span>
+                            <span class="disText" style="font-size: 1.1rem; color:#666666; font-weight:400">(售價已折) </span>
+                            <span class="oldprice">$29,990</span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="find_inspire_item">
+                        <a href="{{store direct_url='antony-sideboard.html'}}">
+                            <img class="mrl-click HS-mcmP6 select-item" data-ga-category="MKT-mcm" data-ga-item-id="22-0049-0-19" data-ga-item-index="6" data-ga-label="【北歐復古】Antony 實木餐邊櫃 赤栗棕" style="display: block; width: 100%;" src="{{media url=catalog/product/cache/804a86e25a95667105da151c406f212a/a/n/antony_sideboard_p00_v01.jpg}}" alt="Antony 實木餐邊櫃 赤栗棕" loading="lazy" width="195" height="195">
+                        </a>
+                        <div class="find_inspire_item_bottom">
+                            <a class="mrl-click HS-mcmP6 select-item" data-ga-category="MKT-mcm" data-ga-item-id="22-0049-0-19" data-ga-item-index="6" data-ga-label="【北歐復古】Antony 實木餐邊櫃 赤栗棕" href="{{store direct_url='antony-sideboard.html'}}">
+                                Antony 實木餐邊櫃</br>赤栗棕
+                            </a>
+                            <span class="price" style="color: #C24035;font-weight: 700; ">$27,990</span>
+                            <span class="disText" style="font-size: 1.1rem; color:#666666; font-weight:400">(售價已折) </span>
+                            <span class="oldprice">$29,990</span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="find_inspire_item">
+                        <a href="{{store direct_url='antony-dressingtable.html'}}">
+                            <img class="mrl-click HS-mcmP7 select-item" data-ga-category="MKT-mcm" data-ga-item-id="21-0021-0-19" data-ga-item-index="7" data-ga-label="【北歐復古】Antony 實木翻轉化妝桌 赤栗棕" style="display: block; width: 100%;" src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/a/n/antony_vanity_p01_v1_1_.jpg}}" alt="Antony 翻轉化妝桌 赤栗棕" loading="lazy" width="195" height="195">
+                        </a>
+                        <div class="find_inspire_item_bottom">
+                            <a class="mrl-click HS-mcmP7 select-item" data-ga-category="MKT-mcm" data-ga-item-id="21-0021-0-19" data-ga-item-index="7" data-ga-label="【北歐復古】Antony 實木翻轉化妝桌 赤栗棕" href="{{store direct_url='antony-dressingtable.html'}}">
+                                Antony 翻轉化妝桌</br>赤栗棕
+                            </a>
+                            <span class="price" style="color: #C24035;font-weight: 700; ">$18,990</span>
+                            <span class="disText" style="font-size: 1.1rem; color:#666666; font-weight:400">(售價已折) </span>
+                            <span class="oldprice">$19,990</span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="find_inspire_item">
+                        <a href="{{store direct_url='charles-dressingchair.html'}}">
+                            <img class="mrl-click HS-mcmP8 select-item" data-ga-category="MKT-mcm" data-ga-item-id="13-0016-0-19" data-ga-item-index="8" data-ga-label="Charles 化妝凳/書椅" style="display: block; width: 100%;" src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/c/h/charles_dressingchair_v2_0621_p00.jpg}}" alt="Charles 化妝凳/書椅" loading="lazy" width="195" height="195">
+                        </a>
+                        <div class="find_inspire_item_bottom">
+                            <a class="mrl-click HS-mcmP8 select-item" data-ga-category="MKT-mcm" data-ga-item-id="13-0016-0-19" data-ga-item-index="8" data-ga-label="Charles 化妝凳/書椅" href="{{store direct_url='charles-dressingchair.html'}}">
+                                Charles 化妝凳/書椅
+                            </a>
+                            <span class="price">$5,500</span>
+                        </div>
+                        
+                    </div>
+
+        
+                    <div class="more">
+                        <a class="mrl-click click-HS-more" data-ga-category="MKT-mcm" href="{{store direct_url='hotsales/mcm-series.html'}}">
+                            more
+                        </a>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        
+    </div>
+</div>

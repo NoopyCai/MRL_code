@@ -1,0 +1,168 @@
+<style>
+    .fbbrodcast-btn-div {
+      position: fixed;
+      width: 100px;
+      bottom: 45%;
+      right: 1%;
+      z-index: 99999;
+    }
+  
+    /* 模擬的彈出窗口樣式 */
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 10000;
+    }
+  
+    #modal-content {
+      width: auto;
+      height: auto;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #1c1e21;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      padding: 20px;
+    }
+  
+    #close-btn-fb {
+      display: none;
+      font-size: 25px;
+      position: fixed;
+      background-color: transparent;
+      color: #fff;
+      top: -4rem;
+      right: -5rem;
+      cursor: pointer;
+      z-index: 100000;
+      border: none;
+    }
+  </style>
+  
+  <div class="fbbrodcast-btn-div" style="display: none">
+    <div>
+      <a href="javascript:void(0);" id="fbLiveUrl">
+        <img
+          src="https://media.mrliving.com.tw/wysiwyg/fb-brodcast_v2.gif"
+          alt="FB直播中"
+        />
+      </a>
+    </div>
+  </div>
+  
+  <!-- Live poppup -->
+  <div id="modal">
+    <div id="modal-content">
+      <div
+        class="fb-video"
+        mute="false"
+        data-width="500px"
+        data-show-text="false"
+      >
+        <blockquote class="fb-xfbml-parse-ignore">
+          <h2 style="color: #fff">載入中，請稍候．．．</h2>
+        </blockquote>
+      </div>
+      <button id="close-btn-fb" class="mgz-icon mgz-icon-close"></button>
+    </div>
+  </div>
+  
+  <div id="fb-root"></div>
+  <script
+    async
+    defer
+    crossorigin="anonymous"
+    src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v19.0"
+    nonce="bAvxJprT"
+  ></script>
+  <script>
+    var btnDiv = document.querySelector(".fbbrodcast-btn-div");
+    var modal = document.getElementById("modal");
+    var closeBtn = document.getElementById("close-btn-fb");
+    var my_video_player;
+    var fbLiveLink = "https://www.facebook.com/mr.livingteam/videos/829855455922024"; //FB直播連結
+  
+    document.querySelector(".fb-video").setAttribute("data-href", fbLiveLink);
+    document
+      .querySelector(".fb-xfbml-parse-ignore")
+      .setAttribute("cite", fbLiveLink);
+  
+    window.fbAsyncInit = function () {
+      // 初始化 FB SDK
+      FB.init({
+        appId: "672718648235603", //Facebook app ID
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: "v19.0",
+      });
+  
+      FB.Event.subscribe("xfbml.ready", function (msg) {
+        if (msg.type === "video") {
+          my_video_player = msg.instance;
+        }
+      });
+    };
+  
+    btnDiv.addEventListener("click", function (event) {
+      if (window.innerWidth < 1280) {
+        // window.open(fbLiveLink, "_blank");
+        document.querySelector('#fbLiveUrl').href = fbLiveLink;
+      } else {
+        modal.style.display = "block";
+        closeBtn.style.display = "block";
+        document.addEventListener("click", function (event) {
+          if (event.target === modal) {
+            modal.style.display = "none";
+            closeBtn.style.display = "none";
+            my_video_player.pause();
+          }
+        });
+      }
+    });
+    closeBtn.addEventListener("click", function () {
+      modal.style.display = "none";
+      closeBtn.style.display = "none";
+      my_video_player.pause();
+    });
+  
+    // 設定活動開始和結束時間
+    const startDate = new Date(2024, 8, 26, 20, 25, 59); // 0=1月 1=2月
+    const endDate = new Date(2024, 8, 26, 21, 24, 59);
+  
+    // 判斷目前時間是否在活動期間
+    const now = new Date();
+    const isDuringEvent = now >= startDate && now <= endDate;
+  
+    // 設定 icon 的顯示狀態
+    const icon = document.querySelector(".fbbrodcast-btn-div");
+    if (isDuringEvent === true) {
+      icon.style.display = "block";
+      document.querySelector(".LineBlock").style.display = "none";
+    } else {
+      icon.style.display = "none";
+    }
+  
+    //限制顯示
+    let fbBlock = document.querySelector(".fbbrodcast-btn-div");
+    if (isDuringEvent) {
+      if (
+        window.location.pathname.includes("checkout") ||
+        window.location.pathname.includes("login") ||
+        window.location.pathname.includes("create")
+      ) {
+        fbBlock.style.display = "none";
+      } else {
+        fbBlock.style.display = "block";
+      }
+    } else {
+      fbBlock.style.display = "none";
+    }
+  </script>
+  

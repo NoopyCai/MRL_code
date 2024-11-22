@@ -1,0 +1,85 @@
+
+<script>
+    // 移動 section
+    document.querySelector('#order-form_account').after(document.querySelector('#order-addresses'));
+    document.querySelector('#order-addresses').after(document.querySelector('.order-sidebar'));
+    document.querySelector('#order-addresses').after(document.querySelector('#order-items'));
+    document.querySelector('#order-addresses').after(document.querySelector('.order-search-items'));
+    // 移動欄位
+    document.querySelector('.field-deposit_date').before(document.querySelector('.field-so_deposit'));
+    document.querySelector('.field-so_store').after( document.querySelector('.field-shipdate'));
+    document.querySelector('.field-so_store').after( document.querySelector('.field-saman'));
+    document.querySelector('.field-shipdate').after( document.querySelector('.field-ss_comments'));
+    document.querySelector('.field-shipdate').after( document.querySelector('.field-inventory_in_msg'));
+    document.querySelector('.field-gui_printmk').after( document.querySelector('.field-donate_code'));
+    document.querySelector('.field-gui_printmk').after( document.querySelector('.field-gui_carrierid1'));
+    document.querySelector('.field-comid_s').before(document.querySelector('.field-einvoice_item'));
+    document.querySelector('.field-com_s').after(document.querySelector('.field-mrl_campaign_label'));
+    document.querySelector('.field-mrl_campaign_label').after( document.querySelector('.field-test333'));
+    document.querySelector('.field-test333').after(document.querySelector('.field-contact_return'));
+    document.querySelector('.field-use_homecard').after( document.querySelector('.field-remind_msg'));
+    document.querySelector('.field-remind_msg').before(document.querySelector('.field-exp_visited'));
+    document.querySelector('.field-remind_msg').before(document.querySelector('.field-order_labels'));
+    document.querySelector('.field-remind_msg').before(document.querySelector('.field-employee_purchase'));
+    document.querySelector('.field-remind_msg').after(document.querySelector('.field-remind'));;
+    document.querySelector('#order-addresses .admin__page-section-content').after(document.querySelector('.field-has_elevator'));
+    document.querySelector('#order-addresses .admin__page-section-content').after(document.querySelector('.field-dev_phone02'));
+    document.querySelector('.field-einvoice_item').before(document.querySelector('.field-einvoice_email'));
+    //document.querySelector('#order-billing_address .field-telephone').before(document.querySelector('#order-billing_address .field-street'));
+    //document.querySelector('#order-shipping_address .field-telephone').before(document.querySelector('#order-shipping_address .field-street'));
+    //document.querySelector('#order-billing_address .field-firstname').before(document.querySelector('#order-billing_address .field-lastname'));
+    //document.querySelector('#order-shipping_address .field-firstname').before(document.querySelector('#order-shipping_address .field-lastname'));
+  
+  
+  
+    // customer view 收合
+     if(document.querySelector('.customer-activity-title')){
+      document.querySelector('.customer-activity-title').innerHTML +='<div class="dropdown" style="margin-left:5%; display:inline-block; font-weight:bold; font-size:5px; color:red; background-color:	#D0D0D0;"">&nbsp; ▼ </div>';
+      jQuery(".customer-activity-title").click(function(){
+        jQuery(".create-order-sidebar-container").slideToggle("slow");
+      });
+    }
+  
+  </script>
+  
+  
+    <style>
+  .admin__field+.admin__field { margin-top: 0.5rem;}body { line-height: 1;}.data-grid td { padding: 0.8rem;}.admin__page-section-title {margin-bottom: 0.7rem;}.admin__page-section {margin-bottom: 1.3rem;}.order-sidebar{padding:5rem; width:100%; margin-bottom:2%; margin-top:2%;}.admin__data-grid-pager{white-space:nowrap;}
+  .admin__field.field.field-email.required._required {margin-top: 0rem;}
+  .admin__field.field.field-deposit_date{display: inline-block; width:15%; margin:0 4%;}
+  .field-einvoice_item,.field-saman,.field-so_deposit,.field-e_invoice,.field-pe_select,.field-gui_printmk,.field-donate_code,.field-gui_carrierid1,.field-so_store,.field-paid_store{display:inline-block;width:20%;margin-right:1% !important;}
+  .field-gui_carrierid1,.field-telephone{margin-right:6%; }
+  .field-comid_s{margin-right:3%; }
+  .field-com_s,.field-comid_s{display: inline-block; width:40%; }
+  .admin__field-option {display:inline-block; width:17%; }
+  .field-use_homecard {display:inline-block; width:60%; }
+  .field-order_labels,.field-line_member {display:inline-block; width:25%; }
+  .field-employee_purchase {display:inline-block; width:30%; }
+  .admin__field.field.field-firstname.required._required,.admin__field.field.field-lastname.required._required {display: inline-block;}
+  .admin__field.field.field-company {display: none;}
+  .field-firstname {margin-right:6%; }
+  .field-country_id,.field-state{display: inline-block;}
+  .field-telephone,.field-dev_phone02{display:inline-block; }
+  .field-dev_phone02{margin-bottom: 20px;}
+  .admin__field-shipping-same-as-billing label,.order-save-in-address-book label{white-space:nowrap;}.customer-activity-title{white-space:nowrap;width:80%;}.field-deposit_date ._has-datepicker.admin__control-text{width: 120px;}.order-details{padding: 5rem;width: 100%;}
+  #order-shipping_address_fields>.field-telephone{width:100%;}
+  .customer-activity-title {background-color:#D0D0D0; cursor:pointer;}
+  .create-order-sidebar-container {margin:0px;padding:5px;display:none;}
+  #sidebar_data_cart,#sidebar_data_wishlist,#order-sidebar_reorder {display:inline-block;width:33%;}
+  .custom-price-block {visibility: hidden;}
+  #order-shipping_address_fields, #order-billing_address_fields{
+      display: grid;
+      grid-template:"lastname lastname lastname firstname firstname firstname" 1fr
+                    "country country city city district district" 1fr
+                    "street street street street street street" 1fr
+                    "tele tele tele addbook addbook addbook"1fr/ 15%;
+  }
+      #order-shipping_address_fields .field-lastname, #order-billing_address_fields .field-lastname{grid-area:lastname;}
+      #order-shipping_address_fields .field-firstname, #order-billing_address_fields .field-firstname{grid-area:firstname;}
+      #order-shipping_address_fields .field-street, #order-billing_address_fields .field-street{grid-area:street;}
+      #order-shipping_address_fields .field-country_id, #order-billing_address_fields .field-country_id{grid-area:country;}
+      #order-shipping_address_fields .field-state.required, #order-billing_address_fields .field-state.required{grid-area:city;}
+      #order-shipping_address_fields .field-state._required, #order-billing_address_fields .field-state._required{grid-area:district;}
+      #order-shipping_address_fields .field-telephone, #order-billing_address_fields .field-telephone{grid-area:tele;}
+      #order-shipping_address_fields .order-save-in-address-book, #order-billing_address_fields .order-save-in-address-book{grid-area:addbook; margin-top: 40px; margin-left: 10px;}
+  </style>

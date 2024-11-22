@@ -1,0 +1,94 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+    .category-banner-container{
+        width: 100%;
+        position: relative;
+    }
+    .category-banner-container img{
+        width: 100%;
+    }
+    .until-tuesday-label::after{
+        font-family: "Noto Serif TC", serif;
+        flex-direction: column;
+        justify-content: center;
+        content: '\53ea\5230\9031\4e8c\000d\000a';
+        color: #fff;
+        position: absolute;
+        top: 0;
+        text-align: center;
+        display: flex;
+        right: 0;
+        width: 180px;
+        height: 70px;
+        background: #a97d3c;
+        font-size: 3.3rem;
+        border-bottom-left-radius: 10px;
+        font-weight: 600;
+    }
+    .last-day-label::after{
+        font-family: "Noto Serif TC", serif;
+        flex-direction: column;
+        justify-content: center;
+        content: '\53ea\5269\4eca\5929';
+        color: #fff;
+        position: absolute;
+        top: 0;
+        text-align: center;
+        display: flex;
+        right: 0;
+        width: 180px;
+        height: 70px;
+        background: #a97d3c;
+        font-size: 3.3rem;
+        border-bottom-left-radius: 10px;
+        font-weight: 600;
+    }
+    @media (max-width: 1440px){
+        .until-tuesday-label::after,
+        .last-day-label::after{
+            width: 150px;
+            height: 55px;
+            font-size: 2.8rem;
+        } 
+    }
+    @media (max-width: 768px){
+        .until-tuesday-label::after,
+        .last-day-label::after{
+            width: 65px;
+            height: 28px;
+            font-size: 1.4rem;
+        } 
+    }
+</style>
+<script>
+    //  活動標籤計時器 //
+    (function(){
+        // 設定活動開始和結束時間
+        const scheduleStartDate = new Date(2024, 10 - 1, 9, 10, 30, 59);
+        const scheduleMiddleDate = new Date(2024, 10 - 1, 9, 11, 30, 59);
+        const scheduleEndDate = new Date(2024, 10 - 1, 9, 12, 32, 59);
+    
+        // 判斷目前時間在哪個活動期間   
+        const now = new Date();
+        let stageOneisDuringEvent = false;
+        let stageTwoisDuringEvent = false
+        if (now >= scheduleStartDate && now < scheduleMiddleDate) {
+            stageOneisDuringEvent = true;
+        } else if (now >= scheduleMiddleDate && now < scheduleEndDate) {
+            stageTwoisDuringEvent = true;
+        }
+
+        let schedulePic = document.querySelector(".promotion-schedule");
+        if(schedulePic){
+            if(stageOneisDuringEvent){
+                schedulePic.classList.add("until-tuesday-label");
+            }else if(stageTwoisDuringEvent){
+                schedulePic.classList.remove("until-tuesday-label");
+                schedulePic.classList.add("last-day-label");
+            }else{
+                schedulePic.classList.remove("until-tuesday-label");
+                schedulePic.classList.remove("last-day-label");
+            }
+        }
+    })();
+</script>

@@ -1,0 +1,32 @@
+<style>
+    .label-readonly {
+        color: #ccc;
+        cursor: not-allowed;
+    }
+    .label-readonly::before{
+        background-color: #e9e9e9 !important;
+        cursor: not-allowed;
+    }
+    .checkbox-readonly{
+        cursor: not-allowed;
+    }
+</style>
+<script>
+    (function () {
+        var attributeLabels = document.querySelectorAll(".field-mrl_campaign_label .admin__field-control label");
+        var attributeCheckBoxes = document.querySelectorAll("#mrl_campaign_label_457, #mrl_campaign_label_458");
+        if (attributeLabels.length > 0) {
+            setAttributeReadOnly();
+        }
+        function setAttributeReadOnly() {
+            attributeCheckBoxes.forEach(function (checkbox) {
+                checkbox.readOnly = true;
+                checkbox.classList.add("checkbox-disabled");
+            })
+            attributeLabels.forEach(function (label) {
+                label.readOnly = true;
+                label.classList.add("label-readonly");
+            })
+        }
+    })();
+</script>

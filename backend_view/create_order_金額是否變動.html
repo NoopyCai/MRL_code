@@ -1,0 +1,22 @@
+<script>
+var observer2 = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if (mutation.type === 'childList' || mutation.type === 'subtree') {
+            var grandTotalElement = document.getElementById('grand-total');
+            if (grandTotalElement && mutation.target.contains(grandTotalElement)) {
+                dataLayer.push({'event': 'order-amount-changed'});
+            }
+        } else if (mutation.type === 'attributes' && mutation.target.id === 'grand-total') {
+            dataLayer.push({'event': 'order-amount-changed'});
+        }
+    });    
+});
+
+var observerConfig = {
+    attributes: true,
+    childList: true,
+    subtree: true
+};
+var targetNode = document.getElementById('order-totals');
+observer2.observe(targetNode, observerConfig);
+</script>

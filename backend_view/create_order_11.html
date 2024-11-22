@@ -1,0 +1,54 @@
+
+<script>
+    var sumPrice = document.querySelector("#grand-total > td.admin__total-amount > strong > span");
+    var shipping = document.querySelector("#shipping-include-tax > td.admin__total-amount > span");
+    var productCols = document.querySelectorAll(".col-product");
+    var warrantyExist = false;
+    
+    
+    
+
+    if (sumPrice) {
+        checkPriceMeetConditions();
+    }
+
+    function checkPriceMeetConditions() {
+        sumPrice = parsePrice(sumPrice);
+        if(shipping){
+            shipping = parsePrice(shipping);
+            sumPrice -= shipping;
+        }
+        if(productCols.length > 0){
+            productCols.forEach(function(col){
+                if(col.innerText.includes("送延長保固")){
+                    warrantyExist = true;
+                }
+                if(col.innerText.includes("樓層費")){
+                    var floorFee = col.parentElement.querySelector(".col-price.col-row-subtotal");
+                    floorFee = parsePrice(floorFee);
+                    sumPrice -= floorFee;
+                }else{
+                    return;
+                }
+            })
+        }
+        if(sumPrice >= 5000){
+            document.querySelector("#mrl_campaign_label_465").checked = true;
+        }else{
+            document.querySelector("#mrl_campaign_label_465").checked = false;
+        }
+        if (warrantyExist) {
+            document.querySelector("#mrl_campaign_label_466").checked = true;
+        }else{
+            document.querySelector("#mrl_campaign_label_466").checked = false;
+        }
+    }
+        //轉為num
+        function parsePrice(price) {
+            if (price && price.innerText) {
+                return parseFloat(price.innerText.replace(/[$,]/g, ""));
+            } else {
+                return 0;
+            }
+        }
+</script>

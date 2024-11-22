@@ -1,0 +1,66 @@
+<script>
+    var ticketEventKey = sessionStorage.getItem("ticketCheckeventKey");
+    var warrantyEventKey = sessionStorage.getItem("warrantyEventKey");
+    var campaignLabel =  document.querySelector("#base_fieldset > div.admin__field.field.field-mrl_campaign_label .admin__field-control")
+
+     // 儲存原始 checked 狀態
+    var originalTicketChecked = document.querySelector("#mrl_campaign_label_465").checked;
+    var originalWarrantyChecked = document.querySelector("#mrl_campaign_label_466").checked;
+
+    if(ticketEventKey){
+        if(!document.querySelector("#mrl_campaign_label_465").checked){
+            document.querySelector("#mrl_campaign_label_465").checked = true;
+            campaignLabel.style.backgroundColor = "gold"
+        }
+        sessionStorage.removeItem("ticketCheckeventKey");
+    }
+
+    if(warrantyEventKey){
+        if(!document.querySelector("#mrl_campaign_label_466").checked){
+            document.querySelector("#mrl_campaign_label_466").checked = true;
+            campaignLabel.style.backgroundColor = "gold";
+        }
+        sessionStorage.removeItem("warrantyEventKey");
+    }
+
+    // 檢查 checked 狀態是否有變更
+    var currentTicketChecked = document.querySelector("#mrl_campaign_label_465").checked;
+    var currentWarrantyChecked = document.querySelector("#mrl_campaign_label_466").checked;
+
+    console.log("originalTicketChecked:", originalTicketChecked, currentTicketChecked)
+    console.log("originalWarrantyChecked:", originalWarrantyChecked, currentWarrantyChecked)
+
+    if (currentTicketChecked !== originalTicketChecked || currentWarrantyChecked !== originalWarrantyChecked) {
+        setTimeout(function(){
+            document.querySelector("#save").click();
+        },3000)
+    }
+    
+</script>
+
+<script>
+    var ticketEventKey = sessionStorage.getItem("ticketCheckeventKey");
+    var warrantyEventKey = sessionStorage.getItem("warrantyEventKey");
+    var campaignLabel =  document.querySelector("#base_fieldset > div.admin__field.field.field-mrl_campaign_label .admin__field-control")
+
+    if(ticketEventKey){
+        if(!document.querySelector("#mrl_campaign_label_465").checked){
+            document.querySelector("#mrl_campaign_label_465").checked = true;
+            campaignLabel.style.backgroundColor = "gold"
+        }
+        sessionStorage.removeItem("ticketCheckeventKey");
+    }else if(!ticketEventKey){
+        document.querySelector("#mrl_campaign_label_465").checked = false;
+    }
+
+    if(warrantyEventKey){
+        if(!document.querySelector("#mrl_campaign_label_466").checked){
+            document.querySelector("#mrl_campaign_label_466").checked = true;
+            campaignLabel.style.backgroundColor = "gold";
+        }
+        sessionStorage.removeItem("warrantyEventKey");
+    }else if(!warrantyEventKey){
+        document.querySelector("#mrl_campaign_label_466").checked = false;
+    }
+</script>
+

@@ -1,0 +1,79 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+
+    .promotion-schedule{
+        font-family: "Noto Serif TC", serif;
+        flex-direction: column;
+        justify-content: center;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        text-align: center;
+        display: flex;
+        right: 0;
+        background: #a97d3c;
+        border-bottom-left-radius: 10px;
+        font-weight: 600;
+        width: 130px;
+        height: 45px;
+        font-size: 2.6rem;
+    }
+    .promotion-schedule-cat{
+        width: 180px;
+        height: 70px;
+        font-size: 3.3rem;
+    }
+    @media (max-width: 1440px) {
+        .promotion-schedule-cat{
+            width: 150px;
+            height: 55px;
+            font-size: 2.8rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        .promotion-schedule{
+            width: 100px;
+            height: 32px;
+            font-size: 2rem;
+        }
+
+        .promotion-schedule-cat{
+            width: 65px;
+            height: 28px;
+            font-size: 1.4rem;
+        }
+    }
+</style>
+<script>
+    //  活動標籤計時器 //
+    (function () {
+        // 設定活動開始和結束時間 (年, 月, 日, 時, 分, 秒) 
+        // ex: (2024, 10 - 1, 9, 10, 30, 59) => 2024年10月9日10點30分59秒
+        const scheduleStartDate = new Date(2024, 10 - 1, 11, 11, 30, 59); 
+        const scheduleMiddleDate = new Date(2024, 10 - 1, 11, 12, 40, 59);
+        const scheduleEndDate = new Date(2024, 10 - 1, 11, 13, 42,59);
+
+        // 判斷目前時間在哪個活動期間   
+        const now = new Date();
+        const stageOneisDuringEvent = now >= scheduleStartDate && now < scheduleMiddleDate;
+        const stageTwoisDuringEvent = now >= scheduleMiddleDate && now < scheduleEndDate;
+
+        const pagetype = document.querySelector(".ga-page")?.value;
+        const schedulePicTag = document.querySelector(".promotion-schedule");
+
+        if (schedulePicTag) {
+            if(pagetype === "category"){
+                schedulePicTag.classList.add("promotion-schedule-cat");
+            }
+            if (stageOneisDuringEvent) {
+                schedulePicTag.innerHTML = "只到週二";
+            }else if (stageTwoisDuringEvent) {
+                schedulePicTag.innerHTML = "只剩今天";
+            }else{
+                schedulePicTag.style.display = "none";
+            }
+        }
+    })();
+</script>

@@ -1,0 +1,14 @@
+<script>
+    (function(){
+        require(["jquery", "owlcarousel"], function ($){
+            $("#designer-space-carousel").on("changed.owl.carousel", function (event) {
+                window.dataLayer = window.dataLayer || [];
+                dataLayer.push({
+                    event: "carousel",
+                    carousel_name: '設計師',
+                });
+                console.log("Data pushed to dataLayer:");
+            });
+        })
+    })()
+</script>

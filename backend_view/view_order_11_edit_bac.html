@@ -1,0 +1,156 @@
+<script>
+    document.querySelector("#order-items-recalc").addEventListener("click", function () {
+        var orderInfoTrs = document.querySelectorAll(".admin__page-section-item-content .order-information-table tr")
+        var allPromotionTags = document.querySelectorAll(".col-promotion-tag .promotion-tag-span")
+        var acquisitionDate;
+
+        var editSumPrice = document.querySelector("#ordereditor-new-total-grand_total > .price")
+        var currentSumPrice = document.querySelector("#sales_order_view_tabs_order_info_content div.admin__page-section-item.order-totals > table > tfoot > tr.col-0 > td:nth-child(2) > strong")
+        currentSumPrice = transferSumPrice(currentSumPrice)
+        var checkWarrantyExistAfterEdit = false;
+        var previousWarrantyState = false;
+
+        var orderInfoTableTexts = document.querySelectorAll(".order-information-table tbody tr td strong");
+        checkWarrantyExistAfterEdit = Array.from(orderInfoTableTexts).some(function(text) {
+            return text.innerText.includes("送延長保固");
+        });
+
+        previousWarrantyState = checkWarrantyExistAfterEdit;
+
+
+        
+
+        if (orderInfoTrs.length > 0) {
+            orderInfoTrs.forEach(function (tr) {
+                if (tr.innerText.includes("收單日期")) {
+                    acquisitionDate = tr.querySelector("td").innerText;
+                    acquisitionDate = acquisitionDate.split(' ')[0];
+                }
+                // if(tr.innerText.includes("訂單日期")){
+                //     orderDate = tr.querySelector("td").innerText;
+                //     orderDate = orderDate.split(' ')[0]; 
+                //     orderDate = formatChineseDate(orderDate);
+                //     console.log(orderDate)
+                // }
+            })
+        }
+        
+        var preAvtivityStatus = checkPromotionTag(allPromotionTags);
+
+        if (checkPromotionTag(allPromotionTags) || checkAcquisitionDate(acquisitionDate)) {
+                var afterSumPrice = document.querySelector("#ordereditor-new-total-grand_total span.price")
+                var orderFee = document.querySelector("#ordereditor-new-total-shipping-shipping-incl-tax > span.price")
+                var productNameCols =  document.querySelectorAll("#order-items_grid .order-tables td.col-product");
+                var floorFee;
+                var betweenThePrices;
+                afterSumPrice = parsePrice(afterSumPrice)
+    
+                if(orderFee){
+                    orderFee = parsePrice(orderFee)
+                }
+                productNameCols.forEach(function(col){
+                    if(col.innerText.includes("樓層費")){
+                        floorFee = col.parentElement.querySelector(".col-price .price-incl-tax");
+                        floorFee = parsePrice(floorFee);
+                        afterSumPrice = afterSumPrice - floorFee;
+                    }
+                })
+                document.querySelector("#order-items-submit").addEventListener("mousedown", function(){
+                    var warrantyFound = false; 
+                    productNameCols =  document.querySelectorAll("#order-items_grid .order-tables td.col-product");
+                    productNameCols.forEach(function(col) {
+                        if (col.innerText.includes("送延長保固")) {
+                            if(col.innerText.includes("送延長保固")&& col.parentElement.querySelector(".col-qty input").disabled === false){
+                                warrantyFound = true;
+                            }
+                        }
+                    });
+                    var checkWarrantyExistAfterEdit = warrantyFound;
+
+                    console.log("previousWarrantyState:", previousWarrantyState, "checkWarrantyExistAfterEdit",checkWarrantyExistAfterEdit);
+
+                    if (previousWarrantyState !== checkWarrantyExistAfterEdit) {
+                        sessionStorage.setItem("orderEdited", "orderEdited");
+                    }
+                  
+                })
+                if(currentSumPrice < 5000){
+                    if(afterSumPrice >= 5000){
+                        sessionStorage.setItem("orderEdited", "orderEdited");
+                    }
+                }else if (currentSumPrice >= 5000){
+                    if(afterSumPrice < 5000){
+                        sessionStorage.setItem("orderEdited", "orderEdited");
+                    }
+                }
+        }
+
+        document.querySelector("#order-items-submit").addEventListener("mousedown", function(){
+            var afterEditPromotionsTags = document.querySelectorAll(".col-promotion-tag .promotion-tag-span")
+            console.log(preAvtivityStatus, checkPromotionTag(afterEditPromotionsTags))
+            if(preAvtivityStatus !== checkPromotionTag(afterEditPromotionsTags)){
+                sessionStorage.setItem("orderEdited", "orderEdited");
+            } 
+        })
+    })
+
+    function checkAcquisitionDate(acquisitionDate) {
+        var startDay = new Date(new Date().getFullYear(), 9, 23).toISOString().split('T')[0];
+        var endDay = new Date(new Date().getFullYear(), 10, 26).toISOString().split('T')[0];
+        if (acquisitionDate >= startDay && acquisitionDate <= endDay) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function checkPromotionTag(allPromotionTags) {
+        for (var i = 0; i < allPromotionTags.length; i++) {
+            if (allPromotionTags[i].innerText.indexOf("滿萬折1111") !== -1) {
+                return true;
+            }
+        }
+    }
+
+    function transferSumPrice(sumPrice){
+        var orderFee = document.querySelector("#sales_order_view_tabs_order_info_content div.admin__page-section-content > div.admin__page-section-item.order-totals > table > tbody > tr.col-3 > td:nth-child(2) > span")
+        var floorFeeColumns =  document.querySelectorAll("#sales_order_view_tabs_order_info_content div.admin__table-wrapper.order-items-block > table tr > td.col-product");
+
+        if(sumPrice){
+            sumPrice = parsePrice(sumPrice);
+            var floorFee ;
+            if(orderFee){
+                orderFee = parsePrice(orderFee);
+                sumPrice = sumPrice - orderFee;
+            }
+            floorFeeColumns.forEach(function(floorFeeColumn){
+                if(floorFeeColumn.innerText.includes("送延長保固")){
+                    checkWarrantyExist = true;
+                }
+                if(floorFeeColumn.innerText.includes("樓層費")){
+                    floorFee = floorFeeColumn.parentElement.querySelector(".col-price .price-incl-tax");
+                    floorFee = parsePrice(floorFee);
+                    sumPrice = sumPrice - floorFee;
+                }
+            })
+            return sumPrice;
+        }
+    }
+
+    function parsePrice(price) {
+        if (price && price.innerText) {
+          return parseFloat(price.innerText.replace(/[$,]/g, ""));
+        } else {
+          return 0;
+        }
+    }
+    // function formatChineseDate(dateString) {
+    //     var match = dateString.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+    //     if (match) {
+    //         // 使用 Date 對象來確保格式一致性
+    //         var date = new Date(parseInt(match[1]), parseInt(match[2]) - 1, parseInt(match[3]));
+    //         return date.toISOString().split('T')[0];
+    //     }
+    //     return dateString; // 如果格式不匹配，返回原始字符串
+    // }
+</script>

@@ -1,0 +1,209 @@
+<!-- Slider -->
+
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+    .until-tuesday-label::after{
+        font-family: "Noto Serif TC", serif;
+        flex-direction: column;
+        justify-content: center;
+        content: '\53ea\5230\9031\4e8c\000d\000a';
+        color: #fff;
+        position: absolute;
+        top: 0;
+        text-align: center;
+        display: flex;
+        right: 0;
+        width: 130px;
+        height: 45px;
+        background: #a97d3c;
+        font-size: 2.6rem;
+        border-bottom-left-radius: 10px;
+        font-weight: 600;
+    }
+    #space-product-carousel.nocarousel{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #space-product-carousel.nocarousel .item{
+        display: none;
+    }
+    #space-product-carousel.nocarousel .item:last-child{
+        display: block;
+        width: 50%;
+        margin-left: -25.5%;
+        margin-right: 0.5%;
+        opacity: 0.3;
+        order: 1;
+    }
+    #space-product-carousel.nocarousel .item:nth-child(1){
+        display: block;
+        width: 50%;
+        margin: 0 0%;
+        order: 2;
+    }
+    #space-product-carousel.nocarousel .item:nth-child(2){
+        display: block;
+        width: 50%;
+        margin-right: -25.5%;
+        margin-left: 0.5%;
+        opacity: 0.3;
+        order: 3;
+    }
+    #space-product-carousel .owl-controls{
+        display: block !important;
+    }
+    #space-product-carousel .cat-slider{
+            height: fit-content;
+        }
+        #space-product-carousel .owl-carousel{
+    width:100%;
+    }
+    #space-product-carousel .owl-nav{
+    margin-top: 0 !important;
+    position: absolute;
+    width: 24.5%;
+    height: 100%;
+    top: 0;
+    }
+    #space-product-carousel .owl-next,#space-product-carousel .owl-prev{
+    top:50%;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    opacity: 0;
+    }
+    #space-product-carousel .owl-next{
+    left: 308%;
+
+    }
+
+    #space-product-carousel .owl-item{
+    opacity: 0.3;
+    }
+
+    #space-product-carousel .center{
+    opacity: 1 !important;
+    }
+
+    @media(max-width:768px){
+        .until-tuesday-label::after{
+            width: 100px;
+            height: 32px;
+            font-size: 2rem;
+        } 
+        #space-product-carousel .owl-next{
+            left: 379%;
+        }
+        #space-product-carousel .owl-next, #space-product-carousel .owl-prev{
+            width: 29%;
+        }
+        #space-product-carousel.nocarousel{
+            overflow: hidden;
+        }
+        #space-product-carousel.nocarousel .item:last-child{
+            width: 83%;
+            margin-left: -77%;
+            margin-right: 2.5%;
+        }
+        #space-product-carousel.nocarousel .item:nth-child(1){
+            width: 83%;
+        }
+        #space-product-carousel.nocarousel .item:nth-child(2){
+            width: 83%;
+            margin-right: -77.5%;
+            margin-left: 2.5%;
+        }
+         #space-product-carousel {
+            height: calc(100% + 25px) !important;
+        } 
+    }
+    </style>
+
+
+    <div id="space-product-carousel" class="owl-carousel owl-theme nocarousel">
+
+       <div class="item cat-slider until-tuesday-label">
+            <a href="{{store direct_url='affordable-sofa-furniture-picks.html'}}" aria-label="雙10週年慶｜滿萬折千＋滿額免運">
+                <picture>
+                      <source preload="1" srcset="{{media url=wysiwyg/home_page/2024_10M/10M_H_1002_SliderM.jpg}}" media="(max-width: 767px)">
+                      <source preload="1" srcset="{{media url=wysiwyg/home_page/2024_10M/10M_H_1002_Slider.jpg}}" media="(min-width: 768px)">
+                      <img  preload="1" fetchpriority="high" class="default_image mrl-click HomeBanner-img1 select-promotion" data-ga-category="MKT-10K-Dis" data-ga-promotion_id="20241002_10KDis_38KFreeDelivery" data-ga-creative_slot="HomeBanner-img1" alt="雙10週年慶｜滿萬折千＋滿額免運" src="{{media url=wysiwyg/home_page/2024_10M/10M_H_1002_Slider.jpg}}" style="margin: 0 auto; width: 100%;" fetchpriority="high"/>
+                </picture>
+            </a>
+        </div>
+
+       <div class="item cat-slider">
+            <a href="{{store direct_url='lucky-draw-campaign2'}}" aria-label="雙10週年慶優惠攻略">
+                <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/2024_10M/10M_H2_1002_SliderM.jpg}}" media="(max-width: 767px)">
+                    <source srcset="{{media url=wysiwyg/home_page/2024_10M/10M_H2_1002_Slider.jpg}}" media="(min-width: 768px)">
+                    <img class="default_image mrl-click HomeBanner-img0 select-promotion"data-ga-category="MKT-10K-Dis" data-ga-promotion_id="20241002_luckydraw" data-ga-creative_slot="HomeBanner-img0" alt="雙10週年慶優惠攻略" src="{{media url=wysiwyg/home_page/2024_10M/10M_H2_1002_Slider.jpg}}" loading="lazy" style="margin: 0 auto; width: 100%;" fetchpriority="high"/>
+                </picture>
+            </a>
+        </div>
+      
+  <div class="item cat-slider">
+            <a href="{{store direct_url='super-storage-series.html'}}" aria-label="超級收納系列，累積銷售突破9999萬">
+                <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/2024_9M/storageseries_9999w_sliderM.jpg}}" media="(max-width: 767px)">
+                    <source srcset="{{media url=wysiwyg/home_page/2024_9M/storageseries_9999w_slider.jpg}}" media="(min-width: 768px)">
+                    <img class="default_image mrl-click HomeBanner-img2 select-promotion" data-ga-category="MKT-super-storage" data-ga-promotion_id="20241002_10KDis_38KFreeDelivery" data-ga-creative_slot="HomeBanner-img2" alt="超級收納系列，累積銷售突破9999萬" src="{{media url=wysiwyg/home_page/2024_9M/storageseries_9999w_slider.jpg}}" loading="lazy" style="margin: 0 auto; width: 100%;" fetchpriority="high"/>
+                </picture>
+            </a>
+        </div>
+
+        <div class="item cat-slider">
+            <a href="{{store direct_url='furniture/mattress-category/cool-bedpillow.html'}}" aria-label="涼感全系列，一件就免運｜減壓床墊、枕頭、涼感被，打擊炎熱">
+                <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/2023_7M/7M_Cool_SliderM.jpg}}" media="(max-width: 767px)">
+                    <source srcset="{{media url=wysiwyg/home_page/2023_7M/7M_Cool_Slider.jpg}}" media="(min-width: 768px)">
+                    <img class="default_image mrl-click HomeBanner-img3 select-promotion" data-ga-category="MKT-mattress" data-ga-promotion_id="20241002_CoolSeries_FreeDelivery_10KDis" data-ga-creative_slot="HomeBanner-img3" alt="涼感全系列，一件就免運｜減壓床墊、枕頭、涼感被，打擊炎熱" src="{{media url=wysiwyg/home_page/2023_7M/7M_Cool_Slider.jpg}}" style="margin: 0 auto; width: 100%;" loading="lazy"/>
+                </picture>
+            </a>
+        </div>
+
+        <div class="item cat-slider">
+            <a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" aria-label="全館減壓記憶枕買1送1">
+                <picture>
+                    <source srcset="{{media url=catalog/category/2024/202401pillow_BOGO_SliderM.jpg}}" media="(max-width: 767px)">
+                    <source srcset="{{media url=catalog/category/2024/202401pillow_BOGO_Slider.jpg}}" media="(min-width: 768px)">
+                    <img class="default_image mrl-click HomeBanner-img4 select-promotion" data-ga-category="MKT-mattress" data-ga-promotion_id="20241002_pillow_BOGO" data-ga-creative_slot="HomeBanner-img4" alt="全館減壓記憶枕買1送1" src="{{media url=catalog/category/2024/202401pillow_BOGO_Slider.jpg}}" loading="lazy" style="margin: 0 auto; width: 100%;" fetchpriority="high"/>
+                </picture>
+            </a>
+        </div>
+
+        <div class="item cat-slider">
+            <a href="{{store direct_url='sofas/style/sofa-pet-friendly.html'}}" aria-label="防潑水防貓抓布沙發">
+                <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/2024_10M/10M_PF_SliderM.jpg}}" media="(max-width: 767px)">
+                    <source srcset="{{media url=wysiwyg/home_page/2024_10M/10M_PF_Slider.jpg}}" media="(min-width: 768px)">
+                    <img class="default_image mrl-click HomeBanner-img5 select-promotion" data-ga-category="MKT-sofa-pf" data-ga-promotion_id="20241002_10KDis_38KFreeDelivery" data-ga-creative_slot="HomeBanner-img5" alt="防潑水防貓抓布沙發" src="{{media url=wysiwyg/home_page/2024_10M/10M_PF_Slider.jpg}}" style="margin: 0 auto; width: 100%;" loading="lazy"/>
+                </picture>
+            </a>
+        </div>
+
+         <div class="item cat-slider">
+            <a href="{{store direct_url='sofa-fur.html'}}" aria-label="絕版品８折起，再享全館優惠">
+                <picture>
+                    <source srcset="{{media url=wysiwyg/home_page/2024_8M/8M_phaseout_SliderM.jpg}}" media="(max-width: 767px)">
+                    <source srcset="{{media url=wysiwyg/home_page/2024_8M/8M_phaseout_Slider.jpg}}" media="(min-width: 768px)">
+                    <img class="default_image mrl-click HomeBanner-img6 select-promotion" data-ga-category="MKT-limited" alt="絕版品８折起，再享全館優惠" data-ga-promotion_id="20241002_out-of-print_20%off" data-ga-creative_slot="HomeBanner-img6" src="{{media url=mediaurl=wysiwyg/home_page/2024_8M/8M_phaseout_Slider.jpg}}" style="margin: 0 auto; width: 100%;" loading="lazy"/>
+                </picture>
+            </a>
+        </div>
+
+
+        <div class="item cat-slider">
+            <a href="{{store direct_url='mattress-double-20tencel.html'}}" aria-label="護腰護脊減壓記憶床墊｜適合睡覺容易腰痠背痛的你！">
+                <picture>
+                    <source srcset="{{media url=catalog/category/2024/202409mattress_spine_SliderM.jpg}}" media="(max-width: 767px)">
+                    <source srcset="{{media url=catalog/category/2024/202409mattress_spine_Slider.jpg}}" media="(min-width: 768px)">
+                    <img class="default_image mrl-click HomeBanner-img7 select-promotion ga-item" data-ga-category="MKT-mattress" data-ga-promotion_id="20241002_matt-handsel-pillow" data-ga-creative_slot="HomeBanner-img7" data-ga-item-id="30-0049-0-08" data-ga-label="雙人標準(5X6.2)｜護腰護脊減壓記憶床墊｜零干擾 獨立筒" alt="護腰護脊減壓記憶床墊｜適合睡覺容易腰痠背痛的你！" src="{{media url=catalog/category/2024/202409mattress_spine_Slider.jpg}}" style="margin: 0 auto; width: 100%;" loading="lazy"/>
+                </picture>
+            </a>
+        </div>
+
+    </div>
