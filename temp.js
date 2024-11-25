@@ -4,7 +4,7 @@ class Character{
         this.weapon = weapon;
     }
     attack(){
-        return 'attack with ' + this.weapon;
+        return this.name + ' attack with ' + this.weapon;
     }
 }
 
@@ -27,6 +27,4 @@ class Ogre extends Character{
 
 const dolby = new Elf('Dolby', 'cloth', 'house');
 const shrek = new Ogre('Shrek', 'club', 'green');
-console.log(Ogre.prototype.isPrototypeOf(shrek));
-console.log(Character.prototype.isPrototypeOf(Ogre.prototype));
-console.log(dolby instanceof Ogre);
+console.log(dolby.attack());
