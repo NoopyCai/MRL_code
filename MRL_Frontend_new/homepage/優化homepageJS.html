@@ -1,5 +1,6 @@
 <script defer>
     require(["jquery", "owlcarousel", "Mrl_ProductElement","fancybox",], function ($) {
+      //slider
       jQuery("#space-product-carousel").owlCarousel({   
         autoplay: false,
         autoplayTimeout: 6500,
@@ -24,113 +25,7 @@
       
       document.querySelector("#space-product-carousel").classList.remove("nocarousel");
 
-      jQuery("#media-report-carousel").owlCarousel({
-        autoplay: false,
-        navRewind: true,
-        loop: true,
-        margin: 20,
-        nav: false,
-        lazyLoad: true,
-        center: true,
-        dots: false,
-        responsive: {
-          0: {
-            items: 1.4,
-            dots: true,
-          },
-          768: {
-            items: 5,
-          },
-        },
-      });
-      
-      jQuery(".sleepcarousel_top10").owlCarousel({
-        loop: true,
-        nav: false,
-        autoWidth: false,
-        lazyLoad: true,
-        dots: true,
-        center: false,
-        autoHeight: false,
-        dotsEach: 6,
-        navText: [
-          '<svg width="100%" height="30px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 2px;stroke: #333; opacity:0.5;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
-          '<svg width="100%" height="30px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 2px;stroke: #333;opacity:0.5;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>',
-        ],
-        responsive: {
-          0: {
-            items: 2,
-            dots: false,
-          },
-          768: {
-            items: 3,
-          },
-          992: {
-            items: 4,
-          },
-          1200: {
-            items: 5,
-          },
-          1440: {
-            items: 6,
-          },
-        },
-      });
-  
-      jQuery(".find_inspire_carousel_initial").owlCarousel({
-        loop: false,
-        margin: 20,
-        autoWidth: false,
-        dots: true,
-        nav: false,
-        autoplay: false,
-        dotsEach: 2,
-        mouseDrag: true, 
-        touchDrag: true,
-        dragEndSpeed: 800,
-        smartSpeed: 800,   
-        pullDrag: false,   
-        responsive: {
-          0: {
-            items: 1,
-            dotsEach: 1,
-          },
-          996: {
-            items: 2,
-          },
-        },
-      });
-  
-      
-      //初始化靈感空間
-      function initFindInspireCarousel(activeCarousel) {
-        if (!activeCarousel || jQuery(activeCarousel).length === 0) {
-              return; 
-            }
-            activeCarousel = jQuery(activeCarousel);
-            if (activeCarousel.hasClass('owl-loaded')) {
-                  activeCarousel.trigger("refresh.owl.carousel")
-            }
-            window.dispatchEvent(new Event('resize'));
-      }
-  
-  
-      let inspireLi = document.querySelectorAll(".nav_inspire > ul > li");
-      let inspireContent = document.querySelectorAll("#find_inspire_carousel");
-  
-      for (let i = 0; i < inspireLi.length; i++) {
-        inspireLi[i].addEventListener("mouseenter",function () {
-          inspireLi.forEach((li) => li.classList.remove("active"));
-          inspireLi[i].classList.add("active");
-          
-          inspireContent.forEach((car) => car.classList.remove("active"));
-          inspireContent[i].classList.add("active");
-  
-          let activeCarousel = inspireContent[i];
-          initFindInspireCarousel(activeCarousel); 
-        });
-      }
-  
+
       //設計師牆
       function designerCarouselPopup(designerDataNum, height) {
         // 初始化
@@ -171,7 +66,7 @@
           },
         });
       }
-  
+
       //首頁設計師牆-取得點擊的位置數
       let designerOwl = document.querySelector(".designerCarousel.nocarousel");
       let designerOwlItem = document.querySelectorAll("#designerCarousel .item");
@@ -203,7 +98,8 @@
           }
         );
       });
-  
+
+
       //首頁曬單牆
       let KOLOwl = document.querySelector(".KOLfriendHome");
       let $KOLOwl = $(".KOLfriendHome .owl-carousel");
@@ -300,7 +196,7 @@
         }
       });
 
-      //居友的家 - 綁定click事件
+      //曬單牆 - 綁定click事件
       function setupKOLfriendHomeClickHandlers(){
             $(".KOLfriendHome .owl-carousel .owl-item").on("click", function (event, dataNum) {
               dataNum = event.target.closest(".owl-item").querySelector(".item").dataset.position;
@@ -331,7 +227,7 @@
           });
 
         }
-        //居友的家 - 綁定more btn
+        //曬單牆 - 綁定more btn
         function bindMoreButtonHandlers(){
                   const allMoreBtns =  document.querySelectorAll(".KOL-more-container")
                 allMoreBtns.forEach(function(moreBtn){
@@ -375,6 +271,118 @@
                   })
                 }
       KOLOwl.classList.remove("nocarousel");
+  
+
+      //媒體報導
+      jQuery("#media-report-carousel").owlCarousel({
+        autoplay: false,
+        navRewind: true,
+        loop: true,
+        margin: 20,
+        nav: false,
+        lazyLoad: true,
+        center: true,
+        dots: false,
+        responsive: {
+          0: {
+            items: 1.4,
+            dots: true,
+          },
+          768: {
+            items: 5,
+          },
+        },
+      });
+      
+      //靈感空間
+      jQuery(".find_inspire_carousel_initial").owlCarousel({
+        loop: false,
+        margin: 20,
+        autoWidth: false,
+        dots: true,
+        nav: false,
+        autoplay: false,
+        dotsEach: 2,
+        mouseDrag: true, 
+        touchDrag: true,
+        dragEndSpeed: 800,
+        smartSpeed: 800,   
+        pullDrag: false,   
+        responsive: {
+          0: {
+            items: 1,
+            dotsEach: 1,
+          },
+          996: {
+            items: 2,
+          },
+        },
+      });
+  
+      
+      //初始化靈感空間
+      function initFindInspireCarousel(activeCarousel) {
+        if (!activeCarousel || jQuery(activeCarousel).length === 0) {
+              return; 
+            }
+            activeCarousel = jQuery(activeCarousel);
+            if (activeCarousel.hasClass('owl-loaded')) {
+                  activeCarousel.trigger("refresh.owl.carousel")
+            }
+            window.dispatchEvent(new Event('resize'));
+      }
+  
+  
+      let inspireLi = document.querySelectorAll(".nav_inspire > ul > li");
+      let inspireContent = document.querySelectorAll("#find_inspire_carousel");
+  
+      for (let i = 0; i < inspireLi.length; i++) {
+        inspireLi[i].addEventListener("mouseenter",function () {
+          inspireLi.forEach((li) => li.classList.remove("active"));
+          inspireLi[i].classList.add("active");
+          
+          inspireContent.forEach((car) => car.classList.remove("active"));
+          inspireContent[i].classList.add("active");
+  
+          let activeCarousel = inspireContent[i];
+          initFindInspireCarousel(activeCarousel); 
+        });
+      }
+  
+
+      //貨架
+      jQuery(".sleepcarousel_top10").owlCarousel({
+        loop: true,
+        nav: false,
+        autoWidth: false,
+        lazyLoad: true,
+        dots: true,
+        center: false,
+        autoHeight: false,
+        dotsEach: 6,
+        navText: [
+          '<svg width="100%" height="30px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 2px;stroke: #333; opacity:0.5;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+          '<svg width="100%" height="30px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 2px;stroke: #333;opacity:0.5;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>',
+        ],
+        responsive: {
+          0: {
+            items: 2,
+            dots: false,
+          },
+          768: {
+            items: 3,
+          },
+          992: {
+            items: 4,
+          },
+          1200: {
+            items: 5,
+          },
+          1440: {
+            items: 6,
+          },
+        },
+      });
   
       //自動取商品資料
       function autoGetItemInfo() {
