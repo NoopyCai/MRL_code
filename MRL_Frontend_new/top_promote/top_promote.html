@@ -1,0 +1,240 @@
+<style>
+
+    .content-flow{
+      position:absolute;
+      left:0;
+      right:0;
+      margin:auto;
+      top: -40px;;
+    }
+    .content-flow a{
+        color: white;
+        text-decoration: underline;
+    }
+    .content-flow a:hover{
+        color: white;
+    }
+    .top-promo{
+        overflow:hidden;
+        position: relative;
+    }
+    
+    .topPromoTimeshow{
+        margin-left:8px;
+        display: inline-flex;
+        list-style-type: none;
+        font-weight:900;
+    }
+    
+    .show{
+            animation: slide-show 3s;
+            animation-fill-mode: forwards;
+        }
+    .close{  
+            animation: slide-close 3s;
+            animation-fill-mode: forwards;
+        }
+    @keyframes slide-close{
+        from{
+            top:0px;
+        }
+        to{
+            top:40px;
+        }
+    }
+    @keyframes slide-show{
+        from{
+            top:-40px;
+        }
+        to{
+            top:0px;
+        }
+    }
+    
+    .fixed-menu.page-header:hover ~ .fixed-menu.ninjamenus-desktop-wrapper, .fixed-menu.page-header ~ .fixed-menu.ninjamenus-desktop-wrapper:hover{
+        top:103px;
+    }
+    .page-header{
+        height: 103px !important;;
+    }
+    .page-header.no-promote{
+        height: 63px !important;;
+    }
+    .top-promo{
+        background-color: #C34135;
+        height: 40px;
+        text-align: center;
+        font-size: 16px;
+        color: #fff;
+        line-height: 40px;
+    }
+    @media (max-width:767px){
+        .page-header.fixed-menu .top-promo{
+            position: fixed;
+            width: 100% ;
+            top:0;
+        }
+    }
+  </style>
+    
+    
+  <script>
+
+  if(location.pathname !== '/checkout/' && location.pathname !== '/super-storage-survey'){
+  
+    //時間設定處(開始出現計時器時間)
+    let startTimerTime = {year:'2024',month:'11',date:'19',hour:'23',min:'59',sec:'59'};
+    
+    
+    //時間設定處(截止日)
+    let promoteDeadline = {year:'2024',month:'11',date:'26',hour:'23',min:'59',sec:'59'};
+    
+    
+    //只到...文案
+    let deadlineSet = new Date(promoteDeadline.year + '-' + promoteDeadline.month + '-' + promoteDeadline.date + 'T' + promoteDeadline.hour + ':' + promoteDeadline.min + ':' + promoteDeadline.sec).getTime();
+    let startTimeSet = new Date(startTimerTime.year + '-' + startTimerTime.month + '-' + startTimerTime.date + 'T' + startTimerTime.hour + ':' + startTimerTime.min + ':' + startTimerTime.sec).getTime();
+    let timeNowSet = new Date().getTime();
+    let countDownTxt='';
+    if(deadlineSet-timeNowSet<=0){
+      countDownTxt='';
+    }
+    else if(deadlineSet-timeNowSet<=86400000){
+      //截止當天
+      countDownTxt='<span style="font-weight:bold;"> 只到今晚12點</span>';
+    }
+    else if(deadlineSet-timeNowSet<=172800000){
+      //截止日前一天
+      countDownTxt='<span style="font-weight:bold;"> 只到明天</span>';
+    }
+    else if(deadlineSet-timeNowSet<=604800000){
+      //截止日當周
+      countDownTxt='<span style="font-weight:bold;"> 只到週二</span>';
+    }
+    else if(deadlineSet-timeNowSet>=604800000){
+      //截止日當週前
+      countDownTxt='<span style="font-weight:bold;"> 只到11月26日</span>';
+    }
+    
+    let guid = getGaClientId()
+    let lastDigit = guid[guid.length - 1];
+
+    console.log('guid', guid);
+
+    let topPromoteHtmlTimerTxt2, topPromoteHtmlTimerTxt, topPromoteHtmlNoTimerTxt2, topPromoteHtmlNoTimerTxt;
+    if(lastDigit % 2 === 0){
+         //----文案修改處(有計時器)
+        topPromoteHtmlTimerTxt2 = '<div class="close content-flow">石墨烯冬被新上市 加購９折'+'<a href="{{store direct_url='greatliving-co-branding.html?MRL_filters_quilt=295'}}" class="mrl-click select-promotion" data-ga-promotion_id="20241127_GL_WinterQuilt_10%off" data-ga-creative_slot="top-promo" data-ga-category="MKT-Great-Living" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">立即選購 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
+        topPromoteHtmlTimerTxt = '<div class="show content-flow" style="">年終最後優惠 滿萬折千 <span style="font-weight:900;margin-left:0px;">倒數</span><div class="topPromoTimeshow"></div></div>';
+
+
+    //----文案修改處(無計時器)
+        topPromoteHtmlNoTimerTxt2 = '<div class="close content-flow">石墨烯冬被新上市 加購９折'+'<a href="{{store direct_url='greatliving-co-branding.html?MRL_filters_quilt=295'}}" class="mrl-click select-promotion" data-ga-promotion_id="20241127_GL_WinterQuilt_10%off" data-ga-creative_slot="top-promo" data-ga-category="MKT-Great-Living" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">立即選購  <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
+        topPromoteHtmlNoTimerTxt = '<div class="show content-flow">年終最後優惠 滿萬折千'+countDownTxt+'</div>';
+
+
+    //-------------
+    } else {
+        //----文案修改處(有計時器)
+        topPromoteHtmlTimerTxt2 = '<div class="close content-flow">全館減壓枕頭特惠 只到12/12'+'<a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" class="mrl-click select-promotion" data-ga-promotion_id="20241127_pillow_all_BOG" data-ga-creative_slot="top-promo" data-ga-category="MKT-mattress" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">買1送1 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
+        topPromoteHtmlTimerTxt = '<div class="show content-flow" style="">年終最後優惠 滿萬折千 <span style="font-weight:900;margin-left:0px;">倒數</span><div class="topPromoTimeshow"></div></div>';
+
+
+    //----文案修改處(無計時器)
+        topPromoteHtmlNoTimerTxt2 = '<div class="close content-flow">全館減壓枕頭特惠 只到12/12'+'<a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" class="mrl-click select-promotion" data-ga-promotion_id="20241127_pillow_all_BOG" data-ga-creative_slot="top-promo" data-ga-category="MKT-mattress" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">買1送1 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
+        topPromoteHtmlNoTimerTxt = '<div class="show content-flow">年終最後優惠 滿萬折千'+countDownTxt+'</div>';
+
+
+ //-------------
+    }
+
+
+  
+    function switchTopContent(){
+        let contentFlow = document.querySelectorAll(".content-flow");
+        let numTmpShow = 0;
+        let numTmpClose = 0;
+
+        function arrNext(num,arrLength){
+            if(num+1==arrLength){
+                return 0;
+            }
+            else{
+                return num+1;
+            }
+        }
+        for(let i=0;i<contentFlow.length;i++){
+            if(contentFlow[i].classList.contains("show")){
+                numTmpShow = i;                
+            }
+            if(contentFlow[i].classList.contains("close")){
+                numTmpClose = i;                
+            }
+        }
+        contentFlow[numTmpShow].classList.remove("show");
+        contentFlow[arrNext(numTmpShow,contentFlow.length)].classList.add("show");
+        contentFlow[numTmpClose].classList.remove("close");
+        contentFlow[arrNext(numTmpClose,contentFlow.length)].classList.add("close");
+    }
+    window.addEventListener("load", function(){
+    let header = document.querySelector('header .header.content');
+    let topPromotionContent = document.createElement('div');
+    topPromotionContent.classList.add('top-promo');
+    let pageType = document.querySelector(".ga-page")?.value;
+    if(pageType === 'product'){
+        return;
+    }
+    if (timeNowSet > deadlineSet) {
+        topPromotionContent.innerHTML = topPromoteHtmlNoTimerTxt2 + topPromoteHtmlNoTimerTxt; 
+        setInterval(switchTopContent, 5000); 
+        header.before(topPromotionContent);
+    }
+    else if (timeNowSet < startTimeSet) {
+        topPromotionContent.innerHTML = topPromoteHtmlNoTimerTxt2 + topPromoteHtmlNoTimerTxt; 
+        setInterval(switchTopContent, 5000); 
+        header.before(topPromotionContent);
+    }
+    else if (timeNowSet < deadlineSet && timeNowSet > startTimeSet) {
+        topPromotionContent.innerHTML = topPromoteHtmlTimerTxt + topPromoteHtmlTimerTxt2;;
+        setInterval(switchTopContent, 5000);
+        header.before(topPromotionContent);
+        startTimer({
+            selector:'.topPromoTimeshow',
+            finalTime: promoteDeadline,
+            showEndTime: false,
+            showSec:false,
+        })
+    }
+    
+    })
+  
+  
+  }else{
+    document.querySelector('.page-header').classList.add('no-promote');
+  }
+    
+
+  function getGaClientId() {
+    var cookies = document.cookie.split('; ');
+    var gaCookie = null;
+    
+    for (var i = 0; i < cookies.length; i++) {
+        if (cookies[i].indexOf('_ga=') === 0) {
+            gaCookie = cookies[i];
+            break;
+        }
+    }
+
+    if (!gaCookie) {
+        console.log('GA Cookie not found');
+        return null;
+    }
+    
+    var parts = gaCookie.split('.');
+    var clientId = parts[2] + '.' + parts[3];
+
+    return clientId;
+}
+
+
+
+  </script>
