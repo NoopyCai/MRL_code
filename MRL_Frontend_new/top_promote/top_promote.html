@@ -118,29 +118,37 @@
     let guid = getGaClientId()
     let lastDigit = guid[guid.length - 1];
 
-    console.log('guid', guid);
+    dataLayer = window.dataLayer || [];
 
     let topPromoteHtmlTimerTxt2, topPromoteHtmlTimerTxt, topPromoteHtmlNoTimerTxt2, topPromoteHtmlNoTimerTxt;
     if(lastDigit % 2 === 0){
+        dataLayer.push({
+            event: "ABtest_TopPromo_WinterQuilt",  
+        });
+        //冬被版本
          //----文案修改處(有計時器)
-        topPromoteHtmlTimerTxt2 = '<div class="close content-flow">石墨烯冬被新上市 加購９折'+'<a href="{{store direct_url='greatliving-co-branding.html?MRL_filters_quilt=295'}}" class="mrl-click select-promotion" data-ga-promotion_id="20241127_GL_WinterQuilt_10%off" data-ga-creative_slot="top-promo" data-ga-category="MKT-Great-Living" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">立即選購 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
+        topPromoteHtmlTimerTxt2 = '<div class="close content-flow">石墨烯冬被新上市 加購９折'+'<a href="{{store direct_url='greatliving-co-branding.html?MRL_filters_quilt=295'}}" class="mrl-click select-promotion ab-test-WinterQuilt" data-ga-promotion_id="20241127_GL_WinterQuilt_10%off" data-ga-creative_slot="top-promo" data-ga-category="MKT-Great-Living" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">立即選購 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
         topPromoteHtmlTimerTxt = '<div class="show content-flow" style="">年終最後優惠 滿萬折千 <span style="font-weight:900;margin-left:0px;">倒數</span><div class="topPromoTimeshow"></div></div>';
 
 
     //----文案修改處(無計時器)
-        topPromoteHtmlNoTimerTxt2 = '<div class="close content-flow">石墨烯冬被新上市 加購９折'+'<a href="{{store direct_url='greatliving-co-branding.html?MRL_filters_quilt=295'}}" class="mrl-click select-promotion" data-ga-promotion_id="20241127_GL_WinterQuilt_10%off" data-ga-creative_slot="top-promo" data-ga-category="MKT-Great-Living" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">立即選購  <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
+        topPromoteHtmlNoTimerTxt2 = '<div class="close content-flow">石墨烯冬被新上市 加購９折'+'<a href="{{store direct_url='greatliving-co-branding.html?MRL_filters_quilt=295'}}" class="mrl-click select-promotion ab-test-WinterQuilt" data-ga-promotion_id="20241127_GL_WinterQuilt_10%off" data-ga-creative_slot="top-promo" data-ga-category="MKT-Great-Living" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">立即選購  <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
         topPromoteHtmlNoTimerTxt = '<div class="show content-flow">年終最後優惠 滿萬折千'+countDownTxt+'</div>';
 
 
     //-------------
     } else {
+        dataLayer.push({
+            event: "ABtest_TopPromo_Pillow",  
+        });
+        //枕頭版本
         //----文案修改處(有計時器)
-        topPromoteHtmlTimerTxt2 = '<div class="close content-flow">全館減壓枕頭特惠 只到12/12'+'<a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" class="mrl-click select-promotion" data-ga-promotion_id="20241127_pillow_all_BOG" data-ga-creative_slot="top-promo" data-ga-category="MKT-mattress" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">買1送1 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
+        topPromoteHtmlTimerTxt2 = '<div class="close content-flow">全館減壓枕頭特惠 只到12/12'+'<a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" class="mrl-click select-promotion ab-test-pillow" data-ga-promotion_id="20241127_pillow_all_BOG" data-ga-creative_slot="top-promo" data-ga-category="MKT-mattress" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">買1送1 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
         topPromoteHtmlTimerTxt = '<div class="show content-flow" style="">年終最後優惠 滿萬折千 <span style="font-weight:900;margin-left:0px;">倒數</span><div class="topPromoTimeshow"></div></div>';
 
 
     //----文案修改處(無計時器)
-        topPromoteHtmlNoTimerTxt2 = '<div class="close content-flow">全館減壓枕頭特惠 只到12/12'+'<a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" class="mrl-click select-promotion" data-ga-promotion_id="20241127_pillow_all_BOG" data-ga-creative_slot="top-promo" data-ga-category="MKT-mattress" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">買1送1 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
+        topPromoteHtmlNoTimerTxt2 = '<div class="close content-flow">全館減壓枕頭特惠 只到12/12'+'<a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" class="mrl-click select-promotion ab-test-pillow" data-ga-promotion_id="20241127_pillow_all_BOG" data-ga-creative_slot="top-promo" data-ga-category="MKT-mattress" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">買1送1 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
         topPromoteHtmlNoTimerTxt = '<div class="show content-flow">年終最後優惠 滿萬折千'+countDownTxt+'</div>';
 
 
@@ -225,7 +233,6 @@
     }
 
     if (!gaCookie) {
-        console.log('GA Cookie not found');
         return null;
     }
     
