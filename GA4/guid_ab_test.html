@@ -1,46 +1,16 @@
 <script>
-function getGaClientId() {
-    var cookies = document.cookie.split('; ');
-    var gaCookie = null;
-    
-    for (var i = 0; i < cookies.length; i++) {
-        if (cookies[i].indexOf('_ga=') === 0) {
-            gaCookie = cookies[i];
-            break;
+    function(){
+        if(!{{Page Path}}.includes('?')){
+            return '自然流量';
+        }else if({{Page Path}}.includes('utm_medium')){
+            var utmMedium = {{Page Path}}.split('utm_medium=')[1].split('&')[0];
+            if(utmMedium.includes('mattress') || utmMedium.includes('pillow')){
+                return '廣告流量_床枕群';
+            }else if(utmMedium.includes('sofa') || utmMedium.includes('jasper')){
+                return '廣告流量_沙發群';
+            }else if(utmMedium.includes('ad')){
+                return '廣告流量_家具群';
+            }
         }
     }
-
-    if (!gaCookie) {
-        console.log('GA Cookie not found');
-        return null;
-    }
-    
-    var parts = gaCookie.split('.');
-    var clientId = parts[2] + '.' + parts[3];
-
-    var lastDigit = clientId[clientId.length - 1];
-    if (lastDigit % 2 === 0) {
-        console.log('Client ID ends with an even number');
-    } else {
-        console.log('Client ID ends with an odd number');
-    }
-    return clientId;
-}
-
-var guid = getGaClientId();
-
-
-function switchBversito(){
-     //----文案修改處(有計時器)
-     let topPromoteHtmlTimerTxt2 = '<div class="close content-flow">石墨烯冬被新上市 加購９折'+'<a href="{{store direct_url='greatliving-co-branding.html?MRL_filters_quilt=295'}}" class="mrl-click select-promotion" data-ga-promotion_id="20241127_GL_WinterQuilt_10%off" data-ga-creative_slot="top-promo" data-ga-category="MKT-Great-Living" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">立即選購 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
-    let topPromoteHtmlTimerTxt = '<div class="show content-flow" style="">年終最後優惠 滿萬折千 <span style="font-weight:900;margin-left:0px;">倒數</span><div class="topPromoTimeshow"></div></div>';
-
-
-  //----文案修改處(無計時器)
-    let topPromoteHtmlNoTimerTxt2 = '<div class="close content-flow">石墨烯冬被新上市 加購９折'+'<a href="{{store direct_url='greatliving-co-branding.html?MRL_filters_quilt=295'}}" class="mrl-click select-promotion" data-ga-promotion_id="20241127_GL_WinterQuilt_10%off" data-ga-creative_slot="top-promo" data-ga-category="MKT-Great-Living" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">立即選購  <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
-    let topPromoteHtmlNoTimerTxt = '<div class="show content-flow">年終最後優惠 滿萬折千'+countDownTxt+'</div>';
-
-
- //-------------
-}
 </script>
