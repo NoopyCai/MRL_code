@@ -1,1 +1,64 @@
-e
+<script>
+    function createGlAddressCheck() {
+        var glAddressDiv = document.createElement('div');
+        glAddressDiv.id = 'glAddressDiv';
+        glAddressDiv.style.display = 'flex';
+        glAddressDiv.style.alignItems = 'center';
+
+        var glAddressLabel = document.createElement('label');
+        glAddressLabel.innerText = '加入【格蕾第二地址：】';
+
+        var glAddressInput = document.createElement('input');
+        glAddressInput.id = 'glAddressInput';
+        glAddressInput.type = 'checkbox';
+        glAddressInput.style.cursor = 'pointer';
+
+        glAddressDiv.appendChild(glAddressInput);
+        glAddressDiv.appendChild(glAddressLabel);
+        
+
+        document.querySelector(".field-shipdate").appendChild(glAddressDiv);
+
+        if(window.location.href.includes("order_attributes")){
+            glAddressDiv.style.padding = '3px 15px';
+        }
+        checkInsertGlAddress(glAddressDiv)
+    }
+
+    function checkInsertGlAddress(glAddressDiv) {
+        var glAddressInput = document.querySelector('#glAddressInput');
+        var shipDateInput = document.querySelector(".field-shipdate .admin__field-control #shipdate");
+        var checkAddressExist = shipDateInput.value.indexOf('格蕾第二地址');
+        console.log(glAddressInput.value)
+        if(checkAddressExist !== -1){
+            glAddressInput.checked = true;
+        }
+        glAddressInput.addEventListener("change", function(){
+            if(glAddressInput.checked){
+                shipDateInput.value += '【格蕾第二地址：__ 】';
+            }else{
+                shipDateInput.value = shipDateInput.value.replace(/【 格蕾第二地址：[^】]*?】/, '');
+            }
+        })
+    }
+    
+    createGlAddressCheck();
+</script>
+
+<style>
+    .field-shipdate{
+        position: relative;;
+    }
+    #glAddressDiv{
+        position: absolute;
+        font-weight: 600;
+        font-size: 13px;
+        left: 7%;
+        top: -10%;
+        background-color: #eb5202;
+        border-radius: 15px;
+        padding: 6px 15px;
+        color: #fff;
+        gap: 5px;
+    }
+</style>
