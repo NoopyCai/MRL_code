@@ -1,0 +1,36 @@
+<!-- 錨點 -->
+
+<script type="text/javascript">
+    require(["jquery"], function ($) {
+        (function () {
+            if(window.location.href.includes('MRL_filters')){
+                
+                var target_top;
+
+                if ($(".column.main > .toolbar.toolbar-products").length > 0) {
+                    if(window.innerWidth < 768){
+                        target_top = $(".column.main > .toolbar.toolbar-products").offset().top - 100 ;
+                    }else{
+                        target_top = $(".column.main > .toolbar.toolbar-products").offset().top - 350 ;
+                    }
+                }  else {
+                    target_top = 0;
+                }
+                console.log($(".column.main > .toolbar.toolbar-products"));
+                
+                var $body = window.opera
+              ? document.compatMode == "CSS1Compat"
+                ? $("html")
+                : $("body")
+              : $("html,body");
+  
+            $body.animate(
+              {
+                scrollTop: target_top,
+              },
+              800
+            );
+            }
+        })();
+    });
+  </script>
