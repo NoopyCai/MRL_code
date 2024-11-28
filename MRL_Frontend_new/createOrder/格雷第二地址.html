@@ -20,7 +20,7 @@
         document.querySelector(".field-shipdate").appendChild(glAddressDiv);
 
         if(window.location.href.includes("order_attributes")){
-            glAddressDiv.style.padding = '3px 15px';
+            glAddressDiv.style.padding = '3px 5px';
         }
         checkInsertGlAddress(glAddressDiv)
     }
@@ -29,15 +29,16 @@
         var glAddressInput = document.querySelector('#glAddressInput');
         var shipDateInput = document.querySelector(".field-shipdate .admin__field-control #shipdate");
         var checkAddressExist = shipDateInput.value.indexOf('格蕾第二地址');
-        console.log(glAddressInput.value)
+
         if(checkAddressExist !== -1){
             glAddressInput.checked = true;
         }
+        
         glAddressInput.addEventListener("change", function(){
             if(glAddressInput.checked){
                 shipDateInput.value += '【格蕾第二地址：__ 】';
             }else{
-                shipDateInput.value = shipDateInput.value.replace(/【 格蕾第二地址：[^】]*?】/, '');
+                shipDateInput.value = shipDateInput.value.replace(/【格蕾第二地址：__ 】|【格蕾第二地址：[^】]*?】/g, '');
             }
         })
     }
@@ -53,11 +54,11 @@
         position: absolute;
         font-weight: 600;
         font-size: 13px;
-        left: 7%;
+        left: 13rem;
         top: -10%;
         background-color: #eb5202;
-        border-radius: 15px;
-        padding: 6px 15px;
+        border-radius: 3px;
+        padding: 6px 5px;
         color: #fff;
         gap: 5px;
     }
