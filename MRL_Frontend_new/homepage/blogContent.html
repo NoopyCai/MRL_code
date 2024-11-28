@@ -32,9 +32,9 @@
     }
     }
     </style>
-    {{widget type="Magezon\Blog\Block\Widget\PostList" list_layout="slider" grid_col="1" post_ids="53, 2, 49, 3, 6" featurepost="1" limit="6" padding="20" disable_box_shadow="1" disable_border="1" post_author="1" post_date="1" post_cats="1" post_comments="0" post_views="0" post_excerpt="1" owl_item_xl="5" owl_item_lg="5" owl_item_md="3" owl_item_sm="2" owl_item_xs="1.2" owl_autoplay="0" owl_nav="0" owl_dots="0" owl_rtl="0" owl_loop="1" owl_margin="15"}}
-    
-<script>
+    {{widget type="Magezon\Blog\Block\Widget\PostList" list_layout="slider" grid_col="1" post_ids="66, 44, 53, 49, 6" featurepost="1" limit="6" padding="20" disable_box_shadow="1" disable_border="1" post_author="1" post_date="1" post_cats="1" post_comments="0" post_views="0" post_excerpt="1" owl_item_xl="5" owl_item_lg="5" owl_item_md="3" owl_item_sm="2" owl_item_xs="1.2" owl_autoplay="0" owl_nav="0" owl_dots="0" owl_rtl="0" owl_loop="1" owl_margin="15"}}
+
+ <script>
     (function(){
         setTimeout(function(){
             if(window.innerWidth > 768){
@@ -56,16 +56,14 @@
                 const blogPosts = document.querySelectorAll(".blog-block-content > .blog-carousel > .owl-stage-outer > .owl-stage > div.owl-item:not(.active):not(.cloned)");
 
                 let blogPostsArray = Array.from(blogPostActive).concat(Array.from(blogPosts));
-                console.log(blogPostsArray)
 
                 const container = document.querySelector(".blog-carousel .owl-stage");
 
                 let post1 = blogPostsArray[0]; 
                 let post3 = blogPostsArray[3]; 
                 post3.classList.add("active")
-                post3.querySelector(".blog-post-image img").src = "https://d1bbx7pumsnd9q.cloudfront.net/magezon/resized/600x400/wysiwyg/mrl_blog/2024/double11/Nov_BLOG_pic_cover.jpg";
+                post3.querySelector(".blog-post-image img").src = "https://media.mrliving.com.tw/magezon/resized/600x400/wysiwyg/mrl_blog/2022/christmas-5item-diy/12M_blog_christmas_cover.jpg";
                 post3.querySelector(".blog-post-image img").style.opacity = "1"
-                post3.querySelector(".blog-post-meta-date").innerText = "2024-10-23"
                 // 將第 3 插入到第 1 之前
                 container.insertBefore(post3, post1);
                 // 將第 1 插入到第 3 之後
