@@ -1493,43 +1493,32 @@
         initOwlCarousel("#media-report-carousel", mediaReportCarouselOptions);
         initOwlCarousel("#designer-space-carousel", designerSpaceCarouselOptions);
         
+        //push carousel event to GTM
         let mediaLastIndex = 0;
         let designerLastIndex = 0;
+
         $("#media-report-carousel").on("changed.owl.carousel", function (event) {
-            console.log(event.target);
-            const currentIndex = event.item.index;
-            const slideDirection = currentIndex > mediaLastIndex ? "right" : "left";
-
-            mediaLastIndex = currentIndex;
-
-            const carouselImgTitle = event.target.querySelector(".owl-item.active img").getAttribute("alt");
-            dataLayer = window.dataLayer || [];
-            dataLayer.push({
-                event: "carousel",
-                carousel_title: "媒體報導",
-                carousel_item_content: carouselImgTitle,
-                slide_direction: slideDirection
-            });
-            console.log("Data pushed to dataLayer:");
+            mediaLastIndex = createCarouselEvent(event, mediaLastIndex, "關於我們-媒體報導");
         });
 
         $("#designer-space-carousel").on("changed.owl.carousel", function (event) {
-            console.log(event.target);
-            let currentIndex = event.item.index; 
-            let slideDirection = currentIndex > designerLastIndex ? "right" : "left"; 
-
-            designerLastIndex = currentIndex;
-
-            const carouselImgTitle = event.target.querySelector(".owl-item.active img").getAttribute("title");
-                dataLayer = window.dataLayer || [];
-                dataLayer.push({
-                    event: "carousel",
-                    carousel_title: "設計師案例",
-                    carousel_item_content: carouselImgTitle,
-                    slide_direction: slideDirection
-                });
-                console.log("Data pushed to dataLayer:");
+            designerLastIndex = createCarouselEvent(event, designerLastIndex, "關於我們-設計師案例");
         });
+
+        
+        function createCarouselEvent(event, lastIndex, carouselTitle){
+            const currentIndex = event.item.index;
+            const slideDirection = currentIndex > lastIndex ? "-right" : "-left";
+
+            lastIndex = currentIndex;
+
+            dataLayer = window.dataLayer || [];
+            dataLayer.push({
+                event: "carousel",
+                carousel_title: carouselTitle,
+                slide_direction: carouselTitle + slideDirection
+            });
+        }
         
 
         // KV首屏
