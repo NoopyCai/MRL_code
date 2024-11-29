@@ -1,16 +1,27 @@
 <script>
     function(){
-        if(!{{Page Path}}.includes('?')){
+        if(!{{Page URL}}.includes('?')){
             return '自然流量';
-        }else if({{Page Path}}.includes('utm_medium')){
-            var utmMedium = {{Page Path}}.split('utm_medium=')[1].split('&')[0];
-            if(utmMedium.includes('mattress') || utmMedium.includes('pillow')){
+        }else if({{Page URL}}.includes('utm_campaign')){
+            var utm_campaign = {{Page URL}}.split('utm_campaign=')[1].split('&')[0];
+            if(utm_campaign.includes('mattress') || utm_campaign.includes('pillow')){
                 return '廣告流量_床枕群';
-            }else if(utmMedium.includes('sofa') || utmMedium.includes('jasper')){
+            }else if(utm_campaign.includes('sofa') || utm_campaign.includes('jasper')){
                 return '廣告流量_沙發群';
-            }else if(utmMedium.includes('ad')){
+            }else {
                 return '廣告流量_家具群';
             }
+        }else if({{Page URL}}.includes('gclid')){
+            var pathName = window.location.pathname;
+            if(pathName.includes('mattress') || pathName.includes('pillow')){
+                return '廣告流量_床枕群';
+            }else if(pathName.includes('sofa') || pathName.includes('jasper')){
+                return '廣告流量_沙發群';
+            }else {
+                return '廣告流量_家具群';
+            }
+        }else{
+            return '自然流量';
         }
     }
 </script>
