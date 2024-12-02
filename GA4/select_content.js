@@ -1,9 +1,5 @@
 function() {
-    var contentTypes = {
-        "designer": "好設計不將就",
-        "inspireSpace": "空間佈置靈感"
-    };
-
-    var contentType = {{Click Element}}.getAttribute('ga-content-type');
-    return contentTypes[contentType] || null;
+    var clickElement = {{Click Element}};
+    var contentType = {{Click Element}}.getAttribute('ga-content-type') || clickElement.closest('[ga-content-type]').getAttribute('ga-content-type');
+    return contentType;
 }
