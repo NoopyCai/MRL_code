@@ -159,6 +159,10 @@
 
         let activeCarousel = inspireContent[i];
         initFindInspireCarousel(activeCarousel); 
+
+        if(window.innerWidth > 768){
+          inspireLi[i].click();
+        }
       });
     }
 
@@ -731,5 +735,19 @@
         }
       });
     }
+
+     function createCarouselEvent(event, lastIndex, carouselTitle){
+            const currentIndex = event.item.index;
+            const slideDirection = currentIndex > lastIndex ? "-right" : "-left";
+
+            lastIndex = currentIndex;
+
+            dataLayer = window.dataLayer || [];
+            dataLayer.push({
+                event: "carousel",
+                carousel_title: carouselTitle,
+                slide_direction: carouselTitle + slideDirection
+            });
+        }
   });
 </script>
