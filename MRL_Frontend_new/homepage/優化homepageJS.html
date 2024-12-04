@@ -181,6 +181,9 @@
         });
         setTimeout(function(){
          $("#KOLfriendHome").trigger("refresh.owl.carousel");
+         $("#KOLfriendHome").on("changed.owl.carousel", function (event) {
+              KOLfriendHomeLastIndex = createCarouselEvent(event, KOLfriendHomeLastIndex, "首頁-居友的家");
+          });
          }, 500);
       }
       
@@ -511,6 +514,39 @@
         );
       }
 
+      //Push carousel 事件
+      let KOLfriendHomeLastIndex = 0;
+      $("#KOLfriendHome").on("changed.owl.carousel", function (event) {
+          KOLfriendHomeLastIndex = createCarouselEvent(event, KOLfriendHomeLastIndex, "首頁-居友的家");
+      });
+
+ function createCarouselEvent(event, lastIndex, carouselTitle){
+            const currentIndex = event.item.index;
+            const itemCount = event.item.count;
+            let slideDirection;
+
+            const indexDiff = currentIndex - lastIndex;
+
+            if (indexDiff > 0 && indexDiff < itemCount / 2 || indexDiff < -itemCount / 2) {
+                slideDirection = "-right";
+            } else if (indexDiff < 0 && indexDiff > -itemCount / 2 || indexDiff > itemCount / 2) {
+                slideDirection = "-left";
+            } else {
+                slideDirection = "";
+            }
+
+            
+            lastIndex = currentIndex;
+
+            dataLayer = window.dataLayer || [];
+            dataLayer.push({
+                event: "carousel",
+                carousel_title: carouselTitle,
+                slide_direction: carouselTitle + slideDirection
+            });
+
+            return lastIndex;
+        }
     });
     
     //曬單牆更新
@@ -587,5 +623,7 @@ function updateElementsBySKU(success, containerSelector, skuSelector, containerS
     }
   });
 }
+
+  
   </script>
   
