@@ -1,0 +1,273 @@
+<!-- 好設計不將就 -->
+<style>
+    .designer-block-container #designer-block-popup.designer-block-popup-active{
+        display: block !important;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        z-index: 1100;
+        background-color: rgba(0,0,0,.8);
+    }
+    .designer-block-container #designer-block-popup i{
+        font-size: 25px;
+        position: absolute;
+        right: 2rem;
+        top: 2rem;
+        color: rgba(255, 255, 255, 0.81);
+        cursor: pointer;
+    }
+    .designer-block-container #designer-block-popup .designer-block-popup-container{
+        width: 300px;
+        position: absolute;
+        height: fit-content;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    .designer-block-container #designer-block-popup .designer-block-popup-container p{
+        min-height: unset !important;
+        -webkit-box-orient: unset !important;
+    }
+    .designer-block-container #designer-block-popup .designer-block-popup-container p::after{
+        content: '' !important;
+    }
+    .designer-block-container #designer-block-popup .designer-block-popup-container .designer-block-item-pic{
+        width: 100% !important;
+    }
+
+    .designer-block-container #designer-block-popup .designer-block-popup-container .designer-block-item-txt{
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-bottom: 0.4rem;
+    }
+    .designer-block-container{
+        width: 100%;
+        overflow: auto;
+        margin: 60px 0 47px 0;
+    }
+    .designer-block{
+        display: flex;
+        width: 99%;
+        margin: auto;
+        justify-content: space-between;
+    }
+    .designer-block .designer-block-item{
+        width: 18%;
+    }
+    .designer-block-item-txt{
+        position: relative;
+        background-color: #808080;
+        padding: 2rem;
+        padding-top: 1px;
+    }
+    .designer-block-container h1{
+        font-size: 25px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 67px
+    }
+    .designer-block-container h2{
+        color: #000000;
+        font-weight: 600;
+        font-size: 2.2rem;
+        height: 2.4rem;
+        margin-bottom: 3rem;
+    }
+    .designer-block-container h3{
+        color: #ffffff;
+        font-weight: 500;
+        margin-bottom: 2rem;
+    }
+    .designer-block-container p{
+        min-height: 12rem;
+        color: #ffffff;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        position: relative;
+    }
+    @media(max-width:1380px) and (min-width:769px){
+        .designer-block-container h3{
+            margin-top: 3.6rem;
+            height: 5rem;
+        }
+    }
+    @media(max-width:1240px) and (min-width:769px){
+        .designer-block-container h2{
+            font-size: 2rem;
+        }
+        .designer-block-container h3{
+            font-size: 1.6rem;
+            height: 5rem;
+        }
+        .designer-block-container p{
+            font-size: 1.4rem;
+            -webkit-line-clamp: 5;
+            min-height: 10rem;
+        }
+        .designer-block-container p::after {
+            content: "... (點我看更多)";
+            bottom: 0;
+            position: absolute;
+            right: 0;
+            background-color: #808080;
+            padding: 0 4px;
+        }
+        .designer-block-item-txt{
+            padding-bottom: 14px;
+        }
+        .designer-block .designer-block-item {
+            cursor: pointer;
+        }
+    }
+    @media(max-width:1040px) and (min-width:769px){
+        .designer-block-container h2{
+            font-size: 1.8rem;
+        }
+    }
+    @media(max-width:768px){
+        .designer-block-container p::after {
+            content: "... (點我看更多)";
+            bottom: 0;
+            position: absolute;
+            right: 0;
+            background-color: #808080;
+            padding: 0 4px;
+        }
+        .designer-block{
+            width: 100%;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .designer-block .designer-block-item {
+            width: 90%;
+            margin: auto;
+            display: flex;
+        }
+        .designer-block-item-txt{
+            padding: 1rem;
+            width: 60%;
+            padding-bottom: 2rem;
+        }
+        .designer-block-item-pic{
+            width: 40%;
+            overflow: hidden;
+        }
+        .designer-block-item-pic img{
+            width: 155% !important;
+            max-width: unset !important;
+            transform: translateX(-20%);
+        }
+        .designer-block-container h2{
+            font-size: 18px;
+            margin-top: 0rem;
+            margin-bottom: 1.2rem;
+            height: 3rem;
+        }
+        .designer-block-container h3{
+            font-size: 14px;
+            margin-top: 1.4rem;
+            -webkit-line-clamp: 1;
+            height: 1.5rem;
+            margin-bottom: 2.4rem
+;
+        }
+        .designer-block-container p{
+            font-size: 12px;
+            min-height: 3rem;
+            -webkit-line-clamp: 2;
+        }
+
+
+    }
+
+    @media(max-width:500px){
+        .designer-block-item-txt{
+            padding-bottom: 0rem;
+        }
+        .designer-block-item-pic img{
+            width: 146% !important;
+            transform: translateX(-16%);
+        }
+        .designer-block-item-pic{
+            width: 50%;
+        }
+    }
+    @media(max-width:365px){
+        .designer-block-container p{
+            min-height: 1rem;
+            -webkit-line-clamp: 1;
+        }
+    }
+</style>
+<div class="designer-block-container">
+    <div id="designer-block-popup" style="display: none;">
+        <i class="mgz-icon mgz-icon-close"></i>
+        <div class="designer-block-popup-container"></div>
+    </div>
+    <h1>好設計。不將就</h1>
+    <div class="designer-block">
+    
+        <div class="designer-block-item">
+            <div class="designer-block-item-pic"><img style="display: block; width: 100%;" src="{{media url=wysiwyg/home_page/designer/designer_Alex_Moran.jpg}}" alt="北歐復古系列家具設計師 Alex Moran" loading="lazy"/></div>
+            <div class="designer-block-item-txt">
+                <h2>20年英國知名品牌設計資歷</h2>
+                <h3>北歐復古系列家具設計師<br>Alex Moran</h3>
+                <p class="select-content" ga-content-type="好設計不將就" ga-click-text="點我看更多_Alex Moran">現為Maison 55的產品設計師，曾為英國最大家居公司設計家具；作品於美國知名設計家具品牌 Westelm、Anthropologie 販售。</p>
+            </div>
+        </div>
+        <div class="designer-block-item">
+            <div class="designer-block-item-pic"><img style="display: block; width: 100%;" src="{{media url=wysiwyg/home_page/designer/designer_Alison.jpg}}" alt="北歐復古沙發設計師 Alison" loading="lazy"/></div>
+            <div class="designer-block-item-txt">
+                <h2>全球知名家具品牌御用設計師</h2>
+                <h3>北歐復古沙發設計師<br>Alison</h3>
+                <p class="select-content" ga-content-type="好設計不將就" ga-click-text="點我看更多_Alison">服務於全球知名設計家具品牌 West-elm、Anthropologie、Freedom 等;擅長於古典設計中融入現代材質，設計沙發家具頗具辨識度。</p>
+            </div>
+        </div>
+        <div class="designer-block-item">
+            <div class="designer-block-item-pic"><img style="display: block; width: 100%;" src="{{media url=wysiwyg/home_page/designer/designer_Says_Who.jpg}}" alt="北歐簡約風家具設計師 Says Who" loading="lazy"/></div>
+            <div class="designer-block-item-txt">
+                <h2>丹麥設計家具品牌合作首選</h2>
+                <h3>北歐簡約風家具設計師<br>Says Who</h3>
+                <p class="select-content" ga-content-type="好設計不將就" ga-click-text="點我看更多_Says Who">知名設計家具品牌都有合作 如 Bolia、WOUD、Nordlux 等，擅長將傳統與現代結合，創造使用者喜愛的新北歐設計家具。</p>
+            </div>
+        </div>
+        <div class="designer-block-item">
+            <div class="designer-block-item-pic"><img style="display: block; width: 100%;" src="{{media url=wysiwyg/home_page/designer/designer_Nordvink.jpg}}" alt="北歐簡約風家具設計師 Nordvink" loading="lazy"/></div>
+            <div class="designer-block-item-txt">
+                <h2>國際FSC家具設計獎新銳</h2>
+                <h3>北歐簡約風家具設計師<br>Nordvink</h3>
+                <p class="select-content" ga-content-type="好設計不將就" ga-click-text="點我看更多_Nordvink">榮獲2012年FSC Design Award的丹麥新生代家具與家居飾品設計師，以使用者角度提煉出兼具功能與創新的設計；與知名丹麥家具品牌Bolia都有合作。</p>
+            </div>
+        </div>
+        <div class="designer-block-item">
+            <div class="designer-block-item-pic"><img style="display: block; width: 100%;" src="{{media url=wysiwyg/home_page/designer/designer_Steffensen_Wurtz.jpg}}" alt="北歐簡約風家具設計師 Steffensen & Würtz" loading="lazy"/></div>
+            <div class="designer-block-item-txt">
+                <h2>德國紅點設計獎新銳</h2>
+                <h3>北歐簡約風家具設計師<br>Steffensen & Würtz</h3>
+                <p class="select-content" ga-content-type="好設計不將就" ga-click-text="點我看更多_Steffensen & Würtz">榮獲世界三大設計獎『2013年德國紅點設計最高殊榮 Red Dot Design Award－Best of the Best』；丹麥Bolia、Dan-Form 等知名家具品牌常見其作品。</p>
+            </div>
+        </div>
+    </div> 
+</div>
+<script>
+    let designerItem = document.querySelectorAll(".designer-block-container .designer-block-item");
+    for(let i=0;i<designerItem.length;i++){
+        designerItem[i].addEventListener("click",function(){
+            if(window.innerWidth<=1240){
+                let designerPopup = document.querySelector("#designer-block-popup");
+                designerPopup.querySelector(".designer-block-popup-container").innerHTML = designerItem[i].innerHTML;
+                designerPopup.classList.add("designer-block-popup-active");
+            }
+        })
+    }
+    document.querySelector("#designer-block-popup").addEventListener("click",function(){
+        document.querySelector("#designer-block-popup").classList.remove("designer-block-popup-active");
+    })
+</script>
