@@ -1,0 +1,137 @@
+<script>
+    (function(){
+        var barcodeInput = document.getElementById('gui_carrierid1');
+
+        //自然人憑證&手機條碼 regex
+        var naturanPerson = /^[a-zA-Z]{2}[0-9]{14}$/;
+        var mobileBarcode = /^\/{1}[0-9A-Z]{7}$/;
+
+        barcodeInput.addEventListener('change', function(e){
+            var barcodeValue = e.target.value;
+            if(naturanPerson.test(barcodeValue)){
+                document.getElementById('pe_select').value = '34';
+            }else if(mobileBarcode.test(barcodeValue)){
+                document.getElementById('pe_select').value = '174';
+            }
+        })
+    })();
+</script>
+
+<script>
+    var PhonePatt = /^\/[0-9A-Z.+-]{7}$/;
+    var CitizenPatt = /^[A-Z]{2}[0-9]{14}$/;
+    var eInvoiceField = document.querySelector('#e_invoice');
+    var carrierField = document.querySelector('#pe_select');
+    var carrierIDfield = document.querySelector('#gui_carrierid1');
+    var carrierIDfieldInputCode;
+    
+    var isConverting = false;
+
+    carrierIDfield.addEventListener('focusin',function(e){
+      if(carrierField.value === ''){
+        carrierField.style.backgroundColor = 'pink';
+        carrierField.addEventListener('change',function(e){
+          carrierField.style.backgroundColor = '';
+        }, {once: true});
+        carrierField.focus();
+        alert('請先選擇個人發票選項');
+      }else{
+        carrierField.style.backgroundColor = 'unset';
+      }
+    }); 
+    
+    carrierIDfield.addEventListener('keyup',function(e){
+      e.target.value = turnToUpperCase(e.target.value);
+    });
+      
+    carrierIDfield.addEventListener('paste',function(e){
+      e.target.value = turnToUpperCase(e.target.value);
+    });
+      
+    carrierIDfield.addEventListener('change',function(e){
+      e.target.value = turnToUpperCase(e.target.value);
+      if (containsFullWidthCharacters(e.target.value)) { 
+        e.target.value = toHalfWidth(e.target.value); 
+      }
+
+    });
+    
+    carrierIDfield.addEventListener('focusout', function(e){
+      carrierIDfieldInputCode = document.querySelector('#gui_carrierid1').value;
+      if(carrierIDfieldInputCode && carrierIDfieldInputCode !== ''){
+        checkCarrierFormat(carrierIDfieldInputCode);
+      }
+    });
+    
+    eInvoiceField.addEventListener('change',function(e){
+      carrierIDfieldInputCode = document.querySelector('#gui_carrierid1').value;
+      if(eInvoiceField.value === '10' && carrierIDfieldInputCode  && carrierIDfieldInputCode !== ''){
+        checkCarrierFormat(carrierIDfieldInputCode);
+      }
+    })
+    
+    carrierField.addEventListener('change',function(e){
+      carrierIDfieldInputCode = document.querySelector('#gui_carrierid1').value;
+      if(carrierIDfieldInputCode && carrierIDfieldInputCode !== ''){
+        checkCarrierFormat(carrierIDfieldInputCode);
+      }
+    })
+      
+    function turnToUpperCase(origin){
+      return origin.toUpperCase();
+    }
+    
+    function checkCarrierFormat(inputCode){
+      if(eInvoiceField.value !== '10'){
+        alert('請注意發票選項目前並不是「手機載具/自然人憑證」！');
+      }
+      var carrierType = isPhoneOrPeopleCarrier();
+    
+      if(carrierType === 'phone' && !PhonePatt.test(inputCode)){
+          alert('手機載具條碼不符合格式\n'+
+                '第一碼需為「/」，後七碼則由數字「0-9」、大寫英文「A-Z」與特殊符號「.」「-」「+」組成');
+          carrierIDfield.style.background = 'pink';
+      }else if(carrierType === 'citizen' && !CitizenPatt.test(inputCode)){
+          alert('自然人憑證碼不符合格式\n'+
+               '前兩碼為大寫英文「A-Z」，後14碼為數字「0-9」');
+          carrierIDfield.style.background = 'pink';      
+      }else{
+          carrierIDfield.style.background = '';
+
+          //判斷格式自動帶入個人發票選項
+          if(PhonePatt.test(inputCode)){
+            carrierField.value = '174';
+          }else if(CitizenPatt.test(inputCode)){
+            carrierField.value = '34';
+          }
+      }
+    }
+    
+                                    
+    function isPhoneOrPeopleCarrier(){
+      if(carrierField.value === '174'){
+        //手機載具
+        return 'phone'
+      }else if(carrierField.value === '34'){
+        //自然人憑證
+        return 'citizen'
+      }else{
+        return false
+      }
+    }
+
+    //檢查是否有全形字元
+    function containsFullWidthCharacters(value) {
+        return /[^\x00-\xff]/.test(value);
+    }
+
+    function toHalfWidth(str) {
+        return str.replace(/[\uff01-\uff5e]/g, function(char) {
+            if (char === '／') {
+                return '/';
+            } else { 
+                return String.fromCharCode(char.charCodeAt(0) - 0xfee0);
+            }
+        });
+    }
+    </script>
