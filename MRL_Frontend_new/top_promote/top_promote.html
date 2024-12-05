@@ -117,7 +117,6 @@
     
     let topPromoteHtmlTimerTxt2, topPromoteHtmlTimerTxt, topPromoteHtmlNoTimerTxt2, topPromoteHtmlNoTimerTxt;
     waitForGaClientId(function(clientId) {
-        // let guid = getGaClientId()
         let lastDigit = clientId[clientId.length - 1];
   
         dataLayer = window.dataLayer || [];
@@ -238,29 +237,41 @@
             break;
         }
     }
-  
+
+
+
     if (!gaCookie) {
         return null;
     }
     
     let parts = gaCookie.split('.');
+
+    if (parts.length < 4) {
+        return null;
+    }
+
     let clientId = parts[2] + '.' + parts[3];
   
     return clientId;
   }
   
   function waitForGaClientId(callback) {
+    let attempts = 0;
+    let maxAttempts = 4;
     let interval = setInterval(function() {
         let clientId = getGaClientId();
+        
         if (clientId) {
             clearInterval(interval);
             callback(clientId);
+        }else{
+            attempts++;
+            if (attempts >= maxAttempts) {
+                clearInterval(interval);
+                callback(0);
+            }
         }
-        else{
-          clearInterval(interval);
-          callback(0);
-        }
-    }, 100); // 每 100 毫秒檢查一次
+    }, 1000); // 每秒檢查一次
   }
   
   
