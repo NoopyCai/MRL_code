@@ -1,0 +1,49 @@
+<script>
+        var submitBtn = document.querySelector(".action-default.scalable.save.primary")
+        if(submitBtn){
+            submitBtn.addEventListener('click',function(e){
+                var eInvoiceField = document.querySelector('#e_invoice');
+                var carrierField = document.querySelector('#pe_select');
+                var carrierIDfield = document.querySelector('#gui_carrierid1');
+                
+                if(!checkPhoneBarCodeInput(eInvoiceField, carrierField, carrierIDfield)){
+                    event.preventDefault(); 
+                    event.stopImmediatePropagation();
+
+
+                }
+            });
+        }
+
+        function checkPhoneBarCodeInput(eInvoiceField, carrierField, carrierIDfield){
+
+            if(eInvoiceField.value === '10'){
+                var pattern, errorMessage;
+                if(carrierField.value === '174'){
+                    pattern = /^\/[0-9A-Z.+-]{7}$/;
+                    errorMessage = '手機載具條碼不符合格式\n第一碼需為「/」，後七碼則由數字「0-9」、大寫英文「A-Z」與特殊符號「.」「-」「+」組成';
+
+                }else if(carrierField.value === '34'){
+                    pattern = /^[A-Z]{2}[0-9]{14}$/;
+                    errorMessage = '自然人憑證碼不符合格式\n前兩碼為大寫英文「A-Z」，後14碼為數字「0-9」';
+                }
+
+                if(pattern && !pattern.test(carrierIDfield.value)){
+                    moveToWrongField(errorMessage);
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        function moveToWrongField(errorMessage){
+            carrierIDfield.style.backgroundColor = 'pink';
+            carrierIDfield.addEventListener('input',function(e){
+                carrierIDfield.style.backgroundColor = '';
+            }, {once: true});
+            carrierIDfield.focus();
+            alert(errorMessage);
+        }
+    
+</script>

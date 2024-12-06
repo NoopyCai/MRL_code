@@ -1,331 +1,331 @@
 <!-- 代言人專區 -->
+
 <style>
-    .kol-cotainer {
-      display: flex;
-      justify-content: end;
+  .kol-cotainer {
+    display: flex;
+    justify-content: end;
+  }
+  .cotainer-reight {
+    display: flex;
+    flex-direction: column;
+    width: 55.5rem;
+    position: absolute;
+    right: 5%;
+    top: 5%;
+  }
+
+  .area-title {
+    font-size: 3.7rem;
+    margin-bottom: 0;
+    color: #575757;
+  }
+  .bg-img {
+    width: 100%;
+  }
+
+  .videoShow iframe {
+    height: 100% !important;
+  }
+
+  .flex_container {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+  }
+  .vido-title {
+    margin: 2rem 0 2.3rem 0;
+  }
+  .vido-title h1 {
+    text-align: center;
+    font-size: 3.7rem;
+    font-weight: bold;
+    color: #575757;
+    margin-bottom: 0;
+    letter-spacing: 2px;
+    margin: 0;
+    line-height: 5rem;
+  }
+  .item-title h1 {
+    text-align: center;
+    font-size: 3.7rem;
+    font-weight: bold;
+    color: #575757;
+    margin: 3.3rem 0 2rem 0;
+    letter-spacing: 2px;
+  }
+  .twoitem {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 7rem;
+  }
+
+  @media (max-width: 1850px) {
+    .cotainer-reight {
+      width: 28vw;
+      top: 0%;
+    }
+    .item-title h1 {
+      font-size: 3rem;
+    }
+    .vido-title h1 {
+      font-size: 3rem;
+    }
+    .area-title {
+      font-size: 3rem;
+      margin-top: 25px;
+    }
+  }
+
+  @media (max-width: 1600px) {
+    .cotainer-reight {
+      width: 25vw;
+      top: 0%;
+    }
+    .item-title h1 {
+      font-size: 2.6rem;
+    }
+    .vido-title {
+      margin: 1rem 0 1.3rem 0;
+    }
+    .vido-title h1 {
+      font-size: 2.6rem;
+    }
+    .area-title {
+      font-size: 2.6rem;
+      margin-top: 25px;
+    }
+  }
+
+  @media (max-width: 1500px) {
+    .item-title h1 {
+      font-size: 2.6rem;
+    }
+    .vido-title h1 {
+      font-size: 2.6rem;
+    }
+  }
+
+  @media (max-width: 1440px) {
+    .cotainer-reight {
+      width: 25vw;
+    }
+    .vido-title {
+      margin: 1rem 0 0 0;
+    }
+    .item-title h1 {
+      margin: 1.3rem 0 1rem 0;
+    }
+    .area-title {
+      font-size: 2.4rem;
+    }
+  }
+  @media (max-width: 1350px) {
+    .area-title {
+      font-size: 2.2rem;
     }
     .cotainer-reight {
-      display: flex;
-      flex-direction: column;
-      width: 55.5rem;
-      position: absolute;
-      right: 5%;
-      top: 5%;
+      width: 22vw;
     }
-  
+    .item-title h1 {
+      font-size: 2.2rem;
+    }
+    .vido-title h1 {
+      font-size: 2.2rem;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .cotainer-reight {
+      width: 21vw;
+    }
+    .vido-title h1 {
+      font-size: 1.8rem;
+    }
+    .item-title h1 {
+      margin: 0 0 1rem 0;
+      font-size: 1.8rem;
+    }
     .area-title {
-      font-size: 3.7rem;
-      margin-bottom: 0;
-      color: #575757;
+      font-size: 1.8rem;
+    }
+  }
+  @media (max-width: 900px) {
+    .cotainer-reight {
+      top: -5%;
+    }
+    .area-title {
+      font-size: 1.8rem;
+    }
+    .vido-title h1 {
+      font-size: 1.8rem;
+    }
+    .item-title h1 {
+      margin: 0 0 1rem 0;
+      font-size: 1.8rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cotainer-reight {
+      width: auto;
+      position: unset;
+      background-color: #dfdfdf;
+      margin: -5px 0 0 0;
+    }
+
+    .kol-cotainer {
+      flex-direction: column;
+      margin: 0;
+      display: block;
     }
     .bg-img {
       width: 100%;
     }
-  
-    .videoShow iframe {
-      height: 100% !important;
-    }
-  
-    .flex_container {
-      justify-content: center;
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      width: 100%;
-      height: auto;
-      margin: 0 auto;
-      position: relative;
-    }
+
     .vido-title {
-      margin: 2rem 0 2.3rem 0;
+      margin: 1rem 0 1rem 0;
     }
-    .vido-title h1 {
-      text-align: center;
-      font-size: 3.7rem;
-      font-weight: bold;
-      color: #575757;
-      margin-bottom: 0;
-      letter-spacing: 2px;
-      margin: 0;
-      line-height: 5rem;
+
+    .vido-title {
+      display: none;
+    }
+    .area-title {
+      display: none;
+    }
+
+    .videoShow {
+      position: relative;
+      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .flex_container {
+      flex-direction: column;
+      height: auto;
     }
     .item-title h1 {
-      text-align: center;
-      font-size: 3.7rem;
-      font-weight: bold;
-      color: #575757;
-      margin: 3.3rem 0 2rem 0;
-      letter-spacing: 2px;
+      font-size: 1.8rem;
+      margin: 0 0 1rem 0;
+      letter-spacing: 3px;
     }
+
     .twoitem {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 7rem;
+      margin-bottom: 0;
     }
-  
-    @media (max-width: 1850px) {
-      .cotainer-reight {
-        width: 28vw;
-        top: 0%;
-      }
-      .item-title h1 {
-        font-size: 3rem;
-      }
-      .vido-title h1 {
-        font-size: 3rem;
-      }
-      .area-title {
-        font-size: 3rem;
-        margin-top: 25px;
-      }
+
+    .twoitem img {
+      height: 12rem;
+      width: 16.2rem;
+      margin-bottom: 1.8rem;
     }
-  
-    @media (max-width: 1600px) {
-      .cotainer-reight {
-        width: 25vw;
-        top: 0%;
-      }
-      .item-title h1 {
-        font-size: 2.6rem;
-      }
-      .vido-title {
-        margin: 1rem 0 1.3rem 0;
-      }
-      .vido-title h1 {
-        font-size: 2.6rem;
-      }
-      .area-title {
-        font-size: 2.6rem;
-        margin-top: 25px;
-      }
+    .videoShow iframe {
+      height: 24rem;
     }
-  
-    @media (max-width: 1500px) {
-      .item-title h1 {
-        font-size: 2.6rem;
-      }
-      .vido-title h1 {
-        font-size: 2.6rem;
-      }
-    }
-  
-    @media (max-width: 1440px) {
-      .cotainer-reight {
-        width: 25vw;
-      }
-      .vido-title {
-        margin: 1rem 0 0 0;
-      }
-      .item-title h1 {
-        margin: 1.3rem 0 1rem 0;
-      }
-      .area-title {
-        font-size: 2.4rem;
-      }
-    }
-    @media (max-width: 1350px) {
-      .area-title {
-        font-size: 2.2rem;
-      }
-      .cotainer-reight {
-        width: 22vw;
-      }
-      .item-title h1 {
-        font-size: 2.2rem;
-      }
-      .vido-title h1 {
-        font-size: 2.2rem;
-      }
-    }
-  
-    @media (max-width: 1024px) {
-      .cotainer-reight {
-        width: 21vw;
-      }
-      .vido-title h1 {
-        font-size: 1.8rem;
-      }
-      .item-title h1 {
-        margin: 0 0 1rem 0;
-        font-size: 1.8rem;
-      }
-      .area-title {
-        font-size: 1.8rem;
-      }
-    }
-    @media (max-width: 900px) {
-      .cotainer-reight {
-        top: -5%;
-      }
-      .area-title {
-        font-size: 1.8rem;
-      }
-      .vido-title h1 {
-        font-size: 1.8rem;
-      }
-      .item-title h1 {
-        margin: 0 0 1rem 0;
-        font-size: 1.8rem;
-      }
-    }
-  
-    @media (max-width: 768px) {
-      .cotainer-reight {
-        width: auto;
-        position: unset;
-        background-color: #dfdfdf;
-        margin: -5px 0 0 0;
-      }
-  
-      .kol-cotainer {
-        flex-direction: column;
-        margin: 0;
-        display: block;
-      }
-      .bg-img {
-        width: 100%;
-      }
-  
-      .vido-title {
-        margin: 1rem 0 1rem 0;
-      }
-  
-      .vido-title {
-        display: none;
-      }
-      .area-title {
-        display: none;
-      }
-  
-      .videoShow {
-        position: relative;
-        width: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-  
-      .flex_container {
-        flex-direction: column;
-        height: auto;
-      }
-      .item-title h1 {
-        font-size: 1.8rem;
-        margin: 0 0 1rem 0;
-        letter-spacing: 3px;
-      }
-  
-      .twoitem {
-        margin-bottom: 0;
-      }
-  
-      .twoitem img {
-        height: 12rem;
-        width: 16.2rem;
-        margin-bottom: 1.8rem;
-      }
-      .videoShow iframe {
-        height: 24rem;
-      }
-    }
-  </style>
-  <div
-    class="kol-cotainer"
-    style="position: relative; width: 100%; text-align: center; margin: 0 auto"
-  >
-  <picture>
-    <source srcset="{{media url=wysiwyg/home_page/Kuo/kuo_relieve_M_240116.gif}}" media="(max-width: 767px)" loading="lazy">
-    <source srcset="{{media url=wysiwyg/home_page/Kuo/kuo_relieve_PC_240109_1920x850px.gif}}" media="(min-width: 768px)" loading="lazy">
-    <img class="bg-img" alt="世界舉重冠軍都在睡的減壓床墊" loading="lazy" style="display: block; width: 100%" src="{{media url=wysiwyg/home_page/Kuo/kuo_relieve_PC_240109_1920x850px.gif}}" loading="lazy"/>
-  </picture>
-    <div class="cotainer-reight">
-      <div>
-        <h1 class="area-title">世界舉重冠軍 都在睡的減壓床墊</h1>
-        <div class="vido-title">
-          <h1>▼ 減壓直擊 ▼</h1>
-        </div>
-  
-        <div class="HS2R1 videoShow">
-          <p>
-            <lite-youtube
-              videoid="VvW_JVF5Jxs"
-              style="background-image: url('https://i.ytimg.com/vi/VvW_JVF5Jxs/maxresdefault.jpg') !important;"
-              loading="lazy"
-            >
-              <a
-                href="https://www.youtube.com/watch?v=VvW_JVF5Jxs"
-                class="lty-playbtn"
-                title="最近身體壓力大，睡不好嗎？試試這一張涼感減壓床墊吧"
-              >
-              </a>
-            </lite-youtube>
-          </p>
-        </div>
+  }
+</style>
+<div
+  class="kol-cotainer"
+  style="position: relative; width: 100%; text-align: center; margin: 0 auto"
+>
+<picture>
+  <source srcset="{{media url=wysiwyg/home_page/Kuo/kuo_relieve_M_240116.gif}}" media="(max-width: 767px)" loading="lazy">
+  <source srcset="{{media url=wysiwyg/home_page/Kuo/kuo_relieve_PC_240109_1920x850px.gif}}" media="(min-width: 768px)" loading="lazy">
+  <img class="bg-img" alt="世界舉重冠軍都在睡的減壓床墊" loading="lazy" style="display: block; width: 100%" src="{{media url=wysiwyg/home_page/Kuo/kuo_relieve_PC_240109_1920x850px.gif}}" loading="lazy"/>
+</picture>
+  <div class="cotainer-reight">
+    <div>
+      <h1 class="area-title">世界舉重冠軍 都在睡的減壓床墊</h1>
+      <div class="vido-title">
+        <h1>▼ 減壓直擊 ▼</h1>
       </div>
-  
-      <div>
-        <div class="flex_container">
-          <div class="item-title">
-            <h1>| 推薦商品 |</h1>
+
+      <div class="HS2R1 videoShow">
+        <p>
+          <lite-youtube
+            videoid="VvW_JVF5Jxs"
+            style="background-image: url('https://i.ytimg.com/vi/VvW_JVF5Jxs/maxresdefault.jpg') !important;"
+            loading="lazy"
+          >
+            <a
+              href="https://www.youtube.com/watch?v=VvW_JVF5Jxs"
+              class="lty-playbtn"
+              title="世界舉重冠軍都在使用｜護腰護脊減壓記憶床墊"
+            >
+            </a>
+          </lite-youtube>
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex_container">
+        <div class="item-title">
+          <h1>| 推薦商品 |</h1>
+        </div>
+        <div class="twoitem">
+          <div>
+            <a href="{{store direct_url='pillow-butterfly-10-12cm.html'}}">
+              <picture>
+                <source
+                  srcset="{{media url=wysiwyg/home_page/Kuo/kuo_memory_pillow_PC_240116.jpg}}"
+                  media="(min-width:768px)"
+                  loading="lazy"
+                />
+                <source
+                  srcset="{{media url=wysiwyg/home_page/Kuo/kuo_memory_pillow_M_240116.jpg}}"
+                  media="(max-width:767px)"
+                  loading="lazy"
+                />
+                <img
+                  src="{{media url=wysiwyg/home_page/Kuo/kuo_memory_pillow_PC_240116.jpg}}"
+                  class="mrl-click HS2R2-img select-promotion ga-item"
+                  alt="護頸減壓蝶型記憶枕"
+                  data-ga-category="MKT-Kuo-HsingChun"
+                  loading="lazy"
+                  data-ga-promotion_id="20241030_Kuo-HsingChun_winter"
+                  data-ga-creative_slot="HS2R2"
+                  data-ga-item-id="30-0042-0-08-v2"
+                  data-ga-label="護頸減壓蝶型記憶枕 (高側12 / 低側10cm)｜防壓耳 側睡不壓耳"
+                />
+              </picture>
+            </a>
           </div>
-          <div class="twoitem">
-            <div>
-              <a href="{{store direct_url='memory-pillow-14cm.html'}}">
-                <picture>
-                  <source
-                    srcset="{{media url=wysiwyg/home_page/Kuo/kuo_memory_pollow_PC.jpg}}"
-                    media="(min-width:768px)"
-                    loading="lazy"
-                  />
-                  <source
-                    srcset="{{media url=wysiwyg/home_page/Kuo/kuo_memory_pillow_M.jpg}}"
-                    media="(max-width:767px)"
-                    loading="lazy"
-                  />
-                  <img
-                    src="{{media url=wysiwyg/home_page/Kuo/kuo_memory_pollow_PC.jpg}}"
-                    class="mrl-click HS2R2-img select-promotion ga-item"
-                    alt="涼感減壓記憶枕"
-                    data-ga-category="MKT-Kuo-HsingChun"
-                    loading="lazy"
-                    data-ga-promotion_id="20240403_Kuo-HsingChun_summer"
-                    data-ga-creative_slot="HS2R2"
-                    data-ga-item-id="30-0003-0-08-v2"
-                    data-ga-label="涼感減壓記憶枕 (高14cm)｜冰絲表布 專利記憶棉"
-                  />
-                </picture>
-              </a>
-            </div>
-            <div>
-              <a href="{{store direct_url='mattress-tw-standard.html'}}">
-                <picture>
-                  <source
-                    srcset="{{media url=wysiwyg/home_page/Kuo/kuo_memory_bed_PC.jpg}}"
-                    media="(min-width:768px)"
-                    loading="lazy"
-                  />
-                  <source
-                    srcset="{{media url=wysiwyg/home_page/Kuo/kuo_memory_bed_M.jpg}}"
-                    media="(max-width:768px)"
-                    loading="lazy"
-                  />
-                  <img
-                    src="{{media url=wysiwyg/home_page/Kuo/kuo_memory_bed_PC.jpg}}"
-                    class="mrl-click HS2R3-img select-promotion ga-item"
-                    alt="涼感減壓記憶床墊"
-                    data-ga-category="MKT-Kuo-HsingChun"
-                    loading="lazy"
-                    data-ga-promotion_id="20240403_Kuo-HsingChun_summer"
-                    data-ga-creative_slot="HS2R3"
-                    data-ga-item-id="30-0001-0-08"
-                    data-ga-label="雙人標準(5X6.2)｜涼感減壓記憶床墊｜零干擾 獨立筒"
-                  />
-                </picture>
-              </a>
-            </div>
+          <div>
+            <a href="{{store direct_url='mattress-double-20tencel.html'}}">
+              <picture>
+                <source
+                  srcset="{{media url=wysiwyg/home_page/Kuo/kuo_memory_matress_PC_240118.jpg}}"
+                  media="(min-width:768px)"
+                  loading="lazy"
+                />
+                <source
+                  srcset="{{media url=wysiwyg/home_page/Kuo/kuo_memory_matress_M_240118.jpg}}"
+                  media="(max-width:768px)"
+                  loading="lazy"
+                />
+                <img
+                  src="{{media url=wysiwyg/home_page/Kuo/kuo_memory_matress_PC_240118.jpg}}"
+                  class="mrl-click HS2R3-img select-promotion ga-item"
+                  alt="護腰護脊減壓記憶床墊"
+                  data-ga-category="MKT-Kuo-HsingChun"
+                  loading="lazy"
+                  data-ga-promotion_id="20241030_Kuo-HsingChun_winter"
+                  data-ga-creative_slot="HS2R3"
+                  data-ga-item-id="30-0049-0-08-v2"
+                  data-ga-label="雙人標準(5X6.2)｜護腰護脊減壓記憶床墊｜零干擾 獨立筒"
+                />
+              </picture>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

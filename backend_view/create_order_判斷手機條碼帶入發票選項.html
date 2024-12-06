@@ -1,21 +1,4 @@
-<script>
-    (function(){
-        var barcodeInput = document.getElementById('gui_carrierid1');
 
-        //自然人憑證&手機條碼 regex
-        var naturanPerson = /^[a-zA-Z]{2}[0-9]{14}$/;
-        var mobileBarcode = /^\/{1}[0-9A-Z]{7}$/;
-
-        barcodeInput.addEventListener('change', function(e){
-            var barcodeValue = e.target.value;
-            if(naturanPerson.test(barcodeValue)){
-                document.getElementById('pe_select').value = '34';
-            }else if(mobileBarcode.test(barcodeValue)){
-                document.getElementById('pe_select').value = '174';
-            }
-        })
-    })();
-</script>
 
 <script>
     var PhonePatt = /^\/[0-9A-Z.+-]{7}$/;
@@ -39,7 +22,7 @@
         carrierField.style.backgroundColor = 'unset';
       }
     }); 
-    
+
     carrierIDfield.addEventListener('keyup',function(e){
       e.target.value = turnToUpperCase(e.target.value);
     });

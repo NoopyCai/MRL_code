@@ -1,17 +1,39 @@
-<script>
-    document.querySelector("#sales_order_view_tabs_order_info_content .data-table.admin__table-primary.edit-order-table td.col-ordered-qty table tbody tr:nth-child(3) th")
-</script>
-
 <style>
-    #sales_order_view_tabs_order_info_content .data-table.admin__table-primary.edit-order-table td.col-ordered-qty table tbody tr:nth-child(3) th{
+   .shipped-qty{
         background-color: #c34135;
         color: #fff;
         border-radius: 4px;
         position: relative;
-        right: 4px;
-        padding: 0.5rem;
+        right: 4px;vertical-align: middle;
+        padding: 0.5rem !important;
     }
-    #sales_order_view_tabs_order_info_content .data-table.admin__table-primary.edit-order-table td.col-ordered-qty table tbody tr:nth-child(3) td{
-        vertical-align: middle;
+    .shipped-qty-value{
+        vertical-align: middle !important;
     }
 </style>
+
+<script>
+    (function(){
+        var orderQtyTables = document.querySelectorAll(".edit-order-table .col-ordered-qty .qty-table");
+        if(orderQtyTables.length === 0) return;
+
+        orderQtyTables.forEach(function(orderQtyTable){
+            var rows = orderQtyTable.querySelectorAll("tr");
+           
+            Array.from(rows).forEach(function(row){
+                var label = row.querySelector("th:first-child");
+                if(!label) return;
+
+                var value = row.querySelector("td:last-child");
+                var labelText = label.innerText.trim();
+                
+
+                if (labelText === "已發貨" || labelText === "Shipped") {
+                    label.classList.add("shipped-qty");
+                    value.classList.add("shipped-qty-value");
+                }
+            })
+        })
+    })();
+
+</script>
