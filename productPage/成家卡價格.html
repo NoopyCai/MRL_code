@@ -1,0 +1,73 @@
+<style>
+    .ppbd-product-price .product-info-price{
+        position: relative;
+        margin-top: 2rem;
+    }
+    .ppbd-product-price .product-info-price .price-wrapper .price{
+        text-decoration: line-through;
+    }
+    .discount-price-conrainer{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        bottom: 1rem;
+        left: 15rem;
+    }
+    .discountPriceLabel{
+        color: #575757;
+        font-size: 13px;
+        margin-left: 10px;
+    }
+    .homecard-discount-price{
+        margin-left: 10px;
+        font-size: 30px;
+        color: #a01f13;
+        font-weight: 700;
+
+    }
+</style>
+<script>
+    function createElement(tag, className, innerHTML) {
+        innerHTML = innerHTML || '';
+        var element = document.createElement(tag);
+        element.className = className;
+        element.innerHTML = innerHTML;
+        return element;
+    }
+
+    function cloneElementWithClass(element, className, innerHTML) {
+        innerHTML = innerHTML || '';
+        var clonedElement = element.cloneNode(true);
+        clonedElement.classList.add(className);
+        clonedElement.innerHTML = innerHTML;
+        return clonedElement;
+    }
+
+    function appendChildren(parent, children) {
+        children.forEach(function(child) {
+            parent.appendChild(child);
+        });
+    }
+
+    function addDiscountPrice() {
+        var discountPriceContainer = createElement('div', 'discount-price-conrainer');
+        var discountPriceLabel = createElement('span', 'discountPriceLabel', '折扣後價格：');
+        var oldPrice = document.querySelector('.price-final_price .price-container .price-wrapper .price');
+        var discountPrice = cloneElementWithClass(oldPrice, 'homecard-discount-price', '$9,500');
+
+        appendChildren(discountPriceContainer, [discountPriceLabel, discountPrice]);
+        document.querySelector('.ppbd-product-price .product-info-price').appendChild(discountPriceContainer);
+    }
+
+    addDiscountPrice();
+    var allPriceOptions = document.querySelectorAll('.amcard-label-block.-price');
+    allPriceOptions[0].click();
+    allPriceOptions.forEach(function(priceOption) {
+            priceOption.addEventListener('click', function(e) {
+                var targetPrice = e.target.value;
+                var discountedPrice = targetPrice * 0.95;
+                var formattedDiscountedPrice = '$' + discountedPrice.toFixed(0).replace(/\d(?=(\d{3})+$)/g, '$&,');
+                document.querySelector('.homecard-discount-price').innerText = formattedDiscountedPrice;
+            });
+        });
+</script>
