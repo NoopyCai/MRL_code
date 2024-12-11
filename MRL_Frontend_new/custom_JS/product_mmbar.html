@@ -1,797 +1,803 @@
 <!-- Menu bar ProductPage Mobile -->
 
 <style>
-    .bottom-nav,
-    .bottom-nav-button,
-    .bottom-nav-img {
+  .bottom-nav,
+  .bottom-nav-button,
+  .bottom-nav-img {
+    display: none;
+  }
+
+  .add2carOption {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .box-tocart .actions {
       display: none;
     }
-  
+
+    .bottom-nav {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+      height: 56px;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      box-shadow: 0 -2px 10px 0 rgba(0, 0, 0, 0.16),
+        0 -1px 5px 0 rgba(0, 0, 0, 0.26);
+      z-index: 3147483646;
+      margin-bottom: 0px;
+    }
+
+    .scrollUp {
+      padding-bottom: 20px;
+    }
+
+    .bottom-nav::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 76px;
+      background-color: #fff;
+      z-index: -1;
+    }
+
+    .notActive {
+      display: none;
+      transition: 0.3s ease-in-out;
+    }
+
     .add2carOption {
+      position: fixed !important;
+      display: flex;
+      opacity: 0;
+      z-index: 1001;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 5.6rem;
+      background-color: #e4e4e4;
+      position: absolute;
+      bottom: -5rem;
+      transition: bottom 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      left: 0;
+      padding-bottom: 15px;
+    }
+
+    .add2carActive {
+      opacity: 1;
+      bottom: 0;
+    }
+
+    .qtyChoose {
+      width: 100%;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-around;
+      align-items: center;
+      margin: 1rem;
+    }
+
+    .qty-text {
+      font-size: 13.5px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      margin: 0 0 0 1.9rem;
+      color: #696969;
+    }
+
+    .qty-changer {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
+    .qtyChoose {
+      margin-right: 0.7rem;
+    }
+
+    .add2carOption-btn {
+      width: 100%;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 5px;
+      max-width: 9.5rem;
+      height: 3.6rem;
+      background-color: #c34135;
+      border-radius: 11.5px;
+      margin-right: 1.6rem;
+    }
+
+    .add2carOption-btn-a {
+      color: #fff;
+    }
+
+    .fieldset > .field,
+    .fieldset > .fields > .field {
+      margin: 30px 0 0 0;
+    }
+
+    .control #qty {
+      background: transparent;
+      width: 5.1rem;
+      border: none;
+      font-size: 2.3rem;
+      font-weight: 700;
+      position: relative;
+      left: 50px;
+    }
+
+    .ppbd-product-addtocart .control {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-inc,
+    .qty-dec {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 4.3rem !important;
+      height: 3.6rem !important;
+      font-size: 2.7rem !important;
+      font-weight: 700 !important;
+      border: 0.5px solid #a6a6a6 !important;
+      border-radius: 11.5px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .qty-inc {
+      color: #575757 !important;
+    }
+
+    .qty-dec {
+      position: relative;
+      left: -56px;
+      color: #a6a6a6 !important;
+    }
+
+    .bottom-nav-button {
+      padding: 0px;
+      display: block;
+      white-space: nowrap;
+      line-height: 34px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .bottom-nav .bottom-nav-button {
+      height: 100%;
+      flex-grow: 1;
+      flex-shrink: 0;
+      text-align: center;
+      margin: 0;
+      border-radius: 0;
+      line-height: normal;
+    }
+
+    .bottom-nav-add2cart,
+    .bottom-nav-buynow {
+      flex-basis: 107.5px;
+    }
+
+    .menubar-buynow {
+      color: #b2b2b2;
+    }
+
+    .cart-icon::before {
+      content: "";
+      background-image: url("https://www.mrliving.com.tw/media/wysiwyg/MenuBar/Buttom/mmbar_cart.png");
+      background-position: center;
+      background-size: cover;
+      position: absolute;
+      top: 33%;
+      left: 50%;
+      width: 24px;
+      height: 23px;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    .cart-icon::after {
+      content: attr(data-after);
+      background: #c34135;
+      color: #fff;
+      height: 16px;
+      line-height: 16px;
+      border-radius: 2px;
+      display: inline-block;
+      min-width: 15px;
+      overflow: hidden;
+      padding: 0px 1px;
+      text-align: center;
+      white-space: nowrap;
+      margin: 0px 0 0 5px;
+      position: absolute;
+      font-size: 11px;
+      border-radius: 100%;
+      top: 1px;
+      right: 22px;
+      z-index: 2;
+    }
+
+    .cart-icon.noitem::after {
       display: none;
     }
-  
-    @media (max-width: 767px) {
-      .box-tocart .actions {
-        display: none;
-      }
-  
-      .bottom-nav {
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        justify-content: center;
-        height: 56px;
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        box-shadow: 0 -2px 10px 0 rgba(0, 0, 0, 0.16),
-          0 -1px 5px 0 rgba(0, 0, 0, 0.26);
-        z-index: 3147483646;
-        margin-bottom: 0px;
-      }
-  
-      .scrollUp {
-        padding-bottom: 20px;
-      }
-  
-      .bottom-nav::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 76px;
-        background-color: #fff;
-        z-index: -1;
-      }
-  
-      .notActive {
-        display: none;
-        transition: 0.3s ease-in-out;
-      }
-  
-      .add2carOption {
-        position: fixed !important;
-        display: flex;
-        opacity: 0;
-        z-index: 1001;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 5.6rem;
-        background-color: #e4e4e4;
-        position: absolute;
-        bottom: -5rem;
-        transition: bottom 0.3s ease-in-out, opacity 0.3s ease-in-out;
-        left: 0;
-        padding-bottom: 15px;
-      }
-  
-      .add2carActive {
-        opacity: 1;
-        bottom: 0;
-      }
-  
-      .qtyChoose {
-        width: 100%;
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-around;
-        align-items: center;
-        margin: 1rem;
-      }
-  
-      .qty-text {
-        font-size: 13.5px;
-        font-weight: 400;
-        letter-spacing: 1px;
-        margin: 0 0 0 1.9rem;
-        color: #696969;
-      }
-  
-      .qty-changer {
-        display: flex;
-        flex-direction: row-reverse;
-      }
-  
-      .qtyChoose {
-        margin-right: 0.7rem;
-      }
-  
-      .add2carOption-btn {
-        width: 100%;
-        font-size: 1.6rem;
-        font-weight: 700;
-        letter-spacing: 5px;
-        max-width: 9.5rem;
-        height: 3.6rem;
-        background-color: #c34135;
-        border-radius: 11.5px;
-        margin-right: 1.6rem;
-      }
-  
-      .add2carOption-btn-a {
-        color: #fff;
-      }
-  
-      .fieldset > .field,
-      .fieldset > .fields > .field {
-        margin: 30px 0 0 0;
-      }
-  
-      .control #qty {
-        background: transparent;
-        width: 5.1rem;
-        border: none;
-        font-size: 2.3rem;
-        font-weight: 700;
-        position: relative;
-        left: 50px;
-      }
-  
-      .ppbd-product-addtocart .control {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-  
-      .qty-inc,
-      .qty-dec {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        width: 4.3rem !important;
-        height: 3.6rem !important;
-        font-size: 2.7rem !important;
-        font-weight: 700 !important;
-        border: 0.5px solid #a6a6a6 !important;
-        border-radius: 11.5px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-  
-      .qty-inc {
-        color: #575757 !important;
-      }
-  
-      .qty-dec {
-        position: relative;
-        left: -56px;
-        color: #a6a6a6 !important;
-      }
-  
-      .bottom-nav-button {
-        padding: 0px;
-        display: block;
-        white-space: nowrap;
-        line-height: 34px;
-        cursor: pointer;
-        position: relative;
-      }
-  
-      .bottom-nav .bottom-nav-button {
-        height: 100%;
-        flex-grow: 1;
-        flex-shrink: 0;
-        text-align: center;
-        margin: 0;
-        border-radius: 0;
-        line-height: normal;
-      }
-  
-      .bottom-nav-add2cart,
-      .bottom-nav-buynow {
-        flex-basis: 107.5px;
-      }
-  
-      .menubar-buynow {
-        color: #b2b2b2;
-      }
-  
-      .cart-icon::before {
-        content: "";
-        background-image: url("https://www.mrliving.com.tw/media/wysiwyg/MenuBar/Buttom/mmbar_cart.png");
-        background-position: center;
-        background-size: cover;
-        position: absolute;
-        top: 33%;
-        left: 50%;
-        width: 24px;
-        height: 23px;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-      }
-  
-      .cart-icon::after {
-        content: attr(data-after);
-        background: #c34135;
-        color: #fff;
-        height: 16px;
-        line-height: 16px;
-        border-radius: 2px;
-        display: inline-block;
-        min-width: 15px;
-        overflow: hidden;
-        padding: 0px 1px;
-        text-align: center;
-        white-space: nowrap;
-        margin: 0px 0 0 5px;
-        position: absolute;
-        font-size: 11px;
-        border-radius: 100%;
-        top: 1px;
-        right: 22px;
-        z-index: 2;
-      }
-  
-      .cart-icon.noitem::after {
-        display: none;
-      }
-  
-      .cart-icon {
-        height: 23px;
-      }
-  
-      .bottom-nav-add2cart > img,
-      .bottom-nav-buynow > img {
-        width: 12px;
-        height: 13px;
-        margin-right: 5px;
-      }
-  
-      .wish-icon::before {
-        content: "";
-        background-image: url("https://www.mrliving.com.tw/media/wysiwyg/MenuBar/Buttom/mmbar_heart.png");
-        background-position: center;
-        background-size: cover;
-        position: absolute;
-        top: 33%;
-        left: 50%;
-        width: 22px;
-        height: 19.5px;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-      }
-  
-      .wishActive.wish-icon::before {
-        background-image: url("https://www.mrliving.com.tw/media/wysiwyg/MenuBar/Buttom/mmbar_heart_Active.png") !important;
-      }
-  
-      .wish-icon {
-        height: 22px;
-      }
-  
-      .bottom-nav-add2cart,
-      .bottom-nav-add2cart:active,
-      .bottom-nav-add2cart:hover,
-      .bottom-nav-add2cart:focus {
-        background-color: #c34135;
-        color: #fff;
-      }
-  
-      .bottom-nav-buynow,
-      .bottom-nav-buynow:active,
-      .bottom-nav-buynow:hover,
-      .bottom-nav-buynow:focus {
-        background-color: #fff;
-        color: #c34135;
-      }
-  
-      .bottom-nav-cart,
-      .bottom-nav-wishlist {
-        flex-basis: 80px;
-        background-color: #fff;
-      }
-  
-      .bottom-nav-cart,
-      .bottom-nav-cart a,
-      .bottom-nav-wishlist,
-      .bottom-nav-wishlist span {
-        color: #b2b2b2;
-        font-size: 12.5px;
-        text-decoration: none;
-      }
-  
-      .bottom-nav-button {
-        border: none;
-      }
-  
-      .bottom-nav-img {
-        display: inline;
-        height: 12px;
-        width: 13px;
-        margin-right: 5px;
-      }
-  
-      .bottomNavHidden {
-        visibility: hidden;
-        transition: ease-in-out 0.2s;
-        transform: translateY(100%);
-      }
-  
-      .bottomNavActive {
-        visibility: visible;
-        transition: ease-in-out 0.2s;
-        transform: translateY(0);
-      }
-  
-      .bottomNavHidden {
-        visibility: hidden;
-        transition: ease-in-out 0.2s;
-        transform: translateY(100%);
-      }
-  
-      .bottom-nav > #menubar-add2wishlist {
-        background-color: #fff;
-        color: #b2b2b2;
-        border: none;
-      }
+
+    .cart-icon {
+      height: 23px;
     }
-  
-    @media (max-width: 1024px) {
-      #product-info-only {
-        top: unset !important;
-      }
+
+    .bottom-nav-add2cart > img,
+    .bottom-nav-buynow > img {
+      width: 12px;
+      height: 13px;
+      margin-right: 5px;
     }
-  </style>
-  <div class="bottom-nav">
-    <button
-      class="bottom-nav-button bottom-nav-wishlist mrl-click mm-pg-wishlist"
-      id="menubar-add2wishlist"
-    >
-      <div class="wish-icon"></div>
-      我的最愛
-    </button>
-    <button class="bottom-nav-button bottom-nav-cart mrl-click mm-pg-cart">
-      <a href="/checkout/cart/">
-        <div class="cart-icon noitem" data-after="0"></div>
-        我的購物車
-      </a>
-    </button>
-    <button
-      class="bottom-nav-button bottom-nav-add2cart mrl-click mm-pg-add2cart"
-      id="menubar-add2cart"
-    >
-      <a
-        href="javascript:void(1)"
-        data-id="1"
-        id="tar"
-        style="visibility: hidden; position: absolute"
-      ></a
-      >加入購物車
-    </button>
-    <button
-      class="bottom-nav-button bottom-nav-buynow mrl-click mm-pg-checkout"
-      id="menubar-buynow"
-      data-ga-category="Ecommerce"
-    >
-      立即購買
-    </button>
+
+    .wish-icon::before {
+      content: "";
+      background-image: url("https://www.mrliving.com.tw/media/wysiwyg/MenuBar/Buttom/mmbar_heart.png");
+      background-position: center;
+      background-size: cover;
+      position: absolute;
+      top: 33%;
+      left: 50%;
+      width: 22px;
+      height: 19.5px;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    .wishActive.wish-icon::before {
+      background-image: url("https://www.mrliving.com.tw/media/wysiwyg/MenuBar/Buttom/mmbar_heart_Active.png") !important;
+    }
+
+    .wish-icon {
+      height: 22px;
+    }
+
+    .bottom-nav-add2cart,
+    .bottom-nav-add2cart:active,
+    .bottom-nav-add2cart:hover,
+    .bottom-nav-add2cart:focus {
+      background-color: #c34135;
+      color: #fff;
+    }
+
+    .bottom-nav-buynow,
+    .bottom-nav-buynow:active,
+    .bottom-nav-buynow:hover,
+    .bottom-nav-buynow:focus {
+      background-color: #fff;
+      color: #c34135;
+    }
+
+    .bottom-nav-cart,
+    .bottom-nav-wishlist {
+      flex-basis: 80px;
+      background-color: #fff;
+    }
+
+    .bottom-nav-cart,
+    .bottom-nav-cart a,
+    .bottom-nav-wishlist,
+    .bottom-nav-wishlist span {
+      color: #b2b2b2;
+      font-size: 12.5px;
+      text-decoration: none;
+    }
+
+    .bottom-nav-button {
+      border: none;
+    }
+
+    .bottom-nav-img {
+      display: inline;
+      height: 12px;
+      width: 13px;
+      margin-right: 5px;
+    }
+
+    .bottomNavHidden {
+      visibility: hidden;
+      transition: ease-in-out 0.2s;
+      transform: translateY(100%);
+    }
+
+    .bottomNavActive {
+      visibility: visible;
+      transition: ease-in-out 0.2s;
+      transform: translateY(0);
+    }
+
+    .bottomNavHidden {
+      visibility: hidden;
+      transition: ease-in-out 0.2s;
+      transform: translateY(100%);
+    }
+
+    .bottom-nav > #menubar-add2wishlist {
+      background-color: #fff;
+      color: #b2b2b2;
+      border: none;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    #product-info-only {
+      top: unset !important;
+    }
+  }
+</style>
+<div class="bottom-nav">
+  <button
+    class="bottom-nav-button bottom-nav-wishlist mrl-click mm-pg-wishlist"
+    id="menubar-add2wishlist"
+  >
+    <div class="wish-icon"></div>
+    我的最愛
+  </button>
+  <button class="bottom-nav-button bottom-nav-cart mrl-click mm-pg-cart">
+    <a href="/checkout/cart/">
+      <div class="cart-icon noitem" data-after="0"></div>
+      我的購物車
+    </a>
+  </button>
+  <button
+    class="bottom-nav-button bottom-nav-add2cart mrl-click mm-pg-add2cart"
+    id="menubar-add2cart"
+  >
+    <a
+      href="javascript:void(1)"
+      data-id="1"
+      id="tar"
+      style="visibility: hidden; position: absolute"
+    ></a
+    >加入購物車
+  </button>
+  <button
+    class="bottom-nav-button bottom-nav-buynow mrl-click mm-pg-checkout"
+    id="menubar-buynow"
+    data-ga-category="Ecommerce"
+  >
+    立即購買
+  </button>
+</div>
+
+<div class="add2carOption">
+  <div class="qtyChoose">
+    <p class="qty-text">購買數量</p>
   </div>
-  
-  <div class="add2carOption">
-    <div class="qtyChoose">
-      <p class="qty-text">購買數量</p>
-    </div>
-    <button class="add2carOption-btn mrl-click mm-pg-add2cart">
-      <a class="add2carOption-btn-a" data-ga-category="Ecommerce">確定</a>
-    </button>
-  </div>
-  
-  <script type="text/javascript" defer>
-    (function () {
-      var $buyNowEl = document.querySelector("#menubar-buynow");
-      var add2carOption = document.querySelector(".add2carOption");
-      var mmBarAddToCartBtn = document.querySelector("#menubar-add2cart");
-      var add2carOptionBtn = document.querySelector(".add2carOption-btn");
-      var toggle = false;
-      var priceLabel =
-        document.querySelector("#mrl-final_price") || document.querySelector("#mrl-configurable_final_price")
-      var priceIncrease = document.querySelectorAll(
-        "#product-info-only div.aunav8f.mgz-element.mgz-child.mgz-element-product_attribute > div span > strong"
-      );
-      var pageType = document.querySelector(".ga-page")?.value;
-      checkProductType();
-  
-      // priceIncrease.forEach((el) => {
-      //   if (el.textContent.includes("漲")) {
-      //     el.classList.add("tar1");
-      //   }
-      // });
-      var mmbar = document.querySelector(".bottom-nav ");
-      priceLabel.classList.add("tar2");
-  
-      const controlMMbar = function () {
-        let hamburgerActive = false;
-  
-        document.addEventListener("click", function (e) {
-          let bottomNav = document.querySelector(".bottom-nav");
-          if (event.target.classList.contains("ninjamenus-top-triggered")) {
-            event.stopPropagation();
-  
-            hamburgerActive = !hamburgerActive;
-            bottomNav.classList.toggle("bottomNavHidden", hamburgerActive);
-            bottomNav.classList.toggle("bottomNavActive", !hamburgerActive);
-          }
-        });
-      };
-  
-      function mmbarBtnClickFeedback(element, changeTxt) {
-        if (element && element.childNodes[1]) {
-          element.childNodes[1].textContent = changeTxt;
-        }
-        element.disabled = true;
-      }
-      function mmbarShowOriginAddBtn(element, changeTxt) {
-        if (element && element.childNodes[1]) {
-          element.childNodes[1].textContent = changeTxt;
-        }
-        element.disabled = false;
-      }
-  
-      function clickOriginAddtoCart() {
-        document.querySelector("#product-addtocart-button").click();
-      }
-  
-      function clickOriginAddtoWishList() {
-        document.querySelector(".ppbd-addtowishlist .action.towishlist").click();
-      }
-  
-      function clickLogin() {
-        document.querySelector(".mt_signin").click();
-      }
-  
-      function isLogin() {
-        return document.querySelector(".mt_signin") === null ? true : false;
-      }
-  
-      //改變"數量選擇input和箭頭"位置
-      function changeAdd2carPos() {
-        if(pageType !== "product") return;
-        var add2carOption = document.querySelector(
-          ".ppbd-product-addtocart .product-add-form"
-        );
-        var qtyChanger = document.querySelector(
-          ".ppbd-product-addtocart .qty-changer"
-        );
-        var qtyText = document.querySelector(".qty-text");
-  
-        if (window.innerWidth < 768) {
-          qtyChanger.children[0].innerHTML = "+";
-          qtyChanger.children[1].innerHTML = "-";
-          var parent = qtyText.parentNode;
-          parent.insertBefore(add2carOption, qtyText);
-        }
-      }
-  
-      changeAdd2carPos();
-  
-      //reset
-      function resetAdd2carPos() {
-        if (pageType !== 'product') return;
-        var add2carOption = document.querySelector(".product-add-form");
-        var mgzElementProductAddtocart = document.querySelector(
-          ".mgz-element-product_addtocart .ppbd-product-addtocart"
-        );
-        var qtyChanger = document.querySelector(".product-add-form .qty-changer");
-        var goTobuy = document.querySelector("#go2buy");
-  
-        var qtyText = document.querySelector(".qty-text");
-  
-        qtyChanger.children[0].innerHTML = "▲";
-        qtyChanger.children[1].innerHTML = "▼";
-  
-        if (mgzElementProductAddtocart) {
-          mgzElementProductAddtocart.appendChild(add2carOption);
-        }
-      }
-  
-      //限制鍵盤修改數量
-      document.addEventListener("keydown", function (event) {
-        if (
-          event.target.classList.contains("input-text") &&
-          event.target.classList.contains("qty")
-        ) {
-          event.preventDefault();
-        }
-      });
-  
-      //限制箭頭修改數量
-      document.addEventListener("click", function (event) {
-        if (event.target.classList.contains("qty-inc")) {
-          handleArrowClick(true);
-        }
-        if (event.target.classList.contains("qty-dec")) {
-          handleArrowClick(false);
-        }
-      });
-  
-      function handleArrowClick(increase) {
-        var qtyInput = document.querySelector(
-          ".product-add-form .box-tocart input"
-        );
-        var qtyValue = parseInt(qtyInput.value);
-  
-        if (increase) {
-          qtyValue = Math.min(qtyValue, 20);
-        } else {
-          qtyValue = Math.max(qtyValue, 1);
-        }
-  
-        qtyInput.value = qtyValue.toString();
-      }
-  
-      //隨裝置寬度改變
-      window.addEventListener("resize", debounce(resizeHandler, 500));
-  
-      function resizeHandler() {
-        if (window.innerWidth < 768) {
-          changeAdd2carPos();
-        } else {
-          resetAdd2carPos();
-        }
-      }
-  
-      //防止過度觸發resize
-      function debounce(func, delaytime) {
-        var timer;
-        return function () {
-          var context = this;
-          var args = arguments;
-          clearTimeout(timer);
-          timer = setTimeout(function () {
-            func.apply(context, args);
-          }, delaytime);
-        };
-      }
-  
-      //我的最愛
-      var mmBarAddToWishListBtn = document.querySelector("#menubar-add2wishlist");
-      mmBarAddToWishListBtn.addEventListener(
-        "click",
-        function (e) {
-          if (isLogin()) {
-            clickOriginAddtoWishList();
-            mmBarAddToWishListBtn
-              .querySelector(".wish-icon")
-              .classList.add("wishActive");
-          } else {
-            console.log('尚未登入')
-            clickLogin();
-            mmBarAddToWishListBtn
-              .querySelector(".wish-icon")
-              .classList.add("wishActive");
-          }
-        },
-        false
-      );
-  
-      //點擊加入購物車
-      mmBarAddToCartBtn.addEventListener(
-        "click",
-        function () {
-          if (toggle == false) {
-            showAdd2carOption();
-          } else {
-            hideAdd2carOption();
-          }
-  
-          event.stopPropagation();
-        },
-        false
-      );
-  
-      //點擊空白處隱藏
-      document.querySelector("#maincontent").addEventListener(
-        "click",
-        function () {
-          hideAdd2carOption();
-        },
-        false
-      );
-  
-      //控制加入購物車選單
-      function showAdd2carOption() {
-        if (toggle == false) {
-          add2carOption.classList.add("add2carActive");
-          mmbar.classList.add("notActive");
-          toggle = true;
-        }
-      }
-  
-      function hideAdd2carOption() {
-        if (toggle == true) {
-          add2carOption.classList.remove("add2carActive");
-          mmbar.classList.remove("notActive");
-          toggle = false;
-        }
-      }
-  
-      //點擊加入購物車中的"確定"
-      add2carOptionBtn.addEventListener(
-        "click",
-        function (e) {
-          disableBuyButton("加入中...");
-          clickOriginAddtoCart();
-          hideAdd2carOption();
-        },
-        false
-      );
-  
-      function disableBuyButton(add2CartChangeTxt, buyNowChangeTxt) {
-        mmbarBtnClickFeedback(mmBarAddToCartBtn, add2CartChangeTxt);
-        mmbarBtnClickFeedback($buyNowEl, buyNowChangeTxt);
-      }
-  
-      function enableBuyButton(add2CartChangeTxt, buyNowChangeTxt) {
-        mmbarShowOriginAddBtn(
-          mmBarAddToCartBtn,
-          add2CartChangeTxt == undefined ? "加入購物車" : add2CartChangeTxt
-        );
-        mmbarShowOriginAddBtn(
-          $buyNowEl,
-          buyNowChangeTxt == undefined ? "立即購買" : buyNowChangeTxt
-        );
-      }
-  
-      function checkProductType() {
-        if (!(pageType === "product")) {
-          document.getElementById("go2buy").style.display = "none";
-          $buyNowEl.style.pointerEvents = "none";
-          $buyNowEl.style.backgroundColor = "#cccccc";
-          $buyNowEl.style.color = "#fff";
-          $buyNowEl.textContent = "商品已售完";
-          mmBarAddToCartBtn.disabled = true;
-          mmBarAddToCartBtn.style.display = "none";
-        }
-      }
-  
-      //監聽購物車數字
-      var $miniCartNumSelector = document.querySelector(
-        ".minicart-wrapper .counter-number"
-      );
-      var MutationObserver =
-        window.MutationObserver || window.WebKitMutationObserver;
-      if (MutationObserver) {
-        var MutationObserverConfig = {
-          childList: true,
-          subtree: true,
-          characterData: true,
-          attributes: true,
-        };
-        var miniCartWrapperSelector = document.querySelector(".minicart-wrapper");
-  
-        var observer = new MutationObserver(function (mutations) {
-          enableBuyButton();
-          console.log("mutations", mutations);
-          mutations.forEach(function (mutation) {
-            var $isInitEntry =
-              mutation.type === "childList" &&
-              mutation.target.className == "counter-number";
-            var $isClickEntry =
-              mutation.type === "characterData" &&
-              mutation.target.parentElement.className == "counter-number";
-            if ($isInitEntry || $isClickEntry) {
-              var newCartNum = parseInt(mutation.target.textContent);
-              if (newCartNum > 0) {
-                var cartIcon = document.querySelector(".cart-icon");
-                cartIcon.setAttribute("data-after", newCartNum);
-                cartIcon.classList.remove("noitem");
-              }
-            }
-          });
-        });
-        observer.observe($miniCartNumSelector, MutationObserverConfig);
-      } else if ($miniCartNumSelector.addEventListener) {
-        $miniCartNumSelector.addEventListener(
-          "DOMSubtreeModified",
-          function (e) {
-            var newCartNum = e.target.textContent;
-            if (newCartNum !== 0) {
-              document
-                .querySelector(".cart-icon")
-                .setAttribute("data-after", newCartNum);
-              document.querySelector(".cart-icon").classList.remove("noitem");
-            } else {
-              document.querySelector(".cart-icon").classList.add("noitem");
-            }
-            enableBuyButton();
-          },
-          false
-        );
-      } else {
-        console.log("unsupported browser");
-      }
-      //點擊漢堡時隱藏底部選單
+  <button class="add2carOption-btn mrl-click mm-pg-add2cart">
+    <a class="add2carOption-btn-a" data-ga-category="Ecommerce">確定</a>
+  </button>
+</div>
+
+<script type="text/javascript" defer>
+  (function () {
+    const pathName = window.location.pathname;
+    var $buyNowEl = document.querySelector("#menubar-buynow");
+    var add2carOption = document.querySelector(".add2carOption");
+    var mmBarAddToCartBtn = document.querySelector("#menubar-add2cart");
+    var add2carOptionBtn = document.querySelector(".add2carOption-btn");
+    var toggle = false;
+    var priceLabel =
+      document.querySelector("#mrl-final_price") || document.querySelector("#mrl-configurable_final_price") || document.querySelector(".product-info-price")
+    var priceIncrease = document.querySelectorAll(
+      "#product-info-only div.aunav8f.mgz-element.mgz-child.mgz-element-product_attribute > div span > strong"
+    );
+    var pageType = document.querySelector(".ga-page")?.value;
+    checkProductType();
+
+    // priceIncrease.forEach((el) => {
+    //   if (el.textContent.includes("漲")) {
+    //     el.classList.add("tar1");
+    //   }
+    // });
+    var mmbar = document.querySelector(".bottom-nav ");
+    priceLabel.classList.add("tar2");
+
+    const controlMMbar = function () {
       let hamburgerActive = false;
-  
+
       document.addEventListener("click", function (e) {
         let bottomNav = document.querySelector(".bottom-nav");
         if (event.target.classList.contains("ninjamenus-top-triggered")) {
           event.stopPropagation();
-  
+
           hamburgerActive = !hamburgerActive;
           bottomNav.classList.toggle("bottomNavHidden", hamburgerActive);
           bottomNav.classList.toggle("bottomNavActive", !hamburgerActive);
         }
       });
-  
-      var lastScrollTop = 0;
-      window.addEventListener(
-        "scroll",
-        function () {
-          var currentScroll =
-            window.pageYOffset || document.documentElement.scrollTop;
-          if (currentScroll > lastScrollTop) {
-            document.querySelector(".bottom-nav").classList.add("scrollUp");
+    };
+
+    function mmbarBtnClickFeedback(element, changeTxt) {
+      if (element && element.childNodes[1]) {
+        element.childNodes[1].textContent = changeTxt;
+      }
+      element.disabled = true;
+    }
+    function mmbarShowOriginAddBtn(element, changeTxt) {
+      if (element && element.childNodes[1]) {
+        element.childNodes[1].textContent = changeTxt;
+      }
+      element.disabled = false;
+    }
+
+    function clickOriginAddtoCart() {
+      document.querySelector("#product-addtocart-button").click();
+    }
+
+    function clickOriginAddtoWishList() {
+      document.querySelector(".ppbd-addtowishlist .action.towishlist").click();
+    }
+
+    function clickLogin() {
+      document.querySelector(".mt_signin").click();
+    }
+
+    function isLogin() {
+      return document.querySelector(".mt_signin") === null ? true : false;
+    }
+
+    //改變"數量選擇input和箭頭"位置
+    function changeAdd2carPos() {
+      if(pageType !== "product") return;
+      var add2carOption = document.querySelector(
+        ".ppbd-product-addtocart .product-add-form"
+      );
+      var qtyChanger = document.querySelector(
+        ".ppbd-product-addtocart .qty-changer"
+      );
+      var qtyText = document.querySelector(".qty-text");
+
+      if (window.innerWidth < 768) {
+        qtyChanger.children[0].innerHTML = "+";
+        qtyChanger.children[1].innerHTML = "-";
+        var parent = qtyText.parentNode;
+        parent.insertBefore(add2carOption, qtyText);
+      }
+    }
+    if(!pathName.includes("home-card-2025")){
+      changeAdd2carPos();
+    }
+
+    //reset
+    function resetAdd2carPos() {
+      if (pageType !== 'product') return;
+      var add2carOption = document.querySelector(".product-add-form");
+      var mgzElementProductAddtocart = document.querySelector(
+        ".mgz-element-product_addtocart .ppbd-product-addtocart"
+      );
+      var qtyChanger = document.querySelector(".product-add-form .qty-changer");
+      var goTobuy = document.querySelector("#go2buy");
+
+      var qtyText = document.querySelector(".qty-text");
+
+      qtyChanger.children[0].innerHTML = "▲";
+      qtyChanger.children[1].innerHTML = "▼";
+
+      if (mgzElementProductAddtocart) {
+        mgzElementProductAddtocart.appendChild(add2carOption);
+      }
+    }
+
+    //限制鍵盤修改數量
+    document.addEventListener("keydown", function (event) {
+      if (
+        event.target.classList.contains("input-text") &&
+        event.target.classList.contains("qty")
+      ) {
+        event.preventDefault();
+      }
+    });
+
+    //限制箭頭修改數量
+    document.addEventListener("click", function (event) {
+      if (event.target.classList.contains("qty-inc")) {
+        handleArrowClick(true);
+      }
+      if (event.target.classList.contains("qty-dec")) {
+        handleArrowClick(false);
+      }
+    });
+
+    function handleArrowClick(increase) {
+      var qtyInput = document.querySelector(
+        ".product-add-form .box-tocart input"
+      );
+      var qtyValue = parseInt(qtyInput.value);
+
+      if (increase) {
+        qtyValue = Math.min(qtyValue, 20);
+      } else {
+        qtyValue = Math.max(qtyValue, 1);
+      }
+
+      qtyInput.value = qtyValue.toString();
+    }
+
+    //隨裝置寬度改變
+    if(!pathName.includes("home-card-2025")){
+      window.addEventListener("resize", debounce(resizeHandler, 500));
+    }
+
+    function resizeHandler() {
+      if (window.innerWidth < 768) {
+        changeAdd2carPos();
+      } else {
+        resetAdd2carPos();
+      }
+    }
+
+    //防止過度觸發resize
+    function debounce(func, delaytime) {
+      var timer;
+      return function () {
+        var context = this;
+        var args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          func.apply(context, args);
+        }, delaytime);
+      };
+    }
+
+    //我的最愛
+    var mmBarAddToWishListBtn = document.querySelector("#menubar-add2wishlist");
+    mmBarAddToWishListBtn.addEventListener(
+      "click",
+      function (e) {
+        if (isLogin()) {
+          clickOriginAddtoWishList();
+          mmBarAddToWishListBtn
+            .querySelector(".wish-icon")
+            .classList.add("wishActive");
+        } else {
+          console.log('尚未登入')
+          clickLogin();
+          mmBarAddToWishListBtn
+            .querySelector(".wish-icon")
+            .classList.add("wishActive");
+        }
+      },
+      false
+    );
+
+    //點擊加入購物車
+    mmBarAddToCartBtn.addEventListener("click", function (e) {
+        if(pathName.includes("home-card-2025")){
+            disableBuyButton("加入中...");
+            clickOriginAddtoCart();
+        }else{
+          if (toggle == false) {
+            showAdd2carOption();
           } else {
-            document.querySelector(".bottom-nav").classList.remove("scrollUp");
+            hideAdd2carOption();
           }
-          lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }
+       
+        event.stopPropagation();
+      },
+      false
+    );
+
+    //點擊空白處隱藏
+    document.querySelector("#maincontent").addEventListener(
+      "click",
+      function () {
+        hideAdd2carOption();
+      },
+      false
+    );
+
+    //控制加入購物車選單
+    function showAdd2carOption() {
+      if (toggle == false) {
+        add2carOption.classList.add("add2carActive");
+        mmbar.classList.add("notActive");
+        toggle = true;
+      }
+    }
+
+    function hideAdd2carOption() {
+      if (toggle == true) {
+        add2carOption.classList.remove("add2carActive");
+        mmbar.classList.remove("notActive");
+        toggle = false;
+      }
+    }
+
+    //點擊加入購物車中的"確定"
+    add2carOptionBtn.addEventListener(
+      "click",
+      function (e) {
+        disableBuyButton("加入中...");
+        clickOriginAddtoCart();
+        hideAdd2carOption();
+      },
+      false
+    );
+
+    function disableBuyButton(add2CartChangeTxt, buyNowChangeTxt) {
+      mmbarBtnClickFeedback(mmBarAddToCartBtn, add2CartChangeTxt);
+      mmbarBtnClickFeedback($buyNowEl, buyNowChangeTxt);
+    }
+
+    function enableBuyButton(add2CartChangeTxt, buyNowChangeTxt) {
+      mmbarShowOriginAddBtn(
+        mmBarAddToCartBtn,
+        add2CartChangeTxt == undefined ? "加入購物車" : add2CartChangeTxt
+      );
+      mmbarShowOriginAddBtn(
+        $buyNowEl,
+        buyNowChangeTxt == undefined ? "立即購買" : buyNowChangeTxt
+      );
+    }
+
+    function checkProductType() {
+      if (!(pageType === "product")) {
+        document.getElementById("go2buy").style.display = "none";
+        $buyNowEl.style.pointerEvents = "none";
+        $buyNowEl.style.backgroundColor = "#cccccc";
+        $buyNowEl.style.color = "#fff";
+        $buyNowEl.textContent = "商品已售完";
+        mmBarAddToCartBtn.disabled = true;
+        mmBarAddToCartBtn.style.display = "none";
+      }
+    }
+
+    //監聽購物車數字
+    var $miniCartNumSelector = document.querySelector(
+      ".minicart-wrapper .counter-number"
+    );
+    var MutationObserver =
+      window.MutationObserver || window.WebKitMutationObserver;
+    if (MutationObserver) {
+      var MutationObserverConfig = {
+        childList: true,
+        subtree: true,
+        characterData: true,
+        attributes: true,
+      };
+      var miniCartWrapperSelector = document.querySelector(".minicart-wrapper");
+
+      var observer = new MutationObserver(function (mutations) {
+        enableBuyButton();
+        console.log("mutations", mutations);
+        mutations.forEach(function (mutation) {
+          var $isInitEntry =
+            mutation.type === "childList" &&
+            mutation.target.className == "counter-number";
+          var $isClickEntry =
+            mutation.type === "characterData" &&
+            mutation.target.parentElement.className == "counter-number";
+          if ($isInitEntry || $isClickEntry) {
+            var newCartNum = parseInt(mutation.target.textContent);
+            if (newCartNum > 0) {
+              var cartIcon = document.querySelector(".cart-icon");
+              cartIcon.setAttribute("data-after", newCartNum);
+              cartIcon.classList.remove("noitem");
+            }
+          }
+        });
+      });
+      observer.observe($miniCartNumSelector, MutationObserverConfig);
+    } else if ($miniCartNumSelector.addEventListener) {
+      $miniCartNumSelector.addEventListener(
+        "DOMSubtreeModified",
+        function (e) {
+          var newCartNum = e.target.textContent;
+          if (newCartNum !== 0) {
+            document
+              .querySelector(".cart-icon")
+              .setAttribute("data-after", newCartNum);
+            document.querySelector(".cart-icon").classList.remove("noitem");
+          } else {
+            document.querySelector(".cart-icon").classList.add("noitem");
+          }
+          enableBuyButton();
         },
         false
       );
-  
-      require(["jquery", "Mrl_SocialLogin/js/pslogin-mixin"], function (
-        $,
-        pslogin
-      ) {
-        var mmBarGoCheckoutBtn = document.querySelector("#menubar-buynow");
-        var domain = window.location.origin;
-  
-        mmBarGoCheckoutBtn.addEventListener(
-          "click",
-          function (e) {
-            disableBuyButton();
-            clickOriginAddtoCart();
-            if (isLogin()) {
-              setTimeout(
-                function () {
-                  window.location.href = domain + "/checkout/";
-                },
-                1000,
-                e.target
-              );
-            } else {
-              pslogin($).setGoToUrl(domain + "/checkout/");
-              clickLogin();
-            }
+    } else {
+      console.log("unsupported browser");
+    }
+    //點擊漢堡時隱藏底部選單
+    let hamburgerActive = false;
+
+    document.addEventListener("click", function (e) {
+      let bottomNav = document.querySelector(".bottom-nav");
+      if (event.target.classList.contains("ninjamenus-top-triggered")) {
+        event.stopPropagation();
+
+        hamburgerActive = !hamburgerActive;
+        bottomNav.classList.toggle("bottomNavHidden", hamburgerActive);
+        bottomNav.classList.toggle("bottomNavActive", !hamburgerActive);
+      }
+    });
+
+    var lastScrollTop = 0;
+    window.addEventListener(
+      "scroll",
+      function () {
+        var currentScroll =
+          window.pageYOffset || document.documentElement.scrollTop;
+        if (currentScroll > lastScrollTop) {
+          document.querySelector(".bottom-nav").classList.add("scrollUp");
+        } else {
+          document.querySelector(".bottom-nav").classList.remove("scrollUp");
+        }
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+      },
+      false
+    );
+
+    require(["jquery", "Mrl_SocialLogin/js/pslogin-mixin"], function (
+      $,
+      pslogin
+    ) {
+      var mmBarGoCheckoutBtn = document.querySelector("#menubar-buynow");
+      var domain = window.location.origin;
+
+      mmBarGoCheckoutBtn.addEventListener(
+        "click",
+        function (e) {
+          disableBuyButton();
+          clickOriginAddtoCart();
+          if (isLogin()) {
+            setTimeout(
+              function () {
+                window.location.href = domain + "/checkout/";
+              },
+              1000,
+              e.target
+            );
+          } else {
+            pslogin($).setGoToUrl(domain + "/checkout/");
+            clickLogin();
+          }
+        },
+        false
+      );
+    });
+
+    require(["jquery"], function ($) {
+      mmBarAddToCartBtn.addEventListener("click", function () {
+        // var targets = document.querySelectorAll(
+        //   "#product-info-only div.aunav8f.mgz-element.mgz-child.mgz-element-product_attribute > div span > strong"
+        // );
+        // var target1_top;
+
+        // targets.forEach((target) => {
+        //   if (target.classList.contains("tar1")) {
+        //     target1_top = $(".tar1").offset().top - 50;
+        //   }
+        // });
+
+        var target2_top = $(".tar2").offset().top;
+        var $body = window.opera
+          ? document.compatMode == "CSS1Compat"
+            ? $("html")
+            : $("body")
+          : $("html,body");
+        var scrollTopValue = target2_top;
+        $body.animate(
+          {
+            scrollTop: scrollTopValue,
           },
-          false
+          800
         );
       });
-  
-      require(["jquery"], function ($) {
-        mmBarAddToCartBtn.addEventListener("click", function () {
-          // var targets = document.querySelectorAll(
-          //   "#product-info-only div.aunav8f.mgz-element.mgz-child.mgz-element-product_attribute > div span > strong"
-          // );
-          // var target1_top;
-  
-          // targets.forEach((target) => {
-          //   if (target.classList.contains("tar1")) {
-          //     target1_top = $(".tar1").offset().top - 50;
-          //   }
-          // });
-  
-          var target2_top = $(".tar2").offset().top;
-          var $body = window.opera
-            ? document.compatMode == "CSS1Compat"
-              ? $("html")
-              : $("body")
-            : $("html,body");
-          var scrollTopValue = target2_top;
-          $body.animate(
-            {
-              scrollTop: scrollTopValue,
-            },
-            800
-          );
-        });
-      });
-    })();
-  </script>
-  
+    });
+  })();
+</script>
