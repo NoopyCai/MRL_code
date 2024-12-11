@@ -353,6 +353,7 @@
   
         cartItems.forEach(function (cartItem) {
           var kitItem = cartItem.querySelector(".mst-cart-item-is-product-kit");
+          var itemName = cartItem.querySelector(".product-item-name").innerText;
           var qtyInputContainer = cartItem.querySelector(".control");
           var qtyArrow = qtyInputContainer.querySelector(".qty-changer ");
           var qtyInputPar = qtyInputContainer.closest(".field ");
@@ -362,6 +363,12 @@
             qtyInputPar.style.display = "flex";
             qtyInputPar.style.justifyContent = "center";
             qtyInputPar.style.marginTop = "10px";
+            qtyInput.disabled = true;
+            qtyArrow.style.display = "none";
+          }
+
+          if(itemName.includes("成家卡")){
+            var qtyInput = qtyInputContainer.querySelector("input");
             qtyInput.disabled = true;
             qtyArrow.style.display = "none";
           }
