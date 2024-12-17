@@ -1,0 +1,53 @@
+<style>
+    #product-item-info_5664 > div > div.price-box.price-final_price > div{
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: left;
+        height: 4rem;
+    }
+    .mrl_homecard_discount_txt{
+        color: #666666;
+        font-size: 1.1rem;
+        margin: 0 4px;
+    }
+    .mrl_homecard_discount_price{
+        color: #333;
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+    .mrl_homecard_original_price{
+        font-weight: 400 !important;
+        text-decoration: line-through;
+        color: #666;
+    }
+</style>
+<script>
+    (function(){
+        const allCategoryItems = document.querySelectorAll('.products-grid .product-item .product-item-name a');
+    
+        allCategoryItems.forEach((item) => {
+            if(item.innerText.includes('新春成家卡')){
+                const discountPriceContainer = createElement('div', 'mrl_homecard_discount_container', '')
+                const mrl_homecard_discount_txt = createElement('span', 'mrl_homecard_discount_txt', '(售價已折)')
+                const mrl_homecard_discount_price = createElement('span', 'mrl_homecard_discount_price', '$9,500')
+
+                discountPriceContainer.appendChild(mrl_homecard_discount_price);
+                discountPriceContainer.appendChild(mrl_homecard_discount_txt);
+                
+                const priceBox = item.parentNode.parentNode.querySelector('.price-final_price .price-box')
+                priceBox.appendChild(discountPriceContainer);
+                priceBox.querySelector('#product-price-5664').classList.add('mrl_homecard_original_price');
+            }else{
+                return;
+            }
+        })
+
+        function createElement(tag, className, innerHTML) {
+            innerHTML = innerHTML || '';
+            const element = document.createElement(tag);
+            element.className = className;
+            element.innerHTML = innerHTML;
+            return element;
+        }   
+    })();
+</script>

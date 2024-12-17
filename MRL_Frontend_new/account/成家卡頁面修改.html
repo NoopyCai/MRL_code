@@ -1,0 +1,38 @@
+<script>
+    (function(){
+        document.querySelector('#maincontent .page-title .base').innerText = '成家卡';
+        document.querySelector('.nav.item.current strong').innerText = '成家卡';   
+        var allDataDates = document.querySelectorAll('[data-th="有效日至"]');
+        if(allDataDates.length > 0){
+            allDataDates.forEach(function(dataDate){
+                dataDate.innerText = '無限期';
+            });
+        };
+    })();
+</script>
+<style>
+    .col.usage{
+        display: none;
+    }
+    .amcard-delete.action{
+        display: none;
+    }
+    .amcard-field-container.-code{
+        display: none;
+    }
+    #maincontent > div.columns > div.column.main > div.amcardacc-codes-block > div > div.table-wrapper > table > tbody > tr > td.col.usage{
+        display: none;
+    }
+    #maincontent > div.columns > div.column.main > div.amcardacc-codes-block > div > div.table-wrapper > table > thead > tr > th:nth-child(6){
+        display: none;
+    }
+</style>
+
+<script>
+    var accountAllNavItems = document.querySelectorAll('#block-collapsible-nav ul li a')
+    accountAllNavItems.forEach(function(navItem){
+        if(navItem.innerText === '禮品卡'){
+            navItem.innerText = '成家卡';  ;
+        }
+    })
+</script>
