@@ -1,0 +1,55 @@
+<script>
+    (function(){
+        var qtyTables = document.querySelectorAll(".order-tables .col-product .product-sku-block");
+     if (qtyTables.length === 0) return;
+     qtyTables.forEach(function(qtyTable){
+        var skuLink = qtyTable.querySelector("a");
+        if(skuLink.innerText.includes("MRL-Home-Card")){
+            var currentRow = qtyTable.closest("tr");
+            processRow(currentRow);
+        }
+
+     })
+
+     function processRow(row) {
+            var rowInputs = row.querySelectorAll("input");
+            var rowTextArea = row.querySelector("textarea");
+            var actionTables = row.querySelectorAll("td:last-child table");
+            var qtyCol = row.querySelector(".col-qty");
+    
+            // Disable input
+            Array.from(rowInputs).forEach(function (rowInput) {
+                rowInput.readOnly = true;
+                rowInput.style.backgroundColor = "#f0f0f0";
+            });
+            
+            // Disable textarea
+            if (rowTextArea) {
+                rowTextArea.readOnly = true;
+                rowTextArea.style.backgroundColor = "#f0f0f0";
+            }
+            // Disable action tables
+            Array.from(actionTables).forEach(function (actionTable) {
+                actionTable.style.display = "none";
+            });
+            // Disable qty col & 插入文案
+            if (qtyCol) {
+                var disableEditText = document.createElement("p");
+                disableEditText.innerText = "{※如需調整成家卡額度，請移除後重新加入商品}";
+                disableEditText.style.fontWeight = "bold";
+                disableEditText.style.textAlign = "left";
+                disableEditText.style.color = "red";
+                disableEditText.style.marginTop = "10px";
+                qtyCol.appendChild(disableEditText);
+            }
+
+            // Disable action buttons
+            setTimeout(function () {
+                var actionButtons = row.querySelectorAll("button");
+                Array.from(actionButtons).forEach(function (actionButton) {
+                    actionButton.style.display = "none";
+                });
+            }, 500);
+        }
+    })();
+</script>
