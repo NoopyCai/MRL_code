@@ -33,12 +33,11 @@
 
                 discountPriceContainer.appendChild(mrl_homecard_discount_price);
                 discountPriceContainer.appendChild(mrl_homecard_discount_txt);
-                
-                const priceBox = item.parentNode.parentNode.querySelector('.price-final_price .price-box')
-                priceBox.appendChild(discountPriceContainer);
-                priceBox.querySelector('#product-price-5664').classList.add('mrl_homecard_original_price');
-            }else{
-                return;
+                const priceBox = item.closest('.product-item-details').querySelector('.price-final_price .price-box')
+                if(priceBox){
+                    priceBox.appendChild(discountPriceContainer);
+                    priceBox.querySelector('#product-price-5664').classList.add('mrl_homecard_original_price');
+                }
             }
         })
 
