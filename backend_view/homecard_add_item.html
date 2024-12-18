@@ -1,0 +1,19 @@
+<script>
+    (function(){
+        var homecardImgSelect = document.querySelector('#product_composite_configure_form .am_giftcard #am_giftcard_image')
+        var homecardQtyInput = document.querySelector('#product_composite_configure_form #product_composite_configure_input_qty')
+        if(homecardImgSelect && homecardQtyInput){
+            homecardImgSelect.value = '27'
+            homecardQtyInput.value = '1'
+            disabledElement(homecardImgSelect);
+            disabledElement(homecardQtyInput);
+        }
+
+        function disabledElement(elem){
+            elem.readOnly = true;
+            elem.style.backgroundColor = 'rgb(240, 240, 240)';
+            elem.style.color = 'rgb(102, 102, 102)';
+            elem.style.opacity = '0.5'
+        }
+    })();
+</script>

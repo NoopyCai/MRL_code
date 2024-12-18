@@ -1,0 +1,79 @@
+<style>
+    /* 調整成家卡layout & style */
+    .amcard-check,
+    .amcard-delete{
+        color: #006bb4 !important;
+        font-weight: 400 !important;
+        background: transparent !important;
+    }
+    .amcard-codes-list div{
+        margin-bottom: 1rem;
+    }
+    .amcard-codes-list div span{
+        margin-right: 5px;
+    }
+    .amcard-field.-datalist{
+        cursor: pointer;
+    }
+    .hiddenOption{
+        display: none !important;
+    }
+</style>
+<script>
+    (function(){
+        var homeCardCheckBtn = document.querySelector('.amcard-check');
+        var homeCardText = document.querySelectorAll('.table-totals .totals .title')[1];
+        var codeInputOptions = document.querySelectorAll('.amgcard-datalist-ul .amcard-datalist-li');
+        var codeUseBtn = document.querySelector('.amcard-button');
+        var codeSelectField = document.querySelector('.amgcard-datalist-container')
+
+
+        if(homeCardCheckBtn && homeCardText){
+            changeHomeCardText(homeCardCheckBtn, homeCardText);
+        }
+
+        if(codeSelectField){
+            codeSelectField.addEventListener('click', checkDuplicateCode);
+        }
+
+        //點擊序號選項後自動點擊使用按鈕    
+        if(codeInputOptions.length > 0){
+            codeInputOptions.forEach(function(option){
+                option.addEventListener('click', function(){
+                    codeUseBtn.click();
+                })
+            })
+        }
+
+        //修改文辭
+        function changeHomeCardText(homeCardCheckBtn, homeCardText){
+            homeCardCheckBtn.innerText = '成家卡明細';
+            homeCardText.innerText = '成家卡';
+        }
+
+
+        //檢查是否有已使用的序號，若有則隱藏該選項
+        function checkDuplicateCode(){
+            var alreadyUsedCodesArray = [];
+            var optionCodes = document.querySelectorAll('.amgcard-datalist-ul .amcard-datalist-li');
+            var alreadyUsedCodes = document.querySelectorAll('.amcard-codes-list div span');
+            if(alreadyUsedCodes.length > 0){
+                alreadyUsedCodes.forEach(function(code){
+                    alreadyUsedCodesArray.push(code.innerText.trim());
+                })
+            }
+            
+            optionCodes.forEach(function(optionCode){
+                if(alreadyUsedCodesArray.includes(optionCode.innerText)){
+                    optionCode.classList.add('hiddenOption');
+                }else{
+                    if(optionCode.classList.contains('hiddenOption')){
+                        optionCode.classList.remove('hiddenOption');
+                    }
+                }
+            })
+        }   
+
+    })();
+</script>
+
