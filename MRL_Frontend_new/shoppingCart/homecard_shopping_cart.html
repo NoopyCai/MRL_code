@@ -1,9 +1,12 @@
 <style>
     /* 調整成家卡區塊layout & style */
     [data-bind="scope: \'amcard-giftcards\'"] {
-        margin:1rem 0;
+        margin: 1rem 0 0 0;
         position: relative;
         
+    }
+    .amcard-codes-list .table-wrapper{
+        margin-bottom: 0;
     }
     .amcard-field-block{
         position: relative;
@@ -53,15 +56,21 @@
        vertical-align: middle;
     }
     .table-code-items tbody tr .col.expired-date{
-        visibility: hidden;
+        /* visibility: hidden; */
+        position: relative;
+        color: transparent;
         width: 0;
     }
     .table-code-items tbody tr .col.expired-date::after{
         content: '無限期';
+        position: absolute;
+        left: 1rem;
+        width: 85px; 
+        color: #333;
         font-size: 14px;
         font-weight: 400;
-        position: relative;
-        bottom: 1rem;
+        position: absolute;
+        /* bottom: 1rem; */
         visibility: visible;
     }
     /* 成家卡明細title */
@@ -78,6 +87,7 @@
         }
         .table-code-items tbody tr .col.expired-date{
             width: auto;
+            border-bottom: none !important;
         }
         .table-code-items tbody tr .col.expired-date::before{
             visibility: visible;
@@ -85,6 +95,8 @@
         .table-code-items tbody tr .col.expired-date::after{
             bottom: 0rem;
             right: 7.5rem;
+            left: auto;
+            position: relative;
         }
         .amcard-check{
             margin-bottom: 1rem;
