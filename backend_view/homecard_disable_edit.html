@@ -40,10 +40,12 @@
 
         orderTableObserver.observe(orderTables, { childList: true, subtree: true });
 
+        //處理成家卡item
         function processRow(row) {
             var rowInputs = row.querySelectorAll("input");
             var rowTextArea = row.querySelector("textarea");
             var actionTables = row.querySelectorAll("td:last-child table");
+            var actionDropdown = row.querySelector(".col-actions .admin__control-select") 
             var qtyCol = row.querySelector(".col-qty");
 
             // Disable input
@@ -61,10 +63,21 @@
             Array.from(actionTables).forEach(function (actionTable) {
                 actionTable.style.display = "none";
             });
+            // Disable action dropdown
+            console.log('currentrow', row);
+            if (actionDropdown) {
+                actionDropdown.style.backgroundColor = "#f0f0f0";
+                actionDropdown.style.color = "#999";  
+                actionDropdown.style.border = "1px solid #ccc"; 
+                actionDropdown.style.backgroundImage = "none";
+                actionDropdown.addEventListener('mousedown', function (event) {
+                    event.preventDefault();
+                });
+            }
             // Disable qty col & 插入文案
             if (qtyCol) {
                 var disableEditText = document.createElement("p");
-                disableEditText.innerText = "{※如需調整成家卡額度，請移除後重新加入商品}";
+                disableEditText.innerText = "{※如需調整成家卡額度，請聯絡電商瓊文或宇凡處理}";
                 disableEditText.style.fontWeight = "bold";
                 disableEditText.style.textAlign = "left";
                 disableEditText.style.color = "red";
