@@ -1,28 +1,57 @@
 <script>
-    (function(){
+    (function () {
+        //初始化處理
         var qtyTables = document.querySelectorAll(".order-tables .col-product .product-sku-block");
-     if (qtyTables.length === 0) return;
-     qtyTables.forEach(function(qtyTable){
-        var skuLink = qtyTable.querySelector("a");
-        if(skuLink.innerText.includes("MRL-Home-Card")){
-            var currentRow = qtyTable.closest("tr");
-            processRow(currentRow);
+        if (qtyTables.length === 0) return;
+        qtyTables.forEach(function (qtyTable) {
+            var skuLink = qtyTable.querySelector("a");
+            if (skuLink.innerText.includes("MRL-Home-Card")) {
+                var currentRow = qtyTable.closest("tr");
+                processRow(currentRow);
+            }
+        })
+
+        //處理新增的商品
+        function processHomeCardItem(tbody) {
+            var qtyTables = tbody.querySelectorAll(".col-product .product-sku-block");
+            if (qtyTables.length === 0) return;
+            qtyTables.forEach(function (qtyTable) {
+                var skuLink = qtyTable.querySelector("a");
+                if (skuLink.innerText.includes("MRL-Home-Card")) {
+                    var currentRow = qtyTable.closest("tr");
+                    processRow(currentRow);
+                }
+            })
         }
 
-     })
+        // 監聽order-tables add item
+        var orderTables = document.querySelector('.order-tables');
+        var orderTableObserver = new MutationObserver(function (mutationsList) {
+            mutationsList.forEach(function (mutation) {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach(function (node) {
+                        if (node.tagName && node.tagName.toLowerCase() === 'tbody') {
+                            processHomeCardItem(node);
+                        }
+                    });
+                }
+            });
+        });
 
-     function processRow(row) {
+        orderTableObserver.observe(orderTables, { childList: true, subtree: true });
+
+        function processRow(row) {
             var rowInputs = row.querySelectorAll("input");
             var rowTextArea = row.querySelector("textarea");
             var actionTables = row.querySelectorAll("td:last-child table");
             var qtyCol = row.querySelector(".col-qty");
-    
+
             // Disable input
             Array.from(rowInputs).forEach(function (rowInput) {
                 rowInput.readOnly = true;
                 rowInput.style.backgroundColor = "#f0f0f0";
             });
-            
+
             // Disable textarea
             if (rowTextArea) {
                 rowTextArea.readOnly = true;
