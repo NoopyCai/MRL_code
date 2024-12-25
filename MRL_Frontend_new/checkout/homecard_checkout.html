@@ -1,79 +1,364 @@
 <style>
-    /* 調整成家卡layout & style */
-    .amcard-check,
-    .amcard-delete{
+    /* 調整成家卡區塊layout & style */
+    .amgift-code .payment-option-content {
+        margin: 1rem 0 0 0;
+        position: relative;
+        padding-bottom: 0 !important;
+    }
+    /* .payment-option-content > .amcard-codes-list{
+        height: 0;
+    } */
+    .checkout-payment-method > .amcard-codes-list {
+        padding: 0 2rem 2rem 2rem;
+    }
+    .table-code-items tbody tr td,
+    .table-code-items thead tr{
+        font-size: 14px;
+    }
+    .amcard-check {
+        pointer-events: none;
+        color: #333 !important;
+        font-weight: 600 !important;
+        background: transparent !important;
+        padding-top: 1rem;
+        left: 1rem;
+    }
+    .amcard-check:hover {
+        text-decoration: none !important;
+    }
+    .amcard-delete {
+        visibility: hidden;
+        pointer-events: none;
+    }
+    .amcard-delete-cloned {
         color: #006bb4 !important;
         font-weight: 400 !important;
         background: transparent !important;
+        position: absolute;
+        right: 3%;
+        top: 1.2rem;
+        padding: 0 0 3px 0;
+        border: none;
     }
-    .amcard-codes-list div{
+    .amcard-delete-cloned:hover {
+        border: none;
+        padding: 0 0 3px 0;
+    }
+    .amcard-codes-list div:not([class]) span {
+        margin-right: 5px;
+        display: none;
+    }
+
+    .amcard-codes-list div {
         margin-bottom: 1rem;
     }
-    .amcard-codes-list div span{
+
+    .amcard-codes-list div span {
         margin-right: 5px;
     }
-    .amcard-field.-datalist{
+
+    .amcard-field.-datalist {
         cursor: pointer;
     }
-    .hiddenOption{
+
+    .homecard-hidden,
+    .amcard-button,
+    .col.status {
         display: none !important;
+    }
+    .message.success>*:first-child:before{
+        top: 28px !important;
+    }
+
+    /* 成家卡明細表格調整 */
+    .table-code-items tbody tr {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    .table-code-items tbody tr td {
+        vertical-align: middle;
+        padding: 11px 6px;
+    }
+
+    .message.success {
+        padding: 19px 20px 32px 45px;
+    }
+    .amgift-code .payment-option-content .amcard-codes-list div:not([class]) {
+        height: 0;
+    }
+    /* 成家卡明細title */
+    .block.discount .title:first-child {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .amcard-title {
+        font-weight: 600;
+    }
+
+    .amcard-check {
+        margin-bottom: 1rem;
+    }
+    .homecard-visibility-hidden{
+        visibility: hidden;
+    }
+    @media (max-width: 1440px) {
+        .table-code-items thead tr,
+        .table-code-items tbody tr td {
+            font-size: 13px;
+        }
+
+        .amcard-delete-cloned {
+            font-size: 13px;
+            right: 0;
+        }
+    }
+    @media (max-width: 768px) {
+        .amgift-code .payment-option-content {
+            padding: 0 15px;
+        }
+
+        .table-code-items thead tr,
+        .table-code-items tbody tr td,
+        .amcard-delete-cloned {
+            font-size: 14px;
+        }
+
+        .amcard-delete {
+            top: 0;
+            left: 3%;
+            margin: 0.8rem 0 1rem 0;
+        }
+        .checkout-payment-method > .amcard-codes-list {
+            padding: 0;
+        }
+        .checkout-payment-method .payment-option .payment-option-content{
+            padding: 0;
+        }
+        .table-wrapper .table:not(.totals):not(.cart):not(.table-comparison)>tbody>tr td {
+            padding: 10px 10px 0px 15px;
+        }
     }
 </style>
 <script>
-    (function(){
+    (function () {
+        var codeInputOptions = document.querySelectorAll('.amgcard-datalist-ul .amcard-datalist-li');
+
+        // 檢查是否有可使用的序號，不執行後續程式
+        if (!checkCodeExisted(codeInputOptions)) return;
+
+        var homeCardContainer = document.querySelector('.amgift-code .payment-option-content');
         var homeCardCheckBtn = document.querySelector('.amcard-check');
         var homeCardText = document.querySelectorAll('.table-totals .totals .title')[1];
         var codeInputOptions = document.querySelectorAll('.amgcard-datalist-ul .amcard-datalist-li');
         var codeUseBtn = document.querySelector('.amcard-button');
-        var codeSelectField = document.querySelector('.amgcard-datalist-container')
+        var homeCardInputField = document.querySelector('.amcard-field.-datalist');
+        var amcarDeleteBtns = document.querySelectorAll('.amcard-delete');
 
+        var tableCodeItems = document.querySelectorAll('.amcard-codes-list .table-code-items tbody tr');
+        var amcardCodesList = document.querySelector('.checkout-payment-method > .amcard-codes-list');
 
-        if(homeCardCheckBtn && homeCardText){
-            changeHomeCardText(homeCardCheckBtn, homeCardText);
+        if (homeCardContainer) {
+            // 監聽成家卡區塊變動
+            var observer = new MutationObserver(function (mutationsList) {
+                mutationsList.forEach(function (mutation) {
+                    if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach(function (node) {
+                            if (node.tagName && node.tagName.toLowerCase() === 'div' && node.classList.length === 0) {
+                                // 檢查是否有已使用的序號
+                                var codeExisted = node.querySelector('div > span').innerText;
+                                if (!codeExisted) return;
+
+                                amcarDeleteBtns = node.querySelectorAll('.amcard-delete');
+                                if (amcarDeleteBtns.length > 0) {
+                                    // 自動觸發成家卡明細
+                                    autoCheckHomeCardDetail(homeCardInputField, homeCardCheckBtn)
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+
+            observer.observe(homeCardContainer, { childList: true, subtree: true });
         }
 
-        if(codeSelectField){
-            codeSelectField.addEventListener('click', checkDuplicateCode);
+        //明細列表變動
+        if (amcardCodesList) {
+            var triggerScheduled = false;
+            var codeListObserver = new MutationObserver(function (mutationsList) {
+                mutationsList.forEach(function (mutation) {
+                    if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach(function (node) {
+                            if (node.tagName && node.tagName.toLowerCase() === 'tr') {
+                                repositionAmcardDeleteBtn();
+                            }
+                        });
+                    }
+                });
+            });
+
+            codeListObserver.observe(amcardCodesList, { childList: true, subtree: true });
+        }
+
+        // 修改文辭
+        if (homeCardCheckBtn) {
+            changeHomeCardText(homeCardCheckBtn);
+            homeCardCheckBtn.classList.add('homecard-visibility-hidden');
+        }
+
+        if (homeCardInputField) {
+            homeCardInputField.placeholder = '請選擇序號';
+            // 限制手動輸入
+            homeCardInputField.setAttribute('readonly', 'true');
+
+            // 點擊序號選項後檢查是否有已使用的序號
+            homeCardInputField.addEventListener('click', checkDuplicateCode);
         }
 
         //點擊序號選項後自動點擊使用按鈕    
-        if(codeInputOptions.length > 0){
-            codeInputOptions.forEach(function(option){
-                option.addEventListener('click', function(){
+        if (codeInputOptions.length > 0) {
+            codeInputOptions.forEach(function (option) {
+                option.addEventListener('click', function () {
                     codeUseBtn.click();
                 })
             })
         }
 
+        // 檢查是否有成家卡序號
+        function checkCodeExisted(codeInputOptions) {
+            var exists = codeInputOptions.length > 0;
+            document.querySelector('.amgift-code .payment-option-content').classList.toggle('homecard-hidden', !exists);
+
+            document.querySelector('#block-gift-card-heading').click()
+            return exists;
+        }
+
         //修改文辭
-        function changeHomeCardText(homeCardCheckBtn, homeCardText){
+        function changeHomeCardText(homeCardCheckBtn) {
             homeCardCheckBtn.innerText = '成家卡明細';
-            homeCardText.innerText = '成家卡';
+            // homeCardText.innerText = '成家卡';
         }
 
 
         //檢查是否有已使用的序號，若有則隱藏該選項
-        function checkDuplicateCode(){
+        function checkDuplicateCode() {
             var alreadyUsedCodesArray = [];
             var optionCodes = document.querySelectorAll('.amgcard-datalist-ul .amcard-datalist-li');
             var alreadyUsedCodes = document.querySelectorAll('.amcard-codes-list div span');
-            if(alreadyUsedCodes.length > 0){
-                alreadyUsedCodes.forEach(function(code){
+            if (alreadyUsedCodes.length > 0) {
+                alreadyUsedCodes.forEach(function (code) {
                     alreadyUsedCodesArray.push(code.innerText.trim());
                 })
             }
-            
-            optionCodes.forEach(function(optionCode){
-                if(alreadyUsedCodesArray.includes(optionCode.innerText)){
-                    optionCode.classList.add('hiddenOption');
-                }else{
-                    if(optionCode.classList.contains('hiddenOption')){
-                        optionCode.classList.remove('hiddenOption');
+
+            optionCodes.forEach(function (optionCode) {
+                if (alreadyUsedCodesArray.includes(optionCode.innerText)) {
+                    optionCode.classList.add('homecard-hidden');
+                } else {
+                    if (optionCode.classList.contains('homecard-hidden')) {
+                        optionCode.classList.remove('homecard-hidden');
                     }
                 }
             })
-        }   
+        }
+
+        // 調整移除按鈕位置
+        function repositionAmcardDeleteBtn(amcarDeleteBtns, tableCodeItems) {
+            amcarDeleteBtns = document.querySelectorAll('.amcard-delete');
+            tableCodeItems = document.querySelectorAll('.amcard-codes-list .table-code-items tbody tr');
+            if(tableCodeItems.length === 0){
+               homeCardCheckBtn.classList.add('homecard-visibility-hidden');
+            }
+
+            amcarDeleteBtns.forEach(function (btn, index) {
+                //fake delete button
+                var clonedBtn = document.createElement('button');
+                clonedBtn.className = 'amcard-delete-cloned';
+                clonedBtn.innerText = '移除';
+                clonedBtn.setAttribute('list-index', index);
+
+                tableCodeItems.forEach(function (item) {
+                    item.querySelector('.col.expired-date').innerText = '無限期';
+                });
+                if (index < tableCodeItems.length && tableCodeItems[index]) {
+                    if (!tableCodeItems[index].querySelector('.amcard-delete-cloned')) {
+                        if (tableCodeItems[index].querySelector('.amcard-delete-cloned')) {
+                            tableCodeItems[index].querySelector('.amcard-delete-cloned').remove();
+                        }
+
+                        tableCodeItems[index].appendChild(clonedBtn);
+                        clonedBtn.addEventListener('click', function (e) {
+                            var index = e.target.getAttribute('list-index');
+                            var originalBtn = document.querySelector('.amcard-delete[list-index="' + index + '"]');
+                            if (originalBtn) {
+                                originalBtn.click();
+                            }
+                            tableCodeItems[index].remove();
+                            // dont use setTimerout
+                            setTimeout(function () {
+                                repositionAmcardDeleteBtn();
+                            }, 3000)
+                        })
+                    }
+                }
+            })
+        }
+
+        // 設定刪除按鈕的index
+        function setIndexForDeleteBtns() {
+            var afterRenderAmcarDeleteBtns = document.querySelectorAll('.amcard-delete');
+            afterRenderAmcarDeleteBtns.forEach(function (btn, index) {
+                btn.setAttribute('list-index', index);
+            })
+        }
+
+        // 自動觸發成家卡明細
+        function autoCheckHomeCardDetail(homeCardInputField, homeCardCheckBtn) {
+            return new Promise(function (resolve, reject) {
+                var alreadyUsedCodeTextElem = document.querySelector('span.gift-card.coupon');
+                if (!alreadyUsedCodeTextElem) return;
+                var event = new Event('change');
+                var alreadyUsedCodeText = alreadyUsedCodeTextElem.innerText;
+
+                var alreadyUsedCode = alreadyUsedCodeText.split(',').map(function (code) {
+                    return code.trim();
+                }).join(',');
+
+                homeCardInputField.value = alreadyUsedCode;
+                homeCardInputField.dispatchEvent(event);
+
+                homeCardCheckBtn.click();
+
+                if (homeCardCheckBtn.classList.contains('homecard-visibility-hidden')) {
+                    homeCardCheckBtn.classList.remove('homecard-visibility-hidden');
+                }
+
+                homeCardInputField.value = '';
+                resolve();
+            })
+        }
+
+        // 監聽價格變動，重新套用成家卡時阻擋成家卡折扣明細收合
+        var priceElement = document.querySelector('.grand.totals .price');
+        if (priceElement) {
+            var observer = new MutationObserver(function (mutationsList) {
+                mutationsList.forEach(function (mutation) {
+                    if (mutation.type === 'characterData' || mutation.type === 'childList') {
+                        // 在這裡添加你需要的處理邏輯
+                        homeCardText = document.querySelectorAll('.data.table.totals .totals .title')[1];
+                        if (homeCardText) {
+                            updateHomeCardText(homeCardText);
+                        }
+                        setIndexForDeleteBtns();
+                    }
+                });
+            });
+
+            observer.observe(priceElement, { characterData: true, childList: true, subtree: true });
+        }
+
+        autoCheckHomeCardDetail(homeCardInputField, homeCardCheckBtn);
 
     })();
 </script>
-
