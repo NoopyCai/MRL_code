@@ -65,6 +65,9 @@
         font-weight: 700;
 
     }
+    .mgz-element-product_addtocart .mgz-element-inner{
+        margin: 15px 0 5px 0!important;
+    }
     /* 調整價格選項排版 */
     .amcard-field-container{
         flex-basis: 50% !important;
@@ -185,8 +188,22 @@
     //將價格選項移到價格下方
     function repositionPriceOptions(){
         var priceOptionsContainer = document.querySelector('.mgz-element-product_addtocart');
+        var amcardCodeContainer = document.querySelector('.mgz-element-product_addtocart .amcard-general-container');
         var productPriceContainer =  document.querySelector('.mgz-element-product_price');
 
+        var attributeBlocks = document.querySelectorAll('.mgz-element-product_attribute')
+        var attributeHr = document.querySelector('#mrl_hr')
+
+        //將attributeBlocks中的第3、4個元素移到價格選項和購物車按鈕中間
+        attributeBlocks.forEach(function(attributeBlock, index){
+            if(index === 2){
+                amcardCodeContainer.appendChild(attributeBlock);
+                amcardCodeContainer.appendChild(attributeHr);
+            }else if(index === 3){
+                amcardCodeContainer.appendChild(attributeBlock);
+            }
+        })
+        
         if(priceOptionsContainer && productPriceContainer){
             productPriceContainer.insertAdjacentElement('afterend', priceOptionsContainer);
         }
