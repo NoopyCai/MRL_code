@@ -1,0 +1,479 @@
+<style>
+    .homecard-reminder-text{
+        font-size: 16px;
+        margin: 1rem 0 4rem 0;
+        color: #fff;
+        text-align: center;
+    }
+    .homecard-list-close::after {
+        position: absolute;
+        left: 26rem;
+        bottom: 13rem;
+        font-size: 20px;
+        width: 30px;
+        height: 30px;
+        color: red;
+        content: '\e616';
+        font-family: 'luma-icons';
+        font-weight: 600;
+    }
+    .homecard-list-close {
+        position: absolute;
+    }
+    .order-summary .order-discounts {
+        display: flex;
+        gap: 6rem;
+    }
+
+    .order-summary .order-discounts .action-secondary {
+        display: none;
+    }
+
+    .order-coupons {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    .order-discounts .admin__field {
+        margin: 4rem 0 2rem 0;
+    }
+
+    .homecard-codes-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0.95;
+        background-color: #2c2e33;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 600px;
+        margin: auto;
+        height: 350px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: #fff;
+        cursor: pointer;
+        padding: 2.25em 1.5em;
+        position: fixed;
+        left: 35%;
+        bottom: 40%;
+        overflow: hidden;
+        border: none;
+        overflow: auto;
+    }
+
+    .homecard-codes-list {
+        width: 100%;
+        text-align: center;
+        list-style: none;
+        position: relative;
+    }
+
+    .homecard-code-no-item {
+        margin: 2rem 0;
+        padding: 1rem 0;
+    }
+
+    .homecard-code-item-title,
+    .homecard-code-item {
+        display: flex;
+        justify-content: space-around;
+        margin: 2rem 0;
+        padding: 1rem 0;
+    }
+
+    .homecard-code-item:not(:first-child):hover {
+        background-color: #fff;
+        color: #2c2e33;
+    }
+
+    .homecard-code-item-title span,
+    .homecard-code-item span {
+        width: 10rem;
+        text-align: left;
+    }
+    .amgiftcard-code-input .action-default{
+        visibility: hidden;
+    }
+    .homecard-hidden{
+        visibility: hidden;
+    }
+    #ordereditor-items-actions-block{
+        position: relative;
+    }
+    .homecard-check-btn-submit{
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eb5202;
+        border-color: #eb5202;
+        color: #fff;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, .25);
+        width: 80px;
+        height: 33px;
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+    }
+</style>
+<script>
+    (function () {
+        var couponCodeContainer = document.querySelector('.order-discounts');
+        var userEmail = document.querySelectorAll(".order-account-information-table tbody tr")[1].querySelector('td > a').innerText;
+        var monitorClickOutsideCodeList = false;
+        var recalBtn = document.querySelector('#order-items-recalc-giftcard');
+        var alreadyUsedMoney = 0;
+        
+        
+
+        if (couponCodeContainer) {
+            var homeCardCodeInput = document.querySelector('#amgiftcard_code');
+            var deleteBtns = document.querySelectorAll('.added-giftcard-code');
+
+            if (homeCardCodeInput) {
+                homeCardCodeInput.placeholder = '請選擇序號';
+                homeCardCodeInput.addEventListener('click', function () {
+                    getGiftCardCodesByEmail(userEmail)
+                        .then(function (giftCardItems) {
+                            createHomeCardCodeList(giftCardItems, '請選擇欲使用的成家卡序號進行套用');
+                        })
+                        .then(function () {
+                            var codeUseBtn = document.querySelector('#order-coupons .action-default');
+                            if (codeUseBtn) autoUseCodeWithClickOption(codeUseBtn);
+                        })
+                        .catch(function (error) {
+                            console.error('Error:', error);
+                        });
+                })
+                
+
+                if(deleteBtns.length > 0){
+                    removeAddedCode();
+                }
+
+                recordOrderHomecardUseedValue();
+                checkCodeExitedBeforeSubmit(userEmail);
+            }
+        }
+
+        // 取得特定 email 的成家卡序號
+        function getAllGiftCardCodesByEmail(email) {
+            var url = '/rest/V1/amgcard/account/all';
+            var token = "wcfvnx1xmkl0flra9g3rkwrmrvdd4fob";
+
+            var payload = {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                }
+            };
+
+            return fetch(url, payload)
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    // 過濾出符合特定 email 的 gift card accounts
+                    var filteredAccounts = data.filter(function (account) {
+                        return account.recipient_email === email && account.current_value > 0;
+                    });
+
+                    var giftCardItems = filteredAccounts.map(function (account) {
+                        account.current_value = getFormatter(account.current_value);
+                        return {
+                            code: account.code_model.code.trim(),
+                            balance: account.current_value
+                        }
+                    })
+                    
+                    return giftCardItems;
+                })
+                .catch(function (error) {
+                    console.log('There was a problem with the fetch operation:', error);
+                });
+        }
+
+        //取得帳戶所有成家卡序號
+                // 取得特定 email 的成家卡序號
+                function getGiftCardCodesByEmail(email) {
+            var url = '/rest/V1/amgcard/account/all';
+            var token = "wcfvnx1xmkl0flra9g3rkwrmrvdd4fob";
+
+            var payload = {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                }
+            };
+
+            return fetch(url, payload)
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    // 過濾出符合特定 email 的 gift card accounts
+                    var filteredAccounts = data.filter(function (account) {
+                        return account.recipient_email === email && account.current_value > 0;
+                    });
+
+                    var giftCardItems = filteredAccounts.map(function (account) {
+                        account.current_value = getFormatter(account.current_value);
+                        return {
+                            code: account.code_model.code.trim(),
+                            balance: account.current_value
+                        }
+                    })
+                    // 檢查是否有已使用的序號
+                    
+                    giftCardItems = checkDuplicateCode(giftCardItems);
+
+                    return giftCardItems;
+                })
+                .catch(function (error) {
+                    console.log('There was a problem with the fetch operation:', error);
+                });
+        }
+
+        // 建立成家卡序號列表
+        function createHomeCardCodeList(giftCardItems, reminderTextContent) {
+            if (document.querySelector('.homecard-codes-container')) {
+                return;
+            }
+
+            var heomCardCodesContainer = document.createElement('div');
+            heomCardCodesContainer.classList.add('homecard-codes-container');
+            document.querySelector('#anchor-content').appendChild(heomCardCodesContainer);
+
+            if(!monitorClickOutsideCodeList){
+                monitorClickOutsideCodeList = true;
+                document.addEventListener('click', function(event) {
+                    var container = document.querySelector('.homecard-codes-container');
+                    if (container && !event.target.closest('.homecard-codes-container')) {
+                        container.remove();
+                    }
+                });
+            }
+            
+            var homeCardCodesList = document.createElement('ul');
+            homeCardCodesList.classList.add('homecard-codes-list');
+
+            var reminderText = document.createElement('p');
+            reminderText.classList.add('homecard-reminder-text');
+            reminderText.innerHTML = reminderTextContent;
+
+            var lsitHeader = document.createElement('li');
+            lsitHeader.classList.add('homecard-code-item-title');
+            lsitHeader.innerHTML =
+                '<span class="homecard-code">' + '序號' + '</span>' +
+                '<span class="homecard-balance">' + '額度' + '</span>' +
+                '<span class="homecard-date">' + '有效日至' + '</span>';
+
+            var closeBtn = document.createElement('span');
+            closeBtn.classList.add('homecard-list-close');
+
+            closeBtn.addEventListener('click', function () {
+                heomCardCodesContainer.remove();
+            })
+
+            homeCardCodesList.appendChild(reminderText);
+            homeCardCodesList.appendChild(lsitHeader);
+            heomCardCodesContainer.appendChild(closeBtn);
+
+            if (giftCardItems.length === 0) {
+                var codeItem = document.createElement('li');
+                codeItem.classList.add('homecard-code-no-item');
+                codeItem.innerHTML = '此帳戶目前無成家卡序號可使用！'
+                lsitHeader.style.display = 'none';
+                reminderText.style.display = 'none';
+                homeCardCodesList.appendChild(codeItem);
+            } else {
+                giftCardItems.forEach(function (item) {
+                    var codeItem = document.createElement('li');
+                    codeItem.classList.add('homecard-code-item');
+
+                    codeItem.innerHTML =
+                        '<span class="homecard-code">' + item.code + '</span>' +
+                        '<span class="homecard-balance">' + item.balance + '</span>' +
+                        '<span class="homecard-date">' + '無限期' + '</span>'
+                    homeCardCodesList.appendChild(codeItem);
+                })
+            }
+
+            heomCardCodesContainer.appendChild(homeCardCodesList);
+        }
+
+        //格式化金額
+        function getFormatter(money) {
+            var formatter = new Intl.NumberFormat("en-US");
+            var formattedNumber = formatter.format(money);
+            return formattedNumber;
+        }
+
+        //點擊序號選項後自動點擊使用按鈕
+        function autoUseCodeWithClickOption(codeUseBtn) {
+            var codeOptions = document.querySelectorAll('.homecard-code-item');
+            codeOptions.forEach(function (option) {
+                option.addEventListener('click', function (e) {
+                    var homeCardCodeValue = e.target.closest('.homecard-code-item').querySelector('.homecard-code').innerText
+
+                    homeCardCodeInput.value = homeCardCodeValue;
+                    codeUseBtn.click();
+
+                    recalBtn.click();
+                })
+            })
+
+            // 監聽序號刪除按鈕出現
+            var observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.addedNodes.length > 0) {
+                        mutation.addedNodes.forEach(function(node) {
+                            if (node.classList && node.classList.contains('added-giftcard-code')) {
+                                removeAddedCode();
+                            }
+                        });
+                    }
+                });
+            });
+
+            var targetNode = document.querySelector('.field-apply-giftcode-code .admin__field-control');
+            if (targetNode) {
+                observer.observe(targetNode, { childList: true, subtree: true });
+            }
+        }
+
+        //過濾已使用的序號
+        function checkDuplicateCode(giftCardItems) {
+            var addedHomeCardCodes = [];
+            var addedHomeCardCodesElems = document.querySelectorAll('.added-giftcard-code .amGiftCardsCode');
+
+            addedHomeCardCodesElems.forEach(function (elem) {
+                var code = elem.value.split('\n')[0].trim();
+                addedHomeCardCodes.push(code);
+            })
+
+            giftCardItems = giftCardItems.filter(function (item) {
+                return !addedHomeCardCodes.includes(item.code);
+            });
+
+            return giftCardItems;
+        }
+
+        //移除使用序號
+        function removeAddedCode() {
+            var deleteBtns = document.querySelectorAll('.added-giftcard-code .action-remove');
+            deleteBtns.forEach(function(btn) {
+                if (!btn.classList.contains('listener-added')) { 
+                    btn.classList.add('listener-added');
+                    btn.addEventListener('click', function() {
+                        setTimeout(function() {
+                            recalBtn.click();
+                        }, 500);
+                    });
+                }
+            });
+        }
+
+        //送出前檢查是否有位使用的序號
+        function checkCodeExitedBeforeSubmit(userEmail) {
+            var checkUnUsedCodesStatus = false;
+            if(checkUnUsedCodesStatus) return;
+
+            var originalSubmitBtn = document.querySelector('#order-items-submit');
+            var checkBtn = document.createElement('div');
+            
+            checkBtn.innerHTML = 'Submit';
+            checkBtn.classList.add('homecard-check-btn-submit');
+            originalSubmitBtn.classList.add('homecard-hidden');
+
+            document.querySelector('#ordereditor-items-actions-block').appendChild(checkBtn);
+
+
+            checkBtn.addEventListener('click', function(e){
+                e.preventDefault();
+                e.stopPropagation();
+
+                var addedCodes = document.querySelectorAll('.added-giftcard-code')
+                if(addedCodes.length > 0){
+                    checkHomecardValueInTotal(); //檢查商品變動前後的成家卡金額是否一致
+                    originalSubmitBtn.click();
+                    return;
+                }
+
+
+                getGiftCardCodesByEmail(userEmail)
+                    .then(function (giftCardItems) {
+                        if (giftCardItems.length > 0) {
+                            createHomeCardCodeList(giftCardItems, '提醒您：此帳戶有未使用的成家卡序號<br>無需使用請重新提交變更。');  
+                        }else{
+                            originalSubmitBtn.click();
+                            return;
+                        }
+                    })
+                    .then(function () {
+                        var codeUseBtn = document.querySelector('#order-coupons .action-default');
+                        if (codeUseBtn) autoUseCodeWithClickOption(codeUseBtn);
+
+                        checkBtn.remove();
+                        originalSubmitBtn.classList.remove('homecard-hidden');
+
+                        checkUnUsedCodesStatus = true;
+                    })
+                    .catch(function (error) {
+                        console.error('Error:', error);
+                    });
+                })
+        }
+
+        //當前order total狀態
+        function recordOrderHomecardUseedValue(){
+            var addedCodeLabels = document.querySelectorAll('.order-subtotal-table td.label');
+           
+            addedCodeLabels.forEach(function(label){
+                if(label.innerText.includes('Gift')){
+                    var moneyCells = label.closest('tr').querySelectorAll('td');
+                    var money = moneyCells[moneyCells.length - 1].innerText; // 选择最后一个 td 元素
+                    
+                    var moneyValue = parseFloat(money.replace(/[^0-9.-]+/g, ""));
+                     moneyValue = Math.abs(moneyValue);
+                    alreadyUsedMoney += moneyValue;
+                    console.log('alreadyUsedMoney', alreadyUsedMoney);
+                }else{
+                    return;
+                }
+            })
+        }
+
+        //檢查商品變動前後的成家卡金額是否一致
+        function checkHomecardValueInTotal(){
+            var newTotalTableTds = document.querySelectorAll('.new-totals tbody tr td');
+            newTotalTableTds.forEach(function(td){
+                if(td.innerText.includes('Gift Card')){
+                    var moneyCells = td.closest('tr').querySelectorAll('td');
+                    var money = moneyCells[moneyCells.length - 1].innerText;
+                    var moneyValue = parseFloat(money.replace(/[^0-9.-]+/g, ""));
+                    moneyValue = Math.abs(moneyValue);
+
+                    console.log('moneyValue', moneyValue);
+                    console.log('alreadyUsedMoney', alreadyUsedMoney);
+
+                    if(moneyValue !== alreadyUsedMoney){
+                        alert('成家卡金額與商品變動前後不一致，請重新確認');
+                    }
+                }
+            })
+        }
+
+    })();
+
+</script>
