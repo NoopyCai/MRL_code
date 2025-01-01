@@ -1,0 +1,24 @@
+<script>
+    var lastEventTime = 0;
+    var eventCooldown = 5000;
+    var observer2 = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.target.id === 'order-coupons') {
+                var currentTime = new Date().getTime();
+                if (currentTime - lastEventTime > eventCooldown) {
+                    dataLayer.push({ 'event': 'add-product' });
+                    lastEventTime = currentTime; 
+                }
+            }
+        });
+    });
+
+    // Notify me of style changes
+    var observerConfig = {
+        attributes: true,
+        childList: true,
+        subtree: true
+    };
+    var targetNode = document.getElementById('order-items');
+    observer2.observe(targetNode, observerConfig);
+</script>
