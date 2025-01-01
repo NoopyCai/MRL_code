@@ -102,6 +102,12 @@
     .homecard-visibility-hidden{
         visibility: hidden;
     }
+    .checkout-payment-method .payment-option-title .action-toggle{
+        font-size: 14px;
+    }
+    .payment-option-title.field.choice{
+        border-top: 1px solid #ccc !important;
+    }
     @media (max-width: 1440px) {
         .table-code-items thead tr,
         .table-code-items tbody tr td {
@@ -157,6 +163,7 @@
 
         var tableCodeItems = document.querySelectorAll('.amcard-codes-list .table-code-items tbody tr');
         var amcardCodesList = document.querySelector('.checkout-payment-method > .amcard-codes-list');
+        var discountTitle = document.querySelector('#block-discount-heading > span')
 
         if (homeCardContainer) {
             // 監聽成家卡區塊變動
@@ -207,6 +214,10 @@
             homeCardCheckBtn.classList.add('homecard-visibility-hidden');
         }
 
+        if(discountTitle){
+            discountTitle.innerText = '使用折扣碼';
+        }
+
         if (homeCardInputField) {
             homeCardInputField.placeholder = '請選擇序號';
             // 限制手動輸入
@@ -228,7 +239,7 @@
         // 檢查是否有成家卡序號
         function checkCodeExisted(codeInputOptions) {
             var exists = codeInputOptions.length > 0;
-            document.querySelector('.amgift-code .payment-option-content').classList.toggle('homecard-hidden', !exists);
+            document.querySelector('.amgift-code').classList.toggle('homecard-hidden', !exists);
 
             document.querySelector('#block-gift-card-heading').click()
             return exists;
@@ -253,7 +264,7 @@
             }
 
             optionCodes.forEach(function (optionCode) {
-                if (alreadyUsedCodesArray.includes(optionCode.innerText)) {
+                if (alreadyUsedCodesArray.includes(optionCode.innerText.trim())) {
                     optionCode.classList.add('homecard-hidden');
                 } else {
                     if (optionCode.classList.contains('homecard-hidden')) {

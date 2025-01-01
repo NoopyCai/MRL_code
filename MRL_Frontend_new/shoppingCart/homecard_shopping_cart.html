@@ -93,9 +93,13 @@
     }
     /* 成家卡明細title */
     .block.discount .title:first-child {
-        border-bottom: 1px solid #ccc;
+        /* border-bottom: 1px solid #ccc; */
+        padding-bottom: 0;
     }
-
+    .amcard-field-container.-cart{
+        border-top: 1px solid #ccc;
+        padding-top: 1rem;
+    }
     .amcard-title {
         font-weight: 600;
     }
@@ -152,6 +156,7 @@
         var amcarDeleteBtns = document.querySelectorAll('.amcard-delete');
         var tableCodeItems = document.querySelectorAll('.amcard-codes-list .table-code-items tbody tr');
         var amcardCodesList = document.querySelector('div[data-bind="scope: \'amcard-cart-render\'"] .amcard-codes-list');
+        var discountTitle = document.querySelector('#block-discount-heading');
 
         if (homeCardContainer) {
             // 調整成家卡區塊位置
@@ -204,6 +209,11 @@
             changeHomeCardCheckBtn(homeCardCheckBtn);
             homeCardCheckBtn.classList.add('homecard-hidden')
         }
+
+        if(discountTitle){
+            discountTitle.innerText = '使用折扣碼';
+        }
+
         if (homeCardText) {
             updateHomeCardText(homeCardText);
         }
@@ -264,7 +274,7 @@
             }
 
             optionCodes.forEach(function (optionCode) {
-                if (alreadyUsedCodesArray.includes(optionCode.innerText)) {
+                if (alreadyUsedCodesArray.includes(optionCode.innerText.trim())) {
                     optionCode.classList.add('homecard-hidden');
                 } else {
                     if (optionCode.classList.contains('homecard-hidden')) {
@@ -360,12 +370,6 @@
                 homeCardInputField.value = '';
                 resolve();
             })
-        }
-
-        //進購物車時已套用成家卡
-        function checkHomeCardApplied(homeCardInputField, homeCardCheckBtn) {
-            autoCheckHomeCardDetail(homeCardInputField, homeCardCheckBtn);
-            setIndexForDeleteBtns();
         }
 
         // 監聽價格變動，重新套用成家卡時阻擋成家卡折扣明細收合
