@@ -1,17 +1,19 @@
+<!-- 主視覺倒數計時器與文案設定_SLIDER＆Category -->
+
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
     .promotion-schedule{
-        font-family: "Noto Serif TC", serif;
+        font-family: "Noto Sans TC", serif;
         flex-direction: column;
         justify-content: center;
         color: #fff;
+        background-color: #AF8369;
         position: absolute;
         top: 0;
         text-align: center;
         display: flex;
         right: 0;
-        background: #a97d3c;
         border-bottom-left-radius: 10px;
         font-weight: 600;
         width: 130px;
@@ -37,6 +39,10 @@
             width: 100px;
             height: 32px;
             font-size: 2rem;
+            right: unset;
+            left: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 10px;
         }
 
         .promotion-schedule-cat{
@@ -51,9 +57,9 @@
     (function () {
         // 設定活動開始和結束時間 (年, 月, 日, 時, 分, 秒) 
         // ex: (2024, 10 - 1, 9, 10, 30, 59) => 2024年10月9日10點30分59秒
-        const scheduleStartDate = new Date(2024, 10 - 1, 11, 11, 30, 59); 
-        const scheduleMiddleDate = new Date(2024, 10 - 1, 11, 12, 40, 59);
-        const scheduleEndDate = new Date(2024, 10 - 1, 11, 13, 42,59);
+        const scheduleStartDate = new Date(2024, 12 - 1,15, 23, 59, 59); 
+        const scheduleMiddleDate = new Date(2025, 1 - 1,6, 23, 59, 59);
+        const scheduleEndDate = new Date(2025, 1 - 1, 7, 23, 59,59);
 
         // 判斷目前時間在哪個活動期間   
         const now = new Date();
