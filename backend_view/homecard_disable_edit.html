@@ -5,7 +5,7 @@
         if (qtyTables.length === 0) return;
         qtyTables.forEach(function (qtyTable) {
             var skuLink = qtyTable.querySelector("a");
-            if (skuLink.innerText.includes("MRL-Home-Card")) {
+            if (skuLink.innerText.includes("MRL-HomeCard-New")) {
                 var currentRow = qtyTable.closest("tr");
                 processRow(currentRow);
             }
@@ -16,8 +16,11 @@
             var qtyTables = tbody.querySelectorAll(".col-product .product-sku-block");
             if (qtyTables.length === 0) return;
             qtyTables.forEach(function (qtyTable) {
-                var skuLink = qtyTable.querySelector("a");
-                if (skuLink.innerText.includes("MRL-Home-Card")) {
+                var skuLink = qtyTable.querySelector("a > span");
+                if(skuLink === null) return;
+
+                if (skuLink.innerText.includes("MRL-HomeCard-New")) {
+                    console.log(skuLink);
                     var currentRow = qtyTable.closest("tr");
                     processRow(currentRow);
                 }
@@ -31,6 +34,7 @@
                 if (mutation.type === 'childList') {
                     mutation.addedNodes.forEach(function (node) {
                         if (node.tagName && node.tagName.toLowerCase() === 'tbody') {
+                            console.log(node);
                             processHomeCardItem(node);
                         }
                     });
@@ -64,7 +68,6 @@
                 actionTable.style.display = "none";
             });
             // Disable action dropdown
-            console.log('currentrow', row);
             if (actionDropdown) {
                 actionDropdown.style.backgroundColor = "#f0f0f0";
                 actionDropdown.style.color = "#999";  
