@@ -1,0 +1,18 @@
+<script>
+    (function(){
+        //header選單新增成家卡選項
+        var headerList = document.querySelector('.customer-menu .header.links');
+        if(headerList){
+            var homecardLink = document.createElement('li');
+            homecardLink.style.width = "100%";
+            homecardLink.innerHTML = "<a href='" + window.location.origin + "/amgcard/account/'>我的成家卡</a>";
+
+            if(window.innerWidth < 768){
+                headerList = document.querySelector('.nav-sections-item-content .customer-menu .header.links')
+            }
+
+            var wishListLink = headerList.querySelector('.link.wishlist');
+            headerList.insertBefore(homecardLink, wishListLink);
+        }
+    })();
+</script>
