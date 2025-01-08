@@ -1,11 +1,12 @@
 <script>
     var lastEventTime = 0;
-    var eventCooldown = 5000;
+    var eventCooldown = 1000;
     var observer2 = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
             if (mutation.target.id === 'order-coupons') {
                 var currentTime = new Date().getTime();
                 if (currentTime - lastEventTime > eventCooldown) {
+                    console.log('發送add-product');
                     dataLayer.push({ 'event': 'add-product' });
                     lastEventTime = currentTime; 
                 }
