@@ -149,6 +149,7 @@
 
         var homeCardContainer = document.querySelector('[data-bind="scope: \'amcard-giftcards\'"]');
         var homeCardCheckBtn = document.querySelector('.amcard-check');
+        var homeCardTitle = document.querySelector('.amcard-title');
         var homeCardText = document.querySelectorAll('.data.table.totals .totals .title')[1];
         var homeCardInputField = document.querySelector('.amcard-field.-datalist');
         var codeUseBtn = document.querySelector('.amcard-button');
@@ -205,8 +206,8 @@
         }
 
         // 修改文辭
-        if (homeCardCheckBtn) {
-            changeHomeCardCheckBtn(homeCardCheckBtn);
+        if (homeCardCheckBtn && homeCardTitle) {
+            changeHomeCardTextContent(homeCardCheckBtn, homeCardTitle);
             homeCardCheckBtn.classList.add('homecard-hidden')
         }
 
@@ -246,8 +247,9 @@
         }
 
         // 修改文辭
-        function changeHomeCardCheckBtn(homeCardCheckBtn) {
+        function changeHomeCardTextContent(homeCardCheckBtn, homeCardTitle) {
             homeCardCheckBtn.innerText = '成家卡明細';
+            homeCardTitle.innerText = '使用成家卡 (可複選套用)';
         }
 
         // 更新成家卡文本

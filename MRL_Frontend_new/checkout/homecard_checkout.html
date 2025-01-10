@@ -200,6 +200,9 @@
     .un-used-code-alert-text{
         font-weight: 600;
     }
+    .homecard-active{
+        background-color: pink !important;
+    }
     @media (max-width: 1440px) {
         .table-code-items thead tr,
         .table-code-items tbody tr td {
@@ -483,6 +486,10 @@
                     var subtotalAmount = parseInt(subtotal.innerText.replace(/[^0-9.-]+/g, ""));
                     var unusedCodes = document.querySelectorAll('.amgcard-datalist-ul .amcard-datalist-li:not(.homecard-hidden)');
 
+                    // 未來樓層費用
+                    // var floorFee = #;
+                    // if(subtotalAmount === 0 || subtotalAmount === shippingAmount + floorFee)
+
                     //折抵排除運費 or 訂單總金額為 0 不檢查
                     if(subtotalAmount === 0 || subtotalAmount === shippingAmount){
                         originalSubmitBtn.click();
@@ -520,9 +527,13 @@
             confirmBtn.addEventListener('click', function(){
                 var dataListField = document.querySelector('.amcard-field.-datalist')
                 if (dataListField) {
+                    //欄位醒目
                     dataListField.focus(); 
-                    dataListField.click()
-                    dataListField.scrollIntoView({ behavior: 'smooth', block: 'center' }); // 滚动到元素位置
+                    dataListField.classList.add('homecard-active');
+                    dataListField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    dataListField.addEventListener('click', function(){
+                        dataListField.classList.remove('homecard-active');
+                    }, {once: true})
                 }
                 overlay.remove();
             })
