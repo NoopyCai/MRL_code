@@ -179,7 +179,7 @@
 
         // 取得特定 customerID 的成家卡序號
         function getGiftCardCodesByCustomerID(customerID) {
-            var url = '/rest/V1/amgcard/account/customer/' + customerID.innerText.replace(/\D/g, '');
+            var url = 'http://dev-devbk243.mrliving.tw/rest/V1/amgcard/account/customer/' + customerID.innerText.replace(/\D/g, '');
             var token = '8yda5iij2lyjwxu57znp41ja2dwyriri';
 
             var payload = {
@@ -383,7 +383,11 @@
 
 
             checkBtn.addEventListener('click', function(e){
-                if(!validateOrderItemEditTotal(customerID)){
+                var newTotalTable = document.querySelector('#ordereditor_new_totals')
+
+                //判斷是否有新total table & 是否有剩餘餘額沒扣完
+                if(!newTotalTable && !validateOrderItemEditTotal(customerID)){
+                    originalSubmitBtn.click();
                     return;
                 }  
 
@@ -394,8 +398,10 @@
 
                 getGiftCardCodesByCustomerID(customerID)
                     .then(function (giftCardItems) {
+                    
+                        giftCardItems = checkDuplicateCode(giftCardItems);
+
                         if (giftCardItems.length > 0) {
-                            giftCardItems = checkDuplicateCode(giftCardItems);
                             createHomeCardCodeList(giftCardItems, '帳戶中 尚有可使用的成家卡序號<br>請選擇 並進行「重新計算」的動作');  
                         }else{
                             originalSubmitBtn.click();
@@ -421,11 +427,29 @@
         function validateOrderItemEditTotal(customerID){
             var grandTotals = document.querySelector('#ordereditor-new-total-grand_total .price').innerText;
             var shippingFee = document.querySelector('#ordereditor-new-total-shipping-shipping-incl-tax .price').innerText;
-            if((grandTotals - shippingFee) < 0){
-                alert('訂單總額異常、不可為負數\n請進行「重新計算」的動作');
+            var colProductNames = document.querySelectorAll('#order-items_grid .col-product > span');
+            var floorFee = 0;
+
+            //排除費用使用array儲存 抓sku判斷
+
+            if(colProductNames.length > 0){
+                colProductNames.forEach(function(name){
+                    if(name.innerText.includes('樓層費')){
+                        var fee = name.closest('tr').querySelector('.col-qty .qty_input').value;
+                        floorFee += parseInt(fee.replace(/[^0-9.-]+/g, ""), 10); // 累加 floorFee
+                    }
+                })
+            }
+
+            grandTotals = parseInt(grandTotals.replace(/[^0-9.-]+/g, ""));
+            shippingFee = parseInt(shippingFee.replace(/[^0-9.-]+/g, ""))
+            
+            if((grandTotals - (shippingFee + floorFee)) < 0){
+                alert('訂單總額異常、不可為負數\n系統將自動重新計算，請再確認');
+                //trigger homecard recal
                 return true;
             }
-            else if((grandTotals - shippingFee) > 0){
+            else if((grandTotals - (shippingFee + floorFee)) > 0){
                 // 參數
                 var giftCardsElem = document.querySelectorAll('.ordereditor-new-total-giftcardaccount');
                 var giftCardDatas = [];
@@ -435,7 +459,7 @@
                     var price = elem.querySelector('.price').innerText;
                     var giftCodeText = elem.parentElement.querySelector('.admin__total-mark').innerText;
                     var giftCode = giftCodeText.replace(/.*\s([A-Za-z0-9]+)$/, '$1').trim();
-                    console.log('giftCode:',giftCode);
+                    console.log(giftCode);
                     var data = {
                         price: price,
                         code: giftCode
@@ -457,13 +481,14 @@
                             });                    
 
                             var balance = foundCard.balance.replace(/,/g, '');
-                            if(balance > (giftCardData.price)*-1){
+                            if(balance > 0){
                                 isGiftCardBalanceAvailable = true;
                             }
                         });
 
                         if(isGiftCardBalanceAvailable){
                             alert('目前套用的成家卡序號中，還有剩餘額度可折抵\n請進行「重新計算」的動作');
+                            //trigger homecard recal
                             return true;
                         }
 
@@ -471,11 +496,13 @@
                     .catch(function (error) {
                         console.error('Error:', error);
                 });
-            }else if (((grandTotals - shippingFee) === 0)){
+            }else if (((grandTotals - (shippingFee + floorFee)) === 0)){
                 return false;
             }
             return true;
         }
+
+        
 
     })();
 
