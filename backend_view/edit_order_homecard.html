@@ -71,7 +71,7 @@
 
     .homecard-codes-list {
         width: 100%;
-        height: 100%;
+        height: auto;
         text-align: center;
         list-style: none;
         position: relative;
@@ -147,10 +147,18 @@
 <script>
     (function () {
         var couponCodeContainer = document.querySelector('.order-discounts');
-        var customerID = document.querySelector('.order-account-information-table tbody tr:last-child td:last-child > span');
         var monitorClickOutsideCodeList = false;
         var recalBtn = document.querySelector('#order-items-recalc-giftcard');
         var homecardTitle = document.querySelector('.field-apply-giftcode-code .admin__field-label >span');
+
+        //  取得 customerID ，若無法取得則不執行
+        var customerID = updateCustomerIDfromEditForm();
+        if(!customerID){
+            customerID = updateCustomerIDfromInfo();
+            if(!customerID){
+                return;
+            }
+        }
 
         if (couponCodeContainer) {
             var homeCardCodeInput = document.querySelector('#amgiftcard_code');
@@ -180,15 +188,17 @@
                 if (deleteBtns.length > 0) {
                     removeAddedCode();
                 }
-
+                
                 checkCodeExitedBeforeSubmit(customerID);
             }
         }
 
         // 取得特定 customerID 的成家卡序號
         function getGiftCardCodesByCustomerID(customerID, state) {
-            var url = 'http://dev-devbk243.mrliving.tw/rest/V1/amgcard/account/customer/' + customerID.innerText.replace(/\D/g, '');
-            var token = '8yda5iij2lyjwxu57znp41ja2dwyriri';
+            
+            var domainUrl = window.location.origin;
+            var url = domainUrl + '/rest/V1/amgcard/account/customer/' + customerID;
+            var token = 'zm7lhgnrummsdkbun9hy7uub0smyk14i';
 
             var payload = {
                 method: 'GET',
@@ -556,11 +566,39 @@
             });
         }
 
+        //更新 customerID from edit form
+        function updateCustomerIDfromEditForm() {
+            var editFormElem = document.querySelector('#order_items_edit_form');
+            if (!editFormElem) return;
+
+            var orderConfig = editFormElem.getAttribute('data-order-config');
+            var orderConfigObj = JSON.parse(orderConfig);
+            var customerID = orderConfigObj.customer_id;
+
+            return customerID;
+        }
+
+         //更新 customerID from edit form
+         function updateCustomerIDfromInfo() {
+            var accountEditElem = document.querySelector('.order-account-information-table tbody tr:first-child td > a');
+            if (!editFormElem) return;
+
+            var accountEditLink = accountEditElem.href;
+            var customerIDMatch = accountEditLink.match(/\/id\/(\d+)\//);
+            if(customerIDMatch){
+                var customerID = customerIDMatch[1];
+                
+                return customerID;
+            }else{
+                return null;
+            }
+        }
 
         //取得需要被排除的SKU
         function getExcludedSku() {
-            var url = 'http://dev-devbk243.mrliving.tw/rest/V1/products?fields=items[sku]&searchCriteria[filter_groups][0][filters][0][field]=category_id&searchCriteria[filter_groups][0][filters][0][value]=117'
-            var token = "8yda5iij2lyjwxu57znp41ja2dwyriri";
+            var domainUrl = window.location.origin;
+            var url = domainUrl + '/rest/V1/products?fields=items[sku]&searchCriteria[filter_groups][0][filters][0][field]=category_id&searchCriteria[filter_groups][0][filters][0][value]=117'
+            var token = "zm7lhgnrummsdkbun9hy7uub0smyk14i";
 
             var payload = {
                 method: 'GET',
@@ -590,7 +628,6 @@
                     console.error('There was a problem with the fetch operation:', error);
                 });
         }
-
 
 
     })();
