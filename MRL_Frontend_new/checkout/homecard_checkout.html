@@ -5,16 +5,19 @@
         position: relative;
         padding-bottom: 0 !important;
     }
+
     /* .payment-option-content > .amcard-codes-list{
         height: 0;
     } */
-    .checkout-payment-method > .amcard-codes-list {
+    .checkout-payment-method>.amcard-codes-list {
         padding: 0 2rem 2rem 2rem;
     }
+
     .table-code-items tbody tr td,
-    .table-code-items thead tr{
+    .table-code-items thead tr {
         font-size: 14px;
     }
+
     .amcard-check {
         pointer-events: none;
         color: #333 !important;
@@ -23,13 +26,16 @@
         padding-top: 1rem;
         left: 1rem;
     }
+
     .amcard-check:hover {
         text-decoration: none !important;
     }
+
     .amcard-delete {
         visibility: hidden;
         pointer-events: none;
     }
+
     .amcard-delete-cloned {
         color: #006bb4 !important;
         font-weight: 400 !important;
@@ -40,10 +46,12 @@
         padding: 0 0 3px 0;
         border: none;
     }
+
     .amcard-delete-cloned:hover {
         border: none;
         padding: 0 0 3px 0;
     }
+
     .amcard-codes-list div:not([class]) span {
         margin-right: 5px;
         display: none;
@@ -66,7 +74,8 @@
     .col.status {
         display: none !important;
     }
-    .message.success>*:first-child:before{
+
+    .message.success>*:first-child:before {
         top: 28px !important;
     }
 
@@ -84,9 +93,11 @@
     .message.success {
         padding: 19px 20px 32px 45px;
     }
+
     .amgift-code .payment-option-content .amcard-codes-list div:not([class]) {
         height: 0;
     }
+
     /* 成家卡明細title */
     .block.discount .title:first-child {
         border-bottom: 1px solid #ccc;
@@ -99,20 +110,25 @@
     .amcard-check {
         margin-bottom: 1rem;
     }
-    .homecard-visibility-hidden{
+
+    .homecard-visibility-hidden {
         visibility: hidden;
     }
-    .checkout-payment-method .payment-option-title .action-toggle{
+
+    .checkout-payment-method .payment-option-title .action-toggle {
         font-size: 14px;
     }
-    .payment-option-title.field.choice{
+
+    .payment-option-title.field.choice {
         border-top: 1px solid #ccc !important;
     }
-    .amgift-code .payment-option-title{
+
+    .amgift-code .payment-option-title {
         padding-bottom: 0;
     }
+
     /* 假submit按鈕 */
-    .check-homecard-before-submit{
+    .check-homecard-before-submit {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -120,11 +136,13 @@
         left: 0;
         bottom: 0;
     }
-    .checkout-payment-method.submit .checkout{
+
+    .checkout-payment-method.submit .checkout {
         position: relative;
     }
+
     /* 未使用序號跳窗 */
-    .un-used-code-overlay{
+    .un-used-code-overlay {
         background-color: rgba(51, 51, 51, .55);
         bottom: 0;
         left: 0;
@@ -133,7 +151,8 @@
         top: 0;
         z-index: 1;
     }
-    .un-used-code-alert{
+
+    .un-used-code-alert {
         width: 46rem;
         background-color: #fff;
         color: #333;
@@ -154,56 +173,68 @@
         border-radius: 10px;
         animation: slideIn 0.5s forwards;
     }
+
     @keyframes slideIn {
         from {
-            transform: translate(100%, -50%); 
+            transform: translate(100%, -50%);
         }
+
         to {
             transform: translate(-50%, -50%);
         }
     }
-    .un-used-code-alert-btns{
+
+    .un-used-code-alert-btns {
         display: flex;
         justify-content: right;
         margin-top: 2rem;
         gap: 2rem;
     }
-    .un-used-code-alert-confirm{
+
+    .un-used-code-alert-confirm {
         width: 10rem;
         background: #c34135;
         color: #fff;
         border: none;
         cursor: pointer;
     }
-    .un-used-code-alert-cancel{
+
+    .un-used-code-alert-cancel {
         background-color: #fff;
         color: #333;
         border: 1px solid #ccc;
         cursor: pointer;
     }
-    .un-used-code-alert-confirm:hover{
+
+    .un-used-code-alert-confirm:hover {
         border: none;
         color: #fff;
         background-color: #c34135;
         cursor: pointer;
     }
-    .un-used-code-alert-cancel:hover{
+
+    .un-used-code-alert-cancel:hover {
         /* border: none; */
         color: #333;
         background-color: transparent;
         cursor: pointer;
     }
-    .unUsedPoppup-img{
+
+    .unUsedPoppup-img {
         width: 23%;
         margin-right: 2rem;
     }
-    .un-used-code-alert-text{
+
+    .un-used-code-alert-text {
         font-weight: 600;
     }
-    .homecard-active{
+
+    .homecard-active {
         background-color: pink !important;
     }
+
     @media (max-width: 1440px) {
+
         .table-code-items thead tr,
         .table-code-items tbody tr td {
             font-size: 13px;
@@ -214,6 +245,7 @@
             right: 0;
         }
     }
+
     @media (max-width: 768px) {
         .amgift-code .payment-option-content {
             padding: 0 15px;
@@ -230,19 +262,24 @@
             left: 3%;
             margin: 0.8rem 0 1rem 0;
         }
-        .checkout-payment-method > .amcard-codes-list {
+
+        .checkout-payment-method>.amcard-codes-list {
             padding: 0;
         }
-        .checkout-payment-method .payment-option .payment-option-content{
+
+        .checkout-payment-method .payment-option .payment-option-content {
             padding: 0;
         }
+
         .table-wrapper .table:not(.totals):not(.cart):not(.table-comparison)>tbody>tr td {
             padding: 10px 10px 0px 15px;
         }
-        .un-used-code-alert{
+
+        .un-used-code-alert {
             width: 90%;
         }
-        .un-used-code-alert-confirm{
+
+        .un-used-code-alert-confirm {
             width: 5rem;
         }
     }
@@ -324,7 +361,7 @@
             homeCardCheckBtn.classList.add('homecard-visibility-hidden');
         }
 
-        if(discountTitle){
+        if (discountTitle) {
             discountTitle.innerText = '使用折扣碼';
         }
 
@@ -350,14 +387,14 @@
         // 檢查是否有成家卡序號
         function checkCodeExisted(codeInputOptions) {
             var exists = codeInputOptions.length > 0;
-            if(exists){
+            if (exists) {
                 setTimeout(function () {
                     document.querySelector('#block-gift-card-heading').click()
                 }, 2000)
-            }else{
+            } else {
                 document.querySelector('.amgift-code').classList.add('homecard-hidden')
             }
-            
+
             return exists;
         }
 
@@ -394,8 +431,8 @@
         function repositionAmcardDeleteBtn(amcarDeleteBtns, tableCodeItems) {
             amcarDeleteBtns = document.querySelectorAll('.amcard-delete');
             tableCodeItems = document.querySelectorAll('.amcard-codes-list .table-code-items tbody tr');
-            if(tableCodeItems.length === 0){
-               homeCardCheckBtn.classList.add('homecard-visibility-hidden');
+            if (tableCodeItems.length === 0) {
+                homeCardCheckBtn.classList.add('homecard-visibility-hidden');
             }
 
             amcarDeleteBtns.forEach(function (btn, index) {
@@ -444,7 +481,7 @@
         function autoCheckHomeCardDetail(homeCardInputField, homeCardCheckBtn) {
             return new Promise(function (resolve, reject) {
                 var alreadyUsedCodeTextElem = document.querySelector('span.gift-card.coupon');
-  
+
                 if (!alreadyUsedCodeTextElem) return;
                 var event = new Event('change');
                 var alreadyUsedCodeText = alreadyUsedCodeTextElem.innerText;
@@ -475,9 +512,9 @@
             originalSubmitBtn.appendChild(sunmitOrderBtn);
 
             sunmitOrderBtn.addEventListener('click', function (e) {
-                e.preventDefault(); 
-                e.stopPropagation(); 
-                 
+                e.preventDefault();
+                e.stopPropagation();
+
                 var shipping = document.querySelector('.shipping.incl .amount .price')
                 var subtotal = document.querySelector('.grand.totals .amount .price');
 
@@ -491,11 +528,11 @@
                     // if(subtotalAmount === 0 || subtotalAmount === shippingAmount + floorFee)
 
                     //折抵排除運費 or 訂單總金額為 0 不檢查
-                    if(subtotalAmount === 0 || subtotalAmount === shippingAmount){
+                    if (subtotalAmount === 0 || subtotalAmount === shippingAmount) {
                         originalSubmitBtn.click();
-                    }else if(unusedCodes.length > 0){
+                    } else if (unusedCodes.length > 0) {
                         showUnUsedCodeAlert(originalSubmitBtn);
-                    }else{
+                    } else {
                         originalSubmitBtn.click();
                     }
                 }
@@ -505,58 +542,82 @@
         }
 
         // 未使用的成家卡序號跳窗
-        function showUnUsedCodeAlert(originalSubmitBtn){
+        function showUnUsedCodeAlert(originalSubmitBtn) {
             var overlay = document.createElement('div');
             overlay.className = 'un-used-code-overlay';
 
             var exictedCodes = document.querySelectorAll('.table-code-items tbody tr');
             var unUsedPoppup = document.createElement('div');
             unUsedPoppup.className = 'un-used-code-alert';
-            if(exictedCodes.length > 0){
+            if (exictedCodes.length > 0) {
                 unUsedPoppup.innerHTML = '<img src="https://d1bbx7pumsnd9q.cloudfront.net/.thumbswysiwyg/co_IMG/HomeCard_mini_v1.jpg" class="unUsedPoppup-img"/><div class="un-used-code-alert-content"><p class="un-used-code-alert-text">你還有成家卡序號可以折抵訂單，是否要使用？</p><div class="un-used-code-alert-btns"><button class="un-used-code-alert-confirm">是</button><button class="un-used-code-alert-cancel">否，直接下訂單</button></div></div>';
-            }else{
+            } else {
                 unUsedPoppup.innerHTML = '<img src="https://d1bbx7pumsnd9q.cloudfront.net/.thumbswysiwyg/co_IMG/HomeCard_mini_v1.jpg" class="unUsedPoppup-img"/><div class="un-used-code-alert-content"><p class="un-used-code-alert-text">你有成家卡序號可以折抵訂單，是否要使用？</p><div class="un-used-code-alert-btns"><button class="un-used-code-alert-confirm">是</button><button class="un-used-code-alert-cancel">否，直接下訂單</button></div></div>';
             }
-           
+
             document.body.appendChild(overlay);
             overlay.appendChild(unUsedPoppup);
 
             var confirmBtn = document.querySelector('.un-used-code-alert-confirm');
             var cancelBtn = document.querySelector('.un-used-code-alert-cancel');
             //是
-            confirmBtn.addEventListener('click', function(){
+            confirmBtn.addEventListener('click', function () {
                 var dataListField = document.querySelector('.amcard-field.-datalist')
                 if (dataListField) {
                     //欄位醒目
-                    dataListField.focus(); 
+                    dataListField.focus();
                     dataListField.classList.add('homecard-active');
                     dataListField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    dataListField.addEventListener('click', function(){
+                    dataListField.addEventListener('click', function () {
                         dataListField.classList.remove('homecard-active');
-                    }, {once: true})
+                    }, { once: true })
                 }
                 overlay.remove();
             })
             //否
-            cancelBtn.addEventListener('click', function(){
+            cancelBtn.addEventListener('click', function () {
                 originalSubmitBtn.click();
                 overlay.remove();
             })
         }
 
-        // 監聽價格變動，重新套用成家卡時阻擋成家卡折扣明細收合
-        var priceElement = document.querySelector('.grand.totals .price');
+        // 監聽codelist變動，reindex
+        var codeList = document.querySelector('.amcard-codes-list');
 
-        if (priceElement) {
+
+        if (codeList) {
+            // 列表中已使用的序號隱藏
+            var codesOfList = document.querySelectorAll('.amgcard-datalist-ul .amcard-datalist-li')
+            var usedCodes = document.querySelectorAll('.payment-option-content .amcard-codes-list div span');
+            if (codesOfList.length > 0) {
+                codesOfList.forEach(function (code) {
+                    usedCodes.forEach(function (usedCode) {
+                        if (code.innerText.trim() === usedCode.innerText.trim()) {
+                            code.classList.add('homecard-hidden');
+                        }
+                    });
+                })
+            }
+
             var observer = new MutationObserver(function (mutationsList) {
                 mutationsList.forEach(function (mutation) {
-                    if (mutation.type === 'characterData' || mutation.type === 'childList') {
-                        setIndexForDeleteBtns();
+                    if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach(function (node) {
+                            if (node.nodeType === 1 && node.tagName.toLowerCase() === 'div' && node.classList.length === 0) {
+                                setIndexForDeleteBtns();
+                            }
+                        });
+
+                        mutation.removedNodes.forEach(function (node) {
+                            if (node.nodeType === 1 && node.tagName.toLowerCase() === 'div' && node.classList.length === 0) {
+                                setIndexForDeleteBtns();
+                            }
+                        });
                     }
                 });
             });
 
-            observer.observe(priceElement, { characterData: true, childList: true, subtree: true });
+            observer.observe(codeList, { characterData: true, childList: true, subtree: true });
         }
 
         autoCheckHomeCardDetail(homeCardInputField, homeCardCheckBtn);
