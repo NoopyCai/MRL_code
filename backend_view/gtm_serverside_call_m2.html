@@ -1,0 +1,31 @@
+<script>
+            // 取得特定 email 的成家卡序號(所有)
+        function getAllGiftCardCodesByEmail(email) {
+            var url = '/rest/V1/amgcard/account/all';
+            var token = '8yda5iij2lyjwxu57znp41ja2dwyriri';
+
+            var payload = {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                }
+            };
+
+            return fetch(url, payload)
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }else{
+                        console.log('沒有東西', response);
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log('data', data);
+                })
+                .catch(function (error) {
+                    console.log('There was a problem with the fetch operation:', error);
+                });
+        }
+</script>
