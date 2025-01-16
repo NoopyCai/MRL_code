@@ -1,574 +1,273 @@
-<!-- 購買指南Ｅ超過五萬位居友信賴 -->
+<p>*使用時間自 2025/02/01起，無限期</p>
+<p>*成家卡序號 統一於2025/02/01 10點前，發放至訂單會員帳戶中；<a id="scrollToFAQ">詳見說明</a></p>
+<p>*成家卡序號 為歸戶記名，無法轉移，使用時無法折抵運費、樓層費</p>
+
+<script>
+    document.querySelector("#scrollToFAQ").addEventListener("click",function(){
+        var FAQ = document.querySelectorAll(".qa-title");
+        FAQ[1].scrollIntoView({block: "center",inline: "nearest",behavior: 'smooth'});
+        var FAQans = document.querySelectorAll(".all-questions");
+        var FAQtitle = document.querySelectorAll(".qa-title");
+        FAQans[1].classList.add("active");
+        FAQtitle[1].querySelector(".icon-plus").classList.add("active");
+    })
+</script>
+
+<!-- FAQ_CSS_JS_ExpandAll -->
+
 <style>
-    #top_10_blue .title_top_top10{
-        background-color: #fff;
-        color: #333333;
-    }
-    #top_10_blue .nav_top10 ul li{
-        color: #333333;
-    }
-    .oldprice{
-      text-decoration:line-through;
-      color: gray;
-      display: inline-block;
-      font-size: 14px;
-      font-weight: 400px;
-    }
-  
-  
-  
-    @media(max-width:768px){
-      
-        #top_10_blue .nav_top10 ul{
-            background-color: #fff;
-        }
-        .nav_top10 ul li{
-            margin-left: 0;
-            margin-right: 0;
-        }
-        #top_10_blue .nav_top10 ul li.active{
-            background-color: #fff;
-            color: #333333;
-        }
-        .item_top10 .allprice {
-            margin-top: 41%;
-            padding-bottom: 4%;
-            width: 100%;
-        }
-  
-    }
-  
-  
-  </style>
+  .icon-plus-active {
+      background: #0088cc;
+      width: 24px;
+      height: 4px;
+      display: flex;
+      margin: 10px;
+      transform: rotate(360deg);
+      transition: all 0.5s;
+  }
+
+  .icon-plus-active::after {
+      content: "";
+      width: 24px;
+      height: 4px;
+      background: #0088cc;
+      transform: rotate(180deg);
+      transition: all 0.5s;
+  }
+
+  .qa-title {
+      display: flex;
+      align-items: center;
+  }
+
+  .qa-title h2 {
+      margin: 20px;
+  }
+
+  .all-questions {
+      display: block !important;
+  }
+</style>
+<script>
+  let iconContainers = document.querySelectorAll('.icon-container');
+  if (iconContainers) {
+      iconContainers.forEach((iconContainer) => {
+          iconContainer.classList.add("icon-plus-active");
+      });
+  }
+</script>
 
 
- <div style="margin: 0;" class="top_10 double_11" id="top_10_blue">
-  <div class="pdcarousel" style="background-color: rgb(242 242 242);width: 100%;margin: auto; display: flex;flex-direction: column;">
-    
-    
-    <div class="nav_top10">
-        <h1>
-            超過五萬位居友信賴
-        </h1>
+<!-- PB_FAQ_新春成家卡 -->
+
+<div>
+  <div class="claim-section" style="display: flex">
+    <h1 class="size22pt" style="margin: auto auto">新春成家卡 FAQ</h1>
+  </div>
+  <div class="qa-title">
+    <div id="store_icon" class="icon-plus icon-plus-active"></div>
+    <h2>注意事項</h2>
+  </div>
+  <div id="faq_store" class="all-questions">
+    <ul>
+      <li>
+        <h3>使用期限</h3>
         <ul>
-            <li class="active">小坪數餐桌椅</li>
-            <li>人氣收納櫃</li>
-            <li>設計款茶几</li>
-            <li >化妝書桌椅</li>
+          <li>
+            <p class="caution">
+              自官網會員帳號收到序號及額度起(系統統一2025年2月1日發放)，成家卡無有效期限。購買本卡後，恕不接受要求兌換現金，亦不得要求折抵1月31日（含）前成立之訂單金額。
+            </p>
+          </li>
         </ul>
-    </div>
-  
-  <!-- 小坪數餐桌椅 -->
-
-  <div class="owl-carousel owl-theme sleepcarousel_top10 active carStartUp ga-parent-item-list" data-ga-item-list-id="HS-DiningP" data-ga-item-list-name="好清潔餐桌椅" style="height: 18.6em;">
- 
-    <div class="item_top10" data-ga-item-id="24-0006-0-06-v2">
-      <a href="{{store direct_url='joyce0001.html'}}"><img class="mrl-click HS-DiningP1 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="24-0006-0-06-v2"data-ga-item-index="1" data-ga-label="Joyce 小坪數延伸餐桌 120/162cm 原木色" alt="Joyce 小坪數延伸餐桌 120/162cm 原木色" src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/j/o/joyce_table_120_v1_1111_p00.jpg}}" loading="lazy"></a>
-      <a href="{{store direct_url='joyce0001.html'}}" loading="lazy"><div class="mrl-click HS-DiningP1 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="24-0006-0-06-v2" data-ga-item-index="1" data-ga-label="Joyce 小坪數延伸餐桌 120/162cm 原木色" >Joyce 小坪數延伸餐桌<br/>120/162cm</div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span>
-        <span class="oldprice"></span></div>
-    </div>
-  
-      <div class="item_sales" ><span>狂銷1816件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="12-0035-0-17">
-      <a href="{{store direct_url='diningchair-florence-leather-tan.html'}}"><img class="mrl-click HS-DiningP2 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0035-0-17" data-ga-item-index="2" data-ga-label="Florence 皮餐椅 焦糖棕" alt="Florence 皮餐椅 焦糖棕" src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/f/l/florence-leatan-p01-0215-v1.jpg}}" loading="lazy"></a>
-      <a href="{{store direct_url='diningchair-florence-leather-tan.html'}}"><div class="mrl-click HS-DiningP2 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0035-0-17" data-ga-item-index="2" data-ga-label="Florence 皮餐椅 焦糖棕" >Florence 皮餐椅<br/>焦糖棕</div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span>
-        <span class="oldprice"></span></div>
-    </div>
-  
-      <div class="item_sales" ><span>狂銷4593件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="24-0036-0-18">
-      <a href="{{store direct_url='ivy-diningtable-exten.html'}}"><img class="mrl-click HS-DiningP3 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="24-0036-0-18" data-ga-item-index="3" data-ga-label="Ivy 小坪數延伸餐桌 120/160cm" alt="Ivy 小坪數延伸餐桌 120/160cm" src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/i/v/ivy_diningtable_v1_0407_p00.jpg}}" loading="lazy"></a>
-      <a href="{{store direct_url='ivy-diningtable-exten.html'}}"><div class="mrl-click HS-DiningP3 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="24-0036-0-18" data-ga-item-index="3" data-ga-label="Ivy 小坪數延伸餐桌 120/160cm" >Ivy 小坪數延伸餐桌<br/>120/160cm</div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span>
-        <span class="oldprice"></span></div>
-    </div>
-  
-      <div class="item_sales" ><span>狂銷523件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="12-0022-0-17">
-      <a href="{{store direct_url='diningchair-paris-fabric-grey.html'}}"><img class="mrl-click HS-DiningP4 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0022-0-17" data-ga-item-index="4" data-ga-label="Paris 布餐椅 香草灰" alt="Paris 布餐椅 香草灰" src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/p/a/paris-grey-p01-0120-v1.jpg}}" loading="lazy"></a>
-      <a href="{{store direct_url='diningchair-paris-fabric-grey.html'}}"><div class="mrl-click HS-DiningP4 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0022-0-17" data-ga-item-index="4" data-ga-label="Paris 布餐椅 香草灰" >Paris 布餐椅 香草灰</div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span>
-        <span class="oldprice"></span></div>
-    </div>
-  
-      <div class="item_sales" ><span>狂銷1067件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="1017922">
-      <a href="{{store direct_url='diningtable-emma-ash.html'}}"><img class="mrl-click HS-DiningP5 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1017922" data-ga-item-index="5" data-ga-label="Emma 小坪數延伸餐桌 140/180cm 原木色" alt="Emma 小坪數延伸餐桌 140/180cm" src="{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667/e/m/emma-diningtable_140-180_web_800x1000px_v01_p00.jpg}}" loading="lazy"></a>
-      <a href="{{store direct_url='diningtable-emma-ash.html'}}"><div class="mrl-click HS-DiningP5 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1017922" data-ga-item-index="5" data-ga-label="Emma 小坪數延伸餐桌 140/180cm 原木色" >Emma 小坪數延伸餐桌<br/>140/180cm</div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span>
-        <span class="oldprice"></span></div>
-    </div>
-  
-      <div class="item_sales" ><span>已售240件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="12-0028-0-17">
-      <a href="{{store direct_url='diningchair-cuba-leather-gery.html'}}"><img class="mrl-click HS-DiningP6 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0028-0-17" data-ga-item-index="6" data-ga-label="Cuba 皮餐椅 迷霧灰" alt="Cuba 皮餐椅 迷霧灰" src="{{media url=catalog/product/cache/ee0598d472ffe6b294082027fe8d5830/c/u/cuba-grey-p01-0207-v1.jpg}}" loading="lazy"></a>
-      <a href="{{store direct_url='diningchair-cuba-leather-gery.html'}}"><div class="mrl-click HS-DiningP6 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0028-0-17" data-ga-item-index="6" data-ga-label="Cuba 皮餐椅 迷霧灰" >Cuba 皮餐椅<br/>迷霧灰</div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span>
-        <span class="oldprice"></span></div>
-    </div>
-  
-      <div class="item_sales" ><span>狂銷3754件</span></div>
-    </div>
-    
-    <div class="item_top10" data-ga-item-id="12-0037-0-17">
-      <a href=""><img class="mrl-click HS-DiningP7 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0037-0-17" data-ga-item-index="7" data-ga-label="Milan 餐椅 頁岩灰" alt="Milan 餐椅 頁岩灰" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-DiningP7 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0037-0-17" data-ga-item-index="7" data-ga-label="Milan 餐椅 頁岩灰"></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span>
-          <span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1637件</span></div>
-    </div>
-    
-    <div class="item_top10" data-ga-item-id="12-0007-0-02">
-      <a href=""><img class="mrl-click HS-DiningP8 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0007-0-02" data-ga-item-index="8" data-ga-label="White & Wood 北歐風布餐椅" alt="White & Wood 北歐風布餐椅" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-DiningP8 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0007-0-02" data-ga-item-index="8" data-ga-label="White & Wood 北歐風布餐椅" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1647件</span></div>
-    </div>
-
-    <div class="item_top10" data-ga-item-id="12-0017-0-02">
-      <a href=""><img class="mrl-click HS-DiningP9 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0017-0-02" data-ga-item-index="9" data-ga-label="Lona 北歐風皮餐椅" alt="Lona 北歐風皮餐椅" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-DiningP9 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0017-0-02" data-ga-item-index="9" data-ga-label="Lona 北歐風皮餐椅" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1068件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="12-0039-0-18">
-      <a href=""><img class="mrl-click HS-DiningP10 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0039-0-18" data-ga-item-index="10" data-ga-label="Dalas 皮餐椅" alt="Dalas 皮餐椅" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-DiningP10 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0039-0-18" data-ga-item-index="10" data-ga-label="Dalas 皮餐椅" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷880件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="12-0049-0-19">
-      <a href=""><img class="mrl-click HS-DiningP11 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0049-0-19" data-ga-item-index="11" data-ga-label="Audrey 皮餐椅" alt="Audrey 皮餐椅" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-DiningP11 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0049-0-19" data-ga-item-index="11" data-ga-label="Audrey 皮餐椅" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1455件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="12-0082-0-02">
-      <a href=""><img class="mrl-click HS-DiningP12 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0082-0-02" data-ga-item-index="12" data-ga-label="Cora 藤編牛皮餐椅 白橡木色" alt="Cora 藤編牛皮餐椅 白橡木色" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-DiningP12 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="12-0082-0-02" data-ga-item-index="12" data-ga-label="Cora 藤編牛皮餐椅 白橡木色" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷864件</span></div>
-    </div>
-
+      </li>
+      <li>
+        <h3>成家卡購物方式：</h3>
+        <ul>
+          <li><p class="caution">支付 9,500 元的價格購買成家卡，即可獲得 10,000 元的購物額度。</p></li>
+          <li><p class="caution">購買成家卡的統一發票將於購卡後7個工作天內開立。
+          </p></li>
+          <li><p class="caution">成家卡僅限於限訂單成立當下使用，尾款不適用，且不可要求兌換成現金。
+          </p></li>
+          <li><p class="caution">若結帳金額折抵成家卡後須找零，統一退還成家卡金額額度，恕不提供現金找零服務。
+          </p></li>
+          <li><p class="caution">使用成家卡折抵後的差額可使用現金及刷卡兩種付款方式。
+          </p></li>
+        </ul>
+      </li>
+      <li>
+        <h3>使用範圍：</h3>
+        <ul>
+          <li>
+            <p class="caution">
+              於居家先生MR. LIVING官方網站與全台門市皆可使用成家卡購買居家先生商品，並可參加全館滿額優惠活動。
+            </p>
+          </li>
+          <li>
+            <p class="caution">
+              成家卡不適用momo購物網、PChome、嘖嘖等外部購物平台。</p>
+          </li>
+          <li>
+            <p class="caution">
+              成家卡無法折抵運費、樓層費等服務性費用（以結帳系統認定為準）。
+            </p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3>購買成家卡的金額也可以列入滿額活動計算嗎？</h3>
+        <ul>
+          <li>
+            <p class="caution">成家卡屬於特殊優惠商品，購買成家卡的金額不列入其他優惠活動計算。</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3>退貨及金額異動：</h3>
+        <ul>
+          <li>
+            <p class="caution">若原訂單享有免運優惠門檻，但因退貨造成訂單未達免運標準，將須支付原應加計之運費。收費標準請參考官網公告。</p>
+          </li>
+          <li>
+            <p class="caution">使用成家卡的訂單，若發生退貨等情況（如101晚床墊體驗退貨或14日買貴退差價）使訂單總金額有異動，統一退還成家卡金額額度，恕無法全額或部分兌換退款現金。
+            </p>
+            <p class="caution">※訂單總金額15,980元(單人床墊$9,990+床頭櫃$5,990)
+            </p>
+            <ul>
+              <li style="font-size: 16.8px; margin-right: 2rem;">
+                支付方式：使用成家卡折抵10,000元 + 支付5,980元（刷卡/現金）。
+              </li>
+              <li style="font-size: 16.8px; margin-right: 2rem;">
+                如遇退貨9,990元單人床墊，採返還消費者成家卡額度10,000元，同時消費者需回補10元差額（刷卡/現金）。
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <hr />
   </div>
-  
-  
-  <!-- 人氣收納櫃 -->
 
-  <div class="owl-carousel owl-theme sleepcarousel_top10 ga-parent-item-list" data-ga-item-list-id="HS-StorageP" data-ga-item-list-name="人氣收納櫃" style="height: 18.6em;">
-  
-    <div class="item_top10" data-ga-item-id="22-0050-0-19" >
-      <a href=""><img class="mrl-click HS-StorageP1 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0050-0-19" data-ga-item-index="1" data-ga-label="【北歐復古】Antony 實木電視櫃 (右抽) 赤栗棕" alt="Antony 實木電視櫃 赤栗棕" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP1 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0050-0-19" data-ga-item-index="1" data-ga-label="【北歐復古】Antony 實木電視櫃 (右抽) 赤栗棕" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1317件</span></div>
-    </div>
-
-    <div class="item_top10" data-ga-item-id="1017928">
-      <a href=""><img class="mrl-click HS-StorageP2 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1017928" data-ga-item-index="2" data-ga-label="超級收納餐邊櫃 150cm" alt="超級收納餐邊櫃 150cm" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP2 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1017928" data-ga-item-index="2" data-ga-label="超級收納餐邊櫃 150cm" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1021件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="22-0075-0-06">
-      <a href=""><img class="mrl-click HS-StorageP3 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0075-0-06" data-ga-item-index="3" data-ga-label="Fishbone 收納邊几/床頭櫃" alt="Fishbone 床頭櫃" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP3 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0075-0-06" data-ga-item-index="3" data-ga-label="Fishbone 收納邊几/床頭櫃" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷905件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="22-0078-0-02">
-      <a href=""><img class="mrl-click HS-StorageP4 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0078-0-02" data-ga-item-index="4" data-ga-label="Cage 邊几/床頭櫃" alt="Cage 邊几/床頭櫃" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP4 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0078-0-02" data-ga-item-index="4" data-ga-label="Cage 邊几/床頭櫃" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售337件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="22-0055-0-19">
-      <a href=""><img class="mrl-click HS-StorageP5 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id=" 22-0055-0-19" data-ga-item-index="5" data-ga-label="【北歐復古】Antony 實木六斗櫃 (矮櫃) 赤栗棕" alt="Antony 實木六斗櫃 赤栗棕" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP5 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id=" 22-0055-0-19" data-ga-item-index="5" data-ga-label="【北歐復古】Antony 實木六斗櫃 (矮櫃) 赤栗棕" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1165件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="22-0008-0-06-v2">
-      <a href=""><img class="mrl-click HS-StorageP6 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0008-0-06-v2" data-ga-item-index="6" data-ga-label="Joyce 電視櫃 原木色" alt="Joyce 電視櫃 原木色" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP6 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0008-0-06-v2" data-ga-item-index="6" data-ga-label="Joyce 電視櫃 原木色" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售461件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="22-0077-0-18">
-      <a href=""><img class="mrl-click HS-StorageP7 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0077-0-18" data-ga-item-index="7" data-ga-label="Berlin 電視櫃" alt="Berlin 電視櫃" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP7 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0077-0-18" data-ga-item-index="7" data-ga-label="Berlin 電視櫃" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售281件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="22-0087-0-19">
-      <a href=""><img class="mrl-click HS-StorageP8 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0087-0-19"data-ga-item-index="8" data-ga-label="Nora 實木六斗櫃" alt="Nora 實木六斗櫃" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP8 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0087-0-19" data-ga-item-index="8" data-ga-label="Nora 實木六斗櫃" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售259件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="22-0049-0-19">
-      <a href=""><img class="mrl-click HS-StorageP9 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0049-0-19" data-ga-item-index="9" data-ga-label="【北歐復古】Antony 實木餐邊櫃 赤栗棕" alt="Antony 實木餐邊櫃 赤栗棕" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP9 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0049-0-19" data-ga-item-index="9" data-ga-label="【北歐復古】Antony 實木餐邊櫃 赤栗棕" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷634件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="22-0070-0-19">
-      <a href=""><img class="mrl-click HS-StorageP10 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0070-0-19" data-ga-item-index="10" data-ga-label="【北歐復古】Antony 實木鞋櫃 赤栗棕" alt="Antony 實木鞋櫃 赤栗棕" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP10 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0070-0-19" data-ga-item-index="10" data-ga-label="【北歐復古】Antony 實木鞋櫃 赤栗棕" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售223件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="22-0144-0-19">
-      <a href=""><img class="mrl-click HS-StorageP11 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0144-0-19" data-ga-item-index="11" data-ga-label="【北歐現代】Antony 展示收納櫃 (小) 原木色" alt="Antony 展示收納櫃 原木色" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP11 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0144-0-19" data-ga-item-index="11" data-ga-label="【北歐現代】Antony 展示收納櫃 (小) 原木色" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售252件</span></div>
-    </div>
-
-    <div class="item_top10" data-ga-item-id="22-0047-0-19">
-      <a href=""><img class="mrl-click HS-StorageP12 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0047-0-19"data-ga-item-index="12" data-ga-label="Antony 實木抽屜床頭櫃 赤栗棕" alt="Antony 實木抽屜床頭櫃 赤栗棕" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-StorageP12 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0047-0-19"data-ga-item-index="12" data-ga-label="Antony 實木抽屜床頭櫃 赤栗棕" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷2284件</span></div>
-    </div>
-
+  <div class="qa-title">
+    <div class="icon-plus icon-plus-active"></div>
+    <h2>如何查詢成家卡序號及額度？</h2>
   </div>
-  
-  
-  <!-- 設計款茶几 -->
-
-  <div class="owl-carousel owl-theme sleepcarousel_top10 ga-parent-item-list" data-ga-item-list-id="HS-CoftableP" data-ga-item-list-name="設計款茶几" style="height: 18.6em;">
-
-    <div class="item_top10" data-ga-item-id="20-0089-0-24">
-      <a href=""><img class="mrl-click HS-CoftableP1 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0089-0-24" data-ga-item-index="1" data-ga-label="Adele 義大利大理石圓邊几 (金)" alt="Adele 義大利大理石圓邊几 金" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP1 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0089-0-24" data-ga-item-index="1" data-ga-label="Adele 義大利大理石圓邊几 (金)" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1231件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="20-0008-0-02">
-      <a href=""><img class="mrl-click HS-CoftableP2 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0008-0-02" data-ga-item-index="2" data-ga-label="Black & Wood 工業風沙發邊几" alt="Black & Wood 工業風沙發邊几" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP2 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0008-0-02" data-ga-item-index="2" data-ga-label="Black & Wood 工業風沙發邊几" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷854件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="20-0014-0-06-v2">
-      <a href=""><img class="mrl-click HS-CoftableP3 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0014-0-06-v2" data-ga-item-index="3" data-ga-label="Joyce 茶几 原木色" alt="Joyce 茶几 原木色" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP3 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0014-0-06-v2" data-ga-item-index="3" data-ga-label="Joyce 茶几 原木色" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1812件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="20-0070-0-19">
-      <a href=""><img class="mrl-click HS-CoftableP4 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0070-0-19" data-ga-item-index="4" data-ga-label="【北歐復古】Antony 實木抽屜茶几 赤栗棕" alt="Antony 實木抽屜茶几 赤栗棕" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP4 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0070-0-19" data-ga-item-index="4" data-ga-label="【北歐復古】Antony 實木抽屜茶几 赤栗棕" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷827件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="22-0074-0-06">
-      <a href=""><img class="mrl-click HS-CoftableP5 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0074-0-06" data-ga-item-index="5" data-ga-label="Cane 收納邊几/床頭櫃" alt="Cane 收納邊几" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP5 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="22-0074-0-06" data-ga-item-index="5" data-ga-label="Cane 收納邊几/床頭櫃" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷801件</span></div>
-    </div>
-  
-  <div class="item_top10" data-ga-item-id="20-0110-0-19">
-      <a href=""><img class="mrl-click HS-CoftableP6 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0110-0-19" data-ga-item-index="6" data-ga-label="Nora 抽屜茶几" alt="Nora 抽屜茶几" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP6 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0110-0-19" data-ga-item-index="6" data-ga-label="Nora 抽屜茶几" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售139件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="1018302">
-      <a href=""><img class="mrl-click HS-CoftableP7 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1018302" data-ga-item-index="7" data-ga-label="Bela 義大利大理石圓茶几 80cm" alt="Bela 義大利大理石圓茶几 80cm" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP7 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1018302" data-ga-item-index="7" data-ga-label="Bela 義大利大理石圓茶几 80cm" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷2896件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="20-0082-0-24">
-      <a href=""><img class="mrl-click HS-CoftableP8 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0082-0-24" data-ga-item-index="8" data-ga-label="Pillar 義大利大理石圓茶几" alt="Pillar 義大利大理石圓茶几" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP8 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0082-0-24" data-ga-item-index="8" data-ga-label="Pillar 義大利大理石圓茶几" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1181件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="20-0101-0-19-v2">
-      <a href=""><img class="mrl-click HS-CoftableP9 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0101-0-19-v2" data-ga-item-index="9" data-ga-label="【北歐復古】Antony 實木小邊几 赤栗棕" alt="【北歐復古】Antony 實木小邊几 赤栗棕" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP9 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0101-0-19-v2" data-ga-item-index="9" data-ga-label="【北歐復古】Antony 實木小邊几 赤栗棕" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售185件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="1018011">
-      <a href=""><img class="mrl-click HS-CoftableP10 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1018011" data-ga-item-index="10" data-ga-label="Curva 升降茶几 / 升降儲物茶几" alt="Curva 升降茶几 / 升降儲物茶几" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP10 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1018011" data-ga-item-index="10" data-ga-label="Curva 升降茶几 / 升降儲物茶几" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售160件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="20-0097-0-02">
-      <a href=""><img class="mrl-click HS-CoftableP11 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0097-0-02" data-ga-item-index="11" data-ga-label="Monty 大小茶几組" alt="Monty 大小茶几組" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP11 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0097-0-02" data-ga-item-index="11" data-ga-label="Monty 大小茶几組" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷813件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="20-0134-0-19">
-      <a href=""><img class="mrl-click HS-CoftableP12 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0134-0-19" data-ga-item-index="12" data-ga-label="Audrey 實木抽屜茶几" alt="Audrey 實木抽屜茶几" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-CoftableP12 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="20-0134-0-19" data-ga-item-index="12" data-ga-label="Audrey 實木抽屜茶几" ></div></a>
-      <div class="allprice">
-          <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售298件</span></div>
-    </div>
-  
+  <div class="all-questions">
+    <p class="questions-text">
+      成家卡為歸戶記名形式，前往<a href="{{store direct_url='amgcard/account/}}" target="_blank">會員中心</a>查看我的成家卡。
+    </p>
+    <p class="questions-text">
+      上述方法仍無法成功、需客服小幫手協助，請於上班日週一至六 9:30〜12:00/13:00~18:30 透過官方<a href="https://maac.io/1srlL">LINE</a>，提供『訂購人手機號或訂購單號』詢問。
+    </p>
+    <hr />
   </div>
-  
-  
-  <!--化妝書桌椅-->
 
-  <div class="owl-carousel owl-theme sleepcarousel_top10 ga-parent-item-list" data-ga-item-list-id="HS-deskP" data-ga-item-list-name="化妝書桌椅" style="height: 18.6em;">
-  
-    <div class="item_top10" data-ga-item-id="1017956">
-      <a href=""><img class="mrl-click HS-deskP1 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1017956" data-ga-item-index="1" data-ga-label="超級收納化妝台/化妝桌 100cm 櫻桃木" alt="超級收納化妝台/化妝桌 櫻桃木" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP1 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1017956" data-ga-item-index="1" data-ga-label="超級收納化妝台/化妝桌 100cm 櫻桃木" ></div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷2408件</span></div>
-    </div>
-
-    <div class="item_top10" data-ga-item-id="1017957">
-      <a href=""><img class="mrl-click HS-deskP2 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1017957" data-ga-item-index="2" data-ga-label="小資實木化妝凳/化妝椅" alt="小資實木化妝凳/化妝椅" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP2 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1017957" data-ga-item-index="2" data-ga-label="小資實木化妝凳/化妝椅" ></div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1586件</span></div>
-    </div>
-
-    <div class="item_top10" data-ga-item-id="13-0016-0-19">
-      <a href=""><img class="mrl-click HS-deskP3 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="13-0016-0-19" data-ga-item-index="3" data-ga-label="Charles 化妝凳/書椅" alt="Charles 化妝凳/書椅" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP3 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="13-0016-0-19" data-ga-item-index="3" data-ga-label="Charles 化妝凳/書椅" ></div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷770件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="21-0021-0-19">
-      <a href=""><img class="mrl-click HS-deskP4 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="21-0021-0-19" data-ga-item-index="4" data-ga-label="【北歐復古】Antony 實木翻轉化妝桌 赤栗棕" alt="Antony 實木翻轉化妝桌 赤栗棕" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP4 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="21-0021-0-19" data-ga-item-index="4" data-ga-label="【北歐復古】Antony 實木翻轉化妝桌 赤栗棕" ></div></a>
-      <div class="allprice">
-     <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷622件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="13-0017-0-19">
-      <a href=""><img class="mrl-click HS-deskP5 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="13-0017-0-19" data-ga-item-index="5" data-ga-label="【北歐復古】Antony 化妝凳 赤栗棕" alt="Antony 化妝凳 赤栗棕" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP5 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="13-0017-0-19" data-ga-item-index="5" data-ga-label="【北歐復古】Antony 化妝凳 赤栗棕" ></div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷918件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="1018007">
-      <a href=""><img class="mrl-click HS-deskP6 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1018007" data-ga-item-index="6" data-ga-label="超級收納化妝台/化妝桌 100cm 胡桃木" alt="超級收納化妝台/化妝桌 胡桃木" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP6 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="1018007"data-ga-item-index="6" data-ga-label="超級收納化妝台/化妝桌 100cm 胡桃木" ></div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售489件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="13-0021-0-19">
-      <a href=""><img class="mrl-click HS-deskP7 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="13-0021-0-19" data-ga-item-index="7" data-ga-label="Nora 化妝凳/書椅" alt="Nora 化妝凳/書椅" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP7 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="13-0021-0-19" data-ga-item-index="7" data-ga-label="Nora 化妝凳/書椅" ></div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售260件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="21-0003-0-06-v2">
-      <a href=""><img class="mrl-click HS-deskP8 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="21-0003-0-06-v2" data-ga-item-index="8" data-ga-label="KiKi 書桌" alt="KiKi 書桌" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP8 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="21-0003-0-06-v2" data-ga-item-index="8" data-ga-label="KiKi 書桌" ></div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>已售398件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="21-0022-0-19">
-      <a href=""><img class="mrl-click HS-deskP9 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="21-0022-0-19" data-ga-item-index="9" data-ga-label="Charles 化妝桌/書桌" alt="Charles 化妝桌/書桌" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP9 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="21-0022-0-19" data-ga-item-index="9" data-ga-label="Charles 化妝桌/書桌" ></div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>    
-      </div>
-  
-      <div class="item_sales" ><span>已售392件</span></div>
-    </div>
-  
-    <div class="item_top10" data-ga-item-id="21-0031-0-19">
-      <a href=""><img class="mrl-click HS-deskP10 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="21-0031-0-19" data-ga-item-index="10" data-ga-label="Arthur 實木化妝桌" alt="Arthur 實木化妝桌" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP10 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="21-0031-0-19" data-ga-item-index="10" data-ga-label="Arthur 實木化妝桌" ></div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>    
-      </div>
-  
-      <div class="item_sales" ><span>已售344件</span></div>
-    </div>
-
-    <div class="item_top10" data-ga-item-id="35-0016-0-17">
-      <a href=""><img class="mrl-click HS-deskP11 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="35-0016-0-17" data-ga-item-index="11" data-ga-label="Milan 皮辦公椅 焦糖棕" alt="Milan 皮辦公椅 焦糖棕" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP11 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="35-0016-0-17" data-ga-item-index="11" data-ga-label="Milan 皮辦公椅 焦糖棕" ></div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>
-      </div>
-  
-      <div class="item_sales" ><span>狂銷1271件</span></div>
-    </div>
-
-    <div class="item_top10" data-ga-item-id="21-0052-0-19">
-      <a href=""><img class="mrl-click HS-deskP12 scrolling_img select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="21-0052-0-19" data-ga-item-index="12" data-ga-label="【北歐復古】Antony 實木書桌 120cm 赤栗棕" alt="Antony 實木書桌 赤栗棕" src="" loading="lazy"></a>
-      <a href=""><div class="mrl-click HS-deskP12 scrolling_pdname select-item" data-ga-category="MKT-TopSaleP" data-ga-item-id="21-0052-0-19" data-ga-item-index="12" data-ga-label="【北歐復古】Antony 實木書桌 120cm 赤栗棕" ></div></a>
-      <div class="allprice">
-        <div style="position:relative;"><span class="price" style=" font-weight: 700;"></span><span class="oldprice"></span></div>    
-      </div>
-  
-      <div class="item_sales" ><span>已售334件</span></div>
-    </div>
+  <div class="qa-title">
+    <div class="icon-plus icon-plus-active"></div>
+    <h2>我超級想買成家卡，但一直付款不成功，怎麼辦？</h2>
   </div>
+  <div class="all-questions">
+    <p class="questions-text">
+      線上信用卡交易失敗(卡號輸入錯誤、3D驗證失敗等)時，可點選畫面中『點我重新付款』，您會重新進入填寫信用卡資訊頁～
+      若仍多次無法成功，建議您
+    </p>
+    <ul class="questions-text">
+      <li>選擇其他銀行別信用卡，再次進行付款；或洽詢發卡銀行協助。</li>
+      <li>如為瀏覽器問題，請改採其他瀏覽器軟體(如Chorme)，重新訂購。</li>
+    </ul>
+    <p class="questions-text">
+      上述方法仍無法成功，請將交易失敗的提醒資訊(請將信用卡帳戶相關資訊馬賽克)，截圖訊息至官方<a href="https://maac.io/1srlL">LINE</a>；請放心～我們將保留該筆交易付款的權利，於開工後上班日時客服小幫手會盡快協助您～
+    </p>
+    <hr />
   </div>
+
+  <div class="qa-title">
+    <div class="icon-plus icon-plus-active"></div>
+    <h2>成家卡有限定使用人嗎？能不能給家人使用？</h2>
   </div>
+  <div class="all-questions">
+    <p class="questions-text">
+      成家卡為歸戶記名形式；若想與家人分享成家卡，建議您陪同家人至<a
+        class="reserve-btn"
+        style="cursor: pointer"
+        >體驗店</a
+      >選購，或由您代家人於官網下訂單～
+    </p>
+    <hr />
+  </div>
+
+  <div class="qa-title">
+    <div class="icon-plus icon-plus-active"></div>
+    <h2>購買成家卡後，如果發現不需要了，能取消嗎？</h2>
+  </div>
+
+  <div class="all-questions">
+    <p class="questions-text">
+      在您收到成家卡序號隔日起７日內且尚未使用，享有鑑賞期服務、可取消；超過鑑賞期或已使用恕無法取消成家卡。
+      若您因還沒決定好買什麼、新屋尚未交屋、翻新舊屋計畫未定等；成家卡獨享折上折，最低85折起，且無使用期限！非常建議您保留成家卡喔～
+    </p>
+    <hr />
+  </div>
+
+  <div class="qa-title">
+    <div class="icon-plus icon-plus-active"></div>
+    <h2>如何使用成家卡訂購喜愛的商品？</h2>
+  </div>
+
+  <div class="all-questions">
+    <p class="questions-text">購買成家卡的居友們，有兩種使用方式</p>
+    <ol class="questions-text">
+      <li>
+        全台體驗店：現場挑選完商品，手機登入官網會員帳戶，出示會員Email給門市夥伴為您開立訂單。
+      </li>
+      <li>
+        官網購物：成功登入會員帳戶後，於購物車頁或結帳頁面，『使用成家卡』欄位點選序號即可折抵購物車中商品。
+      </li>
+    </ol>
+    <hr />
+  </div>
+
+  <div class="qa-title">
+    <div class="icon-plus icon-plus-active"></div>
+    <h2>其他</h2>
+  </div>
+  <div class="all-questions">
+    <ol>
+      <li class="question-li">
+        <div class="question">
+          <div class="icon-plus little-plus"></div>
+          <h3>官網會員帳戶查無成家卡序號及額度，怎麼辦？</h3>
+        </div>
+        <div class="answer">
+          <p>
+            請您先協助確認選購成家卡時的Email帳戶，與您當下登入者是否一致；若仍無法取得成家卡資訊，請透過官方<a href="https://maac.io/1srlL">LINE</a>，提供『訂購人手機號或成家卡訂購單號』，由客服小幫手協助您～
+          </p>
+        </div>
+      </li>
+      <hr />
+
+      <li class="question-li">
+        <div class="question">
+          <div class="icon-plus little-plus"></div>
+          <h3>使用成家卡至門市買家具，家具有7天鑑賞期嗎？</h3>
+        </div>
+        <div class="answer">
+          <p>
+            鑑賞期僅適用於官網線上購物，不適用於實體門市喔～實體門市購物需知請洽各體驗店。
+          </p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<style>
+  .questions-text {
+    margin-left: 6rem;
+    padding-right: 2rem;
+    font-size: larger;
+  }
+  .caution{
+    font-size: 16.8px;
+    padding-right: 2rem;
+  }
+</style>
