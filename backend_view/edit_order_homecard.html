@@ -218,6 +218,7 @@
                 .then(function (data) {
                     var giftCardItems = data.map(function (account) {
                         account.current_value = Math.round(account.current_value);
+                        account.current_value = returnBalanceToCustomer(account.code_model.code.trim(), account.current_value);
 
                         if (account.current_value === 0 || account.status === 5) {
                             return null;
@@ -238,6 +239,40 @@
                     console.log('There was a problem with the fetch operation:', error);
                 });
         }
+
+        //返還使用餘額
+        function returnBalanceToCustomer(code, currentValue) {
+            var totalTableTds = document.querySelectorAll('.order-subtotal-table td')
+            var editValuesElems = document.querySelectorAll('.ordereditor-new-total-giftcardaccount')
+
+            // 1.現有額度 + 已使用額度
+            totalTableTds.forEach(function(td){
+                if(td.innerText.includes('成家卡 ')){
+                    var alreadyUseCode = td.innerText.replace('成家卡 ', '').trim();
+                    if(alreadyUseCode === code){
+                        var alreadyUseValue = td.parentNode.querySelector('td > span').innerText;
+                        alreadyUseValue = parseInt(alreadyUseValue.replace(/[^0-9.-]+/g, ""), 10);
+                        alreadyUseValue = Math.abs(alreadyUseValue);
+                        currentValue += alreadyUseValue;
+                    }
+                }
+            })
+
+            // 2.現有額度 - 編輯使用額度
+            if(editValuesElems.length > 0){
+                editValuesElems.forEach(function(elem){
+                    var editValueCode = elem.parentNode.querySelector('.admin__total-mark').innerText.replace(/.*\s([A-Za-z0-9]+)$/, '$1').trim();
+           
+                    if(editValueCode === code){
+                        var editValueNumber = parseInt(elem.innerText);
+                        currentValue += editValueNumber;
+                    }
+                })
+            }
+
+            return currentValue;
+        }
+
 
         // 建立成家卡序號列表
         function createHomeCardCodeList(giftCardItems, reminderTextContent) {
@@ -422,7 +457,7 @@
                             var sku = skuElem.innerText;
 
                             if (excludedSkuList.includes(sku)) {
-                                var fee = skuElem.closest('tr').querySelector('.col-qty .qty-table .qty_input').value;
+                                var fee = skuElem.closest('tr').querySelector('.col-row-total .mw-order-editor-order-item').value;
                                 excludedFee += parseInt(fee.replace(/[^0-9.-]+/g, ""), 10); // 累加 excludedFee
                                 // console.log('excludedFee', excludedFee);
                             }

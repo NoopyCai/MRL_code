@@ -71,7 +71,7 @@
 
     .homecard-codes-list {
         width: 100%;
-        height: 100%;
+        height: auto;
         text-align: center;
         list-style: none;
         position: relative;
@@ -155,46 +155,54 @@
 <script>
     (function () {
         var monitorClickOutsideCodeList = false;
-            setTimeout(function () {
-                var couponCodeContainer = document.querySelector('.order-discounts');
-                if (couponCodeContainer) {
-                    repositionCouponCodeContainer();
-                }
-            }, 1000);
-
-            var homeCardCodeInput = document.querySelector('#amgiftcard_code');
-
-            if (homeCardCodeInput) {
-                document.querySelector('.amcoupons-main-container .admin__field-label').innerText = '使用優惠券代碼';
-                document.querySelector('.field-apply-coupon-code .admin__field-label >span').innerText = '使用成家卡';
-                homeCardCodeInput.placeholder = '請選擇序號';
-
-                homeCardCodeInput.addEventListener('click', function () {
-                    //點擊時更新 customerID
-                    var customerID = updateCustomerID();
-                    if(!customerID) return;
-
-                    getGiftCardCodesByCustomerID(customerID)
-                        .then(function (giftCardItems) {
-                            createHomeCardCodeList(giftCardItems);
-                        })
-                        .then(function () {
-                            var useCodeBtn = document.querySelector('#order-coupons .action-default');
-                            if (useCodeBtn) autoUseCodeWithClickOption(useCodeBtn);
-                        })
-                        .catch(function (error) {
-                            console.error('Error:', error);
-                        });
-                })
+        setTimeout(function () {
+            var couponCodeContainer = document.querySelector('.order-discounts');
+            if (couponCodeContainer) {
+                repositionCouponCodeContainer();
             }
-        
+        }, 1000);
+
+        var homeCardCodeInput = document.querySelector('#amgiftcard_code');
+
+        if (homeCardCodeInput) {
+            document.querySelector('.amcoupons-main-container .admin__field-label').innerText = '使用優惠券代碼';
+            document.querySelector('.field-apply-coupon-code .admin__field-label >span').innerText = '使用成家卡';
+            homeCardCodeInput.placeholder = '請選擇序號';
+
+            homeCardCodeInput.addEventListener('click', function () {
+                //點擊時更新 customerID
+                var customerID = updateCustomerIDfromEditForm();
+                if (!customerID) {
+                    customerID = updateCustomerIDfromList();
+                    if (!customerID) {
+                        console.error('Customer ID not found');
+                        return;
+                    }
+                }
+
+                
+
+                getGiftCardCodesByCustomerID(customerID)
+                    .then(function (giftCardItems) {
+                        createHomeCardCodeList(giftCardItems);
+                    })
+                    .then(function () {
+                        var useCodeBtn = document.querySelector('#order-coupons .action-default');
+                        if (useCodeBtn) autoUseCodeWithClickOption(useCodeBtn);
+                    })
+                    .catch(function (error) {
+                        console.error('Error:', error);
+                    });
+            })
+        }
+
 
         //送出前檢查是否有位使用的序號
         checkCodeExitedBeforeSubmit();
-        
 
-        //更新 customerID
-        function updateCustomerID() {
+
+        //更新 customerID from list
+        function updateCustomerIDfromList() {
             var emailInput = document.querySelector('#email');
             var userEmailOnList = document.querySelectorAll('#sales_order_create_customer_grid_table tbody .col-email')
             var matchCustomerIdWithEmail = null;
@@ -205,7 +213,20 @@
                 }
             });
 
-            return matchCustomerIdWithEmail;
+            if (!matchCustomerIdWithEmail) return;
+            return matchCustomerIdWithEmail.innerText;
+        }
+
+        //更新 customerID from edit form
+        function updateCustomerIDfromEditForm() {
+            var editFormElem = document.querySelector('#edit_form');
+            if (!editFormElem) return;
+
+            var orderConfig = editFormElem.getAttribute('data-order-config');
+            var orderConfigObj = JSON.parse(orderConfig);
+            var customerID = orderConfigObj.customer_id;
+
+            return customerID;
         }
 
         // 調整 coupon code 區塊位置
@@ -220,8 +241,7 @@
 
             if (removeCodeBtns.length > 0) {
                 removeCodeBtns.forEach(function (btn) {
-                    btn.addEventListener('click', function () {
-                        couponCodeContainer.remove();
+                        btn.addEventListener('click', function () {
                     })
                 })
             }
@@ -239,8 +259,11 @@
 
         // 取得特定 Customer ID 的成家卡序號
         function getGiftCardCodesByCustomerID(customerID) {
-            var url = '/rest/V1/amgcard/account/customer/' + customerID.innerText;
-            var token = "8yda5iij2lyjwxu57znp41ja2dwyriri";
+            if (!customerID) return;
+
+            var domainUrl = window.location.origin;
+            var url = domainUrl + '/rest/V1/amgcard/account/customer/' + customerID;
+            var token = "zm7lhgnrummsdkbun9hy7uub0smyk14i";
 
             var payload = {
                 method: 'GET',
@@ -368,8 +391,6 @@
 
                     homeCardCodeInput.value = homeCardCodeValue;
                     codeUseBtn.click();
-
-                    couponCodeContainer.remove();
                 })
             })
         }
@@ -395,8 +416,8 @@
             var orderTitle = document.querySelector('#order-header')
             var checkUnUsedCodesStatus = false;
 
-            if(orderTitle.innerText.includes('Create New Order in Default Store View') || 
-             orderTitle.innerText.includes('為 Default Store View 創建新訂單')){
+            if (orderTitle.innerText.includes('Create New Order in Default Store View') ||
+                orderTitle.innerText.includes('為 Default Store View 創建新訂單')) {
                 return;
             }
             if (checkUnUsedCodesStatus) return;
@@ -436,7 +457,7 @@
                         colProductSkusElem.forEach(function (skuElem) {
                             var sku = skuElem.innerText.replace(/^SKU:\s*/, '').trim(); // 移除 "SKU: " 
                             if (excludedSkuList.includes(sku)) {
-                                var fee = skuElem.closest('tr').querySelector('.col-qty .item-qty').value;
+                                var fee = skuElem.closest('tr').querySelector('.col-row-subtotal .price').innerText;
                                 excludedFee += parseInt(fee.replace(/[^0-9.-]+/g, ""), 10); // 累加 excludedFee
                             }
                         })
@@ -451,12 +472,21 @@
                             originalSubmitBtn.click();
                             return;
                         } else if (grandTotals - (shippingFee + excludedFee) > 0) {
-                            console.log('grandTotals', grandTotals, 'shippingFee', shippingFee, 'excludedFee', excludedFee)
-                            console.log('grandTotals - (shippingFee + excludedFee)', grandTotals - (shippingFee + excludedFee))
 
                             //點擊時更新 customerID
-                            var customerID = updateCustomerID();
-                            if(!customerID) return;
+                            var customerID = updateCustomerIDfromEditForm();
+                            if (!customerID) {
+                                customerID = updateCustomerIDfromList();
+                                if (!customerID) {
+                                    console.error('Customer ID not found');
+                                    checkBtn.remove();
+                                    originalSubmitBtn.classList.remove('homecard-hidden');  
+                                    originalSubmitBtn.click();
+                                    return;
+                                }
+                            }
+
+                            
 
                             //使用Customer ID取得成家卡序號
                             getGiftCardCodesByCustomerID(customerID)
@@ -491,13 +521,14 @@
                     .catch(function (error) {
                         console.error('Error:', error);
                     });
-            })     
+            })
         }
 
         //取得需要被排除的SKU
         function getExcludedSku() {
-            var url = 'http://dev-devbk243.mrliving.tw/rest/V1/products?fields=items[sku]&searchCriteria[filter_groups][0][filters][0][field]=category_id&searchCriteria[filter_groups][0][filters][0][value]=117'
-            var token = "8yda5iij2lyjwxu57znp41ja2dwyriri";
+            var domainUrl = window.location.origin;
+            var url = domainUrl + '/rest/V1/products?fields=items[sku]&searchCriteria[filter_groups][0][filters][0][field]=category_id&searchCriteria[filter_groups][0][filters][0][value]=117'
+            var token = "zm7lhgnrummsdkbun9hy7uub0smyk14i";
 
             var payload = {
                 method: 'GET',
@@ -520,13 +551,13 @@
                         return item.sku;
                     }));
 
-                    console.log('skuList', skuList)
                     return skuList;
                 })
                 .catch(function (error) {
                     console.error('There was a problem with the fetch operation:', error);
                 });
         }
+
     })();
 
 </script>
