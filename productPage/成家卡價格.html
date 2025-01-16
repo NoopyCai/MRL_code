@@ -169,6 +169,7 @@
 
         appendChildren(discountPriceContainer, [discountPriceLabel, discountPrice]);
         document.querySelector('.ppbd-product-price .product-info-price').appendChild(discountPriceContainer);
+        
     }
 
     //新增查看更多價格選項按鈕
@@ -230,8 +231,11 @@
         if (isInitialized) return;
         isInitialized = true;
 
-        //隱藏數量調整input
+        // 隱藏數量調整input(release)
         document.querySelector('.box-tocart .sticky-addtocart').classList.add('hidden-with-homecard');
+
+        //隱藏數量調整input(dev)
+        // document.querySelector('.box-tocart .field.qty').classList.add('hidden-with-homecard');
 
         document.querySelector('.amcard-title').innerText = '選擇 成家卡面額';
 
@@ -243,6 +247,7 @@
         addCheckMoreButton();
 
         var allPriceOptions = document.querySelectorAll('.amcard-label-block.-price');
+        
         allPriceOptions[0].click();
         allPriceOptions.forEach(function(priceOption) {
             priceOption.addEventListener('click', function(e) {
