@@ -5,7 +5,7 @@
         if (qtyTables.length === 0) return;
         qtyTables.forEach(function (qtyTable) {
             var skuLink = qtyTable.querySelector("a");
-            if (skuLink.innerText.includes("MRL-HomeCard-New")) {
+            if (skuLink.innerText.includes("MRL-HomeCard-New")  || skuLink.innerText.includes("TEST-HomeCard")) {
                 var currentRow = qtyTable.closest("tr");
                 processRow(currentRow);
             }
@@ -19,7 +19,7 @@
                 var skuLink = qtyTable.querySelector("a > span");
                 if(skuLink === null) return;
 
-                if (skuLink.innerText.includes("MRL-HomeCard-New")) {
+                if (skuLink.innerText.includes("MRL-HomeCard-New") || skuLink.innerText.includes("TEST-HomeCard")) {
                     console.log(skuLink);
                     var currentRow = qtyTable.closest("tr");
                     processRow(currentRow);
@@ -79,8 +79,14 @@
             }
             // Disable qty col & 插入文案
             if (qtyCol) {
+                var now = new Date();
+                var changeDate = new Date("2025-02-01");
                 var disableEditText = document.createElement("p");
-                disableEditText.innerText = "{※如需調整成家卡額度，請直接創建新訂單，取消本訂單}";
+                if(now > changeDate){
+                    disableEditText.innerText = "{※遇成家卡改單找資訊電商部瓊文/宇凡處理}";
+                }else{
+                    disableEditText.innerText = "{※如需調整成家卡額度，請直接創建新訂單，取消本訂單}";
+                }
                 disableEditText.style.fontWeight = "bold";
                 disableEditText.style.textAlign = "left";
                 disableEditText.style.color = "red";
