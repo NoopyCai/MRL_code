@@ -1,0 +1,26 @@
+<script>
+    (function () {
+        var currentUserAccount = document.querySelector('.admin-user-account-text')
+        //白名單
+        var whiteMemberList = ['Bonnie', 'yutin1991', 'melissah1224', 'diohsu', 'uflin', 'Frontend', 'Frontend2'];
+
+        if (currentUserAccount && !whiteMemberList.includes(currentUserAccount.innerText.trim())) {
+            var pageActionBtns = document.querySelectorAll('.page-actions-buttons button');
+
+            if (pageActionBtns.length > 0) {
+                pageActionBtns.forEach(function (btn) {
+                    if (btn.id !== 'back') {
+                        btn.disabled = true;
+                    }
+                });
+                var permissionsReminedText = document.createElement('span')
+                permissionsReminedText.innerText = '僅供檢視，無編修儲存權限；有調整需求，請找Bonnie / 瓊文';
+                permissionsReminedText.style.color = 'red';
+                permissionsReminedText.style.fontSize = '20px';
+
+                document.querySelector('.page-main-actions').appendChild(permissionsReminedText);
+            }
+
+        }
+    }());
+</script>
