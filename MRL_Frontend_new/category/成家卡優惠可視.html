@@ -36,7 +36,10 @@
                 const priceBox = item.closest('.product-item-details').querySelector('.price-final_price .price-box')
                 if(priceBox){
                     priceBox.appendChild(discountPriceContainer);
-                    priceBox.querySelector('#product-price-5664').classList.add('mrl_homecard_original_price');
+                    priceBox.style.display = 'flex';
+                    priceBox.style.flexDirection = 'row-reverse';
+                    priceBox.style.justifyContent = 'left';
+                    priceBox.querySelector('#product-price-5689').classList.add('mrl_homecard_original_price');
                 }
             }
         })
