@@ -527,7 +527,7 @@
     }
 
     //隨裝置寬度改變
-    if(!pathName.includes("home-card-2025")){
+    if(!pathName.includes("homecard")){
       window.addEventListener("resize", debounce(resizeHandler, 500));
     }
 
@@ -575,7 +575,7 @@
 
     //點擊加入購物車
     mmBarAddToCartBtn.addEventListener("click", function (e) {
-        if(pathName.includes("home-card-2025")){
+        if(pathName.includes("homecard")){
             disableBuyButton("加入中...");
             clickOriginAddtoCart();
         }else{
@@ -650,7 +650,11 @@
         $buyNowEl.style.pointerEvents = "none";
         $buyNowEl.style.backgroundColor = "#cccccc";
         $buyNowEl.style.color = "#fff";
-        $buyNowEl.textContent = "商品已售完";
+        if(pathName.includes("homecard")){
+          $buyNowEl.textContent = "即將開賣";
+        }else{
+          $buyNowEl.textContent = "商品已售完";
+        }
         mmBarAddToCartBtn.disabled = true;
         mmBarAddToCartBtn.style.display = "none";
       }
