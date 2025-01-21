@@ -527,7 +527,7 @@
         //取得需要被排除的SKU
         function getExcludedSku() {
             var domainUrl = window.location.origin;
-            var url = domainUrl + '/rest/V1/products?fields=items[sku]&searchCriteria[filter_groups][0][filters][0][field]=category_id&searchCriteria[filter_groups][0][filters][0][value]=117'
+            var url = domainUrl + '/rest/V1/products?fields=items[sku]&searchCriteria[filter_groups][0][filters][0][field]=category_id&searchCriteria[filter_groups][0][filters][0][value]=117&searchCriteria[page_size]=500'
             var token = "zm7lhgnrummsdkbun9hy7uub0smyk14i";
 
             var payload = {
