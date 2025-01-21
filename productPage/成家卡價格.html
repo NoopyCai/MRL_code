@@ -1,105 +1,124 @@
 <style>
     .material-symbols-outlined.check-more-options-icon {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24;
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
         color: #333333;
         font-size: 18px;
         display: block !important;
         position: relative !important;
-        transition: background-color .3s ease,border .3s ease;
+        transition: background-color .3s ease, border .3s ease;
     }
-    .mgz-element-mrl_product_feature{
+
+    .mgz-element-mrl_product_feature {
         height: 0 !important;
     }
-    .amcard-general-container > .amcard-form-container:first-of-type {
+
+    .amcard-general-container>.amcard-form-container:first-of-type {
         margin-top: 0;
     }
-    .amcard-page-product .product-info-main .price-final_price .price-wrapper .price{
+
+    .amcard-page-product .product-info-main .price-final_price .price-wrapper .price {
         font-weight: 300 !important;
     }
-    .amcard-label-block.-price{
+
+    .amcard-label-block.-price {
         margin: 5px 10px 5px 0;
         padding: 6px 16.5px 6px 8px;
     }
+
     .amcard-label-block.-price.-active,
-    .amcard-label-block.-price:hover{
+    .amcard-label-block.-price:hover {
         font-weight: 600;
         background-color: #333 !important;
         color: #fff !important;
         border-color: #333 !important;
     }
-    .hidden-with-homecard{
+
+    .hidden-with-homecard {
         visibility: hidden !important;
         height: 0 !important;
     }
-    .gallery-placeholder{
+
+    .gallery-placeholder {
         height: auto !important;
     }
-    .ppbd-product-price .product-info-price{
+
+    .ppbd-product-price .product-info-price {
         position: relative;
         margin-top: 2rem;
     }
-    .ppbd-product-price .product-info-price .price-wrapper .price{
+
+    .ppbd-product-price .product-info-price .price-wrapper .price {
         text-decoration: line-through;
     }
 
-    .discount-price-container{
+    .discount-price-container {
         display: flex;
         flex-direction: column;
         position: absolute;
         bottom: 1rem;
         left: 15rem;
     }
-    .discountPriceLabel{
+
+    .discountPriceLabel {
         color: #575757;
         font-size: 13px;
         margin-left: 10px;
     }
-    .homecard-discount-price{
+
+    .homecard-discount-price {
         margin-left: 10px;
         font-size: 30px;
         color: #a01f13;
         font-weight: 700;
 
     }
-    .mgz-element-product_addtocart .mgz-element-inner{
-        margin: 15px 0 5px 0!important;
+
+    .mgz-element-product_addtocart .mgz-element-inner {
+        margin: 15px 0 5px 0 !important;
     }
+
     /* 調整價格選項排版 */
-    .amcard-field-container{
+    .amcard-field-container {
         flex-basis: 50% !important;
     }
-    .amcard-price-container{
+
+    .amcard-price-container {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
     }
+
     .amcard-price-container label:nth-of-type(n+9):nth-of-type(-n+20) {
         opacity: 0;
-        transform: translateY(-20px); 
-        transition: opacity 0.3s ease, transform 0.3s ease; 
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
         height: 0;
         width: 0;
         padding: 0;
         margin: 0;
-        visibility: hidden; /* 隱藏元素，不會占據空間 */
-        pointer-events: none; /* 禁止點擊 */
+        visibility: hidden;
+        /* 隱藏元素，不會占據空間 */
+        pointer-events: none;
+        /* 禁止點擊 */
         /* display: none; */
     }
-    .show-more-price-options{
+
+    .show-more-price-options {
         /* display: block !important; */
         opacity: 1 !important;
         width: auto !important;
         height: auto !important;
         margin: 5px 10px 5px 0 !important;
         padding: 6px 8px !important;
-        transform: translateY(0) !important; 
-        visibility: visible !important; 
-        pointer-events: unset !important; 
+        transform: translateY(0) !important;
+        visibility: visible !important;
+        pointer-events: unset !important;
     }
-    .check-more-button{
+
+    .check-more-button {
         width: 97%;
         height: 40px;
         border: none;
@@ -111,25 +130,30 @@
         justify-content: center;
         cursor: pointer;
         border-radius: 2px;
-        transition: background-color .3s ease,border .3s ease;
+        transition: background-color .3s ease, border .3s ease;
     }
-    .check-more-button:hover{
+
+    .check-more-button:hover {
         background-color: #333;
         font-weight: 600;
         color: #fff;
     }
+
     .check-more-button:hover .material-symbols-outlined.check-more-options-icon {
         font-weight: 600;
-        color: #fff; 
+        color: #fff;
     }
-    @media(max-width: 768px){
+
+    @media(max-width: 768px) {
         .amcard-label-block.-price {
             font-size: 13px;
         }
-        .discountPriceLabel{
+
+        .discountPriceLabel {
             margin-left: 25px;
         }
-        .homecard-discount-price{
+
+        .homecard-discount-price {
             margin-left: 25px;
         }
     }
@@ -155,7 +179,7 @@
 
     //插入子元素
     function appendChildren(parent, children) {
-        children.forEach(function(child) {
+        children.forEach(function (child) {
             parent.appendChild(child);
         });
     }
@@ -169,96 +193,90 @@
 
         appendChildren(discountPriceContainer, [discountPriceLabel, discountPrice]);
         document.querySelector('.ppbd-product-price .product-info-price').appendChild(discountPriceContainer);
-        
+
     }
 
     //新增查看更多價格選項按鈕
-    function addCheckMoreButton(){
+    function addCheckMoreButton() {
         var checkMoreButton = createElement('div', 'check-more-button', "<span>查看更多</span><span class='material-symbols-outlined check-more-options-icon'>keyboard_arrow_down</span>");
-        document.querySelector('.amcard-field-container').appendChild(checkMoreButton);
+        var priceOptionsContainer = document.querySelector('.amcard-field-container');
 
-        checkMoreButton.addEventListener('click', function(e){
+        if (priceOptionsContainer) {
+            priceOptionsContainer.appendChild(checkMoreButton);
+        }
+
+        checkMoreButton.addEventListener('click', function (e) {
             checkMoreButton.classList.add('hidden-with-homecard');
             var allPriceOptions = document.querySelectorAll('.amcard-price-container label');
-            allPriceOptions.forEach(function(priceOption) {
+            allPriceOptions.forEach(function (priceOption) {
                 priceOption.classList.add('show-more-price-options');
             });
         })
     }
 
     //將價格選項移到價格下方
-    function repositionPriceOptions(){
+    function repositionPriceOptions() {
         var priceOptionsContainer = document.querySelector('.mgz-element-product_addtocart');
         var amcardCodeContainer = document.querySelector('.mgz-element-product_addtocart .amcard-general-container');
-        var productPriceContainer =  document.querySelector('.mgz-element-product_price');
+        var productPriceContainer = document.querySelector('.mgz-element-product_price');
 
         var attributeBlocks = document.querySelectorAll('.mgz-element-product_attribute')
         var attributeHr = document.querySelector('#mrl_hr')
 
         //將attributeBlocks中的第3、4個元素移到價格選項和購物車按鈕中間
-        attributeBlocks.forEach(function(attributeBlock, index){
-            if(index === 2){
+        attributeBlocks.forEach(function (attributeBlock, index) {
+            if (index === 2) {
                 amcardCodeContainer.appendChild(attributeBlock);
                 amcardCodeContainer.appendChild(attributeHr);
-            }else if(index === 3){
+            } else if (index === 3) {
                 amcardCodeContainer.appendChild(attributeBlock);
             }
         })
-        
-        if(priceOptionsContainer && productPriceContainer){
+
+        if (priceOptionsContainer && productPriceContainer) {
             productPriceContainer.insertAdjacentElement('afterend', priceOptionsContainer);
         }
     }
 
-
-    function waitForElement(selector, callback) {
-        var observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (document.querySelector(selector)) {
-                    observer.disconnect();
-                    callback();
-                }
-            });
-        });
-
-        observer.observe(document.body, { childList: true, subtree: true });
-    }
-
     var isInitialized = false;
 
-    //等待價格選項出現才執行
-    waitForElement('.amcard-price-container', function() {
-        if (isInitialized) return;
-        isInitialized = true;
+    // 隱藏數量調整input(release)
+    var inputQty = document.querySelector('.box-tocart .sticky-addtocart')
+    // console.log('inputQty', inputQty)
 
-        // 隱藏數量調整input(release)
-        document.querySelector('.box-tocart .sticky-addtocart').classList.add('hidden-with-homecard');
+    if (inputQty) {
+        inputQty.classList.add('hidden-with-homecard');
+    }
 
-        //隱藏數量調整input(dev)
-        // document.querySelector('.box-tocart .field.qty').classList.add('hidden-with-homecard');
+    // if (isInitialized) return;
+    // isInitialized = true;
 
-        document.querySelector('.amcard-title').innerText = '選擇 成家卡面額';
+    document.querySelector('.amcard-title').innerText = '選擇 成家卡面額';
 
-        if(window.innerWidth > 768){
-            repositionPriceOptions();
-        };
-        
-        addDiscountPrice();
-        addCheckMoreButton();
+    if (window.innerWidth > 768) {
+        repositionPriceOptions();
+    };
 
-        var allPriceOptions = document.querySelectorAll('.amcard-label-block.-price');
-        
-        allPriceOptions[0].click();
-        allPriceOptions.forEach(function(priceOption) {
-            priceOption.addEventListener('click', function(e) {
-                var targetPrice = parseFloat(e.target.innerText.replace(/[^0-9.-]+/g, ""));
-                if (isNaN(targetPrice)) {
-                    return;
-                }
-                var discountedPrice = targetPrice * 0.95;
-                var formattedDiscountedPrice = '$' + discountedPrice.toFixed(0).replace(/\d(?=(\d{3})+$)/g, '$&,');
-                document.querySelector('.homecard-discount-price').innerText = formattedDiscountedPrice;
-            });
+    addDiscountPrice();
+
+
+    var allPriceOptions = document.querySelectorAll('.amcard-label-block.-price');
+
+    allPriceOptions[0].click();
+    allPriceOptions.forEach(function (priceOption) {
+        priceOption.addEventListener('click', function (e) {
+            var targetPrice = parseFloat(e.target.innerText.replace(/[^0-9.-]+/g, ""));
+            if (isNaN(targetPrice)) {
+                return;
+            }
+            var discountedPrice = targetPrice * 0.95;
+            var formattedDiscountedPrice = '$' + discountedPrice.toFixed(0).replace(/\d(?=(\d{3})+$)/g, '$&,');
+            document.querySelector('.homecard-discount-price').innerText = formattedDiscountedPrice;
         });
     });
+
+    addCheckMoreButton();
+
+    //隱藏數量調整input(dev)
+    // document.querySelector('.box-tocart .field.qty').classList.add('hidden-with-homecard');
 </script>
