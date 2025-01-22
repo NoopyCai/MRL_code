@@ -80,6 +80,7 @@
     .homecard-code-no-item {
         margin: 2rem 0;
         padding: 1rem 0;
+        line-height: 3rem;
     }
 
     .homecard-code-item-title,
@@ -113,7 +114,7 @@
     }
 
     .field-apply-coupon-code .action-default {
-        visibility: hidden !important;
+        visibility: hidden;
     }
 
     .amcoupons-coupon-input {
@@ -151,10 +152,15 @@
     .homecard-hidden {
         visibility: hidden;
     }
+    .homecard-active {
+        visibility: visible !important;
+        margin-right: 1rem !important;
+    }
 </style>
 <script>
     (function () {
         var monitorClickOutsideCodeList = false;
+
         setTimeout(function () {
             var couponCodeContainer = document.querySelector('.order-discounts');
             if (couponCodeContainer) {
@@ -170,17 +176,33 @@
             homeCardCodeInput.placeholder = '請選擇序號';
 
             homeCardCodeInput.addEventListener('click', function () {
+                var orderTitle = document.querySelector('#order-header')
+
+                if (orderTitle.innerText.includes('Create New Order in Default Store View') ||
+                    orderTitle.innerText.includes('為 Default Store View 創建新訂單')) {
+                    return;
+                }
+
                 //點擊時更新 customerID
                 var customerID = updateCustomerIDfromEditForm();
                 if (!customerID) {
                     customerID = updateCustomerIDfromList();
                     if (!customerID) {
-                        console.error('Customer ID not found');
+                        var useCodeBtn  = document.querySelector('.field-apply-coupon-code .action-default');
+                        var homeCardSubmitBtn = document.querySelector('.homecard-check-btn-submit');
+                        var originalSubmitBtn = document.querySelector('.action-default.save');
+
+                        if(homeCardSubmitBtn && originalSubmitBtn.classList.contains('homecard-hidden')){
+                            homeCardSubmitBtn.remove();
+                            originalSubmitBtn.classList.remove('homecard-hidden');
+                        }
+                        
+                        useCodeBtn.classList.add('homecard-active');
+                        createHomeCardCodeList(null, '系統無法取得成家卡序號<br>請手動輸入後、點擊右側箭頭帶入')
+
                         return;
                     }
                 }
-
-                
 
                 getGiftCardCodesByCustomerID(customerID)
                     .then(function (giftCardItems) {
@@ -241,7 +263,7 @@
 
             if (removeCodeBtns.length > 0) {
                 removeCodeBtns.forEach(function (btn) {
-                        btn.addEventListener('click', function () {
+                    btn.addEventListener('click', function () {
                     })
                 })
             }
@@ -308,24 +330,13 @@
         }
 
         // 建立成家卡序號列表
-        function createHomeCardCodeList(giftCardItems) {
+        function createHomeCardCodeList(giftCardItems ,reminderTextContent) {
             if (document.querySelector('.homecard-codes-container')) {
                 return;
             }
 
-            var heomCardCodesContainer = document.createElement('div');
-            heomCardCodesContainer.classList.add('homecard-codes-container');
-            document.querySelector('#anchor-content').appendChild(heomCardCodesContainer);
-
-            if (!monitorClickOutsideCodeList) {
-                monitorClickOutsideCodeList = true;
-                document.addEventListener('click', function (event) {
-                    var container = document.querySelector('.homecard-codes-container');
-                    if (container && !event.target.closest('.homecard-codes-container')) {
-                        container.remove();
-                    }
-                });
-            }
+            var homeCardCodesContainer = document.createElement('div');
+            homeCardCodesContainer.classList.add('homecard-codes-container');
 
             var homeCardCodesList = document.createElement('ul');
             homeCardCodesList.classList.add('homecard-codes-list');
@@ -334,9 +345,9 @@
             reminderText.classList.add('homecard-reminder-text');
             reminderText.innerHTML = '請選擇欲使用的成家卡序號進行套用';
 
-            var lsitHeader = document.createElement('li');
-            lsitHeader.classList.add('homecard-code-item-title');
-            lsitHeader.innerHTML =
+            var listHeader = document.createElement('li');
+            listHeader.classList.add('homecard-code-item-title');
+            listHeader.innerHTML =
                 '<span class="homecard-code">' + '序號' + '</span>' +
                 '<span class="homecard-balance">' + '額度' + '</span>' +
                 '<span class="homecard-date">' + '有效日至' + '</span>';
@@ -345,18 +356,24 @@
             closeBtn.classList.add('homecard-list-close');
 
             closeBtn.addEventListener('click', function () {
-                heomCardCodesContainer.remove();
+                homeCardCodesContainer.remove();
             })
 
             homeCardCodesList.appendChild(reminderText);
-            homeCardCodesList.appendChild(lsitHeader);
-            heomCardCodesContainer.appendChild(closeBtn);
-
-            if (giftCardItems.length === 0) {
+            homeCardCodesList.appendChild(listHeader);
+            homeCardCodesContainer.appendChild(closeBtn);
+            if (giftCardItems === null) {
+                var codeItem = document.createElement('li');
+                codeItem.classList.add('homecard-code-no-item');
+                codeItem.innerHTML = reminderTextContent;
+                listHeader.style.display = 'none';
+                reminderText.style.display = 'none';
+                homeCardCodesList.appendChild(codeItem);
+            } else if (giftCardItems.length === 0) {
                 var codeItem = document.createElement('li');
                 codeItem.classList.add('homecard-code-no-item');
                 codeItem.innerHTML = '此帳戶目前無成家卡序號可使用！'
-                lsitHeader.style.display = 'none';
+                listHeader.style.display = 'none';
                 reminderText.style.display = 'none';
                 homeCardCodesList.appendChild(codeItem);
             } else {
@@ -372,7 +389,22 @@
                 })
             }
 
-            heomCardCodesContainer.appendChild(homeCardCodesList);
+            homeCardCodesContainer.appendChild(homeCardCodesList);
+            var anchorContent = document.querySelector('#anchor-content');
+
+            if(anchorContent){
+                anchorContent.appendChild(homeCardCodesContainer);
+            }
+
+            if (!monitorClickOutsideCodeList) {
+                monitorClickOutsideCodeList = true;
+                document.addEventListener('click', function (event) {
+                    var container = document.querySelector('.homecard-codes-container');
+                    if (container && !event.target.closest('.homecard-codes-container') && !event.target.closest('#amgiftcard_code')) {
+                        container.remove();
+                    }
+                });
+            }
         }
 
         //格式化金額
@@ -413,13 +445,7 @@
 
         //送出前檢查是否有位使用的序號
         function checkCodeExitedBeforeSubmit() {
-            var orderTitle = document.querySelector('#order-header')
             var checkUnUsedCodesStatus = false;
-
-            if (orderTitle.innerText.includes('Create New Order in Default Store View') ||
-                orderTitle.innerText.includes('為 Default Store View 創建新訂單')) {
-                return;
-            }
             if (checkUnUsedCodesStatus) return;
 
             var originalSubmitBtn = document.querySelector('.action-default.save');
@@ -480,13 +506,13 @@
                                 if (!customerID) {
                                     console.error('Customer ID not found');
                                     checkBtn.remove();
-                                    originalSubmitBtn.classList.remove('homecard-hidden');  
+                                    originalSubmitBtn.classList.remove('homecard-hidden');
                                     originalSubmitBtn.click();
                                     return;
                                 }
                             }
 
-                            
+
 
                             //使用Customer ID取得成家卡序號
                             getGiftCardCodesByCustomerID(customerID)

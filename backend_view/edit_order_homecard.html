@@ -190,7 +190,7 @@
                     getGiftCardCodesByCustomerID(customerID)
                         .then(function (giftCardItems) {
                             giftCardItems = checkDuplicateCode(giftCardItems);
-                            createHomeCardCodeList(giftCardItems, '系統無法取得成家卡序號\n請手動輸入後、點擊右側箭頭帶入');
+                            createHomeCardCodeList(giftCardItems, '請選擇欲使用的成家卡序號進行套用');
                         })
                         .then(function () {
                             var codeUseBtn = document.querySelector('#order-coupons .action-default');
