@@ -1,0 +1,14 @@
+<script>
+    (function () {
+        // 需要disabled的欄位
+        var reonlyFields = [
+            document.querySelector('#mrl_campaign_label_465'),
+            document.querySelector('#mrl_campaign_label_466')
+        ].filter(Boolean);
+
+        reonlyFields.map(function (field) {
+            field.readOnly = true;
+            field.classList.add('checkbox-disabled');
+        })
+    })();
+</script>
