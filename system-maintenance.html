@@ -1,0 +1,322 @@
+<style>
+    .answer p, .answer li{
+        font-size: larger;
+    }
+    hr{
+        border: 0;
+        height: 0;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+    
+    .icon-plus{
+        background: #0088cc;
+        width: 24px;
+        height: 4px;
+        display: flex;
+        margin: 10px;
+        transform: rotate(180deg);
+        transition: all 0.5s;
+          
+    }
+    
+    
+    .icon-plus.active{
+        background: #0088cc;
+        width: 24px;
+        height: 4px;
+        display: flex;
+        margin: 10px;
+        transform: rotate(360deg);
+        transition: all 0.5s;
+          
+    }
+    
+    .icon-plus::after{
+        content:"";
+        width: 24px;
+        height: 4px;
+        background: #0088cc;
+        transform: rotate(90deg);
+        /* transition: all 0.5s; */
+    
+    }
+    .icon-plus.active::after{
+        content:"";
+        width: 24px;
+        height: 4px;
+        background: #0088cc;
+        transform: rotate(180deg);
+        transition: all 0.5s;
+    }
+    
+    .little-plus{
+        width:18px;
+    }
+    .little-plus.active{
+        width:18px;
+    }
+    
+    
+    .question{
+        display: flex;
+        align-items: center;    
+    }
+    
+    .answer.active{
+        display: block;
+        margin: 10px 38px;
+    
+    }
+    
+    .answer{
+        display: none;
+        line-height: 32px;
+    }
+    
+    .all-questions{
+        display: none;
+    }
+    
+    
+    
+    .all-questions.active{
+        display: block;
+    }
+    
+    .question, .qa-title{
+        cursor: pointer;
+    }
+    
+    .question>h3{
+        margin: 10px;
+        line-height: 32px;
+    }
+    
+    .qa-title>h2{
+        margin:20px;
+    }
+    
+    .qa-title{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    
+    .pay-way-table{
+        border-style: solid;
+        border-width: 1px;
+        border-collapse: collapse;
+        
+    }
+    
+    td, th{
+        border: 1px solid ;
+        padding: 6px;
+    }
+    
+    .line-talk{
+        width: fit-content;
+        border-style:solid;
+        border-width: 1px;
+        padding: 10px;
+        
+    }
+    
+    .question-li{
+        list-style:none;
+    }
+    
+    span.highlight{
+        background-color: #f8d017;
+    }
+    .system-maintenance-img{
+        width: 20%;
+    }
+
+    @media(max-width:768px){
+        .system-maintenance-img{
+            width: 30%;
+        }
+    }
+    
+    </style> 
+    
+    <div class="row">
+        <div style="text-align: center;">
+                <img class="system-maintenance-img" src="https://media.mrliving.com.tw/wysiwyg/home_page/system-maintenance.jpg">
+            <br>
+            <br>
+            <p style="font-size: 16px;color:#191919;text-align: center;line-height: 32px;">為提供給每個顧客更好的網站體驗<br>MR. LIVING 居家先生 官方網站<br>正在維修升級中<br>如有產品、訂單或者需要客戶服務的需求<br>請在官方<a href="https://maac.io/1pkUH"> LINE </a>留下訊息<br>我們將於上班時間盡快回覆您<br><br>或於服務時間撥打<a href="tel: 02-66050506"> 02-66050506 </a>分機 9 ，將有夥伴為您服務：）<br><br>客戶服務時間：<br>星期一至六<br>
+     [ 09:30 ~ 12:00 / 13:00 ~ 18:30 ]<br></p>
+        </div>
+        <br>
+        <div style="margin:0 auto;text-align: center;height:40px;width:100%;">
+    <ul class="social-media" style="padding:0;">
+    <li style="padding:0;list-style-type:none;display: inline-block;"><a href="https://www.instagram.com/mrlivingtw/"><img style="text-align: center;margin:0;display: block; width: 55px;" src="https://media.mrliving.com.tw/wysiwyg/test/IG_icon.jpg" alt="IG" /></a>
+    </li>
+    <li style="padding:0;list-style-type:none;display: inline-block;"><a href="https://www.youtube.com/channel/UCHoLedtj0AESnLpemAQlncg"><img style="text-align: center;margin:0;display: block; width: 55px;" src="https://media.mrliving.com.tw/wysiwyg/home_page/YT_icon.jpg" alt="youtube" /></a>
+    </li>
+    <li style="padding:0;list-style-type:none;display: inline-block;"><a href="https://line.me/ti/p/%40gcw0900h"><img style="text-align: center;margin:0;display: block; width: 55px;" src="https://media.mrliving.com.tw/wysiwyg/test/line_icon.jpg" alt="LINE" /></a></li>
+    <li style="padding:0;list-style-type:none;display: inline-block;"><a href="https://www.facebook.com/mr.livingteam/"><img style="text-align: center;margin:0;display: block; width: 55px;" src="https://media.mrliving.com.tw/wysiwyg/test/fb_icon.jpg" alt="FB" /></a></li>
+    </ul>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="all-questions active">
+            <ol style="padding-left:0px;">
+                 <li class="question-li">
+                    <div class="question">
+                        <div class="icon-plus little-plus"></div>
+                        <h3>請問官網維護期間我想找商品還能去哪邊先看看？</h3>
+                    </div>
+                    <div class="answer">
+                        <p>官網維護期間若無法順利瀏覽、查找商品，歡迎您至<a href="https://www.facebook.com/mr.livingteam/">FB粉絲頁</a>、<a href="https://www.instagram.com/mrlivingtw/?hl=zh-tw">IG社群</a>逛逛，若有中意的商品，可<a href="https://maac.io/1pkUH">LINE</a>傳送商品照片、名稱，小幫手將於上班時間盡快為您服務</p>
+                    </div>
+                </li>
+                <hr>
+                <li class="question-li">
+                    <div class="question">
+                        <div class="icon-plus little-plus"></div>
+                        <h3>我有欲下單的商品，請問可以透過哪些管道下單呢？</h3>
+                    </div>
+    
+                    <div class="answer">
+                        <p>您可於<a href="https://maac.io/1pkUH">LINE(@gcw0900h)</a>留下基本資料及欲訂購商品資訊，小幫手將於上班時間盡快為您服務</p>
+                    </div>
+                </li>
+                <hr>
+                <!-- li class="question-li">
+                    <div class="question">
+                        <div class="icon-plus little-plus"></div>
+    
+                        <h3>請問我之前訂購的訂單會不見嗎？  是否可以查詢的到呢？</h3>
+    
+                    </div>
+                    <div class="answer">
+                        <p>訂單仍有相關紀錄存在喔，但轉換後的官網會員帳戶中，並無法查詢到轉換前的訂單；建議您可至當初訂購時填入的Email信箱搜尋『居家先生』，或使用<a href="https://maac.io/1pkUH">LINE客服(@gcw0900h)</a>詢問小幫手。</p>                    
+                    </div>
+                </li>
+                <hr -->
+                <li class="question-li">
+                    <div class="question">
+                        <div class="icon-plus little-plus"></div>
+    
+                        <h3>請問之前的帳號(FB、Google  or Email 註冊的)為什麼無法登入呢？</h3>
+                    </div>
+    
+                    <div class="answer">                    
+                        <p>因系統於2022年優化，請您可直接動動手指、協助重新註冊喔～官網會員須您的手機號碼與Email，進行帳戶兩步驟驗證綁定</p>
+                    </div>
+                </li>
+                <hr>
+                <li class="question-li">
+                    <div class="question">
+                        <div class="icon-plus little-plus"></div>
+                        <h3>請問我想要更換電子信箱或手機號碼，應如何更改呢？</h3>
+                    </div>
+    
+                    <div class="answer">
+                        <p>若有需求可直接登入會員後，於『我的帳戶』中進行資料修改；若有其他服務需求，可使用<a href="https://maac.io/1pkUH">LINE客服(@gcw0900h)</a>或電聯<a href="tel: 02-66050506">02-66050506</a>分機9，由專人為您服務：)</p>
+                    </div>
+                </li>
+          </ol>
+    </div>
+    
+    <script>
+    const questionsNode = document.querySelectorAll('.question');
+    const question = [...questionsNode];
+    const answersNode = document.querySelectorAll('.answer');
+    const answers = [...answersNode];
+    const qaTitleNode = document.querySelectorAll('.qa-title');
+    const qaTitle = [...qaTitleNode];
+    const plusNode = document.querySelectorAll('.icon-plus');
+    const plus = [...plusNode];
+    const allQuestionsNode = document.querySelectorAll('.all-questions');
+    const questions = [...allQuestionsNode];
+    
+    
+    //Open and close questions
+    question.forEach(element => {
+        element.addEventListener('click', toggleAnswer);
+    });
+    qaTitle.forEach(element => {
+        element.addEventListener('click', toggleAnswer);
+    });
+    
+    function toggleAnswer() {
+    
+        //The animation of plus icon
+        this.firstElementChild.classList.toggle('active');
+        //To open or close the answer or questions
+        this.nextElementSibling.classList.toggle('active');
+    }
+    
+    //Search
+    
+    function openAnswer(element) {
+    
+        element.parentElement.parentElement.parentElement.previousElementSibling.style.display = 'flex';
+    
+        //The animation of plus icon of question
+        element.previousElementSibling.firstElementChild.classList.add('active');
+        //To open the answer
+        element.classList.add('active');
+    
+        //The animation of plus icon of h2 title
+        element.parentElement.parentElement.parentElement.previousElementSibling.firstElementChild.classList.add('active');
+        //To open the all questions in h2 title
+        element.parentElement.parentElement.parentElement.classList.add('active');
+    }
+    
+    function closeAll() {
+        //close all first
+        let spans = document.querySelectorAll('span');
+    
+        spans.forEach((s) => {
+            s.classList.remove('highlight');
+        })
+        answers.forEach((a) => {
+            a.classList.remove('active');
+        })
+        questions.forEach((q) => {
+            q.classList.remove('active');
+        })
+        plus.forEach((p) => {
+            p.classList.remove('active');
+        })
+        qaTitle.forEach((t) => {
+            t.style.display = 'none';
+        })
+    }
+    
+    function searchText(keyword) {
+        clearButton.style.visibility = 'visible';
+        closeAll();
+    
+        answers.forEach((a) => {
+            let keywordIndex = a.innerText.indexOf(keyword);
+            let originHTML = a.innerHTML;
+            if (keywordIndex != -1) {
+                highlightKeyword(a, originHTML);
+                // console.log(l);
+                openAnswer(a);
+    
+            }
+        })
+    }
+    
+    //Show store infomation
+    const storeInfoTitle = document.querySelector('#faq_store');
+    const storeIcon = document.querySelector('#store_icon');
+    const storeInfoQuestion = document.querySelector('#store_info');
+    const littleStoreIcon = document.querySelector('#little_store_info');
+    function ShowStoreInfo() {
+        storeInfoTitle.classList.add('active');
+        storeIcon.classList.add('active');
+        storeInfoQuestion.classList.add('active');
+        littleStoreIcon.classList.add('active');
+    }        
+                </script>
