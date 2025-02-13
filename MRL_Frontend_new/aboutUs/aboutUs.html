@@ -1,33 +1,19 @@
 <style>
+    h2 {
+        margin-top: 0;
+    }
+
+    .page-footer .widget.block {
+        margin: 0 !important;
+    }
+
+    #maincontent {
+        background-color: #E4E4E4;
+    }
+
     .row {
         margin-right: 0px;
         margin-left: 0px;
-    }
-
-    .full-size-img {
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
-        width: 100%;
-        height: 0;
-        padding-top: 64%;
-    }
-
-    .flex-column-center {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: stretch;
-        text-align: center;
-        background-color: #e5e5e5;
-    }
-
-    .flex-row-center {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: stretch;
-        text-align: center;
     }
 
     #maincontent {
@@ -42,22 +28,6 @@
 
     #main-img-carousel.owl-theme .owl-controls {
         margin-top: 0px;
-    }
-
-    .normal-title {
-        font-size: 3em;
-        letter-spacing: 0.1em;
-        white-space: nowrap;
-    }
-
-    .normal-second-title {
-        font-size: 2em;
-        letter-spacing: 0.1em;
-        white-space: nowrap;
-    }
-
-    .normal-content {
-        font-size: 1.6em;
     }
 
     .smoothScroll::after {
@@ -104,9 +74,51 @@
         transition: all 0.3s;
     }
 
-    .brand-course,
-    .concept-section {
+    .claim-section-content {
+        position: relative;
+    }
+
+    .claim-section-content .claim-section-title {
+        position: absolute;
+        left: 10rem;
+        top: 10rem;
+    }
+
+    .claim-section-content .claim-section-title h1 {
+        font-size: 50px;
+        color: #666;
+        font-weight: 400;
+        margin-bottom: 1rem;
+    }
+
+    .claim-section-content .claim-section-title span {
+        font-size: 35px;
+        color: #666;
+        font-weight: 300;
+    }
+
+    .brand-course {
         margin: 0 10rem;
+    }
+
+    .concept-section {
+        margin: 0 10rem 0 10rem;
+        padding: 6rem 0;
+    }
+
+    .page-wrapper .breadcrumbs {
+        display: none;
+    }
+
+    .nav-sections {
+        margin-bottom: 0 !important;
+    }
+
+    .concept-section .concept-info-slogn {
+        text-align: center;
+        font-weight: 600;
+        margin-top: 10px;
+        font-size: 2.8rem;
     }
 
     .concept-section-area1 {
@@ -125,7 +137,6 @@
         background-color: #d7d5d2;
         display: flex;
         justify-content: center;
-        gap: 6.4rem;
         position: relative;
         flex: 1;
     }
@@ -139,22 +150,25 @@
         flex: 1;
     }
 
+    .concept-img-container img {
+        width: 100%;
+    }
+
     .concept-info-item1,
     .concept-info-item2 {
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         position: relative;
+        align-items: center;
     }
-
-    .concept-section-area1 .concept-info-item2 {
-        top: 3%;
+    .concept-info-item1{
+        padding-left: 25px;
     }
-
-    .concept-section-area2 .concept-info-item2 {
-        bottom: 2.3%;
+    .concept-info-item2{
+        padding-right: 25px;
     }
-
     .concept-info-text {
         text-align: center;
     }
@@ -174,82 +188,186 @@
         height: auto;
         width: 100%;
         max-width: 300px;
-        margin: 1.6rem 0;
+        margin: 30px 0;
     }
-    .brand-course .brand-course-title,
-    .media-reports .media-reports-title,
-    .designer-space .designer-space-title,
-    .store-location .store-location-title,
-    .talent-recruitmen .talent-recruitmen-title {
-        margin: 80px 0 50px 0;
+
+    .media-reports .media-reports-title {
+        margin: 60px 0 40px 0;
+    }
+
+    section.disintermediations {
+        border-top: 1px solid #a6a6a6;
+        ;
+        padding: 6rem 0;
+    }
+
+    .disintermediations .disintermediations-title {
+        margin: 0 0 4.8rem 0;
+    }
+
+    .designer-space .designer-space-title {
+        margin: 0 0 6rem 0;
+    }
+
+    .talent-recruitmen {
+        padding: 6rem 0
+    }
+
+    .brand-course .brand-course-title {
+        margin: 0 0 1rem 0;
     }
 
     .brand-course .brand-course-title h2,
     .media-reports .media-reports-title h2,
+    .disintermediations .disintermediations-title h2,
     .designer-space .designer-space-title h2,
     .store-location .store-location-title h2,
-    .talent-recruitmen .talent-recruitmen-title h2{
+    .talent-recruitmen .talent-recruitmen-title h2 {
         font-size: 3.5rem;
+        font-weight: 600;
     }
 
-    .media-reports #media-report-carousel {
-        margin: 10px 0 10px 0;
+    .talent-recruitmen-title {
+        margin-bottom: 6rem;
     }
 
     #media-report-carousel {
         display: flex;
+        flex-direction: column;
     }
-    #media-report-carousel .owl-item .item img{
+
+    #media-report-carousel .owl-item .item img {
         margin: 10px 0;
+        width: 100%;
     }
-    .mobile-content{
+
+    .mobile-content {
         display: none;
         text-align: center;
     }
-    .designer-space{
+
+    .disintermediations,
+    .designer-space {
         margin: 0 10rem;
     }
-    .designer-space-carousel .item{
+
+    .designer-space-carousel .item {
         font-size: 1.8rem;
         text-align: center;
     }
-    section.store-location{
+
+    section.store-location {
         border-bottom: 1px solid #a6a6a6;
-        padding-bottom: 50px;
+        padding: 6rem 0;
     }
-    section.brand-course{
+
+    .store-location-title {
+        margin: 0 0 60px 0;
+    }
+
+    section.brand-course {
         border-top: 1px solid #a6a6a6;
         border-bottom: 1px solid #a6a6a6;
-        padding: 0 0 50px 0;
+        padding: 6rem 0
     }
-    section.designer-space{
-        padding: 0 0 50px 0;
+
+    .brand-course-content {
+        opacity: 0;
+        transform: scale(0.5);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .brand-course-content .pc-content picture {
+        display: flex;
+        justify-content: center;
+    }
+
+    .brand-course-content.visible {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    section.designer-space {
+        padding: 6rem 0;
         border-top: 1px solid #a6a6a6;
     }
-    section.media-reports{
+
+
+    section.media-reports {
         padding: 0 0 50px 0;
     }
-    #designer-space-carousel .item img,
+
+    .report-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 10px 12px;
+        margin: 0 0 15px 0px;
+        width: auto;
+        height: 8vw;
+    }
+
+    .report-block .report-content {
+        text-align: center;
+        font-size: 1.4rem;
+    }
+
+    .disintermediations-content {
+        text-align: center;
+    }
+
+    .disintermediations-text p {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .disintermediations-detail {
+        margin: 4.8rem 0 6rem 0;
+    }
+
+    #designer-space-carousel .item img{
+        margin: 0 0 1.5rem 0;
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        object-fit: cover;
+    }
+    #store-location-carousel{
+        display: flex;
+        gap: 1%;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
     #store-location-carousel .store-location-img img{
         margin: 0 0 1.5rem 0;
         width: 100%;
         aspect-ratio: 3 / 2;
         object-fit: cover;
     }
-    .store-location-info p{
+    #store-location-carousel .item{
+        flex: 1 0 30%;
+        max-width: 42rem;
+        margin-bottom: 3rem;
+    }
+    .store-location-info p {
         font-size: 1.6rem;
     }
-    .store-name{
+
+    .store-name {
         font-size: 2.1rem;
         font-weight: 600;
     }
+
     .platform-list {
         display: flex;
         justify-content: center;
         list-style: none;
         gap: 11rem;
     }
-    .platform-list li::after{
+
+    .platform-list li::after {
         content: "";
         border-right: #333 solid 1px;
         position: relative;
@@ -257,22 +375,145 @@
         margin: 0 10px;
         padding: 7px 0px;
     }
+
     .platform-list li:last-child::after {
-        content: none; 
+        content: none;
     }
+
     .platform-list li a {
         font-size: 2.5rem;
         color: #333;
+        font-weight: 600;
     }
+
     .platform-list li a:hover {
         text-decoration: none;
     }
-    .owl-controls{
-        margin: 5rem 0 0 0;
+
+    .owl-controls {
+        margin: 2rem 0 0 0;
     }
-    .page-footer{
+
+    .page-footer {
         margin-top: 0 !important;
     }
+
+    .CEO-section {
+        position: relative;
+        margin: -5px 0;
+    }
+
+    .CEO-section-slogan {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        left: 42%;
+        right: 0;
+        bottom: 50%;
+    }
+
+    .CEO-section-slogan>h2 {
+        font-size: 5.2rem;
+        line-height: 1.5;
+    }
+
+    .talent-recruitmen-content{
+        position: relative;
+    }
+    .darli-cat{
+        position: absolute;
+        right: 5%;
+        bottom: -8.5rem;
+        width: 20%;
+    }
+    .store-location-btn {
+        text-align: center;
+    }
+    .store-location-btn a button{
+        background-color: transparent;
+        color: #333;
+        font-size: 2.1rem;
+        border: 1px solid #333;
+    }
+    /* 滾動動畫 */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .fade-out {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-out.hidden {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    .fade-in-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-in-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .fade-in-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-in-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .fade-out-left {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-out-left.hidden {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    .fade-out-right {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-out-right.hidden {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    @keyframes expand {
+        0% {
+            transform: scale(0.5);
+            opacity: 0;
+        }
+
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
     @media(max-width: 1600px) {
         .concept-info-title {
             font-size: 2rem;
@@ -283,23 +524,52 @@
         }
 
         .concept-info-img img {
-            width: 65%;
-        }
-
-        .concept-info-img .concept-info-img-icon4 {
-            width: 47%;
+            width: 80%;
         }
 
         .line {
-            max-width: 200px;
-        }
-
-        .concept-section-area1 .concept-info-item2 {
-            top: 1%;
+            max-width: 240px;
         }
 
         .media-reports {
             margin: 0 50px;
+        }
+
+        #media-report-carousel .owl-item .item img {
+            width: 70%;
+            position: relative;
+            left: 15%;
+        }
+
+        .report-block .report-content {
+            font-size: 1.3rem;
+        }
+
+        .concept-section .concept-info-slogn {
+            font-size: 2.5rem;
+        }
+
+        .CEO-section-slogan>h2 {
+            font-size: 4.1rem;
+        }
+    }
+
+    @media(min-width: 1440px) {
+        .media-reports #media-report-carousel .owl-stage-outer .owl-stage {
+            transform: none !important;
+        }
+    }
+
+    @media (min-width: 767px) {
+        .fixed-menu {
+            animation-duration: unset;
+            animation-fill-mode: unset;
+            animation-name: unset;
+            position: unset;
+            width: 100%;
+            top: unset;
+            border-bottom: 1px solid #ccccb3;
+            z-index: 400;
         }
     }
 
@@ -311,31 +581,81 @@
         .concept-info-content {
             font-size: 1.4rem;
         }
-
-        .concept-section-area1 .concept-info-item2 {
-            top: 1.5%;
+        .concept-info-img img{
+            width: 60%;
+        }
+        .line {
+            margin: 20px 0;
+            max-width: 200px;
+        }
+        .report-block {
+            height: 10vw;
         }
 
-        .concept-section-area2 .concept-info-item2 {
-            bottom: 2%;
+        .CEO-section-slogan>h2 {
+            font-size: 3.9rem;
         }
-
     }
 
-    @media (min-width: 768px) {
-        .media-reports {
-            width: auto;
-            margin: 0 100px;
+    @media (min-width: 996px) {
+        body {
             overflow: hidden;
         }
 
-        
-        .media-reports #media-report-carousel .owl-stage-outer .owl-stage,
-        #store-location-carousel .owl-stage-outer .owl-stage{
+        section.claim-section {
+            height: 100vh;
+        }
+
+        section.claim-section img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        section.CEO-section {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        section.media-reports {
+            width: auto;
+            margin: 0 100px;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        section.brand-course {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        section.disintermediations {
+            height: 100%;
+        }
+
+        .store-location {
+            margin: 0 10rem;
+        }
+
+        #store-location-carousel>.owl-stage-outer>.owl-stage {
             transform: none !important;
         }
-        .store-location{
-            margin: 0 10rem;
+
+        .disintermediations-detail img {
+            width: 45%;
+        }
+        .store-location-btn.pc-content a button{
+            padding: 15px;
+            margin: 2rem 0 0 0;
+        }
+        .store-location-btn.pc-content a button:hover{
+            background-color: #333;
+            color: #E4E4E4;
         }
     }
 
@@ -354,6 +674,7 @@
 
         .concept-section {
             margin: 0 0;
+            padding: 0 0;
         }
 
         .concept-section-area1 {
@@ -363,30 +684,31 @@
         .concept-section-area2 {
             flex-direction: column;
         }
-        #media-report-carousel{
+
+        #media-report-carousel {
             display: block;
         }
+
         .concept-info-container {
             justify-content: space-around;
-            gap: 1rem;
             padding: 4rem 1rem;
         }
-        .concept-section-area2{
+
+        .concept-section-area2 {
             margin-top: 0;
         }
-        .concept-section-area1 .concept-info-item2{
-            top: 5px;
+        .concept-section .concept-info-slogn {
+            font-size: 2rem;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 25%;
         }
-        .concept-section-area2 .concept-info-item2 {
-            bottom: 7px;
+
+        .concept-info-img img {
+            width: 25%;
         }
-        .concept-section-area1 .concept-info-item2 .concept-info-img{
-            position: relative;
-            top: 14%;
-        }
-        .concept-info-img img{
-            width: 35%;
-        }
+
         .media-reports {
             margin: 0;
         }
@@ -395,19 +717,19 @@
             margin: 25px 0 0 0;
         }
 
-        .media-reports #media-report-carousel {
-            margin: 60px 0 1rem 0;
-        }
-        .concept-info-item1, 
-        .concept-info-item2{
+        .concept-info-item1,
+        .concept-info-item2 {
             display: block;
             padding-bottom: 30%;
             flex: 1 1 0;
+            text-align: center;
         }
-        .concept-img-container img{
+
+        .concept-img-container img {
             width: 100%;
         }
-        .line{
+
+        .line {
             position: absolute;
             top: 0;
             left: 0;
@@ -416,92 +738,255 @@
             margin: auto;
             height: fit-content;
         }
-        .concept-info-img .concept-info-img-icon4 {
-            width: 24%;
-            position: relative;
-            bottom:13px;
-        }
-        .concept-info-text{
+        .concept-info-text {
             position: absolute;
             top: 50%;
             margin: auto;
             left: 0;
             right: 0;
         }
-        .concept-section-area1 .concept-info-item2,
+
+        /* .concept-section-area1 .concept-info-item2,
         .concept-section-area2 .concept-info-item2 {
             top: unset;
             bottom: unset;
-        }
-        .pc-content{
+        } */
+
+        .pc-content {
             display: none;
         }
-        .mobile-content{
+
+        .mobile-content {
             display: block;
         }
-        .designer-space{
+
+        .disintermediations,
+        .designer-space {
             margin: 0;
         }
+
+        .brand-course-content .mobile-content {
+            position: relative;
+        }
+
+        .brand-course-content .mobile-content .brand-course-content-detail {
+            margin-top: 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        .brand-course-content .mobile-content .brand-course-content-detail p {
+            color: #666;
+            font-size: 1.6rem;
+            font-weight: 600;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0%;
+        }
+
+        .brand-course-content .mobile-content .brand-course-content-detail.y2021 {
+            margin-top: 80px;
+        }
+
+        .brand-course-content .mobile-content .brand-course-content-detail.y2018 p {
+            bottom: -15%;
+        }
+
+        .brand-course-content .mobile-content .brand-course-content-detail.y2018 p.brand-course-content-title {
+            bottom: 22%;
+        }
+
+        .brand-course-content .mobile-content .brand-course-content-detail p.brand-course-content-title {
+            bottom: 30%;
+        }
+
+        .brand-course-content .mobile-content .brand-course-content-detail span.highlight {
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .CEO-section-slogan {
+            left: 0;
+            right: 0;
+            bottom: 25%;
+        }
+
+        .CEO-section-slogan>h2 {
+            font-size: 2rem;
+        }
+
+        .designer-space-carousel .owl-controls {
+            margin: 60px 0 0 0;
+        }
+        #store-location-carousel{
+            flex-direction: column;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+        .talent-recruitmen {
+            padding-top: 0;
+        }
+
+        .owl-controls {
+            margin: 5rem 0 0 0;
+        }
+        .store-location-btn.mobile-content a button{
+            padding: 10px;
+            margin: 1.5rem 0 3rem 0;
+        }
+        #store-location-carousel .item{
+            margin-bottom: 0;
+        }
+        section.store-location.part1 {
+            padding: 0;
+            margin-top: 6rem;
+            margin-bottom: 0;
+        }
+        section.store-location.part2 {
+           margin: 0 0 60px 0;
+           padding-top: 0;
+        }
     }
-    @media (max-width: 768px){
-        section.brand-course{
+
+    @media (max-width: 768px) {
+        .claim-section-content .claim-section-title {
+            left: 5rem;
+            top: 5rem;
+        }
+
+        .claim-section-content .claim-section-title h1 {
+            font-size: 35px;
+        }
+
+        .claim-section-content .claim-section-title span {
+            font-size: 25px;
+        }
+
+        section.brand-course {
             margin: 0 0;
         }
-        .concept-info-item1, 
-        .concept-info-item2{
+
+        .concept-info-item1,
+        .concept-info-item2 {
             padding-bottom: 50%;
         }
+
         .concept-info-img .concept-info-img-icon4 {
             width: 42%;
         }
-        .concept-info-img img{
-            width: 65%;
+
+        .concept-info-img img {
+            width: 50%;
         }
-        .line{
+
+        .line {
             max-width: 160px;
         }
-        .brand-course{
+
+        .brand-course {
             margin: 0 4rem;
         }
-        .platform-list{
-            gap: 4rem;
+
+        .platform-list {
+            gap: 2rem;
             padding-inline-start: 0px;
         }
-        .platform-list li::after{
-            padding: 3px 0;
-            left: 16%;
+
+        .platform-list li::after {
+            content: '|';
+            border-right: none;
+            padding: 0 0;
+            left: 8%
         }
-        .platform-list li a{
+
+        .platform-list li a {
             font-size: 1.6rem;
+        }
+
+        .report-block {
+            height: 38vw;
+        }
+
+        .report-block .report-content {
+            font-size: 1.4rem;
+        }
+
+        #media-report-carousel .owl-item .item img {
+            width: 80%;
+            left: 10%;
+        }
+
+        .concept-section .concept-info-slogn {
+            font-size: 1.8rem;
+        }
+        .concept-info-title {
+            font-size: 1.6rem;
+        }
+
+        .concept-info-content {
+            font-size: 1.4rem;
+        }
+
+        .line {
+            bottom: 12%;
+        }
+
+        .CEO-section-slogan>h2 {
+            font-size: 1.8rem;
+        }
+        .darli-cat{
+            bottom: -8.6rem;
+            width: 35%;
         }
     }
 </style>
+
+
 <!--主視覺-->
-<section class="claim-section">
+<section class="claim-section fade-in hidden kvSection">
+    <div class="claim-section-content">
+        <di class="claim-section-title">
+            <h1>
+                關於<br>
+                居家先生
+            </h1>
+            <span>About Us </span>
+    </div>
     <picture>
-        <source srcset="{{media url=wysiwyg/about_us/about_us_240911_M.jpg}}" media="(max-width: 996px)">
-        <img src="{{media url=wysiwyg/about_us/about_us_240911_PC.jpg}}" style="width: 100%;">
+        <source srcset="{{media url=wysiwyg/about_us/about_us_241106_M.jpg}}" media="(max-width: 996px)"
+            alt="關於居家先生｜極簡低被布沙發與藤編收納邊几，打造明亮北歐空間氛圍" />
+        <img src="{{media url=wysiwyg/about_us/about_us_241105_PC_re.jpg}}" style="width: 100%;"
+            alt="關於居家先生｜極簡低被布沙發與藤編收納邊几，打造明亮北歐空間氛圍" />
     </picture>
 </section>
-<section class="CEO-section">
 
+<section class="CEO-section fade-in hidden kvSection">
+    <div class="CEO-section-slogan">
+        <h2>讓大家能以負擔得起的價格<br>
+            擁有好質感的北歐設計家具</h2>
+    </div>
     <picture>
-        <source srcset="{{media url=wysiwyg/about_us/about_us_240911_CEO_M_v2_1.png}}" media="(max-width: 996px)">
-        <img src="{{media url=wysiwyg/about_us/about_us_240911_CEO_PC.jpg}}" style="width: 100%;">
+        <source srcset="{{media url=wysiwyg/about_us/about_us_240927_CEO_M_v2_1.jpg}}" media="(max-width: 996px)"
+            alt="這是執行長楊大成與其他三位創辦人的理念，也是居家先生的品牌使命" />
+        <img src="{{media url=wysiwyg/about_us/about_us_240927_CEO_PC.jpg}}" style="width: 100%;"
+            alt="這是執行長楊大成與其他三位創辦人的理念，也是居家先生的品牌使命" />
     </picture>
 </section>
 
 <!--品牌概念-->
-<section class="concept-section">
-    <div class="concept-section-area1">
+<section class="concept-section kvSection">
+    <div class="concept-section-area1 fade-in-right ">
         <div class="concept-img-container">
-            <img src="{{media url=wysiwyg/about_us/about_us_240911_concept_2.jpg}}" />
+            <img src="{{media url=wysiwyg/about_us/about_us_240919_concept_2_re.jpg}}"
+                alt="以北美白橡木客廳家具與百搭灰色系沙發組搭，氛圍感滿分的北歐現代風格" />
         </div>
         <div class="concept-info-container">
-            <div class="concept-info-item1">
+            <div class="concept-info-item1 fade-in hidden">
                 <div class="concept-info-img">
-                    <img src="{{media url=wysiwyg/about_us/aboutus_240912_icon1.png}}" alt="">
+                    <img src="{{media url=wysiwyg/about_us/concept_icon_1_20241217.png}}" alt="好價格沙發家具示意圖" />
                 </div>
+                <span class="concept-info-slogn">好價格不將就</span>
                 <div class="line"></div>
                 <div class="concept-info-text">
                     <span class="concept-info-title">物超所值</span>
@@ -514,56 +999,61 @@
                 </div>
             </div>
 
-            <div class="concept-info-item2 ">
+            <div class="concept-info-item2 fade-in hidden">
                 <div class="concept-info-img">
-                    <img src="{{media url=wysiwyg/about_us/aboutus_240912_icon2.png}}" alt="">
+                    <img class="concept-info-img-icon2" src="{{media url=wysiwyg/about_us/concept_icon_2_20241217.png}}"
+                        alt="頂級製造商保證示意圖" />
                 </div>
+                <span class="concept-info-slogn">好設計不將就</span>
                 <div class="line"></div>
                 <div class="concept-info-text">
-                    <span class="concept-info-title">全球頂級製造商</span>
-                    <p class="concept-info-content">
+                    <span class="concept-info-title kvSection"">全球頂級製造商</span>
+                    <p class=" concept-info-content">
                         與世界北歐設計家具品牌<br>
-                        英國John Lewis 、 丹麥Bolia<br>
-                        美國West Elm 等<br>
+                        英國 John Lewis、美國 West Elm<br>
+                        丹麥 Bolia 等<br>
                         擁有相同設計家具製造商
-                    </p>
+                        </p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="concept-section-area2">
+    <div class="concept-section-area2 fade-in-left">
         <div class="concept-img-container">
-            <img src="{{media url=wysiwyg/about_us/about_us_240911_concept_1.jpg}}" />
+            <img src="{{media url=wysiwyg/about_us/about_us_240919_concept_1_re.jpg}}" alt="復古感的全牛皮沙發與大理石家具結合，讓空間兼具典雅質感" />
         </div>
         <div class="concept-info-container">
-            <div class="concept-info-item1">
+            <div class="concept-info-item1 fade-in hidden">
                 <div class="concept-info-img">
-                    <img src="{{media url=wysiwyg/about_us/aboutus_240912_icon3.png}}" alt="">
+                    <img class="concept-info-img-icon3" src="{{media url=wysiwyg/about_us/concept_icon_3_20241217.png}}"
+                        alt="嚴選用材示意圖" />
                 </div>
+                <span class="concept-info-slogn">好質感不將就</span>
                 <div class="line"></div>
                 <div class="concept-info-text">
                     <span class="concept-info-title">嚴選用材</span>
                     <p class="concept-info-content">
                         使用頂級產地原料<br>
-                        北美白橡木、義大利進口牛皮等<br>
+                        北美白橡實木、義大利進口牛皮等<br>
                         符合歐美出口認證規範<br>
-                        確保沙發家具安全且使用長久
+                        沙發家具安全且使用長久
                     </p>
                 </div>
             </div>
 
-            <div class="concept-info-item2">
+            <div class="concept-info-item2 fade-in hidden">
                 <div class="concept-info-img">
-                    <img class="concept-info-img-icon4" src="{{media url=wysiwyg/about_us/aboutus_240912_icon4.png}}"
-                        alt="">
+                    <img class="concept-info-img-icon4" src="{{media url=wysiwyg/about_us/concept_icon_4_20241217.png}}"
+                        alt="服務萬名居友示意圖" />
                 </div>
+                <span class="concept-info-slogn top24">萬人見證</span>
                 <div class="line"></div>
                 <div class="concept-info-text">
                     <span class="concept-info-title">首選設計家具品牌</span>
                     <p class="concept-info-content">
-                        服務超過 24.1 萬名居友<br>
-                        累積全台銷售超過 13.7 億<br>
-                        北歐設計家具銷售破 15 萬件<br>
+                        服務超過 29.7 萬名居友<br>
+                        累積全台銷售超過 22.7 億<br>
+                        北歐設計家具銷售破 29 萬件<br>
                         <br>
                     </p>
                 </div>
@@ -571,179 +1061,384 @@
         </div>
     </div>
 </section>
-<section class="media-reports">
-    <div class="media-reports-title" style="text-align: center;">
-        <h2>媒體報導</h2>
+
+<section class="media-reports kvSection"">
+    <div class=" media-reports-title" style="text-align: center;">
+    <h2>媒體報導</h2>
     </div>
-    <div id="media-report-carousel" class="media-report-carousel-first owl-carousel owl-theme">
+    <div id="media-report-carousel" class="media-report-carousel-first owl-carousel owl-theme fade-in hidden">
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/media_report_1.jpg}}" loading="lazy" />
-            <img src="{{media url=wysiwyg/about_us/media_report_6.jpg}}" loading="lazy" />
+            <div class="report-block">
+                <img src="{{media url=wysiwyg/about_us/media_report_icon1.jpg}}" title="媒體報導-科技橘報" loading="lazy"
+                    alt="TechOrange 科技報橘 報導" />
+                <div class="report-content">
+                    <p>累積銷售額逾 10 億！<br>
+                        新創 MR. LIVING 再獲行政院國發基金青睞投資
+                    </p>
+                </div>
+            </div>
+            <div class="report-block">
+                <img src="{{media url=wysiwyg/about_us/media_report_icon6.jpg}}" title="媒體報導-蘋果日報" loading="lazy" alt="蘋果日報 報導" />
+                <div class="report-content">
+                    <p>集資 2 個月突破 1800 人購買，<br>
+                        金額超過 2200 萬，<br>
+                        創下台灣床墊集資最快及最高金額雙冠<br>
+                    </p>
+                </div>
+            </div>
         </div>
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/media_report_2.jpg}}" loading="lazy" />
-            <img src="{{media url=wysiwyg/about_us/media_report_7.jpg}}" loading="lazy" />
+            <div class="report-block">
+                <img src="{{media url=wysiwyg/about_us/media_report_icon2.jpg}}" title="媒體報導-Dappei" loading="lazy" alt="Dappei 報導" />
+                <div class="report-content">
+                    <p>有著高質感的商品，<br>
+                        但他們的價錢卻是大家可負擔的
+                    </p>
+                </div>
+            </div>
+            <div class="report-block">
+                <img src="{{media url=wysiwyg/about_us/media_report_icon7.jpg}}" title="媒體報導-CTWANT" loading="lazy" alt="CTWANT 報導" />
+                <div class="report-content">
+                    <p>我們稱相同理念的網友為『居友』，塑造認同及共同理念『想讓生活擁有更好的設計』</p>
+                </div>
+            </div>
         </div>
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/media_report_3.jpg}}" loading="lazy" />
-            <img src="{{media url=wysiwyg/about_us/media_report_8.jpg}}" loading="lazy" />
+            <div class="report-block">
+                <img src="{{media url=wysiwyg/about_us/media_report_icon3.jpg}}" title="媒體報導-SEARCHOME 設計家" loading="lazy"
+                    alt="SEARCHOME 設計家 報導" />
+                <div class="report-content">
+                    <p>品質優良、極富設計感，<br>
+                        熱銷沙發平均每個月銷出三百張以上，<br>
+                        且常出現於室內設計師的作品中
+                    </p>
+                </div>
+            </div>
+            <div class="report-block">
+                <img src="{{media url=wysiwyg/about_us/media_report_icon8.jpg}}" title="媒體報導-看雜誌" loading="lazy" alt="看雜誌 報導" />
+                <div class="report-content">
+                    <p>提供來自北歐的原創設計傢俱，價格只有市場上同質商品的一半左右，締造平均單月賣出超過 300 張沙發的紀錄
+                    </p>
+                </div>
+            </div>
         </div>
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/media_report_4.jpg}}" loading="lazy" />
-            <img src="{{media url=wysiwyg/about_us/media_report_9.jpg}}" loading="lazy" />
+            <div class="report-block">
+                <img src="{{media url=wysiwyg/about_us/media_report_icon4.jpg}}" title="媒體報導-今周刊" loading="lazy" alt="今周刊 報導" />
+                <div class="report-content">
+                    <p>一張原本市價賣到十幾萬的沙發，<br>
+                        只要五萬就能搞定，<br>
+                        直接命中消費者最在意的消費痛點
+                    </p>
+                </div>
+            </div>
+            <div class="report-block">
+                <img src="{{media url=wysiwyg/about_us/media_report_icon9.jpg}}" title="媒體報導-Meet 創業小聚" loading="lazy" alt="Meet 創業小聚 報導" />
+                <div class="report-content">
+                    <p>六大競爭優勢「去中間化」強大破壞力，MR. LIVING居家先生年成長 400% 立足傢俱產業
+                    </p>
+                </div>
+            </div>
         </div>
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/media_report_5.jpg}}" loading="lazy" />
-            <img src="{{media url=wysiwyg/about_us/media_report_10.jpg}}" loading="lazy" />
+            <div class="report-block">
+                <img src="{{media url=wysiwyg/about_us/media_report_icon5.jpg}}" title="媒體報導-CrowdWatch 群眾觀點" loading="lazy"
+                    alt="CrowdWatch 群眾觀點 報導" />
+                <div class="report-content">
+                    <p>2018年設計類領域<br>
+                        獨立集資金額第一名：22,906,954
+                    </p>
+                </div>
+            </div>
+            <div class="report-block">
+                <img src="{{media url=wysiwyg/about_us/media_report_icon10.jpg}}" title="媒體報導-BUSINESS NEXT 數位時代" loading="lazy"
+                    alt="BUSINESS NEXT 數位時代 報導" />
+                <div class="report-content">
+                    <p>以去中間化的方式降低價格，更讓消費者能直接拿到製造商所製作的傢俱
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
-<section class="designer-space">
-    <div class="designer-space-title" style="text-align: center;">
-        <h2 class="pc-content">設計師的信任之選｜實現理想生活的家具夥伴</h2>
-        <h2 class="mobile-content">設計師的信任之選</h2>
+<section class="disintermediations kvSection">
+    <div class="disintermediations-title" style="text-align: center;">
+        <h2>精品家具平價化</h2>
     </div>
-    <div id="designer-space-carousel" class="designer-space-carousel owl-carousel owl-theme">
+    <div class="disintermediations-content fade-in hidden">
+        <div class="disintermediations-text">
+            <p class="pc-content">
+                為了解決層層成本堆疊，我們繞過所有中間商<br>
+                直接與北歐設計師及獲得歐美環保安全、木材等級認證<br>
+                如FAS、FSC、NHLA、CertiPUR的品牌製造商達成合作<br>
+                直接連結歐美高端家具品牌供應鏈，就像與家具領域的台積電直接合作<br>
+                才真正讓質感設計家具平價化！
+            </p>
+            <p class="mobile-content">
+                為了解決層層成本堆疊<br>
+                我們繞過所有中間商<br>
+                直接與北歐設計師及<br>
+                獲得歐美環保安全、木材等級認證<br>
+                如FAS、FSC、NHLA、CertiPUR的<br>
+                品牌製造商達成合作<br>
+                直接連結歐美高端家具品牌供應鏈<br>
+                就像與家具領域的台積電直接合作<br>
+                才真正讓質感設計家具平價化！
+            </p>
+        </div>
+        <div class="disintermediations-detail">
+            <picture>
+                <source srcset="{{media url=wysiwyg/about_us/disintermediations_M.png}}" media="(max-width: 996px)"
+                    alt="" />
+                <img src="{{media url=wysiwyg/about_us/disintermediations.png}}" loading="lazy" alt="" />
+            </picture>
+        </div>
+    </div>
+</section>
+
+<!-- 設計師案例 -->
+<section class="designer-space kvSection">
+    <div class="designer-space-title" style="text-align: center;">
+        <h2 class="pc-content">設計師案例</h2>
+        <h2 class="mobile-content">設計師案例</h2>
+    </div>
+    <div id="designer-space-carousel" class="designer-space-carousel owl-carousel owl-theme fade-in hidden">
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_10.jpg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/about_us_design_10.jpg}}" title="設計師案例-1-木日空間設計" loading="lazy"
+                alt="選用好清潔防貓抓布沙發作隔間，搭配上方梁柱位置，沙發背擺放書桌工作用；淺駝棕與收納櫃架原木色系的和諧感，完美展現多元使用" />
             <span>Photo Credit : 木日空間設計</span>
         </div>
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_12.jpg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/about_us_design_12.jpg}}" title="設計師案例-1-知域設計NorWe" loading="lazy"
+                alt="Bryant全牛皮沙發結合金屬感椅凳、原木斜切水泥感牆面，融合多種異材突顯個性與時尚" />
             <span>Photo Credit : 知域設計NorWe
             </span>
         </div>
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_4.jpeg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/about_us_design_4.jpeg}}" title="設計師案例-1-寓子設計" loading="lazy"
+                alt="整體白色空間以深木色系家具點綴，床頭櫃上擺盞桌燈，暖黃光增添溫潤質感" />
             <span>Photo Credit : 寓子設計</span>
         </div>
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_5.jpeg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/about_us_design_5.jpeg}}"  title="設計師案例-2-寓子設計" loading="lazy"
+                alt="書房選用復古感十足的捲簾拉門作工作桌，擺張牛皮單人椅及實木邊桌休憩用，加以立燈營造氛圍感" />
             <span>Photo Credit : 寓子設計</span>
         </div>
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_7.jpg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/about_us_design_7.jpg}}"  title="設計師案例-3-寓子設計" loading="lazy"
+                alt="牛皮沙發圓柱形手枕，及坐墊十字拉扣設計，永遠是空間裡最靓的點" />
             <span>Photo Credit : 寓子設計</span>
         </div>
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_9.jpg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/about_us_design_9.jpg}}"  title="設計師案例-4-寓子設計" loading="lazy"
+                alt="小坪數首選原木伸縮餐桌，半身高隔間設計為椅凳式L型轉角，小空間也能擁有質感用餐環境" />
             <span>Photo Credit : 寓子設計</span>
         </div>
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_1.jpg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/about_us_design_1.jpg}}"  title="設計師案例-1-思銳室內設計有限公司" loading="lazy"
+                alt="寬80公分的高挑化妝桌，是小空間放大神器；床架旁過道也能擺、發揮實用性" />
             <span>Photo Credit : 思銳室內設計有限公司</span>
         </div>
         <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_2.jpg}}" loading="lazy" />
+            <img src="{{media url=wysiwyg/about_us/about_us_design_2.jpg}}" title="設計師案例-2-思銳室內設計有限公司" loading="lazy"
+                alt="北歐復古系餐邊櫃旁以綠植點綴，在落地窗旁也能是最美的風景" />
             <span>Photo Credit : 思銳室內設計有限公司</span>
         </div>
-        <!-- <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_11.jpg}}" loading="lazy" />
-            <span>Photo Credit : 木日空間設計</span>
-        </div>
-
-        <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_6.jpg}}" loading="lazy" />
-            <span>Photo Credit : 寓子設計</span>
-        </div>
-        <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_8.jpg}}" loading="lazy" />
-            <span>Photo Credit : 寓子設計</span>
-        </div>
-        <div class="item">
-            <img src="{{media url=wysiwyg/about_us/about_us_design_3.jpg}}" loading="lazy" />
-            <span>Photo Credit : 寓子設計</span>
-        </div> -->
     </div>
 </section>
-<section class="brand-course">
+
+<!-- 品牌歷程 -->
+<section class="brand-course kvSection">
     <div class="brand-course-title" style="text-align: center;">
         <h2>品牌歷程</h2>
     </div>
     <div class="brand-course-content">
         <div class="pc-content">
-            <img src="{{media url=wysiwyg/about_us/about_us_course_PC.png}}" style="width: 100%;">
+            <img src="{{media url=wysiwyg/about_us/brand_Course_map.jpg}}" style="width: 90%;"
+                alt="品牌歷程｜2016年居家先生誕生，2018年創下台灣床墊集資金額冠，2021年獲行政院國發基金投資，2022年世界舉重冠軍郭婞淳成為品牌代言人，2023年全台總計5間門市，2024年服務突破29.7萬名居友" />
         </div>
         <div class="mobile-content">
-            <img src="{{media url=wysiwyg/about_us/about_us_course_2016.png}}" style="width: 100%;">
-            <img src="{{media url=wysiwyg/about_us/about_us_course_2018.png}}" style="width: 100%;">
-            <img src="{{media url=wysiwyg/about_us/about_us_course_2021.png}}" style="width: 100%;">
-            <img src="{{media url=wysiwyg/about_us/about_us_course_2022.png}}" style="width: 48%;">
-            <img src="{{media url=wysiwyg/about_us/about_us_course_2023.png}}" style="width: 100%;">
-            <img src="{{media url=wysiwyg/about_us/about_us_course_2024.png}}" style="width: 67%;">
+            <div class="brand-course-content-detail">
+                <img src="{{media url=wysiwyg/about_us/brand_road_2016.png}}" style="width: 100%;" alt="2016年居家先生誕生" />
+                <p>
+                    希望讓大家能以「負擔得起的價格，<br>
+                    擁有好質感的北歐設計家具」<br>
+                    的理念創辦居家先生
+                </p>
+            </div>
+            <div class="brand-course-content-detail y2018">
+                <img src="{{media url=wysiwyg/about_us/brand_road_2018.png}}" style="width: 100%;" alt="2018年品牌里程碑" />
+                <p class="brand-course-content-title">
+                    創下台灣床墊<br>
+                    集資金額冠軍
+                </p>
+                <p>
+                    首次床墊群眾募資，創下近 2,300 萬紀錄<br>
+                    共 1,814 人支持，滿意度達 98%
+                </p>
+            </div>
+            <div class="brand-course-content-detail y2021">
+                <img src="{{media url=wysiwyg/about_us/brand_road_2021.png}}" style="width: 100%;" alt="2021年品牌里程碑" />
+                <p class="brand-course-content-title">
+                    榮獲行政院<br>
+                    國發基金投資
+                </p>
+                <p>
+                    榮獲行政院國發基金投資<br>
+                    開業 5 年累積銷售額突破 10 億
+                </p>
+            </div>
+            <div class="brand-course-content-detail">
+                <img src="{{media url=wysiwyg/about_us/brand_road_2022.png}}" style="width: 48%;" alt="2022年品牌里程碑" />
+                <p>
+                    世界舉重冠軍郭婞淳<br>
+                    成為品牌代言人
+                </p>
+            </div>
+            <div class="brand-course-content-detail">
+                <img src="{{media url=wysiwyg/about_us/brand_road_2023.png}}" style="width: 100%;" alt="2023年品牌里程碑" />
+                <p>
+                    全台總計 5 間門市<br>
+                    (台北/新竹/台中/台南/高雄)
+                </p>
+            </div>
+            <div class="brand-course-content-detail">
+                <img src="{{media url=wysiwyg/about_us/brand_road_2024.png}}" style="width: 43%;" alt="2024年品牌里程碑" />
+                <p class="brand-course-content-title">
+                    服務突破<br>
+                    <span class="highlight">29.7</span>萬居友
+                </p>
+                <p>
+                    截至2024年9月<br>
+                    累計服務突破 29.7 萬居友
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="store-location">
+<!-- 門市據點 -->
+<section class="store-location kvSection part1" style="border-bottom:none">
     <div class="store-location-title" style="text-align: center;">
         <h2>門市據點</h2>
     </div>
-    <div id="store-location-carousel" class="owl-carousel owl-theme">
-        <div class="item">
+    <div id="store-location-carousel" class="fade-in hidden">
+       <div class="item">
             <div class="store-location-img">
-                <img src="{{media url=wysiwyg/store_location/store-location-taipei-pic.jpg}}" loading="lazy" />
+                <img src="{{media url=wysiwyg/store_location/store-location-HC-pic.jpg}}" loading="lazy"
+                    alt="新莊旗艦店展廳一隅｜沙發茶几體驗區" />
             </div>
             <div class="store-location-info">
-                <p><span class="store-name">台北 內湖店</span> | 0227905750</p>
+                <p><span class="store-name">新莊 旗艦店</span> | 02-85211613</p>
+                <p>新北市新莊區新北大道四段135號2&3樓</p>
+            </div>
+            <div class="store-location-btn mobile-content">
+                <a href="javascript:;"><button class="reserve-btn">立即預約 ►</button></a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="store-location-img">
+                <img src="{{media url=wysiwyg/store_location/store-location-taipei-pic.jpg}}" loading="lazy"
+                    alt="內湖門市展廳一隅｜餐桌椅體驗區" />
+            </div>
+            <div class="store-location-info">
+                <p><span class="store-name">台北 內湖店</span> | 02-27905750</p>
                 <p>台北市內湖區民權東路六段15巷29-33號3樓</p>
             </div>
+            <div class="store-location-btn mobile-content">
+                <a href="javascript:;"><button class="reserve-btn">立即預約 ►</button></a>
+            </div>
         </div>
         <div class="item">
             <div class="store-location-img">
-                <img src="{{media url=wysiwyg/store_location/store-location-hsinchu-pic.jpg}}" loading="lazy" />
+                <img src="{{media url=wysiwyg/about_us/about_us_location_Zhubei.jpg}}" loading="lazy"
+                    alt="竹北門市展廳一隅｜沙發茶几及書桌辦公椅體驗區" />
             </div>
             <div class="store-location-info">
-                <p><span class="store-name">新竹 竹北店</span> | 036583312</p>
+                <p><span class="store-name">新竹 竹北店</span> | 03-6583312</p>
                 <p>新竹縣竹北市光明六路東一段186號1樓</p>
             </div>
+            <div class="store-location-btn mobile-content">
+                <a href="javascript:;"><button class="reserve-btn">立即預約 ►</button></a>
+            </div>
         </div>
+
+    </div>
+</section>
+<section class="store-location kvSection part2">
+    <div id="store-location-carousel" class="fade-in hidden">
         <div class="item">
             <div class="store-location-img">
-                <img src="{{media url=wysiwyg/store_location/store-location-taichung-pic.jpg}}" loading="lazy" />
+                <img src="{{media url=wysiwyg/about_us/about_us_location_Taichung.jpg}}" loading="lazy"
+                    alt="台中門市展廳一隅｜沙發及餐桌椅體驗區" />
             </div>
             <div class="store-location-info">
                 <p><span class="store-name">台中 黎明店</span> | 04-22512699</p>
                 <p>台中市南屯區黎明路二段599號</p>
             </div>
+            <div class="store-location-btn mobile-content">
+                <a href="javascript:;"><button class="reserve-btn">立即預約 ►</button></a>
+            </div>
         </div>
         <div class="item">
             <div class="store-location-img">
-                <img src="{{media url=wysiwyg/store_location/store-location-tainan-picR.jpg}}" loading="lazy" />
+                <img src="{{media url=wysiwyg/about_us/about_us_location_Tainen.jpg}}" loading="lazy"
+                    alt="台南門市展廳一隅｜沙發茶几體驗區" />
             </div>
             <div class="store-location-info">
                 <p><span class="store-name">台南 崇善店</span> | 06-2689300</p>
                 <p>台南市東區崇善路23號2樓</p>
-            </div>           
+            </div>
+            <div class="store-location-btn mobile-content">
+                <a href="javascript:;"><button class="reserve-btn">立即預約 ►</button></a>
+            </div>
         </div>
         <div class="item">
             <div class="store-location-img">
-                <img src="{{media url=wysiwyg/store_location/store-location-kaosiung-picR3.jpg}}" loading="lazy" />
+                <img src="{{media url=wysiwyg/about_us/about_us_location_Kaosiung.jpg}}" loading="lazy"
+                    alt="高雄門市展廳一隅｜沙發與收納櫃架體驗區" />
             </div>
             <div class="store-location-info">
                 <p><span class="store-name">高雄 巨蛋店</span> | 07-3100192</p>
                 <p>高雄市左營區新莊一路393號2樓</p>
-            </div>     
+            </div>
+            <div class="store-location-btn mobile-content">
+                <a href="javascript:;"><button class="reserve-btn">立即預約 ►</button></a>
+            </div>
         </div>
     </div>
+    <div class="store-location-btn pc-content">
+        <a href="javascript:;"><button class="reserve-btn">立即預約體驗 ►</button></a>
+    </div>
 </section>
-<section class="talent-recruitmen">
+
+
+
+<!-- 人才招募 -->
+<section class="talent-recruitmen kvSection">
     <div class="talent-recruitmen-title" style="text-align: center;">
         <h2>人才招募</h2>
     </div>
-    <div class="talent-recruitmen-content">
+    <div class="talent-recruitmen-content fade-in hidden">
         <ul class="platform-list">
-            <li><a href="https://www.104.com.tw/company/1a2x6bjw7g?jobsource=index_s_cs" target="_blank">104人力銀行</a></li>
-            <li><a href="https://www.yourator.co/companies/MrLiving" target="_blank">Yourator</a></li>
-            <li><a href="https://www.cake.me/companies/mrliving" target="_blank">Cake</a></li>
+            <li><a href="https://www.104.com.tw/company/1a2x6bjw7g?jobsource=index_s_cs" class="outbounceLink" target="_blank">104人力銀行</a>
+            </li>
+            <li><a href="https://www.yourator.co/companies/MrLiving" class="outbounceLink" target="_blank">Yourator</a></li>
+            <li><a href="https://www.cake.me/companies/mrliving" class="outbounceLink" target="_blank">Cake</a></li>
         </ul>
+        <img class="darli-cat" src="{{media url=wysiwyg/about_us/darli_cat.png}}" loading="lazy"/>
     </div>
 </section>
 <script>
-    require(["jquery", "owlcarousel",], function ($) {
-        jQuery("#media-report-carousel").owlCarousel({
+    require(["jquery", "owlcarousel"], function ($) {
+        // 優化 Carousel 初始化
+        function initOwlCarousel(selector, options) {
+            $(selector).owlCarousel(options);
+        }
+
+        const mediaReportCarouselOptions = {
             autoplay: false,
-            navRewind: true,
+            navRewind: false,
             loop: true,
             margin: 10,
             nav: false,
@@ -751,52 +1446,167 @@
             center: true,
             dots: false,
             responsive: {
-                0: {
-                    items: 1.4,
-                    dots: true,
-                },
-                768: {
-                    items: 5,
-                },
-            },
-        });
-        jQuery("#designer-space-carousel").owlCarousel({
+                0: { items: 1, dots: true, stagePadding: 50 },
+                768: { items: 3, dots: true },
+                1440: { items: 5 }
+            }
+        };
+
+        const designerSpaceCarouselOptions = {
             autoplay: false,
-            navRewind: true,
+            navRewind: false,
             loop: true,
             margin: 20,
             nav: false,
             lazyLoad: true,
             dots: true,
             responsive: {
-                0: {
-                    items: 1,
-                },
-                768: {
-                    items: 2,
-                },
-            },
+                0: { items: 1 },
+                768: { items: 2 }
+            }
+        };
+
+        initOwlCarousel("#media-report-carousel", mediaReportCarouselOptions);
+        initOwlCarousel("#designer-space-carousel", designerSpaceCarouselOptions);
+        
+        //push carousel event to GTM
+        let mediaLastIndex = 0;
+        let designerLastIndex = 0;
+
+        $("#media-report-carousel").on("changed.owl.carousel", function (event) {
+            mediaLastIndex = createCarouselEvent(event, mediaLastIndex, "關於我們-媒體報導");
         });
-        jQuery("#store-location-carousel").owlCarousel({
-            autoplay: false,
-            navRewind: true,
-            loop: true,
-            margin: 10,
-            nav: false,
-            lazyLoad: true,
-            center: true,
-            dots: false,
-            responsive: {
-                0: {
-                    items: 1.4,
-                    dots: true,
-                },
-                768: {
-                    items: 5,
-                },
-            },
+
+        $("#designer-space-carousel").on("changed.owl.carousel", function (event) {
+            designerLastIndex = createCarouselEvent(event, designerLastIndex, "關於我們-設計師案例");
+        });
+
+        
+        function createCarouselEvent(event, lastIndex, carouselTitle){
+            const currentIndex = event.item.index;
+            const slideDirection = currentIndex > lastIndex ? "-right" : "-left";
+
+            lastIndex = currentIndex;
+
+            dataLayer = window.dataLayer || [];
+            dataLayer.push({
+                event: "carousel",
+                carousel_title: carouselTitle,
+                slide_direction: carouselTitle + slideDirection
+            });
+        }
+        
+
+        // KV首屏
+        window.addEventListener("load", function () {
+            if (window.innerWidth <= 996) return;
+
+            const targetTop = $("section.claim-section").offset().top;
+            const $body = $("html,body");
+            $body.animate({ scrollTop: targetTop }, 800);
+        });
+
+        // KV滾動
+        const $body = $("html,body");
+        const $section = $(".kvSection");
+        let curPage = 0;
+        let scrollLock = false;
+        const numOfPages = $section.length - 1;
+
+        function scrollPage() {
+            $(document).on("mousewheel DOMMouseScroll", function (e) {
+                if (scrollLock) return;
+
+                e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0 ? navigateUp() : navigateDown();
+            });
+        }
+
+        function pagination() {
+            scrollLock = true;
+            $body.stop().animate({
+                scrollTop: $section.eq(curPage).offset().top
+            }, 1000, 'swing', function () {
+                scrollLock = false;
+            });
+        }
+
+        function navigateUp() {
+            if (curPage === 0) return;
+            curPage--;
+            pagination();
+        }
+
+        function navigateDown() {
+            if (curPage === numOfPages) return;
+            curPage++;
+            pagination();
+        }
+
+        $(function () {
+            if (window.innerWidth > 996) {
+                scrollPage();
+            }
         });
     });
 
-</script>
+    
+    //動畫效果
+    document.addEventListener("DOMContentLoaded", function () {
+        const fadeInElements = document.querySelectorAll(".fade-in");
+        const fadeInLeftElements = document.querySelectorAll(".fade-in-left");
+        const fadeInRightElements = document.querySelectorAll(".fade-in-right");
+        const brandCourse = document.querySelector(".brand-course-content");
 
+        // 減少滾動事件觸發
+        function throttle(fn, delay) {
+            let lastCall = 0;
+            return function () {
+                const now = new Date().getTime();
+                if (now - lastCall >= delay) {
+                    lastCall = now;
+                    fn.apply(this, arguments);
+                }
+            };
+        }
+
+        function toggleVisibility(elements, fadeClass) {
+            const scrollY = window.scrollY + window.innerHeight;
+
+            elements.forEach(element => {
+                const elementTop = element.offsetTop;
+                const elementHeight = element.offsetHeight;
+
+                if (scrollY > elementTop + elementHeight / 9) {
+                    element.classList.add("visible");
+                    element.classList.remove("hidden", fadeClass);
+                } else {
+                    element.classList.add("hidden");
+                    element.classList.remove("visible");
+                    element.classList.add(fadeClass);
+                }
+            });
+        }
+
+        function checkVisibility() {
+            toggleVisibility(fadeInElements, "fade-out");
+            toggleVisibility(fadeInLeftElements, "fade-out-left");
+            toggleVisibility(fadeInRightElements, "fade-out-right");
+
+            if (brandCourse) {
+                const scrollY = window.scrollY + window.innerHeight;
+                const brandCourseTop = brandCourse.offsetTop;
+                const brandCourseHeight = brandCourse.offsetHeight;
+
+                if (scrollY > brandCourseTop + brandCourseHeight / 9) {
+                    brandCourse.classList.add("visible");
+                } else {
+                    brandCourse.classList.remove("visible");
+                }
+            }
+        }
+
+        checkVisibility();
+
+        window.addEventListener("scroll", throttle(checkVisibility, 100));
+    });
+</script>
