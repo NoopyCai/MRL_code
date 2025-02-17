@@ -1,0 +1,27 @@
+<script>
+    var eventInDataLayer = false;
+    var newTotalObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(function (node) {
+                    if (node) {
+                        if (!eventInDataLayer) {
+                            dataLayer.push({ 'event': 'order_product_change' });
+                            eventInDataLayer = true;
+                            newTotalObserver.disconnect();
+                        }else {return;}
+                    }
+                });
+            }
+        });
+    });
+
+    // Notify me of style changes
+    var observerConfig = {
+        attributes: true,
+        childList: true,
+        subtree: true
+    };
+    var targetNode = document.querySelector('#ordereditor_new_totals');
+    newTotalObserver.observe(targetNode, observerConfig);
+</script>
