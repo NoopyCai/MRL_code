@@ -65,11 +65,53 @@
             lhfBigger: ['1018583', '1018597', '1018562']
         }
     };
+
+    var duneFabric = {
+        teddytan:{
+            secondHalf: ['1018637'],
+            third: ['1018639'],
+            fourth: ['1018639', '1018637'],
+            fourthBigger: ['1018637', '1018639'],
+        },
+        white:{
+            secondHalf:['1018638'],
+            third:['1018640'],
+            fourth:['1018640', '1018638'],
+            fourthBigger:['1018638', '1018640'],
+        },
+    }
+    var mykFabric = {
+        apricotGrey:{
+            second:['1018641'],
+            third:['1018643', '1018645'],
+            fourth:['1018643', '1018641', '1018645'],
+        },
+        cloudsGray:{
+            second:['1018642'],
+            third:['1018644', '1018646'],
+            fourth:['1018644', '1018642', '1018646'],
+        },
+        
+    }
+    var bunFabric = {
+        gray:{
+            secondHalf:['1018661', '1018662'],
+            fourth:['1018661', '1018660', '1018662'],
+            lhf:['1018661', '1018660', '1018663'],
+            rhf:['1018662', '1018660', '1018663'],
+        },
+    }
     
     switchInventoryLink();
     
     function switchInventoryLink(){
-        allInventoryLinks = document.querySelectorAll('.product-sap-id-block a');
+        var allInventoryLinks = document.querySelectorAll('.product-sap-id-block a');
+        var allSkuLinks = document.querySelectorAll('.product-sku-block a');
+
+        if (allSkuLinks.length > 0) {
+            allInventoryLinks = Array.from(allInventoryLinks).concat(Array.from(allSkuLinks));
+        }
+
         var conditions = {
             'pluffy-fabric-3s-210-deepblue': pluffyFabric.blue.third,
             'pluffy-fabric-4s-250-deepblue': pluffyFabric.blue.fourth,
@@ -119,12 +161,30 @@
             'pluffy-fabric-rhf-210-milkwhite': pluffyFabric.milk.rhf,
             'pluffy-fabric-lhf-210-milkwhite': pluffyFabric.milk.lhf,
             'pluffy-fabric-rhf-290-milkwhite': pluffyFabric.milk.rhfBigger,
-            'pluffy-fabric-lhf-290-milkwhite': pluffyFabric.milk.lhfBigger
+            'pluffy-fabric-lhf-290-milkwhite': pluffyFabric.milk.lhfBigger,
+            'dune-fabric-25s-180-teddytan': duneFabric.teddytan.secondHalf,
+            'dune-fabric-3s-210-teddytan': duneFabric.teddytan.third,
+            'dune-fabric-4s-300-teddytan': duneFabric.teddytan.fourth,
+            'dune-fabric-corner-285-teddytan': duneFabric.teddytan.fourthBigger,
+            'dune-fabric-25s-180-shellwhite': duneFabric.white.secondHalf,
+            'dune-fabric-3s-210-shellwhite': duneFabric.white.third,
+            'dune-fabric-4s-300-shellwhite': duneFabric.white.fourth,
+            'dune-fabric-corner-285-shellwhite': duneFabric.white.fourthBigger,
+            'Myk-fabric-3s-212-apricotgrey': mykFabric.apricotGrey.third,
+            'Myk-fabric-4s-293-apricotgrey':mykFabric.apricotGrey.fourth,
+            'Myk-fabric-2s-162-apricotgrey':mykFabric.apricotGrey.second,
+            'Myk-fabric-3s-212-cloudgrey':mykFabric.cloudsGray.third,
+            'Myk-fabric-4s-293-cloudgrey':mykFabric.cloudsGray.fourth,
+            'Myk-fabric-2s-162-cloudgrey':mykFabric.cloudsGray.second,
+            'bun-fabric-25s-180-grey':bunFabric.gray.secondHalf,
+            'bun-fabric-4s-279-grey':bunFabric.gray.fourth,
+            'bun-fabric-sectional-189L-grey':bunFabric.gray.lhf,
+            'bun-fabric-sectional-189R-grey':bunFabric.gray.rhf,
         }
         if(allInventoryLinks.length > 0){
             allInventoryLinks.forEach(function(link){
                 var sapID = link.innerText;
-                sapID = sapID.replace(/<br>/g, " ").toLowerCase().replace(/\s+/g, "");
+                sapID = sapID.replace(/<br>/g, " ").replace(/\s+/g, "").replace(/\n/g, "").trim();
                 for(var condition in conditions){
                     if(sapID.includes(condition)){
                         var newIDs = conditions[condition].join(',');
@@ -133,7 +193,7 @@
                     }
                 }
             })
-            console.log("組合沙發 Inventory links 已更新");
+            // console.log("組合沙發 Inventory links 已更新");
             var allShippingBtn = document.getElementById('mrl_all_shipping_attributes');
             allShippingBtn.removeAttribute('onclick');
             allShippingBtn.addEventListener('click', function(){
@@ -148,12 +208,12 @@
             skuList = document.querySelectorAll('.product-sap-id-block');
             var allShippingUrl = 'http://stock.mrl.com.tw/sbo-query-ui/www/item.php?id=';
             // if(window.location.hostname.includes("dev-devbk243")){
-            //     allShippingUrl = 'http://dev-stock.mrl.com.tw/sbo-query-ui/www/item.php?id=';
+            // var allShippingUrl = 'http://dev-stock.mrl.com.tw/sbo-query-ui/www/item.php?id=';
             // }
             var skuListTemp = [];
             skuList.forEach(function(sku){
               var skuCode = sku.querySelector("a").innerHTML;
-              skuCode = skuCode.replace(/<br>/g, " ").toLowerCase().replace(/\s+/g, "");
+              skuCode = skuCode.replace(/<br>/g, " ").replace(/\s+/g, "").replace(/\n/g, "").trim();
               for(var condition in conditions){
                 if(skuCode.includes(condition)){
                   skuCode = conditions[condition].join(',');
