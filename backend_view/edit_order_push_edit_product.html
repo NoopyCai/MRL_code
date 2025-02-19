@@ -1,0 +1,28 @@
+<script>
+    var eventSent = false;
+    var debounceTime = 3000;
+
+    var observer2 = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            console.log(mutation.target.className);
+            if (mutation.target.className === 'admin__table-wrapper order-items-block ordereditor-hidden-fieldset' && !eventSent) {
+                dataLayer.push({ 'event': 'edit-product' });
+                eventSent = true;
+
+                // 設置重置計時器
+                setTimeout(function () {
+                    eventSent = false;
+                }, debounceTime);
+            }
+        });
+    });
+
+    // Notify me of style changes
+    var observerConfig = {
+        attributes: true,
+        childList: true,
+        subtree: true
+    };
+    var targetNode = document.querySelector('.admin__table-wrapper.order-items-block');
+    observer2.observe(targetNode, observerConfig);
+</script>
