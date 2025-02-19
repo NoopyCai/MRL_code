@@ -1514,10 +1514,25 @@
         const numOfPages = $section.length - 1;
 
         function scrollPage() {
+
             $(document).on("mousewheel DOMMouseScroll", function (e) {
+                const now = new Date().getTime();
                 if (scrollLock) return;
 
-                e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0 ? navigateUp() : navigateDown();
+                const delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+
+                // 滾動幅度超過threshold才移動區塊
+                const threshold = 50; 
+
+                if (Math.abs(delta) > threshold) {
+                    if (delta > 0) {
+                        navigateUp();
+                    } else {
+                        navigateDown();
+                    }
+                }
+
+                // e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0 ? navigateUp() : navigateDown();
             });
         }
 
@@ -1532,12 +1547,20 @@
 
         function navigateUp() {
             if (curPage === 0) return;
+            const headerMenu = document.querySelector('.fixed-menu');
+            if(headerMenu){
+                headerMenu.style.position = 'fixed';
+            }
             curPage--;
             pagination();
         }
 
         function navigateDown() {
             if (curPage === numOfPages) return;
+            const headerMenu = document.querySelector('.fixed-menu');
+            if(headerMenu){
+                headerMenu.style.position = 'unset';
+            }
             curPage++;
             pagination();
         }
