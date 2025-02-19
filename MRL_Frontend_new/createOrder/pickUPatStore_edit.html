@@ -43,6 +43,9 @@
             var allActions = document.querySelectorAll("#order-items_grid .col-actions");
 
             allActions.forEach(function(action) {
+                if(action.querySelector(".pick-up-at-store-table")){
+                    return;
+                }
                 var pickUPtable = document.createElement("table");
                 pickUPtable.className = "pick-up-at-store-table";
 
@@ -84,12 +87,9 @@
                 }
 
                 pickUPtableCheckboxLabel.addEventListener("click", function(){
-                    console.log(pickUPtableCheckbox.checked, "測試");
                     if(pickUPtableCheckbox.checked){
-                        console.log("remove");
                         removePicUPinRemark(orderRemark, pickUPtableCheckbox, pickUPtableCheckboxLabel);
                     } else {
-                        console.log("add");
                         addPicUPinRemark(orderRemark, pickUPtableCheckbox, pickUPtableCheckboxLabel);
                     }
                 });         
