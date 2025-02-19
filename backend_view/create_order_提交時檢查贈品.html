@@ -1,0 +1,70 @@
+<script>
+    //綁定檢查事件到submit按鈕
+    var submitButton = document.querySelector('.homecard-check-btn-submit');
+
+    submitButton.addEventListener('mousedown', function(e){
+        if(!checkGiveaway()){
+            e.preventDefault();
+            return false;
+        }
+    });
+
+
+    //檢查是否符合滿萬送飛機枕活動
+    function checkGiveaway() {
+        var store = document.querySelector('#so_store');
+        if (store.value === '467') {
+            var now = new Date();
+
+            if (isWithinActivePeriod(now)) {
+                var orderTotal = calOrderTotal();
+                if (orderTotal >= 10000) {
+                    if (!giveawayInTable()) {
+                        alert('符合 滿萬送飛機枕 活動，請手動加入贈品 \n\n品名：【新莊旗艦店滿額禮】贈品－護頸減壓飛機枕\n商品編碼：A22-Free-1018216');
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    // 檢查是否在活動期間
+    function isWithinActivePeriod(date) {
+        var activeStartDate = new Date('2025-02-22');
+        var activeEndDate = new Date('2025-02-24');
+        return date >= activeStartDate && date <= activeEndDate;
+    }
+
+    //計算訂單金額
+    function calOrderTotal() {
+        var grandTotalElement = document.querySelector('#grand-total .price');
+        var shippingFeeElement = document.querySelector('#shipping-include-tax .price');
+
+        var grandTotal = grandTotalElement ? grandTotalElement.innerText.replace(/[$,]/g, '') : '0';
+        var shippingFee = shippingFeeElement ? shippingFeeElement.innerText.replace(/[$,]/g, '') : '0';
+        var floorFee = 0;
+
+        var itemsInTable = document.querySelectorAll('.order-tables .col-product > span');
+
+        itemsInTable.forEach(function (item) {
+            if (item.innerText.includes('樓層費')) {
+                var rowValue = item.parentNode.parentNode.querySelector('.col-row-subtotal .price').innerText.replace(/[$,]/g, '');
+                floorFee += parseInt(rowValue);
+            }
+        });
+
+        return parseInt(grandTotal) - parseInt(shippingFee) - parseInt(floorFee);
+
+    }
+
+    //檢查是否有贈品
+    function giveawayInTable() {
+        var itemsInTable = document.querySelectorAll('.order-tables .col-product > span');
+
+        return Array.from(itemsInTable).some(function (item) {
+            return item.innerText.includes('新莊旗艦店滿額禮')
+        })
+    }
+
+</script>
