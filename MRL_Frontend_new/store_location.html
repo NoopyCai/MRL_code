@@ -1,0 +1,802 @@
+<style>
+    .page-main>.page-title-wrapper .page-title {
+        display: none;
+    }
+
+    #map-close {
+
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: 400;
+        background-color: #e3e2e2;
+        position: fixed;
+        top: 18vh;
+        right: 10%;
+        z-index: 1002;
+        width: 30px;
+        height: 24px;
+        padding-top: 6px;
+    }
+
+    #mobile-map {
+        display: none;
+    }
+
+    .store-location {
+        width: 95%;
+        margin: auto;
+        max-width: 1600px;
+    }
+
+    .store-location .title {
+        text-align: center;
+    }
+
+    .store-location .title h1 {
+        font-size: 48px;
+        letter-spacing: 12px;
+    }
+
+    .store-location .anchor-point {
+        white-space: nowrap;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        margin-bottom: -14rem;
+    }
+
+    .store-location .anchor-point a {
+        color: #7E7E7E;
+        text-decoration: underline;
+        font-size: 20px;
+        padding: 0 1.5rem;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .store-location .anchor-point a+a::before {
+        position: absolute;
+        content: '';
+        top: 1px;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        width: 1.5px;
+        height: 70%;
+        background-color: #7E7E7E;
+    }
+
+    .store-location .anchor-point a:nth-child(1)::after {
+        content: '旗艦店';
+    }
+
+    .store-location .anchor-point a:nth-child(2)::after {
+        content: '內湖';
+    }
+
+    .store-location .anchor-point a:nth-child(3)::after {
+        content: '竹北';
+    }
+
+    .store-location .anchor-point a:nth-child(4)::after {
+        content: '黎明';
+    }
+
+    .store-location .anchor-point a:nth-child(5)::after {
+        content: '崇善';
+    }
+
+    .store-location .anchor-point a:nth-child(6)::after {
+        content: '巨蛋';
+    }
+
+    .store-location .section {
+        display: flex;
+        padding-top: 14rem;
+        position: relative;
+        column-gap: 5rem;
+    }
+
+    .store-location .section:last-child {
+        margin-bottom: 14rem;
+    }
+
+    .store-location .section .content {
+        width: 59%;
+        padding-left: 4rem;
+    }
+
+    .store-location .section::after {
+        content: '';
+        position: absolute;
+        top: 247px;
+        left: 0;
+        width: 3px;
+        opacity: 0.7;
+        height: calc(100% - 260px);
+        background-color: #7d7d7d;
+    }
+
+    .store-location .section::before {
+        content: '';
+        position: absolute;
+        bottom: -3.4rem;
+        left: 0;
+        width: 100%;
+        height: 2.4px;
+        background-color: #bebebe;
+    }
+
+    .store-location .section .content h2 {
+        font-size: 40px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        width: fit-content;
+        margin-left: -4rem;
+    }
+
+    .store-location .section .content .dalicat {
+        width: 100px;
+    }
+
+    .store-location .section .content .flex-container {
+        display: flex;
+        align-items: end;
+    }
+
+    .store-location .section .content .flex-container:nth-child(1) {
+        align-items: center;
+    }
+
+    .store-location .section .content .pic {
+        width: 46%;
+    }
+
+    .store-location .section .reserve-service {
+        width: 170px;
+        display: flex;
+        margin-left: 12%;
+        height: 152px;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 1rem;
+
+    }
+
+    .store-location .section .reserve-service a {
+        font-size: 28px;
+        text-decoration: underline;
+        position: relative;
+        color: black;
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    .store-location .section .reserve-service img {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .store-location .section .content-txt {
+        margin-top: 2rem;
+    }
+
+    .store-location .section .content-txt .map-link {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .store-location .section .content-txt p {
+        font-size: 2rem;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
+
+    .store-location .section .content-txt img {
+        margin-right: 8px;
+        position: relative;
+        top: 5px;
+    }
+
+    .store-location .section .content-txt a {
+        color: black;
+        text-decoration: underline;
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+
+    .store-location .section .map {
+        width: 41%;
+        margin-top: 9rem;
+    }
+
+    .store-location .section .map iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+    .store-location .section .map .iframe-container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .title-xinzhuang-desktop {
+        display: block;
+    }
+
+    .title-xinzhuang-mobile {
+        display: none;
+    }
+
+    @media(max-width:1200px) {
+
+        .store-location .section .content-txt p,
+        .store-location .section .content-txt a {
+            font-size: 1.7rem;
+        }
+    }
+
+    @media(max-width:768px) {
+        .store-location .title h1 {
+            font-size: 24px;
+            margin-top: 5rem;
+        }
+
+        .store-location .anchor-point {
+            margin-bottom: -6rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .store-location .anchor-point a {
+            font-size: 15px;
+            margin-bottom: 5rem;
+            padding: 0 1rem;
+        }
+
+        .store-location .anchor-point a::after {
+            content: '' !important;
+        }
+
+        .store-location .section:last-child {
+            margin-bottom: 6rem;
+        }
+
+        .store-location .section {
+            flex-direction: column;
+            margin-bottom: 0;
+            padding-top: 6rem;
+        }
+
+        .store-location .section .content {
+            width: 90%;
+            padding-left: 0;
+            margin: auto;
+        }
+
+        .store-location .section .content .map-link {
+            text-decoration: underline;
+        }
+
+        .store-location .section .map {
+            margin-top: 26px;
+        }
+
+        .store-location .section .map iframe {
+            display: none;
+        }
+
+        #mobile-map {
+            z-index: 50;
+            position: fixed;
+            top: 17vh;
+            width: 86%;
+            height: 50vh;
+            margin: auto;
+            left: 0;
+            right: 0;
+            padding: 5rem 5%;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .active #mobile-map {
+            display: block;
+        }
+
+        .mobile-map-container.active {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+            background-color: rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 100%;
+        }
+
+        #mobile-map iframe {
+            width: 100%;
+            height: 105%;
+            border: none;
+        }
+
+        .store-location .section .content .pic {
+            width: 100%;
+        }
+
+        .store-location .section .reserve-service {
+            display: flex !important;
+            width: 141px;
+            height: 110px;
+        }
+
+        .store-location .section .content .reserve-service {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+
+        .store-location .section .reserve-service a {
+            font-size: 22px;
+        }
+
+        .store-location .section::after {
+            width: 1px;
+            top: 150px;
+            height: calc(100% - 164px);
+        }
+
+        .store-location .section::before {
+            bottom: -1.4rem;
+            height: 1.1px;
+        }
+
+        .store-location .section .content-txt p,
+        .store-location .section .content-txt a {
+            font-size: 18px;
+        }
+
+        .store-location .section .content h2 {
+            margin-left: -2rem;
+            font-size: 24px;
+        }
+
+        .store-location .section .content .dalicat {
+            width: 84px;
+        }
+
+        .tainan-premap {
+            display: none;
+        }
+
+        .title-xinzhuang-desktop {
+            display: none;
+        }
+
+        .title-xinzhuang-mobile {
+            display: block;
+            line-height: 1.5;
+        }
+    }
+</style>
+
+<div class="store-location">
+    <div id="map-close" style="display: none;">
+        <i class="mgz-icon mgz-icon-close"></i>
+    </div>
+    <div class="mobile-map-container">
+        <div id="mobile-map">
+        </div>
+    </div>
+    <div class="title">
+        <h1>門市據點</h1>
+    </div>
+    <div class="anchor-point">
+        <a>新莊</a>
+        <a>台北</a>
+        <a>新竹</a>
+        <a>台中</a>
+        <a>台南</a>
+        <a>高雄</a>
+    </div>
+
+
+    <div itemscope itemtype="http://schema.org/LocalBusiness" class="section" id="xinzhuang">
+        <div class="content">
+            <div class="flex-container">
+                <h2 itemprop="name" class="title-xinzhuang-desktop">新莊旗艦店 (副都心門市)</h2>
+                <h2 itemprop="name" class="title-xinzhuang-mobile">新莊旗艦店<br>(副都心門市)</h2>
+                <div class="dalicat"><img style="width: 100%;"
+                        src="{{media url=wysiwyg/store_location/dalicat_xinzhuang_V1.png}}" alt="居家先生達利貓">
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="pic">
+                    <img itemprop="image" style="display: block; width: 100%;"
+                        src="{{media url=wysiwyg/store_location/store-location-HC-pic.jpg}}"
+                        alt="居家先生新莊旗艦店 (副都心門市)｜(即將開幕)家具展示空間照">
+                </div>
+                <div itemprop="potentialAction" itemscope itemtype="http://schema.org/ReserveAction"
+                    class="reserve-service">
+                    <a itemprop="name" class="reserve-btn">預約體驗</a>
+                    <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+                </div>
+            </div>
+            <div class="content-txt">
+                <p itemprop="openingHours" datetime="11:00-20:00">
+                    <img style="width: 26px;" src="{{media url=wysiwyg/store_location/business_hours.png}}"
+                        alt="營業時間">營業時間：週一至週日，每日11:00-20:00
+                </p>
+                <!-- <p><img style="width: 26px;" src="{{media url=wysiwyg/store_location/icon_phone.png}}"
+                        alt="聯絡電話">聯絡電話：<a href="TEL:02-85211613"><span itemprop="telephone">02-85211613</span></a></p> -->
+                <p itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/bg_address.png}}" alt="門市地址">門市地址：<span
+                        class="map-link"><span itemprop="addressRegion">新北市</span><span
+                            itemprop="addressLocality">新莊區</span><span
+                            itemprop="streetAddress">新北大道四段135號2&3樓</span></span></p>
+                <p itemprop="parking" itemscope itemtype="http://schema.org/ParkingFacility"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/icon_parking_imf.png}}" alt="停車資訊">停車資訊：<span
+                        itemprop="description">大樓旁即有<span class="map-link">CITY PARKING停車場</span>，步行約１-２分鐘</span></p>
+                <p itemprop="amenityFeature" itemscope itemtype="http://schema.org/LocationFeatureSpecification"><img
+                        style="width: 26px;" src="{{media url=wysiwyg/store_location/icon_transportation.png}}"
+                        alt="大眾交通"><span itemprop="name">大眾交通</span>：<span itemprop="value">《公車835,
+                        960》捷運新莊副都心站下車</span><br><span itemprop="value">《桃園捷運》A4 新莊副都心站下車，步行約１-２分鐘</span></p>
+            </div>
+        </div>
+        <div class="map">
+            <div itemprop="hasMap" class="iframe-container">
+                <iframe class="map-iframe"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1511.1247320658167!2d121.44612405307177!3d25.058725804966674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a881f231fafb%3A0x3f2559734eadc8f!2zMjQy5paw5YyX5biC5paw6I6K5Y2A5paw5YyX5aSn6YGT5Zub5q61MTM16Jmf!5e0!3m2!1szh-TW!2stw!4v1739428690782!5m2!1szh-TW!2stw"
+                    width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div style="display: none;" class="reserve-service">
+                <a class="store-location-map-btn">門市地圖</a>
+                <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+            </div>
+        </div>
+    </div>
+    <div itemscope itemtype="http://schema.org/LocalBusiness" class="section" id="taipei">
+        <div class="content">
+            <div class="flex-container">
+                <h2 itemprop="name">台北店 (內湖門市)</h2>
+                <div class="dalicat"><img style="width: 100%;"
+                        src="{{media url=wysiwyg/store_location/dalicat_taipei_V2.png}}" alt="居家先生達利貓">
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="pic">
+                    <img itemprop="image" style="display: block; width: 100%;"
+                        src="{{media url=wysiwyg/store_location/store-location-taipei-pic.jpg}}"
+                        alt="居家先生台北店(內湖門市)｜家具展示空間照">
+                </div>
+                <div itemprop="potentialAction" itemscope itemtype="http://schema.org/ReserveAction"
+                    class="reserve-service">
+                    <a itemprop="name" class="reserve-btn">預約體驗</a>
+                    <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+                </div>
+            </div>
+            <div class="content-txt">
+                <p itemprop="openingHours" datetime="11:00-20:00">
+                    <img style="width: 26px;" src="{{media url=wysiwyg/store_location/business_hours.png}}"
+                        alt="營業時間">營業時間：週一至週日，每日11:00-20:00
+                </p>
+                <p><img style="width: 26px;" src="{{media url=wysiwyg/store_location/icon_phone.png}}"
+                        alt="聯絡電話">聯絡電話：<a href="TEL:0227905750"><span itemprop="telephone">02-27905750</span></a></p>
+                <p itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/bg_address.png}}" alt="門市地址">門市地址：<span
+                        class="map-link"><span itemprop="addressRegion">台北市</span><span
+                            itemprop="addressLocality">內湖區</span><span
+                            itemprop="streetAddress">民權東路六段15巷29-33號3樓</span></span></p>
+                <p itemprop="parking" itemscope itemtype="http://schema.org/ParkingFacility"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/icon_parking_imf.png}}" alt="停車資訊">停車資訊：<span
+                        itemprop="description">周邊 馬路旁有停車格、<span class="map-link">瑞湖停車場</span>，步行約２-５分鐘</span></p>
+                <p itemprop="amenityFeature" itemscope itemtype="http://schema.org/LocationFeatureSpecification"><img
+                        style="width: 26px;" src="{{media url=wysiwyg/store_location/icon_transportation.png}}"
+                        alt="大眾交通"><span itemprop="name">大眾交通</span>：<span
+                        itemprop="value">《公車》民權大橋公車站下車，步行約５分鐘</span><br><span
+                        itemprop="value">《捷運》文湖線港墘站(BR17)下車，搭計程車約10分鐘</span></p>
+            </div>
+        </div>
+        <div class="map">
+            <div itemprop="hasMap" class="iframe-container">
+                <iframe class="map-iframe"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.979130238375!2d121.57556557612162!3d25.06869647779402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a62a747aad67%3A0xee0059ef2931f323!2zTVIuIExJVklORyDlsYXlrrblhYjnlJ8g5YWn5rmW5peX6Imm5bqX!5e0!3m2!1szh-TW!2stw!4v1682311859000!5m2!1szh-TW!2stw"
+                    width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div style="display: none;" class="reserve-service">
+                <a class="store-location-map-btn">門市地圖</a>
+                <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+            </div>
+        </div>
+    </div>
+    <div itemscope itemtype="http://schema.org/LocalBusiness" class="section" id="hsinchu">
+        <div class="content">
+            <div class="flex-container">
+                <h2 itemprop="name">新竹店 (竹北門市)</h2>
+                <div class="dalicat"><img style="width: 100%;"
+                        src="{{media url=wysiwyg/store_location/dalicat_hsinchu_V2.png}}" alt="居家先生達利貓">
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="pic">
+                    <img itemprop="image" style="display: block; width: 100%;"
+                        src="{{media url=wysiwyg/store_location/store-location-hsinchu-pic.jpg}}"
+                        alt="居家先生新竹店(竹北門市)｜家具展示空間照">
+                </div>
+                <div itemprop="potentialAction" itemscope itemtype="http://schema.org/ReserveAction"
+                    class="reserve-service">
+                    <a itemprop="name" class="reserve-btn">預約體驗</a>
+                    <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+                </div>
+            </div>
+            <div class="content-txt">
+                <p itemprop="openingHours" datetime="11:00-20:00">
+                    <img style="width: 26px;" src="{{media url=wysiwyg/store_location/business_hours.png}}"
+                        alt="營業時間">營業時間：週一至週日，每日11:00-20:00
+                </p>
+                <p><img style="width: 26px;" src="{{media url=wysiwyg/store_location/icon_phone.png}}"
+                        alt="聯絡電話">聯絡電話：<a href="TEL:036583312"><span itemprop="telephone">03-6583312</span></a></p>
+                <p itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/bg_address.png}}" alt="門市地址">門市地址：<span
+                        class="map-link"><span itemprop="addressRegion">新竹縣</span><span
+                            itemprop="addressLocality">竹北市</span><span
+                            itemprop="streetAddress">光明六路東一段186號1樓</span></span></p>
+                <p itemprop="parking" itemscope itemtype="http://schema.org/ParkingFacility"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/icon_parking_imf.png}}" alt="停車資訊">停車資訊：<span
+                        itemprop="description">周邊 <span class="map-link">竹北國民運動中心停車場</span>、<span
+                            class="map-link">遠東百貨購物廣場停車場</span>、<span class="map-link">光明停車場</span>，步行約５分鐘</span></p>
+            </div>
+        </div>
+        <div class="map">
+            <div itemprop="hasMap" class="iframe-container">
+                <iframe class="map-iframe"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.255905904106!2d121.01896599678956!3d24.820920700000016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3468374c1ebf0245%3A0x3934ddf9d7bdfc36!2zTVIuIExJVklORyDlsYXlrrblhYjnlJ8g5paw56u556u55YyX5bqX!5e0!3m2!1szh-TW!2stw!4v1683012565121!5m2!1szh-TW!2stw"
+                    width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div style="display: none;" class="reserve-service">
+                <a class="store-location-map-btn">門市地圖</a>
+                <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+            </div>
+        </div>
+    </div>
+    <div itemscope itemtype="http://schema.org/LocalBusiness" class="section" id="taichung">
+        <div class="content">
+            <div class="flex-container">
+                <h2 itemprop="name">台中店 (黎明門市)</h2>
+                <div class="dalicat"><img style="width: 100%;"
+                        src="{{media url=wysiwyg/store_location/dalicat_taichung_V2.png}}" alt="居家先生達利貓">
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="pic">
+                    <img itemprop="image" style="display: block; width: 100%;"
+                        src="{{media url=wysiwyg/store_location/store-location-taichung-pic.jpg}}"
+                        alt="最美家具店－居家先生台中店(黎明門市)｜家具展示空間照">
+                </div>
+                <div itemprop="potentialAction" itemscope itemtype="http://schema.org/ReserveAction"
+                    class="reserve-service">
+                    <a itemprop="name" class="reserve-btn">預約體驗</a>
+                    <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+                </div>
+            </div>
+            <div class="content-txt">
+                <p itemprop="openingHours" datetime="11:00-20:00">
+                    <img style="width: 26px;" src="{{media url=wysiwyg/store_location/business_hours.png}}"
+                        alt="營業時間">營業時間：週一至週日，每日11:00-20:00
+                </p>
+                <p><img style="width: 26px;" src="{{media url=wysiwyg/store_location/icon_phone.png}}"
+                        alt="聯絡電話">聯絡電話：<a href="TEL:0422512699"><span itemprop="telephone">04-22512699</span></a></p>
+                <p itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/bg_address.png}}" alt="門市地址">門市地址：<span
+                        class="map-link"><span itemprop="addressRegion">台中市</span><span
+                            itemprop="addressLocality">南屯區</span><span itemprop="streetAddress">黎明路二段599號</span></span>
+                </p>
+                <p itemprop="parking" itemscope itemtype="http://schema.org/ParkingFacility"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/icon_parking_imf.png}}" alt="停車資訊">停車資訊：<span
+                        itemprop="description">周邊 馬路旁有停車格、<span class="map-link">林源停車場</span>、<span
+                            class="map-link">隆富停車場</span>，步行約２-５分鐘</span></p>
+            </div>
+        </div>
+        <div class="map">
+            <div itemprop="hasMap" class="iframe-container">
+                <iframe class="map-iframe"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.3557029912354!2d120.62895759678958!3d24.159255000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3469162c8072df3f%3A0x34d60c0eb18ed4f3!2zTVIuIExJVklORyDlsYXlrrblhYjnlJ_lj7DkuK3pq5TpqZflupc!5e0!3m2!1szh-TW!2stw!4v1683012622445!5m2!1szh-TW!2stw"
+                    width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div style="display: none;" class="reserve-service">
+                <a class="store-location-map-btn">門市地圖</a>
+                <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+            </div>
+        </div>
+    </div>
+    <div itemscope itemtype="http://schema.org/LocalBusiness" class="section" id="tainan">
+        <div class="content">
+            <div class="flex-container">
+                <h2 itemprop="name">台南店 (崇善門市)</h2>
+                <div class="dalicat"><img style="width: 100%;"
+                        src="{{media url=wysiwyg/store_location/dalicat_tainan.png}}" alt="居家先生達利貓">
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="pic">
+                    <img itemprop="image" style="display: block; width: 100%;"
+                        src="{{media url=wysiwyg/store_location/store-location-tainan-picR.jpg}}"
+                        alt="居家先生台南店(崇善門市)｜家具展示空間照">
+                </div>
+                <div itemprop="potentialAction" itemscope itemtype="http://schema.org/ReserveAction"
+                    class="reserve-service">
+                    <a itemprop="name" class="reserve-btn">預約體驗</a>
+                    <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+                </div>
+            </div>
+            <div class="content-txt">
+                <p itemprop="openingHours" datetime="11:00-20:00">
+                    <img style="width: 26px;" src="{{media url=wysiwyg/store_location/business_hours.png}}"
+                        alt="營業時間">營業時間：週一至週日，每日11:00-20:00
+                </p>
+                <p><img style="width: 26px;" src="{{media url=wysiwyg/store_location/icon_phone.png}}"
+                        alt="聯絡電話">聯絡電話：<a href="TEL:062689300"><span itemprop="telephone">06-2689300</span></a></p>
+                <p itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/bg_address.png}}" alt="門市地址">門市地址：<span
+                        class="map-link"><span itemprop="addressRegion">台南市</span><span
+                            itemprop="addressLocality">東區</span><span itemprop="streetAddress">崇善路23號2樓</span></span>
+                </p>
+                <p itemprop="parking" itemscope itemtype="http://schema.org/ParkingFacility"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/icon_parking_imf.png}}" alt="停車資訊">停車資訊：<span
+                        itemprop="description">有<span class="map-link">全聯停車場</span>，路邊停車格，或崇善路<span
+                            class="map-link">龍山停車場</span>步行約２-５分鐘</span></p>
+            </div>
+        </div>
+        <div class="map">
+            <div itemprop="hasMap" class="iframe-container">
+                <iframe class="map-iframe"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14692.494038636005!2d120.2207884!3d22.9824853!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e7715508514dd%3A0x8ce6f65545addcf9!2zTVIuIExJVklORyDlsYXlrrblhYjnlJ8g5Y-w5Y2X5bSH5ZaE5bqX!5e0!3m2!1szh-TW!2stw!4v1699239915664!5m2!1szh-TW!2stw"
+                    width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div style="display: none;" class="reserve-service">
+                <a class="store-location-map-btn">門市地圖</a>
+                <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+            </div>
+        </div>
+    </div>
+    <div itemscope itemtype="http://schema.org/LocalBusiness" class="section" id="kaosiung">
+        <div class="content">
+            <div class="flex-container">
+                <h2 itemprop="name">高雄店 (巨蛋門市)</h2>
+                <div class="dalicat"><img style="width: 100%;"
+                        src="{{media url=wysiwyg/store_location/dalicat_kaosiung_V2.png}}" alt="居家先生達利貓">
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="pic">
+                    <img itemprop="image" style="display: block; width: 100%;"
+                        src="{{media url=wysiwyg/store_location/store-location-kaosiung-picR3.jpg}}"
+                        alt="居家先生高雄店(巨蛋門市)｜家具展示空間照">
+                </div>
+                <div itemprop="potentialAction" itemscope itemtype="http://schema.org/ReserveAction"
+                    class="reserve-service">
+                    <a itemprop="name" class="reserve-btn">預約體驗</a>
+                    <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+                </div>
+            </div>
+            <div class="content-txt">
+                <p itemprop="openingHours" datetime="11:00-20:00">
+                    <img style="width: 26px;" src="{{media url=wysiwyg/store_location/business_hours.png}}"
+                        alt="營業時間">營業時間：週一至週日，每日11:00-20:00
+                </p>
+                <p><img style="width: 26px;" src="{{media url=wysiwyg/store_location/icon_phone.png}}"
+                        alt="聯絡電話">聯絡電話：<a href="TEL:073100192"><span itemprop="telephone">07-3100192</span></a></p>
+                <p itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/bg_address.png}}" alt="門市地址">門市地址：<span
+                        class="map-link"><span itemprop="addressRegion">高雄市</span><span
+                            itemprop="addressLocality">左營區</span><span itemprop="streetAddress">新莊一路393號2樓</span></span>
+                </p>
+
+                <p itemprop="parking" itemscope itemtype="http://schema.org/ParkingFacility"><img style="width: 26px;"
+                        src="{{media url=wysiwyg/store_location/icon_parking_imf.png}}" alt="停車資訊">停車資訊：<span
+                        itemprop="description">有周邊新榮街上，<span class="map-link">捷安－阿爾發停車場</span>、<span
+                            class="map-link">漢神巨蛋購物廣場停車場</span>，步行約５分鐘</span></p>
+            </div>
+        </div>
+        <div class="map">
+            <div itemprop="hasMap" class="iframe-container">
+                <iframe class="map-iframe"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.5416743039787!2d120.29993337606109!3d22.67087087942188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e059742e5b47b%3A0xa562688d06bf9bb8!2zTVIuIExJVklORyDlsYXlrrblhYjnlJ8g6auY6ZuE5beo6JuL5bqX!5e0!3m2!1szh-TW!2stw!4v1683012678322!5m2!1szh-TW!2stw"
+                    width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div style="display: none;" class="reserve-service">
+                <a class="store-location-map-btn">門市地圖</a>
+                <img src="{{media url=wysiwyg/MenuBar/Buttom/LOGO_house.png}}" alt="點我預約體驗">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    let mapBtn = document.querySelectorAll('.store-location-map-btn');
+    let map = document.querySelectorAll(".store-location .section .map .iframe-container");
+    let mapLink = document.querySelectorAll(".content-txt .map-link");
+    let parkingMapLink = document.querySelectorAll(".content-txt .map-link");
+    let closeBtn = document.querySelector("#map-close");
+    let targetLatLng = { lat: 25.033671, lng: 121.564427 };
+    let parkingMapHTML =
+        [
+            { name: '新北市新莊區新北大道四段135號2&3樓', section: 0, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1511.1247320658167!2d121.44612405307177!3d25.058725804966674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a881f231fafb%3A0x3f2559734eadc8f!2zMjQy5paw5YyX5biC5paw6I6K5Y2A5paw5YyX5aSn6YGT5Zub5q61MTM16Jmf!5e0!3m2!1szh-TW!2stw!4v1739428690782!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '台北市內湖區民權東路六段15巷29-33號3樓', section: 1, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.979130238375!2d121.57556557612162!3d25.06869647779402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a62a747aad67%3A0xee0059ef2931f323!2zTVIuIExJVklORyDlsYXlrrblhYjnlJ8g5YWn5rmW5peX6Imm5bqX!5e0!3m2!1szh-TW!2stw!4v1682311859000!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '新竹縣竹北市光明六路東一段186號1樓', section: 2, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.255905904106!2d121.01896599678956!3d24.820920700000016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3468374c1ebf0245%3A0x3934ddf9d7bdfc36!2zTVIuIExJVklORyDlsYXlrrblhYjnlJ8g5paw56u556u55YyX5bqX!5e0!3m2!1szh-TW!2stw!4v1683012565121!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '台中市南屯區黎明路二段599號', section: 3, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.3557029912354!2d120.62895759678958!3d24.159255000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3469162c8072df3f%3A0x34d60c0eb18ed4f3!2zTVIuIExJVklORyDlsYXlrrblhYjnlJ_lj7DkuK3pq5TpqZflupc!5e0!3m2!1szh-TW!2stw!4v1683012622445!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '台南市東區崇善路23號2樓', section: 4, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14692.494038636005!2d120.2207884!3d22.9824853!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e7715508514dd%3A0x8ce6f65545addcf9!2zTVIuIExJVklORyDlsYXlrrblhYjnlJ8g5Y-w5Y2X5bSH5ZaE5bqX!5e0!3m2!1szh-TW!2stw!4v1699239915664!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '高雄市左營區新莊一路393號2樓', section: 5, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.5416743039787!2d120.29993337606109!3d22.67087087942188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e059742e5b47b%3A0xa562688d06bf9bb8!2zTVIuIExJVklORyDlsYXlrrblhYjnlJ8g6auY6ZuE5beo6JuL5bqX!5e0!3m2!1szh-TW!2stw!4v1683012678322!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '瑞湖停車場', section: 1, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.9768547546296!2d121.57474591744385!3d25.06877359999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ac7ed7064f89%3A0xb124ca7ec9c8638c!2z55Ge5rmW5YGc6LuK5aC0!5e0!3m2!1szh-TW!2stw!4v1686048975588!5m2!1szh-TW!2stw" width="640" height="480"></iframe>' },
+            { name: '竹北國民運動中心停車場', section: 2, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.2612786941113!2d121.0168039967895!3d24.8207369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346836e5b11e3e91%3A0xe24828d9f7676b87!2z56u55YyX5ZyL5rCR6YGL5YuV5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1683881865562!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '遠東百貨購物廣場停車場', section: 2, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.2024201083577!2d121.02089520362371!3d24.82275034823358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3468378a65086033%3A0x3b2836ab8063c89!2z6YGg5p2x55m-6LKo56u55YyX5bqX5YGc6LuK5aC0!5e0!3m2!1szh-TW!2stw!4v1683880345402!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '光明停車場', section: 2, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.248940574266!2d121.02329007611505!3d24.821158977954898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3468372bc043b3bf%3A0xa11eb0df9c67f95d!2z5Y-w54Gj6IGv6YCa5YGc6LuK5aC0LeerueWMl-WFieaYjuWgtA!5e0!3m2!1szh-TW!2stw!4v1683881717964!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '隆富停車場', section: 3, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.353301052573!2d120.63239947609789!3d24.15933927839355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693def1d11dfad%3A0xee089c5621cbe2e2!2z6ZqG5a-M5YGc6LuK5aC0!5e0!3m2!1szh-TW!2stw!4v1683881051364!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '林源停車場', section: 3, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3640.3422793653967!2d120.63211331744385!3d24.159725999999985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDA5JzM1LjAiTiAxMjDCsDM4JzAzLjUiRQ!5e0!3m2!1szh-TW!2stw!4v1686050391500!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '全聯停車場', section: 4, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.1233759476045!2d120.21821347591114!3d22.982490217821667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e77e5014296c9%3A0x44bed76680415bcb!2z5Y-w54Gj6IGv6YCa5YGc6LuK5aC0LeWPsOWNl-ael-ajruWgtA!5e0!3m2!1szh-TW!2stw!4v1698131277514!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '龍山停車場', section: 4, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.1163489718265!2d120.21660898563972!3d22.98274866420172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e769bf14e6599%3A0x87cd0716bea56b4!2z5bSH5ZaE6Lev6b6N5bGx5YGc6LuK5aC0!5e0!3m2!1szh-TW!2stw!4v1698131327575!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '捷安－阿爾發停車場', section: 5, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.5925610864524!2d120.29830307606116!3d22.66897487942317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e05967c6163bf%3A0x9a07f070d61f0a09!2z5o235a6J5LiA5YGc6LuK5aC0!5e0!3m2!1szh-TW!2stw!4v1683881560570!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: '漢神巨蛋購物廣場停車場', section: 5, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.569140516134!2d120.30004242606121!3d22.669847529422672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e0508a5de30d1%3A0x86c88c34d4d29f80!2z5ryi56We5beo6JuL6LO854mp5buj5aC0!5e0!3m2!1szh-TW!2stw!4v1683883189704!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+            { name: 'CITY PARKING停車場', section: 0, HTML: '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d903.5694082436496!2d121.4471022!3d25.0585775!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a953b7f38763%3A0x26067a923ae813dc!2zQ0lUWSBQQVJLSU5HIOWfjuW4gui7iuaXheWBnOi7iuWgtCDmlrDojorlhbjoj6_kuIDnq5k!5e0!3m2!1szh-TW!2stw!4v1739414113366!5m2!1szh-TW!2stw" width="845" height="475" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' },
+        ];
+    let linkTo = document.querySelectorAll(".store-location .anchor-point a");
+    let section = document.querySelectorAll(".store-location .section .content h2");
+    let index;
+    let mobileMap = document.querySelector(".mobile-map-container");
+    for (let i = 0; i < mapBtn.length; i++) {
+        mapBtn[i].addEventListener('click', function () {
+            mobileMap.querySelector("#mobile-map").innerHTML = parkingMapHTML[i].HTML;
+            mobileMap.classList.add("active");
+            closeBtn.style = 'display: block !important; ';
+        })
+    }
+    for (let i = 0; i < parkingMapLink.length; i++) {
+        parkingMapLink[i].addEventListener('click', function () {
+            index = parkingMapHTML.findIndex(item => item.name === parkingMapLink[i].textContent);
+            if (window.innerWidth < 768) {
+                mobileMap.querySelector("#mobile-map").innerHTML = parkingMapHTML[index].HTML;
+                mobileMap.classList.add("active");
+                closeBtn.style = 'display: block !important; ';
+            }
+            else {
+                map[parkingMapHTML[index].section].innerHTML = parkingMapHTML[index].HTML;
+            }
+        })
+    }
+    closeBtn.addEventListener('click', function () {
+        map.forEach((e) => {
+            e.classList.remove("active");
+            closeBtn.style = 'display: none !important; ';
+        })
+        mobileMap.classList.remove("active");
+    })
+
+    for (let i = 0; i < linkTo.length; i++) {
+        linkTo[i].addEventListener('click', function () {
+            let offsetNum;
+            if (window.innerWidth > 768) {
+                offsetNum = -300;
+            }
+            else {
+                offsetNum = -100;
+            }
+            let objectPosition = section[i].getBoundingClientRect().top + offsetNum;
+            window.scrollTo({
+                top: objectPosition,
+                behavior: "smooth"
+            });
+        })
+    }
+
+
+</script>
