@@ -1,0 +1,74 @@
+<!-- 維護公告popup -->
+<div class="system-maintenance-popup">
+    <span class="system-maintenance-popup-title">【官網維護公告】</span>
+    <p class="maintenance-time">將於<span class="maintenance-time-count"> 00 </span>點<span class="maintenance-time-count"> 00 </span>分 開始
+        <p class="maintenance-notice">
+            如有需要服務的地方<br>
+            請於 官方 LINE 留下訊息<br>
+            我們將於上班時間盡快回覆您：)
+        </p><br>
+        <p class="maintenance-notice">
+            維護中不便處懇請見諒
+        </p>
+    </p>
+    <img class="system-maintenance-img" src="https://media.mrliving.com.tw/wysiwyg/home_page/system-maintenance.jpg">
+</div>
+
+<style>
+    .system-maintenance-popup{
+        background-color:  #e3e3e3;
+        text-align: center;
+        margin: 3rem 0;
+    }
+    .system-maintenance-popup-title{
+        font-size: 28px;
+        font-weight: 600;
+    }
+    .maintenance-time{
+        color: #951522;
+        font-size: 22px;
+    }
+    .maintenance-time-count{
+        font-size: 42px;
+    }
+    .maintenance-notice{
+        font-size: 18px;
+    }
+    .popupbuilder-widget-content{
+        background-color:  #e3e3e3 !important;
+        max-width: 450px;
+    }
+    .system-maintenance-img{
+        width: 50%;
+        position: relative;
+        top: 45px;
+        right: 10rem;
+    }
+    .popupbuilder-popup-close{
+        right: -7% !important;
+        top: -7% !important;
+        padding: 0 7px;
+        background: #fff;
+        position: absolute;
+        border-radius: 50% ;
+    }
+    .popupbuilder-close-button .mgz-icon-close:before{
+        content: "\00D7";
+        font-size: 35px;
+        position: relative;
+        font-weight: 700;
+        bottom: 5px;
+        color: #a6a6a6;
+    }
+    @media (max-width: 768px) {
+        .popupbuilder-widget-content{
+            left: auto !important;
+            right: auto !important;
+            max-width: 350px;
+        }
+        .popupbuilder-popup-close{
+            background-color: transparent;
+        }
+            
+    }
+</style>
