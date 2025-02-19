@@ -1,0 +1,30 @@
+<script>
+    (function () {
+        var recalReminderContainer = document.createElement('div');
+        recalReminderContainer.classList.add('recal-reminder-container');
+        recalReminderContainer.innerHTML =
+            '<span class="recal-content" style="color: red; font-weight: bold; font-size:18px;">' +
+            '注意: 舊檔優惠訂單請勿重新計算<br>' +
+            '<span style="font-weight: normal; font-size:14px;">重新計算將會以「當下」的產品售價以及優惠條件計算。</span>' +
+            '</span>';
+
+        var orderActionPreviousElm = document.querySelector('#ordereditor-items-actions-block').previousElementSibling;
+
+        if (orderActionPreviousElm) {
+            orderActionPreviousElm.previousElementSibling.remove();
+            orderActionPreviousElm.previousElementSibling.insertAdjacentElement('afterend', recalReminderContainer);
+        }
+
+    }());
+</script>
+
+<script>
+    var originalRemindText =  document.querySelector('.page-create-order div div span[style="color:red"]');
+    if(originalRemindText){
+        originalRemindText.innerHTML =
+            '<span class="recal-content" style="color: red; font-weight: bold; font-size:18px;">' +
+            '注意: 舊檔優惠訂單請勿重新計算<br>' +
+            '<span style="font-weight: normal; font-size:14px;">重新計算將會以「當下」的產品售價以及優惠條件計算。</span>' +
+            '</span>';
+    }
+</script>
