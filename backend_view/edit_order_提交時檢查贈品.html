@@ -12,8 +12,9 @@
     //檢查是否符合滿萬送飛機枕活動
     function checkGiveaway() {
         if (checkStore()) {
-            var now = new Date();
-
+            // var now = new Date();
+            var now = new Date('2025-02-22');
+            
             if (isWithinActivePeriod(now)) {
                 var orderTotal = calOrderTotal();
                 console.log(orderTotal);

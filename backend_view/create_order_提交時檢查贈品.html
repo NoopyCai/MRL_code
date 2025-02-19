@@ -14,7 +14,8 @@
     function checkGiveaway() {
         var store = document.querySelector('#so_store');
         if (store.value === '467') {
-            var now = new Date();
+            // var now = new Date();
+            var now = new Date('2025-02-22');
 
             if (isWithinActivePeriod(now)) {
                 var orderTotal = calOrderTotal();
