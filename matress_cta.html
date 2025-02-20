@@ -1,0 +1,185 @@
+<style>
+    .ppbd-product-description .block-static-block.widget{
+      margin-bottom:0 !important;
+    }
+    #mattress-add-to-cart{
+         position: relative;
+     }
+     #mattress-add-to-cart > button{
+         position: absolute;
+         background: #1865FF;
+         border: 1px solid #1865FF;
+         color: #ffffff;
+         cursor: pointer;
+         display: inline-block;
+         font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+         font-weight: 500;
+         width: 204px;
+         height: 44px;
+         border-radius: 28px;
+         font-size: 26px;
+         padding-right: 35px;
+     }
+     #mattress-add-to-cart > button::after{
+         content: '';
+         position: absolute;
+         background-image: url('https://media.mrliving.com.tw/wysiwyg/co_IMG/cart_white.png');
+         background-size: cover;
+         background-position: center;
+         width: 25px;
+         height: 25px;
+         top: 8px;
+         right: 15px;
+     }
+ 
+     #mattress-add-to-cart > .add-to-cart-top {
+         top: 35.5%;
+     }
+     #mattress-add-to-cart > .add-to-cart-medium {
+         top: 59.8%;
+     }
+     #mattress-add-to-cart > .add-to-cart-bottom {
+         top: 85.3%;
+     }
+     #mattress-add-to-cart > .add-to-cart-right {
+         left: 62%;
+     }
+     #mattress-add-to-cart > .add-to-cart-left {
+         left: 17.5%;
+     }
+     #mattress-add-to-cart > .add-to-cart-center {
+         left: 50%;
+         transform: translateX(-50%);
+     }
+     @media (max-width: 767px){
+         #mattress-add-to-cart > button{
+             border: none;
+             width: 120px;
+             height: 26px;
+             font-size: 14px;
+             white-space: nowrap;
+             line-height: 12px;
+         }
+         #mattress-add-to-cart > button::after{
+             width: 15px;
+             height: 15px;
+             right: 15px;
+             top: 5px;
+        }
+         }
+         #mattress-add-to-cart > .add-to-cart-right {
+             left: 62%;
+         } 
+         #mattress-add-to-cart > .add-to-cart-left {
+             left: 16.5%;
+         }
+     }
+     @media (max-width: 480px){
+         #mattress-add-to-cart > button{
+             border: none;
+             width: 100px;
+             height: 26px;
+             font-size: 12px;
+             white-space: nowrap;
+             line-height: 10px;
+         }
+         #mattress-add-to-cart > button::after{
+             font-size: 10px;
+         }
+         #mattress-add-to-cart > .add-to-cart-right {
+             left: 57.5%;
+         } 
+         #mattress-add-to-cart > .add-to-cart-left {
+             left: 11.5%;
+         }
+     }
+ 
+     @media (min-width: 768px) and (max-width: 979px) {
+         #mattress-add-to-cart > button{
+             border: none;
+             width: 180px;
+             font-size: 20px;
+             white-space: nowrap;
+         }
+         #mattress-add-to-cart > .add-to-cart-right {
+             left: 59%;
+         } 
+         #mattress-add-to-cart > .add-to-cart-left {
+             left: 14.5%;
+         }
+     }
+ 
+ </style>
+ <div class="descript-section" id="mattress-add-to-cart">
+     <img src="{{media url=wysiwyg/matress/coolbed_2022/mattress_new_Kuo/mattress_new_0729_v2_c25.jpg}}" alt="床墊尺寸" style="width: 100%;" loading="lazy" />
+     <button id="add-single" class="mrl-click pg-add2cart add-to-cart-top add-to-cart-left cta-tocart" data-ga-category="Ecommerce" data-ga-label="加入購物車單人標準涼感床">加入購物車</button>
+     <button id="add-sigle-max" class="mrl-click pg-add2cart add-to-cart-top add-to-cart-right cta-tocart" data-ga-category="Ecommerce" data-ga-label="加入購物車單人加大涼感床">加入購物車</button>
+     <button id="add-double" class="mrl-click pg-add2cart add-to-cart-medium add-to-cart-left cta-tocart" data-ga-category="Ecommerce" data-ga-label="加入購物車雙人標準涼感床">加入購物車</button>
+     <button id="add-queen" class="mrl-click pg-add2cart add-to-cart-medium add-to-cart-right cta-tocart" data-ga-category="Ecommerce" data-ga-label="加入購物車雙人加大涼感床">加入購物車</button>
+     <button id="add-king" class="mrl-click pg-add2cart add-to-cart-bottom add-to-cart-center cta-tocart" data-ga-category="Ecommerce" data-ga-label="加入購物車雙人特大涼感床">加入購物車</button>
+ </div>
+ <script>
+ let addSingle = document.querySelector('#add-single');
+ addSingle.addEventListener('click',function(e){
+     addItemToCart('3222',e.target);
+ },false)
+ let addSigleMax = document.querySelector('#add-sigle-max');
+ addSigleMax.addEventListener('click',function(e){
+     addItemToCart('3208',e.target);
+ },false)
+ let addDouble = document.querySelector('#add-double');
+ addDouble.addEventListener('click',function(e){
+     addItemToCart('3205',e.target);
+ },false)
+ let addQueen = document.querySelector('#add-queen');
+ addQueen.addEventListener('click',function(e){
+     addItemToCart('3206',e.target);
+ },false)
+ let addKing = document.querySelector('#add-king');
+ addKing.addEventListener('click',function(e){
+     addItemToCart('3209',e.target);
+ },false)
+ 
+ 
+ function addItemToCart(itemId, element) {
+     let addToCartUrl = document.querySelector('#product_addtocart_form').action;
+     let itemIdToAdd = itemId;
+     let newAddToCartUrl = addToCartUrl.replace(/\/\d+\//g, `/${itemIdToAdd}/`);
+ 
+     let formKey = jQuery.cookie("form_key");
+     let formData = new FormData();
+     formData.append("product", itemIdToAdd);
+     formData.append("selected_configurable_option", "");
+     formData.append("related_product", "");
+     formData.append("form_key", formKey);
+     formData.append("qty", 1);
+ 
+     btnClickFeedback(element);
+ 
+     let request = jQuery.ajax({
+         url: newAddToCartUrl,
+         method: "POST",
+         processData: false,
+         contentType: false,
+         data: formData
+     }).done(function( response ) {
+         console.log(response);
+         console.log('Success');
+         afterSuccessAddToCart(element);
+         setTimeout(showOriginAddBtn, 1000, element);
+     }).fail(function( jqXHR, textStatus ) {
+         console.log("Couldn't add product to cart. " + textStatus);
+     });
+ };
+
+ 
+ function btnClickFeedback(element){
+     element.innerText = '加入中…';
+ }
+ function afterSuccessAddToCart(element){
+     element.innerText = '已經添加';
+ }
+ function showOriginAddBtn(element){
+     element.innerText = '加入購物車';
+ }
+ </script>
