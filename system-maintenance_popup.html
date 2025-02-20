@@ -1,48 +1,58 @@
 <!-- 維護公告popup -->
 <div class="system-maintenance-popup">
-    <span class="system-maintenance-popup-title">【官網維護公告】</span>
-    <p class="maintenance-time">將於<span class="maintenance-time-count"> 00 </span>點<span class="maintenance-time-count"> 00 </span>分 開始
-        <p class="maintenance-notice">
-            如有需要服務的地方<br>
-            請於 官方 LINE 留下訊息<br>
-            我們將於上班時間盡快回覆您：)
-        </p><br>
-        <p class="maintenance-notice">
-            維護中不便處懇請見諒
+    <div class="system-maintenance-popup-content">
+        <span class="system-maintenance-popup-title">【官網維護公告】</span>
+        <p class="maintenance-time">將於<span class="maintenance-time-count"> 00 </span>點<span class="maintenance-time-count"> 00 </span>分 開始
+            <p class="maintenance-notice">
+                如有需要服務的地方<br>
+                請於 官方 LINE 留下訊息<br>
+                我們將於上班時間盡快回覆您：)
+            </p><br>
+            <p class="maintenance-notice">
+                維護中不便處懇請見諒
+            </p>
         </p>
-    </p>
-    <img class="system-maintenance-img" src="https://media.mrliving.com.tw/wysiwyg/home_page/system-maintenance.jpg">
+        <img class="system-maintenance-img" src="https://media.mrliving.com.tw/wysiwyg/home_page/system-maintenance.jpg">
+    </div>
 </div>
 
 <style>
     .system-maintenance-popup{
         background-color:  #e3e3e3;
         text-align: center;
-        margin: 3rem 0;
+        padding: 5rem 0 0 0;
     }
     .system-maintenance-popup-title{
-        font-size: 28px;
+        font-size: 32px;
         font-weight: 600;
     }
     .maintenance-time{
         color: #951522;
         font-size: 22px;
+        padding-top: 2rem;
+        font-weight: 600;
     }
     .maintenance-time-count{
         font-size: 42px;
     }
     .maintenance-notice{
         font-size: 18px;
+        line-height: 4rem;
+        font-weight: 600;
     }
     .popupbuilder-widget-content{
         background-color:  #e3e3e3 !important;
         max-width: 450px;
+        border-radius: 15px;
+    }
+    .popupbuilder-widget-content .block-static-block.widget{
+        margin-bottom: 0;
     }
     .system-maintenance-img{
         width: 50%;
         position: relative;
-        top: 45px;
-        right: 10rem;
+        top: 15px;
+        right: 7rem;
     }
     .popupbuilder-popup-close{
         right: -7% !important;
@@ -65,6 +75,15 @@
             left: auto !important;
             right: auto !important;
             max-width: 350px;
+        }
+        .maintenance-time-count{
+            font-size: 38px;
+        }
+        .system-maintenance-popup-title{
+            font-size: 28px;
+        }
+        .maintenance-notice{
+            line-height: 3rem;
         }
         .popupbuilder-popup-close{
             background-color: transparent;
