@@ -158,21 +158,21 @@
 
         //  order status 若為canceled則禁用成家卡區塊
         var orderStatus = document.querySelector('#order_status');
-        if(orderStatus && orderStatus.innerText.includes('Canceled')){
+        if (orderStatus && orderStatus.innerText.includes('Canceled')) {
             disabledHomeCardCodInput();
             return;
         }
 
         //  取得 customerID
         var customerID = updateCustomerIDfromEditForm();
-        if(!customerID){
+        if (!customerID) {
             customerID = updateCustomerIDfromInfo();
-            if(!customerID){
-                var useCodeBtn  = document.querySelector('.amgiftcard-code-input .action-default');
+            if (!customerID) {
+                var useCodeBtn = document.querySelector('.amgiftcard-code-input .action-default');
                 useCodeBtn.classList.add('homecard-active');
             }
         }
-    
+
         if (couponCodeContainer) {
             var homeCardCodeInput = document.querySelector('#amgiftcard_code');
             var deleteBtns = document.querySelectorAll('.added-giftcard-code');
@@ -187,18 +187,31 @@
                         createHomeCardCodeList(null, '系統無法取得成家卡序號<br>請手動輸入後、點擊右側箭頭帶入');
                         return;
                     }
-                    getGiftCardCodesByCustomerID(customerID)
-                        .then(function (giftCardItems) {
-                            giftCardItems = checkDuplicateCode(giftCardItems);
-                            createHomeCardCodeList(giftCardItems, '請選擇欲使用的成家卡序號進行套用');
+
+                    //從dataLayer取得homecardData
+                    var homecardData;
+
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push(function () {
+                        window.dataLayer.forEach(function (item) {
+                            if (item.homecardData) {
+                                homecardData = JSON.parse(item.homecardData)
+                            }
                         })
-                        .then(function () {
-                            var codeUseBtn = document.querySelector('#order-coupons .action-default');
-                            if (codeUseBtn) autoUseCodeWithClickOption(codeUseBtn);
-                        })
-                        .catch(function (error) {
-                            console.error('Error:', error);
-                        });
+                    })
+
+                    //檢查成家卡序號
+                    if (homecardData.length > 0) {
+                        //處理成家卡序號資料
+                        homecardData = processHomecardData(homecardData);
+                        //排除已使用的序號
+                        var homecardItem = checkDuplicateCode(homecardData);
+                        //顯示成家卡序號列表
+                        createHomeCardCodeList(homecardItem, '請選擇欲使用的成家卡序號進行套用');
+
+                        var useCodeBtn = document.querySelector('#order-coupons .action-default');
+                        if (useCodeBtn) autoUseCodeWithClickOption(useCodeBtn);
+                    }
                 })
 
 
@@ -352,7 +365,7 @@
             homeCardCodesContainer.appendChild(homeCardCodesList);
 
             var anchorContent = document.querySelector('#anchor-content');
-            if(anchorContent){
+            if (anchorContent) {
                 anchorContent.appendChild(homeCardCodesContainer);
             }
 
@@ -473,79 +486,212 @@
 
                 var state = { checkOtherCode: true };
 
-                getExcludedSku()
-                    .then(function (skuList) {
-                        excludedSkuList = excludedSkuList.concat(skuList);
+                //從dataLayer取得homecardData
+                var homecardData;
+                var excludedHomecardItem;
 
-                        var colProductSkusElem = document.querySelectorAll('#order-items_grid .col-product > .product-sku-block span > a');
-                        colProductSkusElem.forEach(function (skuElem) {
-                            // if(skuElem.disabled) return;
-                            var sku = skuElem.innerText;
-
-                            if (excludedSkuList.includes(sku)) {
-                                var fee = skuElem.closest('tr').querySelector('.col-row-total .mw-order-editor-order-item').value;
-                                excludedFee += parseInt(fee.replace(/[^0-9.-]+/g, ""), 10); // 累加 excludedFee
-                                // console.log('excludedFee', excludedFee);
-                            }
-                        });
-                    })
-                    .then(function () {
-                        grandTotals = parseInt(grandTotals.replace(/[^0-9.-]+/g, ""), 10);
-                        shippingFee = parseInt(shippingFee.replace(/[^0-9.-]+/g, ""), 10);
-
-                        if (!newTotalTable) {
-                            originalSubmitBtn.click();
-                            return;
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push(function () {
+                    window.dataLayer.forEach(function (item) {
+                        if (item.homecardData) {
+                            homecardData = JSON.parse(item.homecardData)
                         }
-
-                        return validateOrderItemEditTotal(customerID, grandTotals, shippingFee, excludedFee, state);
-                    })
-                    .then(function (isValid) {
-                        if (!isValid) {
-                            // console.log('直接提交');
-                            originalSubmitBtn.click();
-                            return;
+                        if (item.excludedSku) {
+                            excludedHomecardItem = item.excludedSku;
                         }
-
-                        // console.log('checkOtherCode', state.checkOtherCode);
-                        if (!state.checkOtherCode) return;
-
-                        // console.log('判斷有沒有其他成家卡可以用');
-                        // console.log('(grandTotals - (shippingFee + excludedFee))', (grandTotals - (shippingFee + excludedFee)));
-
-                        if ((grandTotals - (shippingFee + excludedFee)) === 0) {
-                            return;
-                        }
-
-                        var addedCodes = document.querySelectorAll('.added-giftcard-code');
-
-                        getGiftCardCodesByCustomerID(customerID)
-                            .then(function (giftCardItems) {
-                                giftCardItems = checkDuplicateCode(giftCardItems);
-
-                                if (giftCardItems.length > 0) {
-                                    createHomeCardCodeList(giftCardItems, '帳戶中 尚有可使用的成家卡序號<br>請選擇 並進行「重新計算」的動作');
-                                } else {
-                                    originalSubmitBtn.click();
-                                    return;
-                                }
-                            })
-                            .then(function () {
-                                var codeUseBtn = document.querySelector('#order-coupons .action-default');
-                                if (codeUseBtn) autoUseCodeWithClickOption(codeUseBtn);
-
-                                checkBtn.remove();
-                                originalSubmitBtn.classList.remove('homecard-hidden');
-
-                                checkUnUsedCodesStatus = true;
-                            })
-                            .catch(function (error) {
-                                console.error('Error:', error);
-                            });
                     })
-                    .catch(function (error) {
-                        console.error('Error:', error);
+                })
+
+                // 解析 excludedSkuList
+                excludedSkuList = excludedSkuList.concat(excludedHomecardItem);
+                var excludedSkuListObj = JSON.parse(excludedSkuList);
+                var skuArray = excludedSkuListObj.items.map(function (item) {
+                    return item.sku;
+                });
+
+                var colProductSkusElem = document.querySelectorAll('#order-items_grid .col-product > .product-sku-block span > a');
+                colProductSkusElem.forEach(function (skuElem) {
+                    // if(skuElem.disabled) return;
+                    var sku = skuElem.innerText;
+
+                    if (skuArray.includes(sku)) {
+                        var fee = skuElem.closest('tr').querySelector('.col-row-total .mw-order-editor-order-item').value;
+                        excludedFee += parseInt(fee.replace(/[^0-9.-]+/g, ""), 10); // 累加 excludedFee
+                        // console.log('excludedFee', excludedFee);
+                    }
+                });
+
+                grandTotals = parseInt(grandTotals.replace(/[^0-9.-]+/g, ""), 10);
+                shippingFee = parseInt(shippingFee.replace(/[^0-9.-]+/g, ""), 10);
+
+                if (!newTotalTable) {
+                    originalSubmitBtn.click();
+                    return;
+                }
+
+                if ((grandTotals - (shippingFee + excludedFee)) < 0) {
+                    console.log('訂單總額異常、不可為負數');
+                    state.checkOtherCode = false;
+                    recalBtn.click();
+                    alert('訂單總額異常、不可為負數\n系統將自動重新計算，請再確認');
+                    document.querySelector('.homecard-check-btn-submit').remove();
+                    document.querySelector('#order-items-submit').classList.remove('homecard-hidden');
+                    return;
+                } else if ((grandTotals - (shippingFee + excludedFee)) > 0) {
+                    console.log('有剩餘餘額');
+                    // 參數
+                    var giftCardsElem = document.querySelectorAll('.ordereditor-new-total-giftcardaccount');
+                    var giftCardDatas = [];
+
+                    // 取得所有頁面上已使用gift card
+                    giftCardsElem.forEach(function (elem) {
+                        var price = elem.querySelector('.price').innerText;
+                        var giftCodeText = elem.parentElement.querySelector('.admin__total-mark').innerText;
+                        var giftCode = giftCodeText.replace(/.*\s([A-Za-z0-9]+)$/, '$1').trim();
+                        // console.log(giftCode);
+                        var data = {
+                            price: price,
+                            code: giftCode
+                        };
+                        giftCardDatas.push(data);
                     });
+
+                    if (homecardData.length > 0) {
+                        homecardData = processHomecardData(homecardData);
+                        var homecardItem = checkDuplicateCode(homecardData);
+                        createHomeCardCodeList(homecardItem, '帳戶中 尚有可使用的成家卡序號<br>請選擇 並進行「重新計算」的動作');
+                    } else {
+                        originalSubmitBtn.click();
+                        return;
+                    }
+
+                    // 判斷是否有剩餘餘額沒扣完
+                    var isGiftCardBalanceAvailable = false;
+                    // console.log('giftCardItems', giftCardItems);
+                    giftCardDatas.forEach(function (giftCardData) {
+                        // console.log('giftCardData', giftCardData);
+                        var foundCard = homecardItem.find(function (card) {
+                            return card.code === giftCardData.code;
+                        });
+
+                        if (!foundCard) return;
+
+
+                        var balance = foundCard.balance.replace(/,/g, '');
+                        // console.log('foundCard', foundCard, balance);
+                        if (balance > 0) {
+                            isGiftCardBalanceAvailable = true;
+                        }
+                    });
+
+                    if (isGiftCardBalanceAvailable) {
+                        state.checkOtherCode = false;
+                        recalBtn.click();
+                        alert('目前套用的成家卡序號;中，還有剩餘額度可折抵\n系統將自動重新計算，請再確認');
+                        document.querySelector('.homecard-check-btn-submit').remove();
+                        document.querySelector('#order-items-submit').classList.remove('homecard-hidden');
+                        return;
+                    } 
+                    // else {
+                    //     document.querySelector('.homecard-check-btn-submit').remove();
+                    //     document.querySelector('#order-items-submit').classList.remove('homecard-hidden');
+                    //     return;
+                    // }
+
+                    var codeUseBtn = document.querySelector('#order-coupons .action-default');
+                    if (codeUseBtn) autoUseCodeWithClickOption(codeUseBtn);
+
+                    checkBtn.remove();
+                    originalSubmitBtn.classList.remove('homecard-hidden');
+
+                    checkUnUsedCodesStatus = true;
+
+
+                    // console.log('checkOtherCode', state.checkOtherCode);
+                    if (!state.checkOtherCode) return;
+
+                    // console.log('判斷有沒有其他成家卡可以用');
+                    // console.log('(grandTotals - (shippingFee + excludedFee))', (grandTotals - (shippingFee + excludedFee)));
+                } else if ((grandTotals - (shippingFee + excludedFee)) === 0) {
+                    console.log('沒有剩餘餘額');
+                    originalSubmitBtn.click();
+                    return;
+                }
+
+            //-----------------------------------//
+                // getExcludedSku()
+                //     .then(function (skuList) {
+                //         excludedSkuList = excludedSkuList.concat(skuList);
+
+                //         var colProductSkusElem = document.querySelectorAll('#order-items_grid .col-product > .product-sku-block span > a');
+                //         colProductSkusElem.forEach(function (skuElem) {
+                //             // if(skuElem.disabled) return;
+                //             var sku = skuElem.innerText;
+
+                //             if (excludedSkuList.includes(sku)) {
+                //                 var fee = skuElem.closest('tr').querySelector('.col-row-total .mw-order-editor-order-item').value;
+                //                 excludedFee += parseInt(fee.replace(/[^0-9.-]+/g, ""), 10); // 累加 excludedFee
+                //                 // console.log('excludedFee', excludedFee);
+                //             }
+                //         });
+                //     })
+                //     .then(function () {
+                //         grandTotals = parseInt(grandTotals.replace(/[^0-9.-]+/g, ""), 10);
+                //         shippingFee = parseInt(shippingFee.replace(/[^0-9.-]+/g, ""), 10);
+
+                //         if (!newTotalTable) {
+                //             originalSubmitBtn.click();
+                //             return;
+                //         }
+
+                //         return validateOrderItemEditTotal(customerID, grandTotals, shippingFee, excludedFee, state);
+                //     })
+                //     .then(function (isValid) {
+                //         if (!isValid) {
+                //             // console.log('直接提交');
+                //             originalSubmitBtn.click();
+                //             return;
+                //         }
+
+                //         // console.log('checkOtherCode', state.checkOtherCode);
+                //         if (!state.checkOtherCode) return;
+
+                //         // console.log('判斷有沒有其他成家卡可以用');
+                //         // console.log('(grandTotals - (shippingFee + excludedFee))', (grandTotals - (shippingFee + excludedFee)));
+
+                //         if ((grandTotals - (shippingFee + excludedFee)) === 0) {
+                //             return;
+                //         }
+
+                //         var addedCodes = document.querySelectorAll('.added-giftcard-code');
+
+                //         getGiftCardCodesByCustomerID(customerID)
+                //             .then(function (giftCardItems) {
+                //                 giftCardItems = checkDuplicateCode(giftCardItems);
+
+                //                 if (giftCardItems.length > 0) {
+                //                     createHomeCardCodeList(giftCardItems, '帳戶中 尚有可使用的成家卡序號<br>請選擇 並進行「重新計算」的動作');
+                //                 } else {
+                //                     originalSubmitBtn.click();
+                //                     return;
+                //                 }
+                //             })
+                //             .then(function () {
+                //                 var codeUseBtn = document.querySelector('#order-coupons .action-default');
+                //                 if (codeUseBtn) autoUseCodeWithClickOption(codeUseBtn);
+
+                //                 checkBtn.remove();
+                //                 originalSubmitBtn.classList.remove('homecard-hidden');
+
+                //                 checkUnUsedCodesStatus = true;
+                //             })
+                //             .catch(function (error) {
+                //                 console.error('Error:', error);
+                //             });
+                //     })
+                //     .catch(function (error) {
+                //         console.error('Error:', error);
+                //     });
             });
         }
 
@@ -658,7 +804,7 @@
         //取得需要被排除的SKU
         function getExcludedSku() {
             var domainUrl = window.location.origin;
-            var url = domainUrl + '/rest/V1/products?fields=items[sku]&searchCriteria[filter_groups][0][filters][0][field]=category_id&searchCriteria[filter_groups][0][filters][0][value]=117'
+            var url = domainUrl + '/rest/V1/products?fields=items[sku]&searchCriteria[filter_groups][0][filters][0][field]=category_id&searchCriteria[filter_groups][0][filters][0][value]=117&searchCriteria[page_size]=500'
             var token = "zm7lhgnrummsdkbun9hy7uub0smyk14i";
 
             var payload = {
@@ -691,20 +837,39 @@
         }
 
         //canceled訂單 禁用成家卡序號輸入
-        function disabledHomeCardCodInput(){
+        function disabledHomeCardCodInput() {
             var homeCardCodeInput = document.querySelector('#amgiftcard_code');
             var allDeleteCodeBtns = document.querySelectorAll('.added-giftcard-code a');
 
-            if(homeCardCodeInput){
+            if (homeCardCodeInput) {
                 homeCardCodeInput.disabled = true;
             }
 
-            if(allDeleteCodeBtns.length > 0){
-                allDeleteCodeBtns.forEach(function(btn){
+            if (allDeleteCodeBtns.length > 0) {
+                allDeleteCodeBtns.forEach(function (btn) {
                     btn.classList.add('homecard-hidden');
                 })
             }
 
+        }
+
+        //處理成家卡序號資料
+        function processHomecardData(data) {
+            return data.map(function (account) {
+                //處理金額
+                account.current_value = Math.round(account.current_value);
+                account.current_value = returnBalanceToCustomer(account.code_model.code.trim(), account.current_value);
+                account.current_value = getFormatter(account.current_value);
+
+                
+                return {
+                    code: account.code_model.code.trim(),
+                    balance: account.current_value
+                };
+            }).filter(function (item) {
+                // 額度為0或狀態為5(已取消)的不顯示 
+                return item.current_value !== 0 && item.status !== 5;
+            });
         }
 
     })();
