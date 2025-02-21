@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=keyboard_arrow_down" />
 <style>
     .material-symbols-outlined.check-more-options-icon {
         font-variation-settings:
@@ -248,9 +249,10 @@
         inputQty.classList.add('hidden-with-homecard');
     }
 
-    // if (isInitialized) return;
-    // isInitialized = true;
-
+    var homecardTitle = document.querySelector('.amcard-title');
+    if(homecardTitle){
+        homecardTitle.innerText = '選擇 成家卡面額';
+    }
     document.querySelector('.amcard-title').innerText = '選擇 成家卡面額';
 
     if (window.innerWidth > 768) {
@@ -263,6 +265,8 @@
     var allPriceOptions = document.querySelectorAll('.amcard-label-block.-price');
 
     allPriceOptions[0].click();
+
+    // 點擊價格選項後 自動更新折扣價格
     allPriceOptions.forEach(function (priceOption) {
         priceOption.addEventListener('click', function (e) {
             var targetPrice = parseFloat(e.target.innerText.replace(/[^0-9.-]+/g, ""));
