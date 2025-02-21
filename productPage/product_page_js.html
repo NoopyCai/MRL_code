@@ -1,0 +1,110 @@
+<script defer>
+    let lastScrollTop, productInfo, productInfoHeight, windowHeight, topMinimum, addtocartBtn, addtocartBtns, qtyField, go2buyBtn;
+    let shiftAmount = 50; //偏移量
+    productInfo = document.querySelector('#product-info-only');
+    if(window.screen.width>=1024) productInfo.style['top'] = '105px';
+    window.addEventListener("load", function(event) {
+        lastScrollTop = 0;
+        productInfoHeight = document.querySelector('#product-info-only').offsetHeight;
+        windowHeight = window.innerHeight;
+        topMinimum = windowHeight - productInfoHeight <= 0 ? windowHeight - productInfoHeight - shiftAmount : 0;
+    
+        addtocartBtns = document.querySelectorAll('.action.primary.tocart');
+        addtocartBtns.forEach(btn => btn.classList.add('sticky-addtocart'));
+        qtyField = document.querySelector('.field.qty');
+        qtyField.classList.add('sticky-addtocart');
+        go2buyBtn = document.querySelector('.go2buy-btn');
+    });
+    
+    let proPageheader = document.querySelector('.page-header');
+    
+    window.addEventListener("scroll", function(){ 
+           var nowScrollTop = window.pageYOffset || document.documentElement.scrollTop; 
+           var productInfoNowTop = parseFloat(productInfo.style['top'].replace('px',''));
+           var amountOfScroll = nowScrollTop - lastScrollTop;
+           if (amountOfScroll > 0){
+              // downscroll code
+              proPageheader.classList.add('hide');
+              
+             if(window.screen.width>=1024 && topMinimum <= 0){
+                   productInfo.style['top'] = productInfoNowTop -  amountOfScroll < topMinimum ? topMinimum.toString() + 'px' : productInfoNowTop -  amountOfScroll + 'px';
+                   productInfo.classList.add('downscroll');
+             }
+           } else {
+              // upscroll code
+              proPageheader.classList.remove('hide');
+              if(window.screen.width>=1024 && topMinimum <= 0){
+                productInfo.classList.remove('downscroll');
+                productInfo.style['top'] = productInfoNowTop -  amountOfScroll > 0 ? '105px' : productInfoNowTop -  amountOfScroll + 'px';
+             }
+           }
+           lastScrollTop = nowScrollTop <= 0 ? 0 : nowScrollTop; 
+        
+    }, false);
+    
+        const footerOptions = {
+        threshold: [0,1]
+        };
+    
+        const addtocartcallback = (entries, observer) => {
+            entries.forEach(entry => {
+               if(entry.isIntersecting){
+                    addtocartBtns = document.querySelectorAll('.action.primary.tocart')
+                    addtocartBtn = document.querySelector('#product-addtocart-button');
+                    addtocartBtns.forEach(btn => btn.classList.remove('sticky-addtocart'));
+                    addtocartBtn.classList.remove('sticky-addtocart');
+                    if(qtyField){
+                        qtyField.classList.remove('sticky-addtocart');
+                    }
+                    if(go2buyBtn){
+                        go2buyBtn.classList.remove('sticky-addtocart');
+                    }
+               }else{
+                    addtocartBtns = document.querySelectorAll('.action.primary.tocart')
+                    addtocartBtns.forEach(btn => btn.classList.add('sticky-addtocart'));
+                    addtocartBtn = document.querySelector('#product-addtocart-button');
+                    addtocartBtn.classList.add('sticky-addtocart');
+                    if(qtyField){
+                        qtyField.classList.add('sticky-addtocart');
+                    }
+                    if(go2buyBtn){
+                        go2buyBtn.classList.add('sticky-addtocart');
+                    }
+               }
+            });
+        };
+    
+        const addtocartObserver = new IntersectionObserver(addtocartcallback, footerOptions);
+    
+        const footer = document.querySelector('.page-footer');
+        addtocartObserver.observe(footer);
+
+
+        //詳細規格滑動
+        let clickDetail = document.querySelectorAll('.mgz-tabs .mgz-tabs-content>div');
+        const optionsClickDetail = {
+        attributes: true
+        }
+        function callbackClickDetail(mutationList, observerClickDetail) {
+            if(clickDetail[1].classList.contains("mgz-active")){
+                document.querySelector(".mgz-tabs-content .mgz-tabs-tab-title").scrollIntoView({block: "start",inline: "nearest",behavior: 'smooth',offset: { top: -150 }});
+                
+            }
+        }
+        const observerClickDetail = new MutationObserver(callbackClickDetail);
+        observerClickDetail.observe(clickDetail[1], optionsClickDetail);
+       
+        
+
+    </script>
+    <style>
+       @media (min-width: 767px){
+       .page-header{
+          transition: top 0.4s ease-in-out;
+       }
+       .page-header.hide{
+           top: -125px;
+           transition: top 0.4s ease-in-out;
+       }
+    }
+    </style>
