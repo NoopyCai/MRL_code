@@ -1,56 +1,93 @@
 <!-- Top Button -->
 
 <div class="top-btn-div">
-    <a href="#" class="top-btn size14pt">&#8593;</a>
-  </div>
-  <script>
-  (function(){
+  <a href="#" class="top-btn size14pt">&#8593;</a>
+</div>
+<script>
+  (function () {
     const currentURL = window.location.pathname;
     const pageType = document.querySelector(".ga-page")?.value;
     // if (currentURL.includes('pay.mrliving.com.tw') || currentURL === "/") {
     //     return;
     // };
 
-    if(!currentURL.includes('blog') && pageType !== "product"){
-        return;
+    if (!currentURL.includes('blog') && pageType !== "product" && !currentURL.includes('homecard')) {
+      return;
     }
 
+    let lastScrollTop = 0;
     const topBtn = document.querySelector('.top-btn-div');
     require(['jquery', 'jquery/jquery.cookie'], function ($) {
-        $(function () {
-            var windowHeight = document.body.scrollHeight;
-            var scrollVal = 0;
-            $(window).scroll(function () {
-                scrollVal = $(this).scrollTop();
-                if (scrollVal / windowHeight > 0.1) {
-                  $(".top-btn-div").addClass("active");
-                } else {
-                  if ($(".top-btn-div").hasClass("active")) {
-                      $(".top-btn-div").toggleClass("active");
-                   }
-               }
-            });
+      $(function () {
+        const scrollThreshold = 100;
+
+        $(window).scroll(function () {
+          const scrollVal = $(this).scrollTop();
+          const scrollDifference = scrollVal - lastScrollTop;
+
+          console.log(scrollDifference);
+          // 向上滑动且幅度大于阈值时显示
+          if (scrollDifference < -scrollThreshold) {
+            $topBtnDiv.addClass("active");
+          } 
+          // 向下滑动时隐藏
+          else if (scrollDifference > 0) {
+            $topBtnDiv.removeClass("active");
+          }
+
+          lastScrollTop = scrollVal;
         });
+      });
+
       $(".top-btn-div").click(function (e) {
         e.preventDefault();
         $("html,body").animate({
-           scrollTop: 0,
+          scrollTop: 0,
         },
-        600
-      );
-  });
+          600
+        );
+      });
     });
   })();
-  </script>
-  <style>
-  .top-btn{
-    font-weight:bolder; text-decoration: none; line-height: 44px; height: 50px;width: 50px; height: 50px;
-    font-size: 28px; margin: 5px; color: #000 !important; border: 1px solid; border-radius: 50%; background-color: #ffffff40; display: inline-block; text-align: center; font-family: 'Noto Sans TC', sans-serif;}
-  .top-btn-div{
-    cursor:pointer;display: block; width: 60px; top:unset; bottom: 225px; right: 10px; position: fixed; z-index: 1000;transform: translateX(200%);transition: transform 0.2s ease-in-out;}
-    .top-btn-div.active{
-    display:block;transform: translateX(0);
-  transition: transform 0.2s ease-in-out;}
-  .top-btn:hover{
-    text-decoration: none; 
+</script>
+<style>
+  .top-btn {
+    font-weight: bolder;
+    text-decoration: none;
+    line-height: 44px;
+    height: 50px;
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+    margin: 5px;
+    color: #000 !important;
+    border: 1px solid;
+    border-radius: 50%;
+    background-color: #ffffff40;
+    display: inline-block;
+    text-align: center;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+
+  .top-btn-div {
+    cursor: pointer;
+    display: block;
+    width: 60px;
+    top: unset;
+    bottom: 225px;
+    right: 10px;
+    position: fixed;
+    z-index: 1000;
+    transform: translateX(200%);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .top-btn-div.active {
+    display: block;
+    transform: translateX(0);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .top-btn:hover {
+    text-decoration: none;
   }
