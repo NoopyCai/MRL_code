@@ -1,5 +1,10 @@
 <script>
     (function () {
+        //檢查是否可編輯
+        if(checkWhiteOrder()){
+            return;
+        }
+
         //初始化處理
         var qtyTables = document.querySelectorAll(".order-tables .col-product .product-sku-block");
         if (qtyTables.length === 0) return;
@@ -102,5 +107,19 @@
                 });
             }, 500);
         }
+
+        //檢查是否可編輯
+        function checkWhiteOrder(){
+            var currentUserAccount = document.querySelector('.admin-user-account-text');
+            //白名單
+            var whiteMemberList = ['melissah1224', 'diohsu', 'uflin', 'Frontend2','Bonnie', 'Livia'];
+
+            if (currentUserAccount && whiteMemberList.includes(currentUserAccount.innerText.trim())) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
     })();
 </script>
