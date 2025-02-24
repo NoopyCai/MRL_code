@@ -161,6 +161,10 @@
 
         let activeCarousel = inspireContent[i];
         initFindInspireCarousel(activeCarousel); 
+
+        if(window.innerWidth > 768){
+          inspireLi[i].click();
+        }
       });
     }
 
@@ -331,6 +335,9 @@
             loop: true,
           },
         },
+      });
+       $("#KOLfriendHome").on("changed.owl.carousel", function (event) {
+          KOLfriendHomeLastIndex = createCarouselEvent(event, KOLfriendHomeLastIndex, "首頁-居友的家");
       });
     }
     function getHeight() {
@@ -652,5 +659,50 @@
         }
       });
     }
+
+    
+      let KOLfriendHomeLastIndex = 0;
+      let inspireLastIndex = 0;
+      $("#KOLfriendHome").on("changed.owl.carousel", function (event) {
+          if(window.innerWidth > 768){
+             KOLfriendHomeLastIndex = createCarouselEvent(event, KOLfriendHomeLastIndex, "首頁-居友的家");
+          }
+      });
+      $("[data-ga-item-list-name='空間靈感佈置_客廳空間']").on("changed.owl.carousel", function (event) {
+          inspireLastIndex = createCarouselEvent(event, inspireLastIndex, "首頁-空間佈置靈感-客廳空間");
+      });
+      $("[data-ga-item-list-name='空間靈感佈置_餐廳空間']").on("changed.owl.carousel", function (event) {
+          inspireLastIndex = createCarouselEvent(event, inspireLastIndex, "首頁-空間佈置靈感-餐廳空間");
+      });
+      $("[data-ga-item-list-name='空間靈感佈置_臥室空間']").on("changed.owl.carousel", function (event) {
+          inspireLastIndex = createCarouselEvent(event, inspireLastIndex, "首頁-空間佈置靈感-臥室空間");
+      });
+function createCarouselEvent(event, lastIndex, carouselTitle){
+          const currentIndex = event.item.index;
+          const itemCount = event.item.count;
+          let slideDirection;
+
+          const indexDiff = currentIndex - lastIndex;
+
+          if (indexDiff > 0 && indexDiff < itemCount / 2 || indexDiff < -itemCount / 2) {
+              slideDirection = "-right";
+          } else if (indexDiff < 0 && indexDiff > -itemCount / 2 || indexDiff > itemCount / 2) {
+              slideDirection = "-left";
+          } else {
+              slideDirection = "";
+          }
+
+          
+          lastIndex = currentIndex;
+
+          dataLayer = window.dataLayer || [];
+          dataLayer.push({
+              event: "carousel",
+              carousel_title: carouselTitle,
+              slide_direction: carouselTitle + slideDirection
+          });
+
+          return lastIndex;
+      }
   });
 </script>
