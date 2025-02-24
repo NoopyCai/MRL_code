@@ -1,10 +1,12 @@
 <script>
     //綁定檢查事件到submit按鈕
     var submitButton = document.querySelector('#order-items-submit');
+    var hasCheckedGiveaway = false;
 
     submitButton.addEventListener('click', function(e){
-        if(!checkGiveaway()){
+        if(!checkGiveaway() && !hasCheckedGiveaway){
             e.stopPropagation();
+            hasCheckedGiveaway = true;
             return false;
         }
     });
