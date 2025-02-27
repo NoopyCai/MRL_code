@@ -1,0 +1,86 @@
+<style>
+	
+    　button#send_notification{
+          display: none;
+      }
+      button#order-view-hold-button{
+          display: none;
+      }
+      button#order_ship{
+          display: none;
+      }
+      button#reset {
+          display: none;
+      }
+      button#send_notification{
+          display: none;
+      }
+      #select_customer{
+        display: none;
+     }
+      #account_edit_form .admin__field:nth-child(4){
+        float: right;
+        width: 50%;
+      }
+    
+      #account_edit_form .admin__field:nth-child(5){
+        float: left;
+        width: 50%;
+      }
+    
+      #account_edit_form #customer_firstname, #account_edit_form #customer_lastname{
+        width: 100%;
+      }
+    
+      #shipping_address_edit_form, #billing_address_edit_form{
+          display: flex;
+          flex-direction: column;
+      }
+      #shipping_address_edit_form.admin__fieldset>.admin__field, #billing_address_edit_form.admin__fieldset>.admin__field{
+        margin-bottom: 2rem;
+      }
+    
+      #shipping_address_edit_form>.field-firstname, #billing_address_edit_form>.field-firstname{
+          order: 2;
+      }
+      #shipping_address_edit_form>.field-lastname, #billing_address_edit_form>.field-lastname{
+        order: 1;
+      }
+      #shipping_address_edit_form>.field-street, #billing_address_edit_form>.field-street{
+          order: 5;
+      }
+      #shipping_address_edit_form>.field-country_id, #billing_address_edit_form>.field-country_id{
+          display: none;
+      }
+      #shipping_address_edit_form>.field-state.admin__field.required, #billing_address_edit_form>.field-state.admin__field.required{
+          order: 3;
+      }
+      #shipping_address_edit_form>.field-state.admin__field._required, #billing_address_edit_form>.field-state.admin__field._required{
+          order: 4;
+      }
+      #shipping_address_edit_form>.field-telephone, #billing_address_edit_form>.field-telephone{
+          order: 6;
+      }
+      select#status option[value='pending'],
+      select#status option[value='fraud'],
+      select#status option[value='complete'],
+      select#status option[value='closed'],
+      select#status option[value='holded'],
+      select#state option[value='new'], 
+      select#state option[value='complete'], 
+      select#state option[value='closed'], 
+      select#state option[value='holded'] {
+         display:none;
+     }
+      
+    </style>
+    <script>
+    if({{dom - order status}} === 'Pending'){
+      var editBtn = document.querySelector('#order_edit');
+      editBtn.style.display = 'none';
+      var cancelBtn = document.querySelector('#order-view-cancel-button');
+      cancelBtn.style.display = 'none';
+      var syncSboBtn = document.querySelector('#sync_with_sap');
+      syncSboBtn.style.display = 'none';
+    }
+    </script>
