@@ -1,0 +1,299 @@
+<!-- Product_Collection_Shopping_Guide_Category組合搭配導購 -->
+
+<style>
+    .img-wrapper {
+      position: relative;
+    }
+  
+    .rwdDot {
+      padding-inline-start: 20px !important;
+      margin-block-end: 0 !important;
+    }  
+  
+    .img-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      text-align: center;
+      cursor: pointer;
+    }
+    .arrow {
+      margin-left: 12px;
+      font-size: 18px;
+    }
+  
+    .btn {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 0.5px solid #999;
+      background-color: #fff;
+      box-shadow: rgba(0, 0, 0, 0.5) 0px 80px 80px,
+        rgba(0, 0, 0, 0.25) 0px -20px 40px, rgba(0, 0, 0, 0.25) 0px 10px 20px,
+        rgba(0, 0, 0, 0.3) 0px 20px 20px, rgba(0, 0, 0, 0.2) 0px -5px 10px,
+        rgba(0, 0, 0, 0.15) 0px -2px 5px;
+      left: 65%;
+      top: 40%;
+      /* animation: pulse 1.8s ease-in-out infinite;  */
+      animation: fadeInOut 1.8s alternate infinite;
+      transform: translate(-50%, -50%);
+      transition: 0.2s ease-in-out;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .btn.Notactive {
+      animation: none;
+      left: 0 !important;
+      right: 0 !important;
+      width: 0;
+      height: 0;
+      margin: auto;
+    }
+    .btn1.Notactive{
+      top: 10% !important;
+    }
+    .btn2.Notactive{
+      top: 38% !important;
+    }
+    .btn3.Notactive{
+      top: 66% !important;
+    }
+  
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+  
+    .itemInfo {
+      visibility: hidden;
+      user-select: none;
+      width: 330px;
+      max-width: 330px;
+      min-width: 230px;
+      opacity: 0;
+      height: 90px;
+      padding: 8px 15px 8px 0;
+      position: absolute;
+      /* bottom: 30px; */
+      transform: translateX(-45%) scale(0);
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      transition: 0.3s ease-out;
+    }
+    /* .itemInfo::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      right: 51.2%;
+      background-color: #fff;
+      transform: rotate(45deg);
+      bottom: -5px;
+    } */
+    .Infoactive {
+      visibility: visible !important;
+      opacity: 1 !important;
+      animation: popup 0.5s;
+      transform: translateX(-38%) scale(1);
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      text-align: left;
+    }
+  
+    @keyframes popup {
+      0% {
+        transform: scale(0) translateX(-45%);
+      }
+      20% {
+        transform: scale(1.1) translateX(-45%);
+      }
+      50% {
+        transform: scale(0.95) translateX(-45%);
+      }
+      80% {
+        transform: scale(1.05) translateX(-45%);
+      }
+      100% {
+        transform: scale(1) translateX(-45%);
+      }
+    }
+  
+    .itemInfo p {
+      font-family: Lato, Helvetica, sans-serif;
+      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .product-title {
+      letter-spacing: 1px;
+    }
+    .product-disPrice {
+      color: #c34135;
+      font-size: 14px;
+    }
+    .product-oldPrice {
+      text-decoration: line-through;
+      color: gray;
+      font-size: 12px;
+    }
+    .btn a {
+      text-decoration: none;
+      color: #333333;
+    }
+    .inspire-close-btn.active {
+      display: block !important;
+    }
+    @media(max-width: 1440px){
+      .btn1.Notactive{
+        top: 10% !important;
+        }
+      .btn2.Notactive{
+        top: 37% !important;
+      }
+      .btn3.Notactive{
+        top: 64% !important;
+      }
+    }
+  
+    @media (min-width: 768px) and (max-width: 1600px) {
+      .itemInfo {
+        width: 290px;
+        height: 80px;
+      }
+      #bottom120 {
+        bottom: -120px !important;
+      }
+      .itemInfo-3-5-btn1::after {
+        right: 30.4% !important;
+      }
+      .itemInfo-3-5::after {
+        left: 22.7%;
+      }
+      #itemInfo-3-4::after {
+        right: 9.9% !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .tableImg {
+        width: 100% !important;
+      }
+      .btn {
+        border: none;
+      }
+  
+      .itemInfo {
+        min-width: 243px;
+        width: 100%;
+        height: auto;
+        transform: translateX(-45%) scale(0);
+      }
+  
+      .Infoactive {
+        transform: translateX(-49%) scale(1);
+        justify-content: space-around;
+      }
+  
+      .product-title {
+        font-size: 11px !important;
+        letter-spacing: 0;
+      }
+  
+      .product-disPrice {
+        font-size: 12px !important;
+        line-height: 0;
+      }
+      .product-olePrice {
+        font-size: 12px !important;
+      }
+      .btn1.Notactive{
+        top: 5% !important;
+        }
+        .btn2.Notactive{
+        top: 36% !important;
+        }
+        .btn3.Notactive{
+        top: 67% !important;
+        }
+      #find_inspire_carousel .itemInfo{
+        height: 60px;
+      }
+    }
+  </style>
+  
+  <script>
+    setTimeout(function () {
+      require(["jquery"], function ($) {
+        $(".find_inspire").on("click", function (event) {
+          event.stopPropagation();
+          if (
+            !$(event.target).closest(".itemInfo").length &&
+            !$(event.target).closest(".btn").length
+          ) {
+            $(".overlay").removeClass("o-active");
+            $(".itemInfo").removeClass("Infoactive");
+            $(".btn").removeClass("Notactive");
+            $(".inspire-close-btn").removeClass("active");
+            $(".check-more-btn").removeClass("check-more-active");
+          }
+        });
+  
+        if(window.innerWidth < 768){
+            $(".check-more-btn button a").each(function() {
+              $(this).text("More " + String.fromCharCode(9658));
+            });
+        }
+  
+  
+        $(".img-container").click(function () {
+          event.stopPropagation();
+  
+          var container = $(this).closest(".img-container");
+          var itemInfo = container.find(".itemInfo");
+          var btn = container.find(".btn");
+          var overlay = container.find(".overlay");
+          var checkMoreBtn = container.find(".check-more-btn");
+          var closeBtn = container.find(".inspire-close-btn");
+          var isActive = overlay.hasClass("o-active"); //檢查當前是否有active
+          $(".img-container .overlay").removeClass("o-active");
+          $(".img-container .check-more-btn").removeClass("check-more-active");
+          $(".img-container .itemInfo").removeClass("Infoactive");
+          $(".img-container .btn").removeClass("Notactive");
+          $(".img-container .inspire-close-btn").removeClass("active");
+          if (!isActive) {
+            
+            overlay.addClass("o-active");
+            itemInfo.addClass("Infoactive");
+            btn.addClass("Notactive");
+            if(window.innerWidth < 768){
+              btn.each(function(index) {
+                $(this).addClass('mobile-btn' + (index + 1));
+            });
+            }
+            checkMoreBtn.addClass("check-more-active");
+            closeBtn.addClass("active");
+          }else{
+            btn.each(function(index) {
+                $(this).removeClass('mobile-btn' + (index + 1));
+            });
+          }
+        });
+      });
+    }, 3000);
+  </script>
+  
