@@ -49,9 +49,21 @@ Disallow: /*?from_rec=
 Disallow: /*?fb_comment_id=
 Disallow: /*?cat=
 Disallow: /*?price=
-Disallow: /*?MRL_filters
-Disallow: /*&p=
+Disallow: /*MRL_filters
+Disallow: /*p=
 Disallow: /*?color=
+Disallow: /*?sofa_type=
+Disallow: /*?leather_style=
+Disallow: /*?footstool_size=
+Disallow: /*?fabric_nordic_style=
+Disallow: /*?MRL_bedsize=
+Disallow: /*?gad_source=
+Disallow: /*?lights_color=
+Disallow: /*?table_color=
+Disallow: /*?gbraid=
+Disallow: /*?gclid=
+Disallow: /popupbuilder
+Disallow: /apptrian_facebookpixel
 
 User-agent: MJ12bot
 Disallow: /
