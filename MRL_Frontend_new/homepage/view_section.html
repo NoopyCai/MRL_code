@@ -1,0 +1,47 @@
+<script>
+    (function () {
+        var sections = document.querySelectorAll('.section, .blog-block-content , .top-promo, #search, .nav-sections, .footer');
+
+        var viewSectionObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    window.dataLayer = window.dataLayer || [];
+
+                    var sectionName = entry.target.dataset.sectionName;
+                    if (entry.target.classList.contains('blog-block-content')) {
+                        sectionName = 'home_Blog';
+                    } else if (entry.target.id === 'search') {
+                        sectionName = 'home_SearchTerm';
+                    }else if (entry.target.classList.contains('nav-sections')) {
+                        if(window.innerWidth < 768){
+                            return;
+                        }
+                        sectionName = 'home_Menu';
+                    }else if (entry.target.classList.contains('footer')) {
+                        sectionName = 'home_Footer';
+                    }
+                    console.log('發送view_section', sectionName);
+
+                    window.dataLayer.push({
+                        event: 'view_section',
+                        section_name: sectionName,
+                    });
+                    // 取消對該區塊observer
+                    viewSectionObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            // section進入視窗的50%
+            threshold: 0.5,
+        });
+
+        sections.forEach(function(section) {
+            viewSectionObserver.observe(section);
+        });
+    })();
+</script>
+
+<script>
+        topPromotionContent.classList.add('section');
+        topPromotionContent.setAttribute('data-section-name', 'home_TopPromotion');
+</script>
