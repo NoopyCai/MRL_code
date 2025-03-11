@@ -530,9 +530,9 @@
                     originalSubmitBtn.click();
                     return;
                 }
-                console.log('grandTotals', grandTotals, 'shippingFee', shippingFee, 'excludedFee', excludedFee);
+                // console.log('grandTotals', grandTotals, 'shippingFee', shippingFee, 'excludedFee', excludedFee);
                 if ((grandTotals - (shippingFee + excludedFee)) < 0) {
-                    console.log('訂單總額異常、不可為負數');
+                    // console.log('訂單總額異常、不可為負數');
                     state.checkOtherCode = false;
                     recalBtn.click();
                     alert('訂單總額異常、不可為負數\n系統將自動重新計算，請再確認');
@@ -540,7 +540,7 @@
                     document.querySelector('#order-items-submit').classList.remove('homecard-hidden');
                     return;
                 } else if ((grandTotals - (shippingFee + excludedFee)) > 0) {
-                    console.log('有剩餘餘額');
+                    // console.log('有剩餘餘額');
                     // 參數
                     var giftCardsElem = document.querySelectorAll('.ordereditor-new-total-giftcardaccount');
                     var giftCardDatas = [];
@@ -564,12 +564,15 @@
                     giftCardDatas.forEach(function (giftCardData) {
                         if (homecardData.length > 0) {
                             var foundCard = homecardData.find(function (card) {
-                                return card.code_model.code.trim() === giftCardData.code.trim();
+                                var cardPrice = Math.abs(giftCardData.price); 
+                                if(cardPrice !== card.current_value) {
+                                    return card.code_model.code.trim() === giftCardData.code.trim();
+                                }
                             });
-
+                            // console.log('giftCardData', giftCardData, 'foundCard', foundCard);
                             if (!foundCard) return;
-
                             var balance = foundCard.current_value;
+                            // console.log('foundCard', foundCard, 'balance', balance);
                                 if (balance > 0) {
                                     isGiftCardBalanceAvailable = true;
                                 }
@@ -579,7 +582,7 @@
                     if (isGiftCardBalanceAvailable) {
                         state.checkOtherCode = false;
                         recalBtn.click();
-                        alert('目前套用的成家卡序號;中，還有剩餘額度可折抵\n系統將自動重新計算，請再確認');
+                        alert('目前套用的成家卡序號中，還有剩餘額度可折抵\n系統將自動重新計算，請再確認');
                         document.querySelector('.homecard-check-btn-submit').remove();
                         document.querySelector('#order-items-submit').classList.remove('homecard-hidden');
                         return;
