@@ -7,12 +7,14 @@ from urllib.parse import urlparse
 import time
 import requests
 
+# ga ban
+
 # set chromedriver path
 chrome_driver_path = "/Users/mrl/Downloads/chromedriver-mac-x64/chromedriver"
 
 # create ChromeOptions object
 chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument("--headless")
+chrome_options.add_argument("--headless")
 # initialize WebDriver
 driver = webdriver.Chrome(service=Service(chrome_driver_path), options=chrome_options)
 
@@ -93,10 +95,11 @@ try:
 
         # find next page button
         try:
-            next_button = WebDriverWait(driver, 30).until(
+            next_button = WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'action') and contains(@class, 'next')]"))
             )
-            next_button.click()
+            driver.execute_script("arguments[0].scrollIntoView(true);", next_button)
+            driver.execute_script("arguments[0].click();", next_button)
             # wait page loaded
             time.sleep(3)
             page_count += 1
