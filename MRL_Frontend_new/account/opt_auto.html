@@ -1,0 +1,16 @@
+<script>
+    (function () {
+        const pathname = window.location.pathname;
+        if (pathname.includes('/mobilelogin/otp/update')) {
+            const optInput = document.querySelector('#updateotp');
+            console.log('optInput',optInput);
+            optInput.addEventListener('input', (e) => {
+                const optValue = e.target.value;
+                console.log('optValue',optValue);
+                if (optValue.length === 6) {
+                    document.querySelector('.submit-update-otp-btn').click();
+                }
+            })
+        }
+    }())
+</script>
