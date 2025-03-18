@@ -1,0 +1,30 @@
+<style>
+    .product-info-main .product-info-price {
+        border-bottom: none !important;
+    }
+
+    .promote-text {
+        display: block;
+        width: 100%;
+        font-size: 18px;
+        border-bottom: 1px solid #c1c1c1;
+        padding-bottom: 20px;
+        position: relative;
+        bottom: 25px;
+    }
+</style>
+
+<script>
+    const promoteText = document.createElement('strong');
+    const priceHike = document.querySelector('.price-hike')
+    promoteText.className = 'promote-text';
+    if(priceHike){
+        //漲幅較高文案
+        promoteText.textContent = '漲幅最高20% 現在買省更多 ';
+    }else{
+        //漲幅較低文案
+        promoteText.textContent = '漲幅最高15% 現在買省更多';
+    }
+
+    document.querySelector('.ppbd-product-price').appendChild(promoteText);
+</script>
