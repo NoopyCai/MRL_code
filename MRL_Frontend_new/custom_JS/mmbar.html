@@ -478,9 +478,9 @@
 <div id="search_popup_01" class="newsletter" style="display: none; padding: 10px 20px 10px 15px; font-size: larger">
     <div id="bottom-nav-search-container">
         <input id="tab-1" type="radio" name="bottom-nav-tab-group" checked="checked" />
-        <label for="tab-1" id="label1">商品搜尋</label>
+        <label class="select-content" ga-content-type="商品搜尋" ga-click-text="商品搜尋" for="tab-1" id="label1">商品搜尋</label>
         <input id="tab-2" type="radio" name="bottom-nav-tab-group" />
-        <label for="tab-2" id="label2">熱銷推薦</label>
+        <label class="select-content" ga-content-type="熱銷推薦" ga-click-text="熱銷推薦" for="tab-2" id="label2">熱銷推薦</label>
 
         <div id="bottom-nav-search-content">
             <div id="content-catalog" style="overflow: hidden">
@@ -488,8 +488,8 @@
                     action="https://www.mrliving.com.tw/catalogsearch/result/" method="get">
                     <div class="field search">
                         <div class="bottom-nav-search-control control">
-                            <input id="menu-search" type="text" name="q" value="" placeholder="皮沙發、北歐風布沙發"
-                                class="input-text bottom-nav-search-catalog" maxlength="128" role="combobox"
+                            <input ga-content-type="商品搜尋" ga-click-text="SearchTerm" id="menu-search" type="text" name="q" value="" placeholder="皮沙發、北歐風布沙發"
+                                class="input-text bottom-nav-search-catalog select-content" maxlength="128" role="combobox"
                                 aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false"
                                 style="
                     padding: 10px;
@@ -514,51 +514,63 @@
                 </form>
                 <div class="content-catalog-all-btn">
                     <div class="content-catalog-btn">
-                        <button type="button"
+                        <button type="button" ga-content-type="商品搜尋" ga-click-text="客廳家具" class="select-content-parent"
                             onclick="location.href='https://www.mrliving.com.tw/furniture/livingroom.html'">
-                            <div class="btn-text">客廳家具</div>
-                            <div class="btn-arrow"><i class="caret fas mgz-fa-angle-right"></i></div>
+                            <div class="btn-text select-content">客廳家具</div>
+                            <div class="btn-arrow select-content"><i class="caret fas mgz-fa-angle-right"></i></div>
                         </button>
                     </div>
                     <div class="content-catalog-btn">
-                        <button type="button"
+                        <button type="button" ga-content-type="商品搜尋" ga-click-text="餐廳家具" class="select-content-parent"
+                            ga-click-text="餐廳家具"
                             onclick="location.href='https://www.mrliving.com.tw/furniture/diningroom.html'">
-                            <div class="btn-text">餐廳家具</div>
-                            <div class="btn-arrow"><i class="caret fas mgz-fa-angle-right"></i></div>
+                            <div class="btn-text select-content">餐廳家具</div>
+                            <div class="btn-arrow select-content"><i class="caret fas mgz-fa-angle-right"></i></div>
                         </button>
                     </div>
                     <div class="content-catalog-btn">
-                        <button type="button"
+                        <button type="button" class="select-content-parent"
+                            ga-content-type="商品搜尋"
+                            ga-click-text="臥室家具"
                             onclick="location.href='https://www.mrliving.com.tw/furniture/bedroom.html'">
-                            <div class="btn-text">臥室家具</div>
-                            <div class="btn-arrow"><i class="caret fas mgz-fa-angle-right"></i></div>
+                            <div class="btn-text select-content">臥室家具</div>
+                            <div class="btn-arrow select-content"><i class="caret fas mgz-fa-angle-right"></i></div>
                         </button>
                     </div>
                     <div class="content-catalog-btn">
-                        <button type="button"
+                        <button type="button" class="select-content-parent"
+                            ga-content-type="商品搜尋"
+                            ga-click-text="書房家具"
                             onclick="location.href='https://www.mrliving.com.tw/furniture/studyroom.html'">
-                            <div class="btn-text">書房家具</div>
-                            <div class="btn-arrow"><i class="caret fas mgz-fa-angle-right"></i></div>
+                            <div class="btn-text select-content">書房家具</div>
+                            <div class="btn-arrow select-content"><i class="caret fas mgz-fa-angle-right"></i></div>
                         </button>
                     </div>
                     <div class="content-catalog-btn">
-                        <button type="button"
+                        <button type="button" class="select-content-parent"
+                            ga-content-type="商品搜尋"
+                            ga-click-text="燈飾"
                             onclick="location.href='https://www.mrliving.com.tw/furniture/nordic-lighting.html'">
-                            <div class="btn-text">燈飾</div>
-                            <div class="btn-arrow"><i class="caret fas mgz-fa-angle-right"></i></div>
+                            <div class="btn-text select-content">燈飾</div>
+                            <div class="btn-arrow select-content"><i class="caret fas mgz-fa-angle-right"></i></div>
                         </button>
                     </div>
                     <div class="content-catalog-btn">
-                        <button type="button" onclick="location.href='https://www.mrliving.com.tw/topsales.html'">
-                            <div class="btn-text">新品家具</div>
-                            <div class="btn-arrow"><i class="caret fas mgz-fa-angle-right"></i></div>
+                        <button type="button" class="select-content-parent"
+                            ga-content-type="商品搜尋"
+                            ga-click-text="新品家具"
+                            onclick="location.href='https://www.mrliving.com.tw/topsales.html'">
+                            <div class="btn-text select-content">新品家具</div>
+                            <div class="btn-arrow select-content"><i class="caret fas mgz-fa-angle-right"></i></div>
                         </button>
                     </div>
                     <div class="content-catalog-btn" style="border-bottom: 0px">
-                        <button type="button"
+                        <button type="button" class="select-content-parent"
+                            ga-content-type="商品搜尋"
+                            ga-click-text="收納家具"
                             onclick="location.href='https://www.mrliving.com.tw/storage-cabinet-furniture.html'">
-                            <div class="btn-text">收納家具</div>
-                            <div class="btn-arrow"><i class="caret fas mgz-fa-angle-right"></i></div>
+                            <div class="btn-text select-content">收納家具</div>
+                            <div class="btn-arrow select-content"><i class="caret fas mgz-fa-angle-right"></i></div>
                         </button>
                     </div>
                 </div>
@@ -567,31 +579,41 @@
                 <ul style="list-style: none">
                     <li class="content-store-li">
                         <a href="https://www.mrliving.com.tw/sofas/style/modular-floor-couch.html"><img
-                                class="bottom-nav-img recomd-img"
+                                class="bottom-nav-img recomd-img select-content"
+                                ga-content-type="熱銷推薦"
+                                ga-click-text="泡芙組合落地沙發-明星商品"
                                 data-src="https://media.mrliving.com.tw/wysiwyg/home_page/2022/2022_5M/HS_565x370_MS_2501.jpg"
                                 alt="泡芙組合落地沙發-明星商品" loading="lazy" /></a>
                     </li>
                     <li class="content-store-li">
                         <a href="https://www.mrliving.com.tw/super-storage-series.html"><img
-                                class="bottom-nav-img recomd-img"
+                                class="bottom-nav-img recomd-img select-content"
+                                ga-content-type="熱銷推薦"
+                                ga-click-text="超級收納系列，累積銷售數破9999萬"
                                 data-src="https://media.mrliving.com.tw/wysiwyg/home_page/2022/2022_5M/HS_storageseries_9999w_240920.jpg"
                                 alt="超級收納系列，累積銷售數破9999萬" loading="lazy" /></a>
                     </li>
                     <li class="content-store-li">
                         <a href="https://www.mrliving.com.tw/furniture/mattress-category/mrl-mattress.html"><img
-                                class="bottom-nav-img recomd-img"
+                                class="bottom-nav-img recomd-img select-content"
+                                ga-content-type="熱銷推薦"
+                                ga-click-text="買床墊送涼感減壓枕"
                                 data-src="https://media.mrliving.com.tw/wysiwyg/home_page/2022/2022_5M/Hotsales_406x266px-07.jpg"
                                 alt="買床墊送涼感減壓枕" loading="lazy" /></a>
                     </li>
                     <li class="content-store-li">
                         <a href="https://www.mrliving.com.tw/hotsales/mcm-series.html"><img
-                                class="bottom-nav-img recomd-img"
+                                class="bottom-nav-img recomd-img select-content"
+                                ga-content-type="熱銷推薦"
+                                ga-click-text="北歐復古實木家具-熱銷精選"
                                 data-src="https://media.mrliving.com.tw/wysiwyg/home_page/2022/2022_5M/Hotsales_406x266px-02.jpg"
                                 alt="北歐復古實木家具-熱銷精選" loading="lazy" /></a>
                     </li>
                     <li class="content-store-li">
                         <a href="https://www.mrliving.com.tw/sofas/style/sofa-pet-friendly.html"><img
-                                class="bottom-nav-img recomd-img"
+                                class="bottom-nav-img recomd-img select-content"
+                                ga-content-type="熱銷推薦"
+                                ga-click-text="防貓抓防潑水科技布沙發"
                                 data-src="https://media.mrliving.com.tw/wysiwyg/home_page/2022/2022_5M/Hotsales_406x266px__1-01_1.jpg"
                                 alt="防貓抓防潑水科技布沙發" loading="lazy" /></a>
                     </li>
