@@ -1,0 +1,60 @@
+<div class="LineBlock">
+    <a id="lineBubble" href="https://maac.io/1snyc" target="_SEJ" rel="noreferrer" >
+      <img class="click_linebubble" src="{{media url=wysiwyg/co_IMG/line_bubble_icon.png}}" alt="Line" loading="lazy"/>
+      <span class="reminded-text">點我詢問商品</span>
+    </a>
+  </div>
+  
+  <style>
+    .LineBlock {
+      display: none;
+      position: fixed;
+      right: 12px;
+      bottom: 15%;
+      z-index: 1;
+      width: 55px;
+      z-index: 2;
+    }
+  
+    @media (max-width: 768px) {
+      .LineBlock {
+        display: block;
+      }
+      .reminded-text{
+        display: none;
+        color:#000;
+        font-size: 11px;
+        font-weight: bold;
+        white-space:pre;
+        position: relative;
+        right: 18%;
+      }
+    }
+  </style>
+  
+  <script>
+    let pageType = document.querySelector(".ga-page")?.value;
+    if (window.location.href === "https://www.mrliving.com.tw/checkout/") {
+      pageType = "checkout";
+    }
+    if (pageType === "product") {
+      document.querySelector('.reminded-text').style.display = 'block';
+      getProductInfo();
+    } else if (pageType === "checkout") {
+      document.querySelector("#lineBubble").style.display = "none";
+    }
+  
+    function getProductInfo() {
+      let productUrl = window.location.href;
+      const productNameElem = document.querySelector("#product-info-only .ppbd-product-name");
+      const productSkuElem = document.querySelector('.product-specification .ppbd-product-attribute span[itemprop="sku"]');
+      let productName = productNameElem ? productNameElem.innerText : "";
+      let productSku = productSkuElem ? productSkuElem.innerText : "";
+
+      let message = `${productName}\n${productSku}\n${productUrl}`;
+      let lineLink =
+        "https://line.me/R/oaMessage/@gcw0900h/?" + encodeURIComponent(message);
+      document.querySelector("#lineBubble").href = lineLink;
+    }
+  </script>
+  
