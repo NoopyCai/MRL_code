@@ -1,0 +1,19 @@
+<script>
+    (function() {
+        var paperInvoiceRadio = document.querySelector('#gui_printmk14');
+        
+        if (paperInvoiceRadio) {
+            paperInvoiceRadio.addEventListener('click', clearInvoiceOptions);
+        }
+    
+        function clearInvoiceOptions() {
+            // 改為紙本發票時清空發票選項和載具
+            if (this.checked) {
+                var invoiceOption = document.querySelector('#pe_select');
+                var carrierid = document.querySelector('#gui_carrierid1');
+                invoiceOption.value = '';
+                carrierid.value = '';
+            }
+        }
+    })();
+</script>
