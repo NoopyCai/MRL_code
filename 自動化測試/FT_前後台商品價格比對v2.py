@@ -3,7 +3,9 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import time
 
-webhook_url = "https://chat.googleapis.com/v1/spaces/AAAASuBT-MM/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=FWrSRi88ee_5nQtUqnVNv3us1XBb2qdCYSL0UsIzoJE"
+# webhook_url = "https://chat.googleapis.com/v1/spaces/AAAASuBT-MM/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=FWrSRi88ee_5nQtUqnVNv3us1XBb2qdCYSL0UsIzoJE"
+
+webhook_url = "https://chat.googleapis.com/v1/spaces/AAAA0Wr2GQg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=xZ_ySyXbOulo-pmofM5KVw6Q2LXz_pItQvLnU08lPW8"
 
 base_url = "https://www.mrliving.com.tw/affordable-sofa-furniture-picks.html"
 
@@ -70,20 +72,23 @@ while True:
                 # 比較前後台資料
                 if api_item:
                     api_price = int(float(api_item["MRL_discount_price"]))
-                    # if api_price == 0:
-                    #     result = f"{sku} Page_Price: {page_price} Backend Price: {api_price} 無折扣價格\n"
-                    # elif page_price != api_price:
-                    #     result = f"{sku} Page_Price: {page_price} Backend Price: {api_price} 資料不同\n"
-                    # else:
-                    #     result = f"{sku} Page_Price: {page_price} Backend Price: {api_price} 資料相同\n"
+                    if api_price == 0:
+                        result = f"{sku} Page_Price: {page_price} Backend Price: {api_price} 無折扣價格\n"
+                        print(result)
+                    elif page_price != api_price:
+                        result = f"{sku} Page_Price: {page_price} Backend Price: {api_price} 資料不同\n"
+                        print(result)
+                    else:
+                        result = f"{sku} Page_Price: {page_price} Backend Price: {api_price} 資料相同\n"
+                        print(result)
+
                     if page_price != api_price and api_price != 0:
                         result = f"{sku} Page_Price: {page_price} Backend Price: {api_price} 資料不同\n"
                     else:
-                        result = "恭喜恭喜再恭喜！！前後端資料都一樣喔！！！！"
+                        result = "恭喜恭喜！！前後端資料都一樣喔！！！！"
                 else:
                     result = f"SKU: {sku} no response data\n"
                 
-                # 發送 Webhook 通知
                 all_results.add(result)
         else:
             print(f"API return error: {api_data[0]['error']}")
@@ -103,6 +108,8 @@ while True:
         break
 
     page_count += 1
+
+    # 等待5秒重複執行
     time.sleep(5)
 
 
