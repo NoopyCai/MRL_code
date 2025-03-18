@@ -1,0 +1,497 @@
+<style>
+    .img-wrapper {
+        position: relative;
+    }
+
+    .rwdDot {
+        padding-inline-start: 20px !important;
+        margin-block-end: 0 !important;
+    }
+
+    .img-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        text-align: center;
+    }
+
+    .arrow {
+        margin-left: 12px;
+        font-size: 18px;
+    }
+
+    .btn {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        /* border: 0.5px solid #999; */
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 80px 80px, rgba(0, 0, 0, 0.25) 0px -20px 40px, rgba(0, 0, 0, 0.25) 0px 10px 20px, rgba(0, 0, 0, 0.3) 0px 20px 20px, rgba(0, 0, 0, 0.2) 0px -5px 10px, rgba(0, 0, 0, 0.15) 0px -2px 5px;
+        left: 65%;
+        top: 40%;
+        /* animation: pulse 1.8s ease-in-out infinite;  */
+        animation: fadeInOut 1.8s alternate infinite;
+        transform: translate(-50%, -50%);
+        transition: 0.2s ease-in-out;
+        cursor: pointer;
+    }
+
+    .btn-dot2 .itemInfo {
+        left: 0 !important;
+        bottom: 30px !important;
+    }
+
+    .btn-dot2 .itemInfo::after {
+        right: 50% !important;
+        bottom: -5px !important;
+
+    }
+
+    .btn.Notactive {
+        animation: none;
+    }
+
+    @keyframes fadeInOut {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+    }
+
+
+
+    .itemInfo {
+        visibility: hidden;
+        user-select: none;
+        max-width: 280px;
+        min-width: 230px;
+        opacity: 0;
+        width: auto;
+        height: auto;
+        padding: 15px;
+        position: absolute;
+        bottom: 30px;
+        transform: translateX(-45%) scale(0);
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        transition: 0.3s ease-out;
+    }
+
+    .itemInfo::after {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        right: 50%;
+        background-color: #fff;
+        transform: rotate(45deg);
+        bottom: -5px;
+    }
+
+    .Infoactive {
+        visibility: visible !important;
+        opacity: 1 !important;
+        animation: popup 0.5s;
+        transform: translateX(-44.5%) scale(1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+    }
+
+    @keyframes popup {
+        0% {
+            transform: scale(0) translateX(-45%);
+        }
+
+        20% {
+            transform: scale(1.1) translateX(-45%);
+        }
+
+        50% {
+            transform: scale(0.95) translateX(-45%);
+        }
+
+        80% {
+            transform: scale(1.05) translateX(-45%);
+        }
+
+        100% {
+            transform: scale(1) translateX(-45%);
+        }
+    }
+
+
+
+    .itemInfo p {
+        font-family: Lato, Helvetica, sans-serif;
+        margin-bottom: 0;
+        font-size: 14px;
+    }
+
+    .product-title {
+        letter-spacing: 1px;
+    }
+
+    .product-disPrice {
+        color: #C34135;
+        font-size: 14px;
+    }
+
+    .product-oldPrice {
+        text-decoration: line-through;
+        color: gray;
+        font-size: 12px;
+    }
+
+    .btn a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .ppbd-product-description .block-static-block.widget {
+        margin-bottom: 0 !important;
+    }
+
+    #mattress-add-to-cart {
+        position: relative;
+    }
+
+    #mattress-add-to-cart>button {
+        position: absolute;
+        background: #1865FF;
+        border: 1px solid #1865FF;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 500;
+        width: 204px;
+        height: 44px;
+        border-radius: 28px;
+        font-size: 26px;
+        padding-right: 35px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        bottom: 7%;
+    }
+
+    #mattress-add-to-cart>button::after {
+        content: '';
+        position: absolute;
+        background-image: url('https://media.mrliving.com.tw/wysiwyg/co_IMG/cart_white.png');
+        background-size: cover;
+        background-position: center;
+        width: 25px;
+        height: 25px;
+        top: 8px;
+        right: 15px;
+    }
+
+    .img1-bt1-itemInfo {
+        bottom: -62.5px;
+        left: -147px;
+    }
+
+    .img1-bt1-itemInfo::after {
+        bottom: 50%;
+        right: -5px;
+    }
+
+    .product-disPrice {
+        line-height: 35px;
+    }
+
+
+
+    @media (max-width: 767px) {
+        #mattress-add-to-cart>button {
+            border: none;
+            width: 120px;
+            height: 26px;
+            font-size: 14px;
+            white-space: nowrap;
+            line-height: 12px;
+        }
+
+        #mattress-add-to-cart>button::after {
+            width: 15px;
+            height: 15px;
+            right: 8px;
+            top: 5px;
+        }
+
+        .bt1-itemInfo::after {
+            bottom: -5px !important;
+
+            right: 47% !important;
+        }
+
+        .blog_table {
+            font-size: 14px;
+        }
+
+        .tableImg {
+            width: 100% !important;
+        }
+
+
+        .btn {
+            left: 70%;
+        }
+
+        .itemInfo {
+            min-width: 130px;
+            padding: 5px 10px;
+
+            width: 100%;
+            height: auto;
+            transform: translateX(-45%) scale(0);
+        }
+
+        .Infoactive {
+            transform: translateX(-45.5%) scale(1);
+        }
+
+        .product-title {
+            font-size: 13px !important;
+            letter-spacing: 0;
+        }
+
+        .product-disPrice {
+            font-size: 12px !important;
+            line-height: 0;
+        }
+
+        .product-olePrice {
+            font-size: 12px !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #mattress-add-to-cart>button {
+            border: none;
+            width: 100px;
+            height: 26px;
+            font-size: 12px;
+            white-space: nowrap;
+            line-height: 10px;
+        }
+
+        #mattress-add-to-cart>button::after {
+            font-size: 10px;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 979px) {
+        #mattress-add-to-cart>button {
+            border: none;
+            width: 180px;
+            font-size: 20px;
+            white-space: nowrap;
+        }
+    }
+</style>
+
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_tence_promise_01_250220.jpg}}"
+    alt="世界舉重冠軍都在睡的減壓枕頭｜累計銷售額超過7780萬" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_new_tencel_c01_250220.jpg}}"
+    alt="天絲防蟎減壓高低枕｜三大特色：天絲抗敏透氣表布，獨家專利減壓記憶棉，專利抗菌內表布" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_new_tencel_v1_0901_03.jpg}}"
+    alt="使用減壓枕頭享有：透氣抗敏，貼合減壓，99%抗菌率" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/coolbed_2022/mattress_new_Kuo/mattress_new_0727_v1_c04.jpg}}"
+    alt="獨家專利減壓記憶棉｜記憶棉的恆溫技術，使枕頭四季躺感一致，不因溫度影響睡感" />
+
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_new_tencel_v1_0901_06.jpg}}"
+    alt="你為什麼需要這款天絲減壓高低枕？壓力大睡不好，常肌肉緊繃、無法放鬆；容易起紅疹、過敏；枕頭高度不適、常落枕、肩頸痠痛" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_tence_selling-point_01-1_250224_v1.jpg}}"
+    alt="多國專利恆溫減壓記憶棉｜安全無毒，貼合頸椎、有效支撐頸部與頭部重量，徹底放鬆肌肉壓力" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_new_tencel_v1_0901_08.jpg}}"
+    alt="居友夢延真實評論：使用後感受到有種被溫暖包覆承托著的感覺，頸部肌肉都感到放鬆，比起一般蓬鬆的枕頭，有更好的透氣性與包覆度。結束一天工作後，能夠舒服放鬆安然入睡好幸福" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_tence_selling-point_04-1_250224_v1.jpg}}"
+    alt="枕頭高低雙向設計｜符合人體工學角度，正睡、側睡、趴睡都能穩定支撐，放鬆頭頸、分散壓力" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_tence_selling-point_04-2_250224_v1.jpg}}"
+    alt="高低枕正睡、側睡、趴睡都能穩定支撐，放鬆頭頸、分散壓力，來自居友Rebecca真實評論，好評推薦" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/Spine2208/Matress_new_spine-double_v1_0808_c12.jpg}}"
+    alt="天絲抗敏透氣表布，吸濕排汗不易紅疹過敏｜添加30%全球唯一認可的奧地利蘭精天絲，纖維透氣加上空氣層面料織法，睡久也不悶熱，適合台灣濕熱氣候" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/Spine2208/Matress_new_spine-double_v1_0808_c13.jpg}}"
+    alt="天絲(萊賽爾纖維)為頂級寢具用材｜取自天然木漿，親膚順滑，吸濕透氣，能抑制細菌、塵蟎，減低肌膚過敏" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/coolbed_2022/mattress_new_Kuo/mattress_new_0727_v2_c16.jpg}}"
+    alt="專利內表布，床墊抗菌率超過99%｜石墨烯中的碳原子可破壞細菌細胞膜，抑制生長抗菌率達99%以上,安心入眠" loading="lazy" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/coolbed_2022/mattress_new_Kuo/mattress_new_0727_v2_c17.jpg}}"
+    alt="石墨烯內表布經實驗測試有效抵抗家中常見細菌(大腸桿菌、金黃色葡萄球菌、白色念球菌)，具備優異的物理性抗菌效果，符合適合嬰兒貼身使用的安全標準" loading="lazy" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/coolbed_2022/mattress_new_Kuo/mattress_new_0727_v1_c19.jpg}}"
+    alt="嬰幼兒使用等級，安全無毒｜通過歐美認證，產品全線材、棉材、輔料等皆通過「甲醛、揮發性有機化合物及重金屬」有害物質檢驗標準，不會造成人體危害" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_promise_05_250224_v4.jpg}}"
+    alt="３年免費保固｜正常使用整體枕頭下陷達1.5公分以上者，享減壓記憶枕免費維修、退換貨等服務" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_new_tencel_c03_250220_v4.jpg}}"
+    alt="５秒可拆洗枕套，提把盒裝好攜帶，自用送禮皆合適" />
+<img style="display: block; width: 100%;"
+    src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_new_tencel_v1_0901_18.jpg}}"
+    alt="減壓記憶枕尺寸｜總寬60公分，總深40公分，高側11公分，低側9公分" />
+
+<div class="img-container">
+    <div class="img-wrapper" id="mattress-add-to-cart">
+        <img src="{{media url=wysiwyg/matress/pillow2022_ten/pillow_new_tencel_c05_250227_v4.jpg}}"
+            alt="推薦組合｜居友都這樣買，臥室熱銷單品" style="width: 100%;" loading="lazy" />
+        <button id="add-pillowcase" class="mrl-click pg-add2cart cta-tocart" data-ga-category="Ecommerce"
+            data-ga-label="天絲防蟎高底枕枕套">加入購物車</button>
+    </div>
+    <div class="btn Notactive" data-product-id="Addon-CS-30-0041-0-08-v2" style="top: 52%; left: 51%;">
+        <a class="product-url" style="text-decoration: none; color: black;"
+            target="_blank">
+            <div class="itemInfo bt1-itemInfo Infoactive">
+                <div class="itemInfo-text">
+                    <p class="product-title"></p>
+                    <p><span style="color: red; font-size: 14px;" class="product-disPrice"></span>
+                        <span style="text-decoration: line-through; color: gray; font-size: 12px;"
+                            class="product-oldPrice"></span>
+                </div>
+                <div class="arrow">
+                    &#10095;
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<!-- 推薦組合 -->
+<div class="descript-section">
+    <map name="image-map2">
+        <area class="mrl-click pg-go2buy" target="" alt="Adele 圓邊几 灰" title="Adele 圓邊几 灰"
+            href="{{store direct_url='sidetable-adele.html'}}" coords="319,782,37,706" shape="rect">
+        <area class="mrl-click pg-go2buy" target="" alt="Liz 雙人床架" title="Liz 雙人床架"
+            href="{{store direct_url='liz-bedframe-double.html'}}" coords="436,709,708,785" shape="rect">
+        <area class="mrl-click pg-go2buy" target="" alt="天絲防蟎減壓高低枕" title="天絲防蟎減壓高低枕" href="#" coords="231,813,578,866"
+            shape="rect">
+        <area class="mrl-click pg-go2buy" target="" alt="護腰護脊減壓記憶床墊" title="護腰護脊減壓記憶床墊"
+            href="{{store direct_url='mattress-double-20tencel.html'}}" coords="506,896,883,945" shape="rect">
+    </map>
+</div>
+<script>
+    let addPillowcase = document.querySelector('#add-pillowcase');
+    addPillowcase.addEventListener('click', function (e) {
+        addItemToCart('5097', e.target);
+        addItemToCart('5150', e.target);
+    }, false)
+
+
+    function addItemToCart(itemId, element) {
+        let addToCartUrl = document.querySelector('#product_addtocart_form').action;
+        let itemIdToAdd = itemId;
+        let newAddToCartUrl = addToCartUrl.replace(/\/\d+\//g, `/${itemIdToAdd}/`);
+
+        let formKey = jQuery.cookie("form_key");
+        let formData = new FormData();
+        formData.append("product", itemIdToAdd);
+        formData.append("selected_configurable_option", "");
+        formData.append("related_product", "");
+        formData.append("form_key", formKey);
+        formData.append("qty", 1);
+
+        btnClickFeedback(element);
+
+        let request = jQuery.ajax({
+            url: newAddToCartUrl,
+            method: "POST",
+            processData: false,
+            contentType: false,
+            data: formData
+        }).done(function (response) {
+            console.log('Success');
+            afterSuccessAddToCart(element);
+            setTimeout(showOriginAddBtn, 1000, element);
+        }).fail(function (jqXHR, textStatus) {
+            console.log("Couldn't add product to cart. " + textStatus);
+        });
+    };
+
+    function btnClickFeedback(element) {
+        element.innerText = '加入中…';
+    }
+    function afterSuccessAddToCart(element) {
+        element.innerText = '已經添加';
+    }
+    function showOriginAddBtn(element) {
+        element.innerText = '加入購物車';
+    }
+
+    setTimeout(function () {
+        require(['jquery', 'Mrl_ProductElement'], function ($) {
+            mrl_prductElement.getProducts(['Addon-CS-30-0041-0-08-v2'], $fields = 'sku,name,price,MRL_discount_price,url_key', $page = 1, $page_size = 20)
+                .then((success) => {
+                    console.log('success', success);
+
+                    var products = success[0].data.items;
+
+
+                    products.forEach(function (product) {
+                        var productId = product.sku;
+                        // var productName = product.name;
+                        var productDisPrice = parseInt(product.MRL_discount_price).toLocaleString();
+                        var productOldPrice = parseInt(product.price).toLocaleString();
+                        // var productUrl = product.url_key;
+                        var productContainers = document.querySelectorAll('.btn[data-product-id="' + productId + '"]');
+
+                        productContainers.forEach(function (productContainer) {
+
+                            var productTitle = productContainer.querySelector('.product-title');
+                            var productdisPrice = productContainer.querySelector('.product-disPrice')
+                            var productoldPrice = productContainer.querySelector('.product-oldPrice')
+                            var productUrlElement = productContainer.querySelector('.product-url')
+
+                            productTitle.innerHTML = '天絲防蟎高低枕枕套'
+                            productUrlElement.href = 'sheets-pillow-tencel-9-11cm.html';
+                            if (productDisPrice !== '0') {
+                                productoldPrice.innerHTML = '$' + productOldPrice;
+                                productdisPrice.innerHTML = '$' + productDisPrice;
+                            } else {
+                                productdisPrice.innerHTML = '$' + productOldPrice;
+                            }
+
+                        })
+
+                    })
+                })
+                .catch((error) => {
+                    console.log('error', error);
+                });
+        });
+    }, 3000);
+</script>
