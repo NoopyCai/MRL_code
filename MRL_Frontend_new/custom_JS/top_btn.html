@@ -15,37 +15,39 @@
       return;
     }
 
-    let lastScrollTop = 0;
-    const topBtn = document.querySelector('.top-btn-div');
-    require(['jquery', 'jquery/jquery.cookie'], function ($) {
-      $(function () {
-        const scrollThreshold = 100;
 
-        $(window).scroll(function () {
-          const scrollVal = $(this).scrollTop();
-          const scrollDifference = scrollVal - lastScrollTop;
+    document.addEventListener('DOMContentLoaded', function () {
+      const scrollThreshold = 50;
+      const topBtn = document.querySelector('.top-btn-div');
+      let lastScrollTop = 0;
 
-          console.log(scrollDifference);
-          // 向上滑动且幅度大于阈值时显示
-          if (scrollDifference < -scrollThreshold) {
-            $topBtnDiv.addClass("active");
-          } 
-          // 向下滑动时隐藏
-          else if (scrollDifference > 0) {
-            $topBtnDiv.removeClass("active");
-          }
+      window.addEventListener('scroll', function () {
+        const scrollVal = window.scrollY;
+        const scrollDifference = scrollVal - lastScrollTop;
 
-          lastScrollTop = scrollVal;
-        });
+        // 在最頂端時不顯示
+        if (scrollVal === 0) {
+          topBtn.classList.remove("active");
+        }
+        // 向上滑動時顯示
+        if (scrollDifference < -scrollThreshold) {
+          topBtn.classList.add("active");
+        } 
+        // 向下滑動時隐藏
+        else if (scrollDifference > 0) {
+          topBtn.classList.remove("active");
+        }
+
+        lastScrollTop = scrollVal;
       });
 
-      $(".top-btn-div").click(function (e) {
+      topBtn.addEventListener('click', function (e) {
+        e.target.blur();
         e.preventDefault();
-        $("html,body").animate({
-          scrollTop: 0,
-        },
-          600
-        );
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       });
     });
   })();
@@ -80,6 +82,8 @@
     z-index: 1000;
     transform: translateX(200%);
     transition: transform 0.2s ease-in-out;
+    -webkit-user-select: none; 
+    -webkit-tap-highlight-color: transparent; 
   }
 
   .top-btn-div.active {
