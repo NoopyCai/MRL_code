@@ -1,0 +1,87 @@
+<dialog id="sofa-friends-only">
+    <div class="sofa-friends-only-container">
+        <div class="sofa-friends-only-content">
+            <ol class="sofa-friends-only-list">
+                <li>居友沙發舊換新活動限於MR. LIVING 直營門市及官網購買，恕不開放momo、PChome、新竹大遠百等第三方渠道參與。</li>
+                <li>本活動僅限曾購買過居家先生其它沙發品項的客人，換購Pluffy泡芙沙發優惠，不開放換購其他品項，亦不開放未曾購買居家先生沙發產品的客人參加。</li>
+                <li>優惠所指之「免費搬運舊沙發下樓」僅限電梯服務，遇無電梯或舊沙發進不去電梯等須走樓梯搬運，仍會酌收費用；且僅協助搬運至一樓或社區清潔隊回收定點。搬運不包含舊家具清運，回收服務請自行聯繫環保局清潔隊處理。
+                </li>
+                <li>於門市參加此優惠的客人，須出示活動Email、簡訊，並提供手機號碼、Email和訂購人姓名，供門市現場服務人員核對身分，非本人之訂購者，恕無法參加本活動。於官網參加此活動之客人，需以接收活動訊息之Email作為帳號，註冊後登入官網始得購買。
+                </li>
+                <li>以舊換新專案價購買泡芙沙發之消費金額，無法加入累計滿萬折千的全館優惠。</li>
+                <li>本規則若有未盡之事宜，MR. LIVING
+                    居家先生就本活動保有修正活動辦法之權利，如遇活動辦法修改，將於官方網站公告，不另通知。如遇天災或人為等不可抗力因素，本公司保有解釋、修改、變更或停止本活動之權利。
+                </li>
+                <li>若有任何疑問，可與MR. LIVING居家先生客服聯絡洽詢；官方LINE服務時間：星期一至星期六 09:30～12:00 / 13:00～18:30。</li>
+            </ol>
+        </div>
+    </div>
+    <i class="mgz-icon mgz-icon-close" id="sofa-friends-only-close"></i>
+</dialog>
+
+<style>
+    #sofa-friends-only-close {
+        position: absolute;
+        right: 16px;
+        top: 3%;
+        background: #e3e2e2;
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    #sofa-friends-only {
+        width: 400px;
+        height: fit-content;
+        border: none;
+        box-shadow: 0 2px 6px #ccc;
+        border-radius: 10px;
+        padding-top: 6rem;
+    }
+
+    .sofa-friends-only-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .sofa-friends-only-content {
+        width: 100%;
+        height: 100%;
+    }
+    .sofa-friends-only-list{
+        padding-inline-start: 20px;
+    }
+    @media screen and (max-width: 767px) {
+        #sofa-friends-only {
+            max-height: 600px;
+            height: 100%;
+            width: 100%;
+        }
+    }
+</style>
+<script type="text/javascript">
+    (() => {
+        const oldCustomerProduct = document.querySelector("[data-is-mrl-vip='true']");
+        if(!oldCustomerProduct){
+            return;
+        }
+        const reserveDialog = document.querySelector('#sofa-friends-only')
+        let reserveLink = document.querySelectorAll('.sofa-friends-only-btn');
+        reserveLink.forEach((e) => {
+            e.addEventListener('click', () => {
+                reserveDialog.showModal();
+            })
+        })
+
+        const reserveModalCloseBtn = document.querySelector('#sofa-friends-only-close');
+        reserveModalCloseBtn.addEventListener('click', () => {
+            reserveDialog.close();
+        })
+
+        reserveDialog.addEventListener('click', function (e) {
+            if (e.target.nodeName === 'DIALOG') {
+                this.close();
+            }
+        });
+    })();
+</script>
