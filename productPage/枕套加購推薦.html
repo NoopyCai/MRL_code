@@ -80,8 +80,8 @@
     .itemInfo {
         visibility: hidden;
         user-select: none;
-        max-width: 280px;
-        min-width: 230px;
+        max-width: 320px;
+        min-width: 310px;
         opacity: 0;
         width: auto;
         height: auto;
@@ -144,7 +144,7 @@
     .itemInfo p {
         font-family: Lato, Helvetica, sans-serif;
         margin-bottom: 0;
-        font-size: 14px;
+        font-size: 26px;
     }
 
     .product-title {
@@ -153,13 +153,13 @@
 
     .product-disPrice {
         color: #C34135;
-        font-size: 14px;
+        font-size: 26px;
     }
 
     .product-oldPrice {
         text-decoration: line-through;
         color: gray;
-        font-size: 12px;
+        font-size: 24px;
     }
 
     .btn a {
@@ -236,7 +236,7 @@
         #mattress-add-to-cart>button::after {
             width: 15px;
             height: 15px;
-            right: 8px;
+            right: 11px;
             top: 5px;
         }
 
@@ -260,7 +260,7 @@
         }
 
         .itemInfo {
-            min-width: 130px;
+            min-width: 180px;
             padding: 5px 10px;
 
             width: 100%;
@@ -273,16 +273,16 @@
         }
 
         .product-title {
-            font-size: 13px !important;
+            font-size: 14px !important;
             letter-spacing: 0;
         }
 
         .product-disPrice {
-            font-size: 12px !important;
+            font-size: 13px !important;
             line-height: 0;
         }
 
-        .product-olePrice {
+        .product-oldPrice {
             font-size: 12px !important;
         }
     }
@@ -290,9 +290,9 @@
     @media (max-width: 480px) {
         #mattress-add-to-cart>button {
             border: none;
-            width: 100px;
+            width: 120px;
             height: 26px;
-            font-size: 12px;
+            font-size: 14px;
             white-space: nowrap;
             line-height: 10px;
         }
@@ -308,6 +308,16 @@
             width: 180px;
             font-size: 20px;
             white-space: nowrap;
+        }
+        .itemInfo p,
+        .product-disPrice{
+            font-size: 20px;
+        }
+        .product-oldPrice {
+            font-size: 18px;
+        }
+        .itemInfo{
+            min-width: 250px;
         }
     }
 </style>
@@ -373,14 +383,12 @@
             data-ga-label="天絲防蟎高底枕枕套">加入購物車</button>
     </div>
     <div class="btn Notactive" data-product-id="Addon-CS-30-0041-0-08-v2" style="top: 52%; left: 51%;">
-        <a class="product-url" style="text-decoration: none; color: black;"
-            target="_blank">
+        <a class="product-url" style="text-decoration: none; color: black;" target="_blank">
             <div class="itemInfo bt1-itemInfo Infoactive">
                 <div class="itemInfo-text">
                     <p class="product-title"></p>
-                    <p><span style="color: red; font-size: 14px;" class="product-disPrice"></span>
-                        <span style="text-decoration: line-through; color: gray; font-size: 12px;"
-                            class="product-oldPrice"></span>
+                    <p><span class="product-disPrice"></span>
+                        <span class="product-oldPrice"></span>
                 </div>
                 <div class="arrow">
                     &#10095;
