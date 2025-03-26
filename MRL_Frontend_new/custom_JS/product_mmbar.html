@@ -11,9 +11,86 @@
     display: none;
   }
 
+  /* 老客戶提示訊息跳窗 */
+  .old-customer-overlay {
+    background-color: rgba(51, 51, 51, .55);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 401;
+  }
+
+  .old-customer-popup {
+    width: 26rem;
+    background-color: #fff;
+    color: #333;
+    position: fixed;
+    left: 50%;
+    padding: 20px;
+    right: 50%;
+    top: 50%;
+    z-index: 1;
+    height: auto;
+    transform: translate(100%, -50%);
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    animation: slideIn 0.5s forwards;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .old-customer-popup p {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+
+  @keyframes slideIn {
+    from {
+      transform: translate(100%, -50%);
+    }
+
+    to {
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .old-customer-popup-confirm {
+    width: 8rem;
+    background: #c34135;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  }
+
+  .old-customer-popup-confirm:hover {
+    background: #a33a2e;
+  }
+
+  .notActive {
+    display: none !important;
+    transition: 0.3s ease-in-out;
+  }
+
+  @media (min-width: 1024px) {
+    .sticky-addtocart.old-customer-buy-pc {
+      width: 25% !important;
+    }
+  }
+
   @media (max-width: 767px) {
     .box-tocart .actions {
-      display: none;
+      display: none;.sticky-addtocart;
     }
 
     .bottom-nav {
@@ -46,11 +123,6 @@
       height: 76px;
       background-color: #fff;
       z-index: -1;
-    }
-
-    .notActive {
-      display: none;
-      transition: 0.3s ease-in-out;
     }
 
     .add2carOption {
@@ -113,12 +185,22 @@
       margin-right: 1.6rem;
     }
 
+    .old-customer-buy {
+      width: 100%;
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      max-width: 18.5rem;
+      color: #fff;
+      background-color: #c34135;
+    }
+
     .add2carOption-btn-a {
       color: #fff;
     }
 
-    .fieldset > .field,
-    .fieldset > .fields > .field {
+    .fieldset>.field,
+    .fieldset>.fields>.field {
       margin: 30px 0 0 0;
     }
 
@@ -235,8 +317,8 @@
       height: 23px;
     }
 
-    .bottom-nav-add2cart > img,
-    .bottom-nav-buynow > img {
+    .bottom-nav-add2cart>img,
+    .bottom-nav-buynow>img {
       width: 12px;
       height: 13px;
       margin-right: 5px;
@@ -324,7 +406,7 @@
       transform: translateY(100%);
     }
 
-    .bottom-nav > #menubar-add2wishlist {
+    .bottom-nav>#menubar-add2wishlist {
       background-color: #fff;
       color: #b2b2b2;
       border: none;
@@ -338,10 +420,7 @@
   }
 </style>
 <div class="bottom-nav">
-  <button
-    class="bottom-nav-button bottom-nav-wishlist mrl-click mm-pg-wishlist"
-    id="menubar-add2wishlist"
-  >
+  <button class="bottom-nav-button bottom-nav-wishlist mrl-click mm-pg-wishlist" id="menubar-add2wishlist">
     <div class="wish-icon"></div>
     我的最愛
   </button>
@@ -351,23 +430,11 @@
       我的購物車
     </a>
   </button>
-  <button
-    class="bottom-nav-button bottom-nav-add2cart mrl-click mm-pg-add2cart"
-    id="menubar-add2cart"
-  >
-    <a
-      href="javascript:void(1)"
-      data-id="1"
-      id="tar"
-      style="visibility: hidden; position: absolute"
-    ></a
-    >加入購物車
+  <button class="bottom-nav-button bottom-nav-add2cart mrl-click mm-pg-add2cart" id="menubar-add2cart">
+    <a href="javascript:void(1)" data-id="1" id="tar" style="visibility: hidden; position: absolute"></a>加入購物車
   </button>
-  <button
-    class="bottom-nav-button bottom-nav-buynow mrl-click mm-pg-checkout"
-    id="menubar-buynow"
-    data-ga-category="Ecommerce"
-  >
+  <button class="bottom-nav-button bottom-nav-buynow mrl-click mm-pg-checkout" id="menubar-buynow"
+    data-ga-category="Ecommerce">
     立即購買
   </button>
 </div>
@@ -394,8 +461,30 @@
     var priceIncrease = document.querySelectorAll(
       "#product-info-only div.aunav8f.mgz-element.mgz-child.mgz-element-product_attribute > div span > strong"
     );
+    const oldCustomerProduct = document.querySelector("[data-is-mrl-vip='true']");
     var pageType = document.querySelector(".ga-page")?.value;
     checkProductType();
+
+    if (oldCustomerProduct) {
+      switchMMbarBtnForOldCus();
+      setTimeout(() => {
+        const errorMessage = document.querySelector('.page.messages .error');
+        if (!errorMessage) {
+          observeErrorMessages();
+        } else {
+          if (errorMessage) {
+            errorMessage.remove();
+            showUnqualifiedPopup(errorMessage.textContent);
+          }
+        }
+      }, 1000);
+
+      if (!isLogin()) {
+        setTimeout(() => {
+          clickLogin();
+        }, 1000);
+      }
+    }
 
     // priceIncrease.forEach((el) => {
     //   if (el.textContent.includes("漲")) {
@@ -451,7 +540,7 @@
 
     //改變"數量選擇input和箭頭"位置
     function changeAdd2carPos() {
-      if(pageType !== "product") return;
+      if (pageType !== "product") return;
       var add2carOption = document.querySelector(
         ".ppbd-product-addtocart .product-add-form"
       );
@@ -467,7 +556,7 @@
         parent.insertBefore(add2carOption, qtyText);
       }
     }
-    if(!pathName.includes("homecard")){
+    if (!pathName.includes("homecard")) {
       changeAdd2carPos();
     }
 
@@ -527,7 +616,7 @@
     }
 
     //隨裝置寬度改變
-    if(!pathName.includes("homecard")){
+    if (!pathName.includes("homecard")) {
       window.addEventListener("resize", debounce(resizeHandler, 500));
     }
 
@@ -575,19 +664,19 @@
 
     //點擊加入購物車
     mmBarAddToCartBtn.addEventListener("click", function (e) {
-        if(pathName.includes("homecard")){
-            disableBuyButton("加入中...");
-            clickOriginAddtoCart();
-        }else{
-          if (toggle == false) {
-            showAdd2carOption();
-          } else {
-            hideAdd2carOption();
-          }
+      if (pathName.includes("homecard")) {
+        disableBuyButton("加入中...");
+        clickOriginAddtoCart();
+      } else {
+        if (toggle == false) {
+          showAdd2carOption();
+        } else {
+          hideAdd2carOption();
         }
-       
-        event.stopPropagation();
-      },
+      }
+
+      event.stopPropagation();
+    },
       false
     );
 
@@ -644,15 +733,93 @@
       );
     }
 
+    //老客戶頁面mmbar按鈕切換
+    function switchMMbarBtnForOldCus() {
+        // Mobile
+        mmBarAddToCartBtn.classList.add("notActive");
+        $buyNowEl.innerHTML = "老客戶限定加入購物車";
+        $buyNowEl.classList.remove('bottom-nav-buynow');
+        $buyNowEl.classList.add("old-customer-buy");
+        // PC
+        originalAdd2CartBtn = document.querySelector("#product-addtocart-button");
+        originalBuyNowBtn = document.querySelector("#go2buy");
+        originalAdd2CartBtn.classList.add("notActive");
+        originalBuyNowBtn.innerHTML = "老客戶限定加入購物車";
+        originalBuyNowBtn.classList.remove('bottom-nav-buynow');
+        originalBuyNowBtn.classList.add("old-customer-buy");
+        originalBuyNowBtn.classList.add("old-customer-buy-pc");
+    }
+
+    //老客戶登入提示訊息跳窗
+    function showRemindLoginPopup(message) {
+      const overlay = document.createElement('div');
+      overlay.className = 'old-customer-overlay';
+
+      const oldCustomerPopup = document.createElement('div');
+      oldCustomerPopup.classList.add('old-customer-popup');
+      oldCustomerPopup.innerHTML = `<p>${message}</p><div class="old-customer-popup-confirm">確認</div>`;
+      document.body.appendChild(overlay);
+      overlay.appendChild(oldCustomerPopup);
+
+      document.querySelector('.old-customer-popup-confirm').addEventListener('click', function () {
+        clickLogin();
+        overlay.remove();
+        oldCustomerPopup.remove();
+      })
+    }
+    //不符資格提示訊息跳窗
+    function showUnqualifiedPopup(message) {
+      const overlay = document.createElement('div');
+      overlay.className = 'old-customer-overlay';
+
+      const oldCustomerPopup = document.createElement('div');
+      oldCustomerPopup.classList.add('old-customer-popup');
+      oldCustomerPopup.innerHTML = `<p>${message}</p><div class="old-customer-popup-confirm">確認</div>`;
+      document.body.appendChild(overlay);
+      overlay.appendChild(oldCustomerPopup);
+
+      document.querySelector('.old-customer-popup-confirm').addEventListener('click', function () {
+        overlay.remove();
+        oldCustomerPopup.remove();
+      })
+    }
+
+    //監聽不符合資格錯誤訊息
+    function observeErrorMessages() {
+      const errorMessagesContainer = document.querySelector('#maincontent');
+
+      if (!errorMessagesContainer) {
+        return;
+      }
+
+      const mutationObserverConfig = { childList: true, subtree: true };
+
+      const handleErrorMutations = function (mutationsList, observer) {
+        for (let mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+            const errorDiv = errorMessagesContainer.querySelector('.page.messages .error');
+            if (errorDiv) {
+              errorDiv.remove();
+              showUnqualifiedPopup(errorDiv.textContent);
+            }
+          }
+        }
+      };
+
+      const errorMutationObserver = new MutationObserver(handleErrorMutations);
+
+      errorMutationObserver.observe(errorMessagesContainer, mutationObserverConfig);
+    }
+
     function checkProductType() {
       if (!(pageType === "product")) {
         document.getElementById("go2buy").style.display = "none";
         $buyNowEl.style.pointerEvents = "none";
         $buyNowEl.style.backgroundColor = "#cccccc";
         $buyNowEl.style.color = "#fff";
-        if(pathName.includes("homecard")){
+        if (pathName.includes("homecard")) {
           $buyNowEl.textContent = "即將開賣";
-        }else{
+        } else {
           $buyNowEl.textContent = "商品已售完";
         }
         mmBarAddToCartBtn.disabled = true;
@@ -677,7 +844,7 @@
 
       var observer = new MutationObserver(function (mutations) {
         enableBuyButton();
-        console.log("mutations", mutations);
+
         mutations.forEach(function (mutation) {
           var $isInitEntry =
             mutation.type === "childList" &&
@@ -753,24 +920,28 @@
       var mmBarGoCheckoutBtn = document.querySelector("#menubar-buynow");
       var domain = window.location.origin;
 
-      mmBarGoCheckoutBtn.addEventListener(
-        "click",
-        function (e) {
+
+      mmBarGoCheckoutBtn.addEventListener("click", function (e) {
+        if (isLogin() && !oldCustomerProduct) {
           disableBuyButton();
           clickOriginAddtoCart();
-          if (isLogin()) {
-            setTimeout(
-              function () {
-                window.location.href = domain + "/checkout/";
-              },
-              1000,
-              e.target
-            );
-          } else {
-            pslogin($).setGoToUrl(domain + "/checkout/");
-            clickLogin();
-          }
-        },
+          setTimeout(
+            function () {
+              window.location.href = domain + "/checkout/";
+            }, 1000, e.target
+          );
+        } else if (!isLogin() && oldCustomerProduct) {
+          showRemindLoginPopup('請先登入再進行購買');
+        } else if (isLogin() && oldCustomerProduct) {
+          disableBuyButton();
+          clickOriginAddtoCart();
+        } else {
+          disableBuyButton();
+          clickOriginAddtoCart();
+          pslogin($).setGoToUrl(domain + "/checkout/");
+          clickLogin();
+        }
+      },
         false
       );
     });
