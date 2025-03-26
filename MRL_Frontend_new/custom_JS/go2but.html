@@ -1,0 +1,137 @@
+<style>
+    .go2buy-btn,
+    .go2buy-btn:hover,
+    .go2buy-btn:focus,
+    .go2buy-btn:active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        cursor: pointer;
+        z-index: 9999999;
+        position: relative;
+        border-radius: 3px;
+        height: 52px;
+        margin-top: -5px;
+        background-color: #C34135;
+        width: 49%;
+    }
+
+    .go2buy-btn span {
+        font-size: 1.8rem;
+        font-weight: 600;
+        user-select: none;
+    }
+
+    .go2buy-btn img {
+        width: 16px;
+        margin-right: 4px;
+        user-select: none;
+    }
+
+
+    @media (min-width: 1024px) {
+        .action.primary.tocart.sticky-addtocart {
+            right: 13.2%;
+            width: 12%;
+        }
+
+        .go2buy-btn.sticky-addtocart {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 13%;
+            margin-right: 0;
+        }
+
+    }
+
+    @media (max-width: 768px) {
+        .go2buy-btn {
+            display: none;
+        }
+    }
+</style>
+<button class="pc-pg-checkout go2buy-btn-container go2buy-btn sticky-addtocart mrl-click" id="go2buy"
+    data-ga-category="Ecommerce">
+    <img src="https://www.mrliving.com.tw/media/wysiwyg/MenuBar/Product/buy_now.jpg" loading="lazy"><span>立即購買</span>
+</button>
+<script>
+    require(['jquery', 'Mrl_SocialLogin/js/pslogin-mixin'],
+        function ($, pslogin) {
+
+            let $go2buy = document.querySelector('#go2buy');
+
+            function btnClickFeedback(element) {
+                element.disabled = true;
+            }
+            function showOriginAddBtn(element) {
+                element.disabled = false;
+            }
+
+            function clickOriginAddtoCart() {
+                document.querySelector('#product-addtocart-button').click();
+            }
+            function clickLogin() {
+                document.querySelector('.mt_signin').click();
+            }
+
+            function isLogin() {
+                return document.querySelector('.mt_signin') === null ? true : false;
+            }
+
+
+            function disableBuyButton() {
+                btnClickFeedback($go2buy);
+                setTimeout(function () {
+                    enableBuyButton();
+                }, 1000);
+                console.log('disableBuyBtn');
+            }
+
+            function enableBuyButton() {
+                showOriginAddBtn($go2buy);
+            }
+
+            //老客戶登入提示訊息跳窗
+            function showRemindLoginPopup(message) {
+                const overlay = document.createElement('div');
+                overlay.className = 'old-customer-overlay';
+
+                const oldCustomerPopup = document.createElement('div');
+                oldCustomerPopup.classList.add('old-customer-popup');
+                oldCustomerPopup.innerHTML = `<p>${message}</p><div class="old-customer-popup-confirm">確認</div>`;
+                document.body.appendChild(overlay);
+                overlay.appendChild(oldCustomerPopup);
+
+                document.querySelector('.old-customer-popup-confirm').addEventListener('click', function () {
+                    clickLogin();
+                    overlay.remove();
+                    oldCustomerPopup.remove();
+                })
+            }
+
+
+            let domain = window.location.origin;
+            const oldCustomerProduct = document.querySelector("[data-is-mrl-vip='true']");
+            $go2buy.addEventListener('click', function (e) {
+                if (isLogin() && !oldCustomerProduct) {
+                    disableBuyButton();
+                    clickOriginAddtoCart();
+                    setTimeout(function () {
+                        window.location.href = domain + '/checkout/';
+                    }, 1000, e.target);
+                } else if (!isLogin() && oldCustomerProduct) {
+                    showRemindLoginPopup('請先登入再進行購買');
+                } else if (isLogin() && oldCustomerProduct) {
+                    disableBuyButton();
+                    clickOriginAddtoCart();
+                } else {
+                    disableBuyButton();
+                    clickOriginAddtoCart();
+                    pslogin($).setGoToUrl(domain + '/checkout/');
+                    clickLogin();
+                }
+            }, false)
+        });
+</script>
