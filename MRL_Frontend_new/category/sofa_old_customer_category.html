@@ -1,0 +1,166 @@
+<!-- sofa_old_customer_category -->
+<style>
+      /* 老客戶提示訊息跳窗 */
+  .old-customer-overlay {
+    background-color: rgba(51, 51, 51, .55);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 401;
+  }
+
+  .old-customer-popup {
+    width: 26rem;
+    background-color: #fff;
+    color: #333;
+    position: fixed;
+    left: 50%;
+    padding: 20px;
+    right: 50%;
+    top: 50%;
+    z-index: 1;
+    height: auto;
+    transform: translate(100%, -50%);
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    animation: slideIn 0.5s forwards;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .old-customer-popup p {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+
+  @keyframes slideIn {
+    from {
+      transform: translate(100%, -50%);
+    }
+
+    to {
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .old-customer-popup-confirm {
+    width: 8rem;
+    background: #c34135;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  }
+
+  .old-customer-popup-confirm:hover {
+    background: #a33a2e;
+  }
+
+</style>
+<script>
+    (function () {
+        setTimeout(() => {
+            const errorMessage = document.querySelector('.page.messages .error');
+            console.log(errorMessage);
+            if (!errorMessage) {
+                observeErrorMessages();
+            } else {
+                if (isLogin()) {
+                    errorMessage.remove();
+                    showRemindLoginPopup(errorMessage.textContent);
+                } else {
+                    errorMessage.remove();
+                    showUnqualifiedPopup(errorMessage.textContent);
+                }
+            }
+        }, 1000);
+
+        //老客戶登入提示訊息跳窗
+        function showRemindLoginPopup(message) {
+            const overlay = document.createElement('div');
+            overlay.className = 'old-customer-overlay';
+
+            const oldCustomerPopup = document.createElement('div');
+            oldCustomerPopup.classList.add('old-customer-popup');
+            oldCustomerPopup.innerHTML = `<p>${message}</p><div class="old-customer-popup-confirm">確認</div>`;
+            document.body.appendChild(overlay);
+            overlay.appendChild(oldCustomerPopup);
+
+            document.querySelector('.old-customer-popup-confirm').addEventListener('click', function () {
+                const loginBtn = document.querySelector(".mt_signin");
+                if (loginBtn) {
+                    loginBtn.click();
+                }
+                overlay.remove();
+                oldCustomerPopup.remove();
+            })
+        }
+        //不符資格提示訊息跳窗
+        function showUnqualifiedPopup(message) {
+            const overlay = document.createElement('div');
+            overlay.className = 'old-customer-overlay';
+
+            const oldCustomerPopup = document.createElement('div');
+            oldCustomerPopup.classList.add('old-customer-popup');
+            oldCustomerPopup.innerHTML = `<p>${message}</p><div class="old-customer-popup-confirm">確認</div>`;
+            document.body.appendChild(overlay);
+            overlay.appendChild(oldCustomerPopup);
+
+            document.querySelector('.old-customer-popup-confirm').addEventListener('click', function () {
+                setTimeout(() => {
+                    document.querySelector(".mt_signin").click();
+                }, 300);
+                overlay.remove();
+                oldCustomerPopup.remove();
+            })
+        }
+
+        //檢查是否登入
+        function isLogin() {
+            return document.querySelector(".mt_signin") === null ? true : false;
+        }
+
+        //監聽不符合資格錯誤訊息
+        function observeErrorMessages() {
+            const errorMessagesContainer = document.querySelector('#maincontent');
+
+            if (!errorMessagesContainer) {
+                return;
+            }
+
+            const mutationObserverConfig = { childList: true, subtree: true };
+
+            const handleErrorMutations = function (mutationsList, observer) {
+                for (let mutation of mutationsList) {
+                    if (mutation.type === 'childList') {
+                        const errorDiv = errorMessagesContainer.querySelector('.page.messages .error');
+                        if (errorDiv) {
+                            if (!isLogin()) {
+                                errorDiv.remove();
+                                showRemindLoginPopup(errorDiv.textContent);
+                            } else {
+                                errorDiv.remove();
+                                showUnqualifiedPopup(errorDiv.textContent);
+                            }
+                        }
+                    }
+                }
+            };
+
+            const errorMutationObserver = new MutationObserver(handleErrorMutations);
+
+            errorMutationObserver.observe(errorMessagesContainer, mutationObserverConfig);
+        }
+    })();
+
+</script>
