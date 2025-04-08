@@ -122,7 +122,7 @@
                         window.location.href = domain + '/checkout/';
                     }, 1000, e.target);
                 } else if (!isLogin() && oldCustomerProduct) {
-                    showRemindLoginPopup('請先登入再進行購買');
+                    showRemindLoginPopup('此商品限定老客戶，請先登入後再加入購物車');
                 } else if (isLogin() && oldCustomerProduct) {
                     disableBuyButton();
                     clickOriginAddtoCart();
