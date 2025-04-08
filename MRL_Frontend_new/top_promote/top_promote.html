@@ -78,16 +78,24 @@
   </style>
     
     
-  <script>
-  
-  if(location.pathname !== '/checkout/' && location.pathname !== '/super-storage-survey'){
+   <script>
+  const excludedPaths = [
+    '/checkout/',
+    '/super-storage-survey',
+    '/homecard',
+    '/special-for-old',
+    '/mcm-casadeco',
+    '/japandi-casadeco',
+    ];
+
+if(!excludedPaths.some(path => location.pathname.includes(path))){
   
     //時間設定處(開始出現計時器時間)
-    let startTimerTime = {year:'2024',month:'11',date:'19',hour:'23',min:'59',sec:'59'};
+    let startTimerTime = {year:'2025',month:'04',date:'15',hour:'23',min:'59',sec:'59'};
     
     
     //時間設定處(截止日)
-    let promoteDeadline = {year:'2024',month:'11',date:'26',hour:'23',min:'59',sec:'59'};
+    let promoteDeadline = {year:'2025',month:'04',date:'22',hour:'23',min:'59',sec:'59'};
     
     
     //只到...文案
@@ -112,28 +120,31 @@
     }
     else if(deadlineSet-timeNowSet>=604800000){
       //截止日當週前
-      countDownTxt='<span style="font-weight:bold;"> 只到11月26日</span>';
+      countDownTxt='<span style="font-weight:bold;"> 只到4月22日</span>';
     }
     
     let topPromoteHtmlTimerTxt2, topPromoteHtmlTimerTxt, topPromoteHtmlNoTimerTxt2, topPromoteHtmlNoTimerTxt;
 
-        //枕頭版本
-        //----文案修改處(有計時器)
-            topPromoteHtmlTimerTxt2 = '<div class="close content-flow">全館減壓枕頭特惠 只到12/12'+'<a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" class="mrl-click select-promotion ab-test-pillow" data-ga-promotion_id="20241127_pillow_all_BOG" data-ga-creative_slot="top-promo" data-ga-category="MKT-mattress" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">買1送1 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
-            topPromoteHtmlTimerTxt = '<div class="show content-flow" style="">年終最後優惠 滿萬折千 <span style="font-weight:900;margin-left:0px;">倒數</span><div class="topPromoTimeshow"></div></div>';
+//----文案修改處(有計時器)
+            topPromoteHtmlTimerTxt2 = '<div class="close content-flow">減壓枕頭特惠 免運帶走 只到4/22'+'<a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" class="mrl-click select-promotion" data-ga-promotion_id="20250409_pillow_all_BOGO" data-ga-creative_slot="top-promo" data-ga-category="MKT-mattress" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">>買1送1 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
+            topPromoteHtmlTimerTxt = '<div class="show content-flow" style="">全館滿萬折千＋滿額免運 <span style="font-weight:900;margin-left:0px;">倒數</span><div class="topPromoTimeshow"></div></div>';
   
   
         //----文案修改處(無計時器)
-            topPromoteHtmlNoTimerTxt2 = '<div class="close content-flow">全館減壓枕頭特惠 只到12/12'+'<a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" class="mrl-click select-promotion ab-test-pillow" data-ga-promotion_id="20241127_pillow_all_BOG" data-ga-creative_slot="top-promo" data-ga-category="MKT-mattress" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">買1送1 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
-            topPromoteHtmlNoTimerTxt = '<div class="show content-flow">年終最後優惠 滿萬折千'+countDownTxt+'</div>';
-  
-  
-    //-------------
+            topPromoteHtmlNoTimerTxt2 = '<div class="close content-flow">減壓枕頭特惠 免運帶走 只到4/22'+'<a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" class="mrl-click select-promotion" data-ga-promotion_id="20250409_pillow_all_BOGO" data-ga-creative_slot="top-promo" data-ga-category="MKT-mattress" style="display: inline-block;height: fit-content;line-height: 3rem;font-size: 1.5rem;font-weight: 600;letter-spacing: 3px;padding: 0 0.7rem 0 1rem;background-color: #FFFFFF;border-radius: 3px;color: black;text-decoration: none;margin-left: 0.8rem;">買1送1 <i class="fa fa-caret-right" style="font-size: 2.2rem;position: relative;top: 3px;" aria-hidden="true"></i></a>'+'</div>';
+            topPromoteHtmlNoTimerTxt = '<div class="show content-flow">全館滿萬折千＋滿額免運 '+countDownTxt+'</div>';
+ 
+
+ //-------------
+ 
+
 
     window.addEventListener("load", function(){
         let header = document.querySelector('header .header.content');
         let topPromotionContent = document.createElement('div');
         topPromotionContent.classList.add('top-promo');
+        topPromotionContent.classList.add('section');
+        topPromotionContent.setAttribute('data-section-name', 'home_TopPromotion');
         let pageType = document.querySelector(".ga-page")?.value;
         if(pageType === 'product'){
             return;
