@@ -1,0 +1,38 @@
+<script>
+    (function () {
+        var colProductNameElem = document.querySelectorAll('#order-items_grid .col-product > span');
+        colProductNameElem.forEach(function (nameElem) {
+            if (nameElem.innerText.includes('優惠免費')) {
+                var qty = nameElem.closest('tr').querySelector('.col-qty input').value;
+                console.log(qty);
+                var subtotal = nameElem.closest('tr').querySelector('.col-subtotal .price').innerText;
+                if (!subtotal.includes('$-')) {
+                    nameElem.closest('tr').querySelector('.col-subtotal .price').innerText = subtotal.replace('$', '$-');
+                }
+                nameElem.closest('tr').querySelector('.col-discount .price').innerText = '$' + qty;
+                var rowSubtotal = nameElem.closest('tr').querySelector('.col-row-subtotal .price').innerText;
+                if (!rowSubtotal.includes('$-')) {
+                    nameElem.closest('tr').querySelector('.col-row-subtotal .price').innerText = rowSubtotal.replace('$', '$-');
+                }
+                var totalPrice = document.querySelectorAll('tfoot tr .col-price .price');
+                totalPrice.forEach(function (priceElem) {
+                    var priceNumber = parseFloat(priceElem.innerText.replace('$', '').replace(/,/g, ''));
+                    if (priceNumber > 0) {
+                        priceNumber = '$' + getFormatter(priceNumber - qty * 2);
+                        priceElem.innerText = priceNumber;
+                    } else if (priceNumber === 0) {
+                        priceElem.innerText = '$' + getFormatter(qty);
+                    }
+                })
+            }
+        })
+
+        //格式化金額
+        function getFormatter(money) {
+            var formatter = new Intl.NumberFormat("en-US");
+            var formattedNumber = formatter.format(money);
+            return formattedNumber;
+        }
+
+    })()
+</script>

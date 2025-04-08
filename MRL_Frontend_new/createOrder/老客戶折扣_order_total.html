@@ -1,0 +1,37 @@
+<script>
+    (function () {
+        var discountRows = document.querySelectorAll('#order-items_grid tr');
+        var totalDiscount = 0;
+
+        discountRows.forEach(function (row) {
+            var productNameElem = row.querySelector('.col-product > span');
+            if (productNameElem && productNameElem.innerText.includes('優惠免費')) {
+                var qty = parseInt(row.querySelector('.col-qty input').value);
+                totalDiscount += qty * 2;
+            }
+        });
+
+        changeOrderTotal(totalDiscount);
+
+        function changeOrderTotal(duscount){
+            var subtotalTotal = document.querySelector('#subtotal-total .price').innerText;
+            var grandTotal = document.querySelector('#grand-total .price').innerText;
+            var subtotalTotalNumber = parseInt(subtotalTotal.replace('$', '').replace(/,/g, ''));
+            var grandTotalNumber = parseInt(grandTotal.replace('$', '').replace(/,/g, ''));
+     
+            subtotalTotalNumber = subtotalTotalNumber - duscount;
+            grandTotalNumber = grandTotalNumber - duscount;
+
+            document.querySelector('#subtotal-total .price').innerText = '$' + getFormatter(subtotalTotalNumber);
+            document.querySelector('#grand-total .price').innerText = '$' + getFormatter(grandTotalNumber);
+            
+        }
+
+        function getFormatter(money) {
+            var formatter = new Intl.NumberFormat("en-US");
+            var formattedNumber = formatter.format(money);
+            return formattedNumber;
+        }
+
+    })()
+</script>
