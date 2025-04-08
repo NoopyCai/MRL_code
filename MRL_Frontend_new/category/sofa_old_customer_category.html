@@ -1,6 +1,6 @@
 <!-- sofa_old_customer_category -->
 <style>
-      /* 老客戶提示訊息跳窗 */
+/* 老客戶提示訊息跳窗 */
   .old-customer-overlay {
     background-color: rgba(51, 51, 51, .55);
     bottom: 0;
@@ -17,7 +17,7 @@
     color: #333;
     position: fixed;
     left: 50%;
-    padding: 20px;
+    padding: 20px 15px;
     right: 50%;
     top: 50%;
     z-index: 1;
@@ -39,7 +39,10 @@
     font-size: 1.6rem;
     text-align: center;
   }
-
+  .old-customer-popup p a {
+    text-decoration: underline;
+    display: inline-block;
+  }
 
   @keyframes slideIn {
     from {
@@ -69,13 +72,18 @@
 </style>
 <script>
     (function () {
+        var allAddToCart = document.querySelectorAll('.action.tocart');
+        allAddToCart.forEach(function(btn){
+            btn.classList.add('pre-add-to-cart-btn');
+            btn.querySelector('span').classList.add('pre-add-to-cart-btn');
+        })
+
         setTimeout(() => {
             const errorMessage = document.querySelector('.page.messages .error');
-            console.log(errorMessage);
             if (!errorMessage) {
                 observeErrorMessages();
             } else {
-                if (isLogin()) {
+                if (!isLogin()) {
                     errorMessage.remove();
                     showRemindLoginPopup(errorMessage.textContent);
                 } else {
@@ -107,12 +115,19 @@
         }
         //不符資格提示訊息跳窗
         function showUnqualifiedPopup(message) {
+            console.log(message)
             const overlay = document.createElement('div');
             overlay.className = 'old-customer-overlay';
 
             const oldCustomerPopup = document.createElement('div');
             oldCustomerPopup.classList.add('old-customer-popup');
-            oldCustomerPopup.innerHTML = `<p>${message}</p><div class="old-customer-popup-confirm">確認</div>`;
+            if (message.includes('客服')) {
+                console.log(message.textContent)
+                oldCustomerPopup.innerHTML = `<p>${message}<a href="https://maac.io/1srlL" target="_blank">LINE</a></p><div class="old-customer-popup-confirm">確認</div>`;
+            } else {
+                console.log(message.textContent)
+                oldCustomerPopup.innerHTML = `<p>${message}</p><div class="old-customer-popup-confirm">確認</div>`;
+            }
             document.body.appendChild(overlay);
             overlay.appendChild(oldCustomerPopup);
 
