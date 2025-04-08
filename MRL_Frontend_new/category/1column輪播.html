@@ -1,0 +1,109 @@
+<style>
+    .cat-slider{
+        height: 415px;
+    }
+    .item-click-rect-1{
+        width: 33%;
+        height: 15%;
+        left: 5%;
+        bottom: 8%;
+    }
+
+    .page-layout-2columns-left .sidebar-main{
+        padding: 0 !important;
+    }
+    .category-banner-container{
+        position: relative;
+    }
+    .category-banner-container img{
+        width: 100%;
+    }
+    .mobile-item{
+        display: none;
+    }
+    .product-image-photo.default_image{
+        transform: unset !important;
+    }
+    @media only screen and (max-width: 768px){
+        .cat-slider{
+            height: 165px;
+        }
+        .item-click-rect-1{
+            width: 45%;
+            height: 15%;
+            left: 6%;
+            bottom: 13%;
+        }
+        .pc-item{
+            display: none !important;
+        }
+        .mobile-item{
+            display: block;
+        }
+    }
+</style>
+
+
+<div id="space-product-carousel" class="owl-carousel owl-theme ga-parent-item-list pc-item" data-ga-item-list-id="118" data-ga-item-list-name="">
+
+
+  <div class="item cat-slider">
+    <picture>
+        <source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_OCsofa_catgM.jpg}}" media="(max-width: 767px)">
+        <source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_OCsofa_catg.jpg}}" media="(min-width: 768px)">
+        <img class="product-image-photo default_image" src="{{media url=wysiwyg/home_page/2025/2025_4M/2504_OCsofa_catg.jpg}}" alt="" style="margin: 0 auto; width: 100%;" >
+    </picture>
+  </div>
+
+  <div class="item cat-slider>
+    <picture>
+        <source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_OCsofa_catg2.jpg}}" media="(min-width: 768px)">
+        <img class="product-image-photo default_image" src="{{media url=wysiwyg/home_page/2025/2025_4M/2504_OCsofa_catg2.jpg}}" alt="" style="margin: 0 auto; width: 100%;" >
+    </picture>
+  </div>
+</div>
+
+<div class="category-banner-container mobile-item">
+    <picture>
+        <img src="{{media url=wysiwyg/home_page/2025/2025_4M/2504_OCsofa_catgM.jpg}}" alt="漲價前最後優惠｜滿1萬2折千">
+    </picture>
+</div>
+
+
+
+<script type="text/javascript">
+    require(['jquery', 'owlcarousel'], function ($) {
+        jQuery("#space-product-carousel").owlCarousel({
+            autoplay: true,
+            margin: 10,
+            dots: true,
+            navRewind: true,
+            animateIn: 'fadeIn',
+            animateOut: 'fadeOut',
+            loop: true,
+            nav: false,
+            lazyLoad: true,
+            // navText: [
+            //     '<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 2px;stroke: #fff;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+            //     '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 2px;stroke: #fff;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'
+            // ],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 1
+                },
+                992: {
+                    items: 1
+                },
+                1200: {
+                    items: 1
+                }
+            }
+        });
+    });
+
+</script>
+
+

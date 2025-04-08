@@ -1,0 +1,379 @@
+<style>
+    .inspire-close-btn {
+        display: none;
+        width: 36px;
+        height: 36px;
+        position: absolute;
+        top: 15px;
+        z-index: 5;
+        font-size: 3.3rem;
+        font-weight: 700;
+        line-height: 35px;
+        right: 10px;
+        color: rgb(0, 0, 0, 50%);
+        opacity: 70%;
+        background-color: white;
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: -1px 1px 6px 2px #5959593b;
+    }
+
+    .itemImgContainer {
+        max-width: 30%;
+    }
+
+    .img-wrapper .overlay {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+    }
+
+    .img-wrapper .overlay.o-active {
+        display: block !important;
+    }
+
+    .img1-bt1-itemInfo {
+        bottom: -62.5px;
+        left: -147px;
+    }
+
+    .img1-bt1-itemInfo::after {
+        bottom: 50%;
+        right: -5px;
+    }
+
+    .product-disPrice {
+        line-height: 35px;
+    }
+
+    .bt2-itemInfo::after {
+        top: -5px;
+    }
+
+    .itemInfo p {
+        font-family: "Noto Sans TC", sans-serif;
+    }
+
+    .itemInfo .itemInfo-text .product-title {
+        letter-spacing: 0;
+    }
+
+    #find_inspire_carousel .owl-dots {
+        margin-bottom: 50px;
+    }
+
+    /* 導構圖產品 */
+    .item-22-0143-0-19 {
+        left: 16% !important;
+        top: 49% !important;
+    }
+
+    .item-20-0133-0-19 {
+        left: 30% !important;
+        top: 61% !important;
+    }
+
+    .item-pluffy-fabric-lhf-290-milkwhite {
+        left: 52% !important;
+        top: 42% !important;
+    }
+
+    @media (max-width: 1440px) {
+        .itemInfo {
+            width: 250px;
+            min-width: 225px;
+            height: 70px;
+            padding: 8px 10px 8px 0;
+        }
+
+        .itemInfo .itemInfo-text .product-title {
+            font-size: 12px;
+        }
+
+        .itemInfo .itemInfo-text .product-disPrice {
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .itemInfo {
+            width: 250px;
+        }
+
+        .itemInfo .itemInfo-text .product-title {
+            font-size: 12px !important;
+        }
+
+        .product-oldPrice {
+            font-size: 10px !important;
+        }
+
+        .itemInfo::after {
+            display: none;
+        }
+
+        .bt1-itemInfo::after {
+            bottom: -5px !important;
+
+            right: 47% !important;
+        }
+
+        .bt2-itemInfo::after {
+            right: 11% !important;
+        }
+
+        .bt3-itemInfo::after {
+            right: 30% !important;
+            bottom: 0;
+            top: -5px;
+        }
+
+        .item-22-0143-0-19 {
+            left: 13% !important;
+            top: 60% !important;
+        }
+
+        .item-20-0133-0-19 {
+            top: 69% !important;
+        }
+
+        .item-pluffy-fabric-lhf-290-milkwhite {
+            top: 54% !important;
+        }
+    }
+</style>
+
+
+<div class="category-banner">
+    <div class="img-container">
+        <div class="img-wrapper">
+            <picture>
+                <source srcset="{{media url=catalog/category/2025/2504M-japandi-casadeco.jpg}}"
+                    media="(max-width: 767px)" />
+                <source srcset="{{media url=catalog/category/2025/2504M-japandi-casadeco.jpg}}"
+                    media="(min-width: 768px)" />
+                <img class="guide btn-trigger select-content" ga-content-type="空間佈置靈感" ga-click-text="空間佈置靈感_白點"
+                    style="margin: inherit; width: 100%"
+                    src="{{media url=catalog/category/2025/2504M-japandi-casadeco.jpg}}" alt="" />
+            </picture>
+            <div class="overlay"></div>
+        </div>
+        <div class="itemInfoContainer select-content" ga-content-type="空間佈置靈感" ga-click-text="空間佈置靈感_白點">
+            <div class="btn btn1 item-pluffy-fabric-lhf-290-milkwhite select-item"
+                data-ga-item-id="pluffy-fabric-lhf-290-milkwhite" data-ga-item-index="客廳空間" data-ga-label="">
+                <a href="" target="_blank">
+                    <div class="itemInfo bt1-itemInfo" data-ga-item-id="pluffy-fabric-lhf-290-milkwhite">
+                        <div class="itemImgContainer">
+                            <img class="itemImg" src="" />
+                        </div>
+
+                        <div class="itemInfo-text">
+                            <p class="product-title"></p>
+                            <p>
+                                <span class="product-disPrice"></span>
+                                <span class="product-oldPrice"></span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="btn btn2 item-20-0133-0-19 select-item" data-ga-item-id="20-0133-0-19" data-ga-item-index="客廳空間"
+                data-ga-label="">
+                <a href="" target="_blank">
+                    <div class="itemInfo bt2-itemInfo" data-ga-item-id="20-0133-0-19">
+                        <div class="itemImgContainer">
+                            <img class="itemImg" src="" />
+                        </div>
+                        <div class="itemInfo-text">
+                            <p class="product-title"></p>
+                            <p>
+                                <span class="product-disPrice"></span>
+                                <span class="product-oldPrice"></span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="btn btn3 item-22-0143-0-19 select-item" data-ga-item-id="22-0143-0-19" data-ga-item-index="客廳空間"
+                data-ga-label="">
+                <a href="" target="_blank">
+                    <div class="itemInfo bt3-itemInfo" data-ga-item-id="22-0143-0-19">
+                        <div class="itemImgContainer">
+                            <img class="itemImg" src="" />
+                        </div>
+                        <div class="itemInfo-text">
+                            <p class="product-title"></p>
+                            <p>
+                                <span class="product-disPrice"></span>
+                                <span class="product-oldPrice"></span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="inspire-close-btn" id="">&#215;</div>
+    </div>
+</div>
+
+<script>
+    require(["jquery", "owlcarousel", "Mrl_ProductElement"], function ($) {
+
+        autoGetItemInfo();
+
+        //自動取商品資料
+        function autoGetItemInfo() {
+            const storedProductData = JSON.parse(
+                localStorage.getItem("storedProductData")
+            );
+            const DataTimestamp = JSON.parse(
+                localStorage.getItem("DataTimestamp_update")
+            );
+
+            //判斷是否已經儲存過資料or資料是否過期
+            if (!storedProductData || isDataExpired(DataTimestamp)) {
+                const inspireItem = document.querySelectorAll(
+                    ".itemInfoContainer .btn"
+                );
+                const inspireSkuList = getUniqueSkus(inspireItem);
+                const combinedSkuList = [
+                    ...new Set(inspireSkuList),
+                ];
+
+                fetchProductData(combinedSkuList);
+
+                localStorage.setItem("storedProductData", Date.now());
+            } else {
+                updateInspireElements(storedProductData);
+            }
+        }
+
+        //檢查資料是否過期
+        function isDataExpired(refreshTime) {
+            const expirationTime = 1000 * 60 * 60;
+            const currentTime = Date.now();
+            return currentTime - refreshTime >= expirationTime;
+        }
+
+        //取商品sku
+        function getUniqueSkus(items) {
+            const skuList = [];
+            items.forEach((item) => {
+                const sku = item.getAttribute("data-ga-item-id");
+                if (!skuList.includes(sku)) {
+                    skuList.push(sku);
+                }
+            });
+            return skuList;
+        }
+
+        //依照sku取商品資訊
+        function fetchProductData(skuList) {
+            mrl_prductElement.getProducts(
+                skuList,
+                ($fields = "sku,name,image,price,MRL_discount_price,url_key"),
+                ($page = 1),
+                ($page_size = skuList.length)
+            )
+                //success =>更新商品資訊
+                .done((success) => {
+                    const productData = success;
+                    const timestamp = Date.now();
+                    updateInspireElements(productData);
+
+                    localStorage.setItem("storedProductData", JSON.stringify(productData));
+                    localStorage.setItem(
+                        "DataTimestamp_update",
+                        JSON.stringify(timestamp)
+                    );
+                    // console.log(productData, "第一次取得的資料");
+                })
+                .fail((error) => {  // .error 應該改為 .fail
+                    console.error("Failed to fetch product data:", error);
+                });
+        }
+
+        //更新商品資訊
+        function updateInspireElements(success) {
+            updateElementsBySKU(success, ".itemInfoContainer .btn", ".btn",
+                (container) => ({
+                    image: container.querySelector(".itemImg"),
+                    source: container.querySelector("source"),
+                    name: container.querySelector(".product-title"),
+                    discountPrice: container.querySelector(".product-disPrice"),
+                    oldPrice: container.querySelector(".product-oldPrice"),
+                    links: [container.querySelector("a")],
+                })
+            );
+        }
+
+        function updateProductInfo(product, containerSelectors) {
+            let { image, url_key, name, price, MRL_discount_price } = product;
+            let productDisPrice = parseInt(MRL_discount_price).toLocaleString();
+            let productOldPrice = parseInt(price).toLocaleString();
+
+            //img
+            if (containerSelectors.image) {
+                containerSelectors.image.src = `{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667${image}}}`;
+            }
+            if (containerSelectors.source) {
+                containerSelectors.source.srcset = `{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667${image}}}`;
+            }
+
+            //link
+            if (containerSelectors.links) {
+                containerSelectors.links.forEach((link) => {
+                    link.href = `${url_key}.html`;
+                });
+            }
+
+            //name
+            if (containerSelectors.name) {
+                containerSelectors.name.innerHTML = name;
+            }
+
+            //price
+            if (containerSelectors.discountPrice) {
+                if (productDisPrice === "0") {
+                    containerSelectors.discountPrice.innerHTML = `$${productOldPrice}`;
+                    containerSelectors.discountPrice.style.color = "black";
+                } else {
+                    containerSelectors.discountPrice.innerHTML = `$${productDisPrice}<span class="disText" style="font-size: 1.1rem; color:#666666; font-weight:400"> (售價已折) </span>`;
+                    containerSelectors.discountPrice.style.color = "#C24035";
+                }
+            }
+
+            // 更新原價
+            if (containerSelectors.oldPrice) {
+                if (productDisPrice !== "0") {
+                    containerSelectors.oldPrice.innerHTML = `$${productOldPrice}`;
+                } else {
+                    containerSelectors.oldPrice.innerHTML = "";
+                }
+            }
+        }
+
+        //SKU更新
+        function updateElementsBySKU(success, containerSelector, skuSelector, containerSelectorsCallback) {
+            const containers = document.querySelectorAll(containerSelector);
+
+            containers.forEach((container) => {
+                let sku = container.getAttribute("data-ga-item-id") || container.querySelector(skuSelector).getAttribute("data-ga-item-id");
+                let skuIndex = success[0].data.items.findIndex((item) => item.sku === sku);
+
+                if (skuIndex >= 0) {
+                    let product = success[0].data.items[skuIndex];
+                    let containerSelectors = containerSelectorsCallback(container);
+
+                    updateProductInfo(product, containerSelectors);
+                }
+            });
+        }
+    });
+</script>
