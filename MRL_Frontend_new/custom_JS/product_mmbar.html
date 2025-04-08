@@ -28,7 +28,7 @@
     color: #333;
     position: fixed;
     left: 50%;
-    padding: 20px;
+    padding: 20px 15px;
     right: 50%;
     top: 50%;
     z-index: 1;
@@ -51,6 +51,11 @@
     text-align: center;
   }
 
+
+  .old-customer-popup p a {
+    text-decoration: underline;
+    display: inline-block;
+  }
 
   @keyframes slideIn {
     from {
@@ -774,7 +779,7 @@
 
       const oldCustomerPopup = document.createElement('div');
       oldCustomerPopup.classList.add('old-customer-popup');
-      oldCustomerPopup.innerHTML = `<p>${message}</p><div class="old-customer-popup-confirm">確認</div>`;
+      oldCustomerPopup.innerHTML = `<p>${message}<a href="https://maac.io/1srlL" target="_blank">LINE</a></p><div class="old-customer-popup-confirm">確認</div>`;
       document.body.appendChild(overlay);
       overlay.appendChild(oldCustomerPopup);
 
@@ -931,7 +936,7 @@
             }, 1000, e.target
           );
         } else if (!isLogin() && oldCustomerProduct) {
-          showRemindLoginPopup('請先登入再進行購買');
+          showRemindLoginPopup('此商品限定老客戶，請先登入後再加入購物車');
         } else if (isLogin() && oldCustomerProduct) {
           disableBuyButton();
           clickOriginAddtoCart();
