@@ -1,0 +1,960 @@
+{
+    "info": {
+        "_postman_id": "e5f4ace6-1f1a-47e5-8fcd-5cf8c8b2edad",
+        "name": "MRL",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "19844034"
+    },
+    "item": [
+        {
+            "name": "M2",
+            "item": [
+                {
+                    "name": "Get Token",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var data = pm.response.json();",
+                                    "pm.environment.set('token', data);"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"test\",\n    \"password\": \"123\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/integration/admin/token",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "integration",
+                                "admin",
+                                "token"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "cross sell",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": ""
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/10-0091-000238-04/links/crosssell",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "10-0091-000238-04",
+                                "links",
+                                "crosssell"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1018139",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\\n  \"items\": [\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018140\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 1\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 2\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018121\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 3\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 4\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018161\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 5\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 6\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018119\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 7\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018407\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 8\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018171\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 9\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018114\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 10\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018103\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 11\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018110\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 12\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018163\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 13\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1017775\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 14\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 15\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-30-0041-0-08\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 16\\n    }\\n  ]\\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1018140/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1018140",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1018429",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1018429\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1018429/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1018429",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1018428",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1018428\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1018428/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1018428",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1018405",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1018405\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1018405/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1018405",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1018404",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1018404\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1018404/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1018404",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1018403",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1018403\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1018403/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1018403",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1018402",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1018402\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1018402/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1018402",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1018325",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1018325\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1018325/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1018325",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1017984",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1017984\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1017984/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1017984",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1017992",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1017992\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1017992/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1017992",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1017993",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1017993\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1017993/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1017993",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1017994",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1017994\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1017994/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1017994",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "23-0063-1-19-v2",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"23-0063-1-19-v2\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/23-0063-1-19-v2/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "23-0063-1-19-v2",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1017983",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1017983\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1017983/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1017983",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1017750",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"1017750\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1017750/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1017750",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "23-0110-1-19",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"23-0110-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/23-0110-1-19/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "23-0110-1-19",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "23-0109-1-19",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"23-0109-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/23-0109-1-19/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "23-0109-1-19",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "23-0104-1-19",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"23-0104-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/23-0104-1-19/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "23-0104-1-19",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "23-0103-1-19",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"23-0103-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/23-0103-1-19/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "23-0103-1-19",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "23-0098-1-19",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"23-0098-1-19\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/23-0098-1-19/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "23-0098-1-19",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "23-0088-1-25",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 1\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 2\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 3\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018407\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 4\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00108\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 5\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018052\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 6\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00109\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 7\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018053\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 8\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00106\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 9\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1018054\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 10\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00110\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 11\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-23-00107\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 12\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 13\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 14\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 15\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0013-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 16\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100016-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 17\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-100025-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 18\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113015-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 19\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-33-0014-113045-01\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 20\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-1017775-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 21\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 22\n        },\n        {\n            \"sku\": \"23-0088-1-25\",\n            \"link_type\": \"crosssell\",\n            \"linked_product_sku\": \"Addon-CS-30-0041-0-08-v2\",\n            \"linked_product_type\": \"simple\",\n            \"position\": 23\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/23-0088-1-25/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "23-0088-1-25",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Magento Restful API"
+        }
+    ]
+}

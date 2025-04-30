@@ -1,0 +1,231 @@
+<div class="lucky-layout">
+    <div class="luckyList-container">
+        <table class="luckyList">
+            <tr>
+                <th style="border-bottom: #000000 1px solid;">序號</th>
+                <th style="border-bottom: #000000 1px solid;">手機</th>
+            </tr>
+         <tr class="week-title">
+                <th colspan="2">第一週</th>
+         <tr>
+          <td>007238</td>
+          <td>0928xxx291</td>
+        </tr>
+         <tr>
+          <td>003094</td>
+          <td>0935xxx976</td>
+        </tr>
+         <tr>
+          <td>000255</td>
+          <td>0976xxx396</td>
+        </tr>
+         <tr>
+          <td>004511</td>
+          <td>0939xxx893</td>
+        </tr>
+         <tr>
+          <td>005924</td>
+          <td>0910xxx776</td>
+        </tr>
+         <tr>
+          <td>15110</td>
+          <td>0988xxx787</td>
+        </tr>
+         <tr>
+          <td>15381</td>
+          <td>0980xxx802</td>
+        </tr>
+        <tr class="week-title">
+            <th colspan="2">第二週</th>
+        <tr>
+            <tr>
+                <td>008035</td>
+                <td>0911xxx600</td>
+              </tr>
+               <tr>
+                <td>003728</td>
+                <td>0963xxx263</td>
+              </tr>
+               <tr>
+                <td>000116</td>
+                <td>0960xxx993</td>
+              </tr>
+               <tr>
+                <td>004952</td>
+                <td>0910xxx239</td>
+              </tr>
+               <tr>
+                <td>006457</td>
+                <td>0926xxx427</td>
+              </tr>
+               <tr>
+                <td>16521</td>
+                <td>0916xxx916</td>
+              </tr>
+               <tr>
+                <td>17414</td>
+                <td>0972xxx006</td>
+              </tr>
+              <tr class="week-title">
+                <th colspan="2">第三週</th>
+            <tr>
+              <tr>
+                <td>009309</td>
+                <td>0925xxx018</td>
+              </tr>
+               <tr>
+                <td>004050</td>
+                <td>0920xxx280</td>
+              </tr>
+               <tr>
+                <td>001116</td>
+                <td>0933xxx023</td>
+              </tr>
+               <tr>
+                <td>005004</td>
+                <td>0963xxx335</td>
+              </tr>
+               <tr>
+                <td>006289</td>
+                <td>0983xxx692</td>
+              </tr>
+               <tr>
+                <td>0016303</td>
+                <td>0919xxx759</td>
+              </tr>
+               <tr>
+                <td>0016985</td>
+                <td>0975xxx053</td>
+              </tr>
+              <tr class="week-title">
+                <th colspan="2">第四週</th>
+            <tr>
+              <tr>
+                <td>007444</td>
+                <td>0966xxx726</td>
+              </tr>
+               <tr>
+                <td>011044</td>
+                <td>0915xxx256</td>
+              </tr>
+               <tr>
+                <td>001503</td>
+                <td>0988xxx413</td>
+              </tr>
+               <tr>
+                <td>010794</td>
+                <td>0967xxx177</td>
+              </tr>
+               <tr>
+                <td>007084</td>
+                <td>0972xxx855</td>
+              </tr>
+               <tr>
+                <td>15096</td>
+                <td>0930xxx396</td>
+              </tr>
+               <tr>
+                <td>18432</td>
+                <td>0972xxx599</td>
+              </tr>
+        </table>
+    </div>
+  </div>
+  
+  <style>
+      .lucky-layout{
+        display: flex;
+        justify-content: center;
+      }
+      .tabDyson{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+      div[data-content-type=tabs] .tabs-navigation li.tab-header:last-child{
+          border-right: none;
+      }
+      div[data-content-type=tabs] .tabs-navigation li.tab-header a.tab-title {
+          font-size: 20px;
+          padding:0.5rem 2rem
+      }
+  
+      div[data-content-type=tabs] .tabs-navigation li.tab-header.ui-state-active{
+          border-bottom: 2px solid #000;
+          background-color: #fff;
+          z-index: 1;
+      }
+      div[data-content-type=tabs] .tabs-navigation li.tab-header{
+          background-color: #fff;
+          border: none;
+          margin: 0 5rem;
+      }
+      div[data-content-type=tabs] .tabs-content {
+          margin-top: 20px;
+          border: 1px solid #000;
+          z-index: 1;
+      }
+      .luckyList-container{
+          width: 850px;
+          display: flex;
+          justify-content: center;
+      }
+      .luckyList{
+          width: 90%;
+          border: #000 1px solid;
+      }
+      .luckyList th{
+          text-align: center;
+          color: #ccc;
+          font-size: 18px;
+          font-weight: 500;
+      }
+      .luckyList td{
+          width: 50%;
+          text-align: center;
+          border-bottom: 1px solid #000;
+          font-size: 18px;
+      }
+      .luckyList tr td:first-child{
+          border-right: 1px solid #000;
+      }
+      .luckyList tr:last-child td{
+          border-bottom: none;
+      }
+      .week-title{
+        background-color: #ccc;
+      }
+      .week-title th{
+        background-color: #ccc;
+        color: #333333 !important;
+      }
+  
+      @media (max-width:768px){
+          .luckyList-container{
+              width: 100%;
+          }
+          .luckyList th{
+              font-size: 16px;
+          }
+          .luckyList td{
+              font-size: 16px;
+          }
+  
+          div[data-content-type=tabs] .tabs-content {
+              width: 100%;
+          }
+          div[data-content-type=tabs] .tabs-navigation{
+              display: flex;
+          }
+          div[data-content-type=tabs] .tabs-navigation li.tab-header{
+              margin: 0 2rem;
+          }
+          .tabFreeOrder div{
+              width: 100%;
+          }
+          [data-content-type=row][data-appearance=contained] {
+            order: 2;
+            width: 100%;
+          }
+      }
+  </style>

@@ -1,0 +1,140 @@
+{
+    "info": {
+        "_postman_id": "e5f4ace6-1f1a-47e5-8fcd-5cf8c8b2edad",
+        "name": "MRL",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "19844034"
+    },
+    "item": [
+        {
+            "name": "M2",
+            "item": [
+                {
+                    "name": "Get Token",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var data = pm.response.json();",
+                                    "pm.environment.set('token', data);"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"test\",\n    \"password\": \"123\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/integration/admin/token",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "integration",
+                                "admin",
+                                "token"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "cross sell",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": ""
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/10-0091-000238-04/links/crosssell",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "10-0091-000238-04",
+                                "links",
+                                "crosssell"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "1018139",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\\n  \"items\": [\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018140\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 1\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-30-0042-0-08-v2\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 2\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018121\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 3\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-30-0003-0-08-v2\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 4\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018161\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 5\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-30-0033-0-08-v2\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 6\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018119\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 7\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018407\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 8\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018171\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 9\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018114\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 10\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018103\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 11\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018110\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 12\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1018163\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 13\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-1017775\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 14\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-30-0012-0-08-v2\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 15\\n    },\\n    {\\n      \"sku\": \"1018140\",\\n      \"link_type\": \"crosssell\",\\n      \"linked_product_sku\": \"Addon-CS-30-0041-0-08\",\\n      \"linked_product_type\": \"simple\",\\n      \"position\": 16\\n    }\\n  ]\\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{adminUri}}/index.php/rest/V1/products/1018140/links",
+                            "host": [
+                                "{{adminUri}}"
+                            ],
+                            "path": [
+                                "index.php",
+                                "rest",
+                                "V1",
+                                "products",
+                                "1018140",
+                                "links"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Magento Restful API"
+        }
+    ]
+}
