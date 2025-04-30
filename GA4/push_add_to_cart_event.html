@@ -1,14 +1,9 @@
 <script>
     console.log('[GTM - add to cart event - start]');
     if ({{ js - pagetype }} == "product-page") {
-        if({{ clickElement.matches('cta-tocart') }}){
-            ctaProductData();
-        }else{
-            productPageData();
-        }
+        productPageData();
     }else {
-        var clickElement = {{ Click Element }
-    }
+    var clickElement = {{ Click Element }}
     var parent = clickElement.closest(".product-item-details");
     var proName = parent.querySelector('.product-item-name').innerText;
     console.log(parent);
@@ -51,7 +46,7 @@
     }},
     "name": { { dom - product name } },
     "price": { { dom - product price } }.replace('$', '').replace(',', ''),
-        "category": { { js - product category in product page } },
+    "category": { { js - product category in product page } },
     "quantity": document.querySelector(".input-text.qty").value
     };
     var products = [mainProduct];
@@ -112,10 +107,6 @@
         }
     });
   
-  }
-
-  function ctaProductData(){
-    
   }
 
 </script>

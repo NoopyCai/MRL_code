@@ -1,0 +1,486 @@
+<?php
+$_orders = $block->getOrders();
+$ordersData = json_decode($_orders, true);
+$items = $ordersData['items'] ?? [];
+$totalCount = $ordersData['total_count'] ?? 0;
+?>
+<?php /** @var \MageWorx\OrderEditor\Block\Adminhtml\Test\Index $block */?>
+<div id="test-form-wrapper" class="admin__fieldset">
+    <h1 class="page-title"><?= $block->escapeHtml(__('Testing Order')) ?></h1>
+    <form method="GET" class="admin__form-field">
+        <h2 style="margin:2rem 0;"><?= $block->escapeHtml(__('搜尋條件')) ?></h2>
+        <div class="admin__field">
+            <label class="admin__field-label"><?= $block->escapeHtml(__('開始日（建立時間）')) ?>:</label>
+            <div class="admin__field-control">
+                <input type="text" 
+                       name="start_at" 
+                       id="start_at" 
+                       value="<?= $block->escapeHtml($block->getStartDate()) ?>" 
+                       class="admin__control-text input-text"
+                       data-mage-init='{"calendar":{"dateFormat":"yyyy-MM-dd","showsTime":false,"timeFormat":null,"buttonImage":null,"buttonText":"Select Date","disabled":false}}'>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label"><?= $block->escapeHtml(__('結束日（建立時間）')) ?>:</label>
+            <div class="admin__field-control">
+                <input type="text" 
+                       name="end_at" 
+                       id="end_at" 
+                       value="<?= $block->escapeHtml($block->getEndDate()) ?>" 
+                       class="admin__control-text input-text"
+                       data-mage-init='{"calendar":{"dateFormat":"yyyy-MM-dd","showsTime":false,"timeFormat":null,"buttonImage":null,"buttonText":"Select Date","disabled":false}}'>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label"><?= $block->escapeHtml(__('狀態')) ?>:</label>
+            <div class="admin__field-control">
+                <input type="text" name="status" value="<?= $block->escapeHtml($block->getStatus()) ?>" size="50" class="admin__control-text">
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label"><?= $block->escapeHtml(__('特殊訂單分類')) ?>:</label>
+            <div class="admin__field-control">
+                <div class="admin__field-option-wrapper">
+                    <?php $orderLabels = $block->getOrderLabels(); ?>
+                    <div class="checkbox-container">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="label_212" name="order_labels[]" value="212" <?= in_array('212', $orderLabels) ? 'checked="checked"' : '' ?>>
+                            <label for="label_212"><?= $block->escapeHtml(__('直播密語')) ?></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="label_236" name="order_labels[]" value="236" <?= in_array('236', $orderLabels) ? 'checked="checked"' : '' ?>>
+                            <label for="label_236"><?= $block->escapeHtml(__('開學專案_買薄墊送枕')) ?></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="label_235" name="order_labels[]" value="235" <?= in_array('235', $orderLabels) ? 'checked="checked"' : '' ?>>
+                            <label for="label_235"><?= $block->escapeHtml(__('KOL團購')) ?></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="label_175" name="order_labels[]" value="175" <?= in_array('175', $orderLabels) ? 'checked="checked"' : '' ?>>
+                            <label for="label_175"><?= $block->escapeHtml(__('換貨')) ?></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="label_176" name="order_labels[]" value="176" <?= in_array('176', $orderLabels) ? 'checked="checked"' : '' ?>>
+                            <label for="label_176"><?= $block->escapeHtml(__('壓單備品')) ?></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="label_177" name="order_labels[]" value="177" <?= in_array('177', $orderLabels) ? 'checked="checked"' : '' ?>>
+                            <label for="label_177"><?= $block->escapeHtml(__('公關品/交換/保證金')) ?></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="label_178" name="order_labels[]" value="178" <?= in_array('178', $orderLabels) ? 'checked="checked"' : '' ?>>
+                            <label for="label_178"><?= $block->escapeHtml(__('員購/親友價')) ?></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="admin__field">
+            <div class="admin__field-control">
+                <button type="submit" class="action-primary"><?= $block->escapeHtml(__('開始計算')) ?></button>
+            </div>
+        </div>
+    </form>
+    
+    <div class="progress-container" style="margin-top: 20px; margin-bottom: 20px;">
+        <div id="message" class="message"><span></span></div>
+        <div id="progress-info" style="margin-top: 10px; display: none;">
+            <div class="progress-text"><?= $block->escapeHtml(__('處理進度')) ?>: <span id="processed-count">0</span> / <span id="total-info">共<?= $block->escapeHtml($totalCount) ?>筆</span></div>
+            <div class="progress">
+                <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%; height: 20px; background-color: #007bdb;"></div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="admin__data-grid-header-title"><?= $block->escapeHtml(__('Results')) ?>: <span id="result-count">(<?= $block->escapeHtml($totalCount) ?>筆)</span></h3>
+    
+    <div class="admin__data-grid-wrap">
+        <div class="admin__data-grid-header">
+            <div class="admin__data-grid-header-row">
+                <div class="admin__data-grid-actions-wrap">
+                    <button id="download-results" class="action-secondary download-results" type="button" style="margin-bottom: 15px; margin-right: 10px;" disabled>
+                        <span><?= $block->escapeHtml(__('下載結果')) ?></span>
+                    </button>
+                    <button id="copy-results" class="action-secondary copy-results" type="button" style="margin-bottom: 15px;" disabled>
+                        <span><?= $block->escapeHtml(__('複製結果')) ?></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <table id="result" class="data-grid admin__table-primary">
+            <thead>
+                <tr>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('ID')) ?></th>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('訂單ID')) ?></th>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('A.原始總金額')) ?></th>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('B.漲價後模擬總金額')) ?></th>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('差額 (A-B)')) ?></th>
+                </tr>
+            </thead>
+            <tbody id="result-body">
+            <?php foreach($items as $order): ?>
+                <tr id="result_<?= $block->escapeHtml($order['order_id']) ?>">
+                    <td><?= $block->escapeHtml($order['order_id']) ?></td>
+                    <td><?= $block->escapeHtml($order['order_number']) ?></td>
+                    <td><?= $block->escapeHtml(number_format($order['order_grand_total'])) ?></td>
+                    <td class="new_price"></td>
+                    <td class="spread"></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    table td.red {
+        color: #e22626 !important;
+    }
+    table td.blue {
+        color: #007bdb !important;
+    }
+    .progress {
+        background-color: #f5f5f5;
+        border-radius: 3px;
+        height: 20px;
+        margin: 10px 0;
+        overflow: hidden;
+    }
+    .download-results, .copy-results {
+        background-color: #eb5202;
+        border-color: #eb5202;
+        color: #ffffff !important;
+    }
+    .admin__control-multiselect {
+        height: auto;
+        min-height: 120px;
+        padding: 0;
+        width: 100%;
+    }
+    .checkbox-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .checkbox-item {
+        display: flex;
+        align-items: center;
+    }
+    .checkbox-item input[type="checkbox"] {
+        margin-right: 8px;
+    }
+    .checkbox-item label {
+        font-weight: normal;
+        cursor: pointer;
+    }
+    .data-grid td{
+        padding: 1rem !important
+    }
+    .data-grid th:first-child{
+        padding-left: 1rem;
+    }
+</style>
+
+<script>
+    require([
+        "jquery",
+        "mage/calendar"
+    ], function($) {
+        // 獲取初始化訂單數據
+        let orders = <?= /* @noEscape */ json_encode($items) ?>;
+        let order_count = orders.length;
+        let total_order_count = <?= (int)$totalCount ?>;
+        let processed_count = 0;
+        let all_processed_count = 0;
+        
+        // 儲存所有訂單的計算結果
+        let allOrderResults = [];
+        
+        // 記錄已處理的訂單ID，避免重複處理
+        let processedOrderIds = {};
+        
+        // 進度條初始化
+        $('#progress-info').show();
+        
+        // 更新進度條
+        function updateProgress() {
+            processed_count++;
+            all_processed_count++;
+            let percentage = Math.round((processed_count / order_count) * 100);
+            $('#processed-count').text(all_processed_count);
+            $('#progress-bar').css('width', percentage + '%');
+            
+            if (processed_count >= order_count) {
+                // 所有數據都處理完畢
+                $('#message').html('<div class="message message-success success"><?= $block->escapeHtml(__('計算完畢')) ?></div>');
+                checkEnableDownload();
+            }
+        }
+        
+        // 分批處理訂單
+        function processOrders(orderList) {
+            if (orderList.length > 0) {
+                $('#message').html('<div class="message message-warning warning"><?= $block->escapeHtml(__('計算中.....')) ?></div>');
+                
+                // 調試輸出
+                console.log("處理訂單: ", {
+                    start_at: $('#start_at').val(),
+                    end_at: $('#end_at').val(),
+                    status: $('input[name="status"]').val(),
+                    order_labels: $('input[name="order_labels[]"]:checked').map(function() {
+                        return this.value;
+                    }).get(),
+                    訂單數量: orderList.length
+                });
+                
+                // 過濾出尚未處理的訂單
+                let unprocessedOrders = orderList.filter(order => !processedOrderIds[order.order_id]);
+                
+                if (unprocessedOrders.length === 0) {
+                    // 所有訂單已處理，直接更新進度條
+                    processed_count = order_count;
+                    updateProgress();
+                    return;
+                }
+                
+                // 分批處理訂單，每批10個
+                const BATCH_SIZE = 10;
+                let batches = [];
+                for (let i = 0; i < unprocessedOrders.length; i += BATCH_SIZE) {
+                    batches.push(unprocessedOrders.slice(i, i + BATCH_SIZE));
+                }
+                
+                // 計算已處理的訂單數
+                let alreadyProcessed = orderList.length - unprocessedOrders.length;
+                processed_count += alreadyProcessed;
+                all_processed_count += alreadyProcessed;
+                
+                processNextBatch(0, batches);
+            } else {
+                $('#progress-info').hide();
+                $('#message').html('<div class="message message-notice notice"><?= $block->escapeHtml(__('沒有符合條件的訂單')) ?></div>');
+            }
+        }
+        
+        // 處理下一批訂單
+        function processNextBatch(batchIndex, batches) {
+            if (batchIndex >= batches.length) {
+                return;
+            }
+            
+            let currentBatch = batches[batchIndex];
+            let batchPromises = [];
+            
+            currentBatch.forEach(function(order) {
+                // 避免重複處理同一訂單
+                if (processedOrderIds[order.order_id]) {
+                    updateProgress();
+                    return;
+                }
+                
+                let data = order;
+                data['form_key'] = "<?= /* @noEscape */ $block->getFormKey() ?>";
+                
+                let promise = new Promise((resolve) => {
+                    $.ajax({
+                        url: "<?= /* @noEscape */ $block->getFormUrl() ?>",
+                        data: data,
+                        type: 'post',
+                        dataType: 'json',
+                        success: function(response) {
+                            if (!response.error && response.status == true) {
+                                console.log(order.order_number, response);
+                                let order_grand_total = parseInt(order.order_grand_total);
+                                let new_grand_total = 0 + parseInt(order.order_shipping_incl_tax);
+                                
+                                $.each(response.result, function(_key, _item) {
+                                    new_grand_total += parseFloat(_item.row_total);
+                                });
+                                
+                                new_grand_total = Math.round(new_grand_total);
+                                let spread = order_grand_total - new_grand_total;
+
+                                // 保存計算結果到完整數據數組
+                                allOrderResults.push({
+                                    order_id: order.order_id,
+                                    order_number: order.order_number,
+                                    original_total: order_grand_total,
+                                    new_total: new_grand_total,
+                                    spread: spread
+                                });
+
+                                // 新金額
+                                let $newPrice = $('#result_' + order.order_id + ' .new_price');
+                                $newPrice.html(number_format(new_grand_total));
+                                if (new_grand_total < order_grand_total) {
+                                    $newPrice.addClass('red');
+                                }
+
+                                //價差
+                                let $spread = $('#result_' + order.order_id + ' .spread');
+                                $spread.html(number_format(spread));
+                                if (spread > 0) {
+                                    $spread.addClass('red');
+                                }
+                                if (spread < 0) {
+                                    $spread.addClass('blue');
+                                }
+                                
+                                // 標記訂單已處理
+                                processedOrderIds[order.order_id] = true;
+                            }
+                            
+                            updateProgress();
+                            resolve();
+                        },
+                        error: function(error) {
+                            console.error('Error processing order', order.order_id, error);
+                            try {
+                                $('#message').html('<div class="message message-error error">' + (error.getMessage ? error.getMessage() : '處理訂單時發生錯誤') + '</div>');
+                            } catch(e) {
+                                $('#message').html('<div class="message message-error error">處理訂單時發生錯誤</div>');
+                            }
+                            
+                            processedOrderIds[order.order_id] = true;
+                            updateProgress();
+                            resolve();
+                        }
+                    });
+                });
+                
+                batchPromises.push(promise);
+            });
+            
+            // 當當前批次全部處理完後，處理下一批次
+            Promise.all(batchPromises).then(() => {
+                setTimeout(() => {
+                    processNextBatch(batchIndex + 1, batches);
+                }, 50); 
+            });
+        }
+        
+        // 處理初始載入的訂單
+        processOrders(orders);
+        
+        // Helper function to format numbers
+        function number_format(number) {
+            return new Intl.NumberFormat().format(number);
+        }
+        
+        // 表格導出功能
+        $('#download-results').on('click', function() {
+            // 確認有數據後才能下載
+            if (all_processed_count === 0) {
+                return;
+            }
+            
+            // 準備CSV數據
+            let csv = [];
+            let headers = [
+                '<?= $block->escapeHtml(__('ID')) ?>',
+                '<?= $block->escapeHtml(__('訂單ID')) ?>',
+                '<?= $block->escapeHtml(__('A.原始總金額')) ?>',
+                '<?= $block->escapeHtml(__('B.漲價後模擬總金額')) ?>',
+                '<?= $block->escapeHtml(__('差額 (A-B)')) ?>'
+            ];
+            csv.push(headers.join(','));
+            
+            // 使用完整數據數組
+            allOrderResults.forEach(function(result) {
+                let row = [
+                    '"' + result.order_id + '"',
+                    '"' + result.order_number + '"',
+                    '"' + result.original_total + '"',
+                    '"' + result.new_total + '"',
+                    '"' + result.spread + '"'
+                ];
+                csv.push(row.join(','));
+            });
+            
+            // 生成CSV文本
+            let csvContent = csv.join('\n');
+            
+            // 創建下載鏈接
+            let blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+            let link = document.createElement('a');
+            let url = URL.createObjectURL(blob);
+            
+            // 設置下載檔名
+            let now = new Date();
+            let fileName = '訂單金額分析_' + 
+                           now.getFullYear() + 
+                           ('0' + (now.getMonth() + 1)).slice(-2) + 
+                           ('0' + now.getDate()).slice(-2) + 
+                           '_全部' + allOrderResults.length + '筆.csv';
+            
+            // 開始下載
+            link.setAttribute('href', url);
+            link.setAttribute('download', fileName);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+        
+        // 複製結果到剪貼板功能
+        $('#copy-results').on('click', function() {
+
+            if (all_processed_count === 0) {
+                return;
+            }
+            
+            let tableText = '';
+            
+            let headers = [
+                '<?= $block->escapeHtml(__('ID')) ?>',
+                '<?= $block->escapeHtml(__('訂單ID')) ?>',
+                '<?= $block->escapeHtml(__('A.原始總金額')) ?>',
+                '<?= $block->escapeHtml(__('B.漲價後模擬總金額')) ?>',
+                '<?= $block->escapeHtml(__('差額 (A-B)')) ?>'
+            ];
+            tableText += headers.join('\t') + '\n';
+            
+            // 使用完整數據數組
+            allOrderResults.forEach(function(result) {
+                let row = [
+                    result.order_id,
+                    result.order_number,
+                    number_format(result.original_total),
+                    number_format(result.new_total),
+                    number_format(result.spread)
+                ];
+                tableText += row.join('\t') + '\n';
+            });
+            
+            // 使用臨時textarea實現複製功能
+            let tempTextarea = document.createElement('textarea');
+            tempTextarea.value = tableText;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            
+            try {
+                let successful = document.execCommand('copy');
+                if (successful) {
+                    // 顯示複製成功訊息，使用純JS生成訊息內容
+                    $('#message').html('<div class="message message-success success">' + 
+                        '<?= $block->escapeHtml(__('已成功複製到剪貼板')) ?> (全部' + allOrderResults.length + '筆)</div>');
+                    setTimeout(function() {
+                        $('#message').html('<div class="message message-success success"><?= $block->escapeHtml(__('計算完畢')) ?></div>');
+                    }, 2000);
+                } else {
+                    $('#message').html('<div class="message message-error error"><?= $block->escapeHtml(__('複製失敗，請手動選擇並複製')) ?></div>');
+                }
+            } catch (err) {
+                $('#message').html('<div class="message message-error error"><?= $block->escapeHtml(__('複製失敗，請手動選擇並複製')) ?></div>');
+            }
+            
+            document.body.removeChild(tempTextarea);
+        });
+        
+        // 處理完畢後顯示按鈕
+        function checkEnableDownload() {
+            $('#download-results').prop('disabled', false);
+            $('#copy-results').prop('disabled', false);
+        }
+    });
+</script>

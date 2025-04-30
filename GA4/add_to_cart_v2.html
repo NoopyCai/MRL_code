@@ -1,0 +1,122 @@
+
+<script>
+    require(['jquery'], function ($) {
+        // 先解綁之前的事件監聽器
+        console.log('ajax:addToCart');
+        jQuery(document).off('ajax:addToCart');
+
+        jQuery(document).on('ajax:addToCart', function (event, data) {
+            // console.log('捕獲到添加到購物車事件!', data);
+
+
+            // 檢查是否成功
+            if (data && data.productInfo && !data.error) {
+                if ({{js - pagetype}} == "product-page") {
+                    productPageData();
+                }else{
+                    var clickElement = {{Click Element}}
+                    var parent = clickElement.closest(".product-item-details");
+                    var proName = parent.querySelector('.product-item-name').innerText;
+                    var proPrice = parent.querySelector('.price-final_price .price').innerText.replace('$', '').replace(',', '');
+                    var proSku = clickElement.closest(".product-item-info").dataset.mrlsku;
+                    var category = "";
+                    if ({{js - pagetype}} == "category-page") {
+                        category = {{js - product category in category page}}
+                    }
+                    dataLayer.push({ecommerce: null});
+
+                    dataLayer.push({
+                        "event": "addToCartV2",
+                        "ecommerce": {
+                            "add": {
+                                "products": [{
+                                    "id": proSku,
+                                    "name": proName,
+                                    "price": proPrice.replace('$', '').replace(',', ''),
+                                    "category": category,
+                                    "quantity": 1
+                                }]
+                            },
+                            "value": parseInt(proPrice.replace('$', '').replace(',', ''))
+                        }
+                    });
+                    if (proSku === '30-0042-0-08') {
+                        dataLayer.push({
+                            "event": "pillow-butterfly-addToCartV2"
+                        });
+                    }
+                }
+
+            } else {
+                console.log('添加到購物車可能失敗或數據不完整', data);
+            }
+        });
+    });
+
+    function productPageData() {
+        var totalValue = 0;
+        var mainProduct = {
+            "id": {{dom - product sku}},
+            "name": {{dom - product name}},
+            "price": {{dom - product price}}.replace('$', '').replace(',', ''),
+            "category": {{js - product category in product page}},
+            "quantity": document.querySelector(".input-text.qty").value
+        };
+    var products = [mainProduct];
+        totalValue += parseInt({{dom - product price}}.replace('$', '').replace(',', ''));
+    if ({{dom - product sku}} === '30-0042-0-08') {
+        dataLayer.push({
+            "event": "pillow-butterfly-addToCartV2"
+        });
+    }
+
+    var itemsSelector = document.querySelectorAll("[data-element=product-block]");
+    itemsSelector.forEach(function (item) {
+        var item_sku = item.getAttribute('data-product-sku');
+        var item_name = item.querySelector('.kit-item-inner a').innerText;
+        var item_price = item.querySelector('[data-element=kit-item-newPrice]').getAttribute('data-one-piece');
+        var item_txt_qty = item.querySelector('span.kit-item-qty');
+
+
+        var item_orig_price_select = item.querySelector('.kit-item-finalPrice');
+        if (item_orig_price_select) {
+            item_price = item_orig_price_select.getAttribute('data-one-piece');
+        }
+        if (item_sku != mainProduct.id && item.classList.contains("active")) {
+            var itemQtySelector = item.querySelector('[data-element=kit-item-select-qty]');
+            var item_qty = (item_txt_qty) ? item_txt_qty.innerText.replace('x', '') : 1;
+            item_qty = (itemQtySelector) ? itemQtySelector.value : item_qty;
+            if (item.querySelector('input') == null || (item.querySelector('input') != null && item.querySelector('input').checked)) {
+                products.push({
+                    "id": item_sku,
+                    "name": item_name,
+                    "price": item_price,
+                    "category": {{js - product category in product page}},
+                    "quantity": item_qty,
+                    "creative_slot": "產品頁加購"
+                });
+                if (item_sku === '30-0042-0-08') {
+                    dataLayer.push({
+                        "event": "pillow-butterfly-addToCartV2"
+                    });
+                }
+                totalValue += parseInt(item_price);
+            }
+        }
+    });
+
+    // console.log('products all', products);
+
+    dataLayer.push({ecommerce: null});
+
+    dataLayer.push({
+        "event": "addToCartV2",
+        "ecommerce": {
+            "add": {
+                "products": products
+            },
+            "value": totalValue
+        }
+    });
+  }
+</script>

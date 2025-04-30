@@ -3,13 +3,14 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import time
 
-# webhook_url = "https://chat.googleapis.com/v1/spaces/AAAASuBT-MM/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=FWrSRi88ee_5nQtUqnVNv3us1XBb2qdCYSL0UsIzoJE"
+webhook_url = "https://chat.googleapis.com/v1/spaces/AAAASuBT-MM/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=FWrSRi88ee_5nQtUqnVNv3us1XBb2qdCYSL0UsIzoJE"
 
-webhook_url = "https://chat.googleapis.com/v1/spaces/AAAA0Wr2GQg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=xZ_ySyXbOulo-pmofM5KVw6Q2LXz_pItQvLnU08lPW8"
+# webhook_url = "https://chat.googleapis.com/v1/spaces/AAAA0Wr2GQg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=xZ_ySyXbOulo-pmofM5KVw6Q2LXz_pItQvLnU08lPW8"
 
-base_url = "https://www.mrliving.com.tw/affordable-sofa-furniture-picks.html"
+base_url = "https://www.mrliving.com.tw/test-test-test.html"
 
 page_count = 1
+total_products = 0
 
 all_results = set()
 
@@ -43,6 +44,9 @@ while True:
         sku_price_list.append({"sku": sku, "price": price})
         skus.append(sku)
     
+    # 更新商品總數
+    total_products += len(skus)
+
     # API payload
     payload = {
         "pids": ",".join(skus),
@@ -96,7 +100,7 @@ while True:
         print(f"API get data failed, status code: {api_response.status_code}")
 
     if not sku_elements:
-        final_message = "前後台商品價格比對結果: \n" + "\n".join(all_results)
+        final_message = f"前後台商品價格比對結果: \n總商品數量: {total_products}\n" + "\n".join(all_results)
 
         # 發送通知到chat
         message = {"text": final_message}
@@ -113,7 +117,7 @@ while True:
     time.sleep(5)
 
 
-final_message = "商品價格比對結果: \n" + "\n".join(all_results)
+final_message = f"商品價格比對結果: \n總商品數量: {total_products}\n" + "\n".join(all_results)
 
 # 發送通知到chat
 message = {"text": final_message}

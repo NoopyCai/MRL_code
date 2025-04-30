@@ -42,26 +42,6 @@ Disallow: /simple-page
 Disallow: /home-page-mrl-01
 Disallow: /no-route
 Disallow: /wishlist
-Disallow: *utm_*
-Disallow: /*?ref=
-Disallow: /*?srsltid=
-Disallow: /*?from_rec=
-Disallow: /*?fb_comment_id=
-Disallow: /*?cat=
-Disallow: /*?price=
-Disallow: /*MRL_filters
-Disallow: /*p=
-Disallow: /*?color=
-Disallow: /*?sofa_type=
-Disallow: /*?leather_style=
-Disallow: /*?footstool_size=
-Disallow: /*?fabric_nordic_style=
-Disallow: /*?MRL_bedsize=
-Disallow: /*?gad_source=
-Disallow: /*?lights_color=
-Disallow: /*?table_color=
-Disallow: /*?gbraid=
-Disallow: /*?gclid=
 Disallow: /popupbuilder
 Disallow: /apptrian_facebookpixel
 
@@ -75,3 +55,6 @@ User-agent: reurl-bot
 Disallow: /
 
 Sitemap: https://www.mrliving.com.tw/media/sitemap_V2.xml
+Sitemap: https://www.mrliving.com.tw/media/sitemap_blog_V2.xml
+Sitemap: https://www.mrliving.com.tw/media/sitemap_category_V2.xml
+Sitemap: https://www.mrliving.com.tw/media/sitemap_product_V2.xml

@@ -126,6 +126,9 @@
                 } else if (isLogin() && oldCustomerProduct) {
                     disableBuyButton();
                     clickOriginAddtoCart();
+                    setTimeout(function () {
+                        window.location.href = domain + '/checkout/cart/';
+                    }, 1000, e.target);
                 } else {
                     disableBuyButton();
                     clickOriginAddtoCart();
