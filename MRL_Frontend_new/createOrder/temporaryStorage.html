@@ -315,263 +315,1288 @@
     }
 </style>
 <script>
-    (function () {
-        makeUserInputEmail(); // 輸入email & 暫存資料彈窗
-        //選單按鈕
-        menuButton.addEventListener("click", function () {
-            var isOpen = false;
-            isOpen = !isOpen;
-            if (isOpen) {
-                menuContent.style.width = "120px";
-                menuContent.style.height = "150px";
-            } else {
-                menuContent.style.width = "0";
-                menuContent.style.height = "0";
-            }
-        });
+    // 重構後的模組化程式碼
+    
+    // ================================
+    // 常數定義
+    // ================================
+    const LOCAL_STORAGE_KEYS = {
+        USER_DATA: 'allUserData',
+        CACHED_ITEM_IDS: 'allCachedItemIDs',
+        ITEM_DATA: 'allItemData'
+    };
 
-        document.addEventListener("click", function (e) {
-            if (e.target !== menuButton && e.target !== menuContent) {
-                isOpen = false;
-                menuContent.style.width = "0";
-                menuContent.style.height = "0";
-            }
-        });
+    const CSS_CLASSES = {
+        VISIBLE: 'show',
+        DIALOG_OPTION: 'dialogOption',
+        DELETE_BUTTON: 'deleteButton',
+        ORDER_TABLES: 'order-tables',
+        EMPTY_TEXT: 'empty-text'
+    };
 
-        //儲存資料按鈕
-        saveDataBtn.addEventListener("click", function () {
-            saveDataToLocalStorage();
-            alert("資料已儲存!");
-        });
+    const SELECTORS = {
+        EMAIL_FIELD: '#email',
+        LAST_NAME_FIELD: '#order-billing_address_lastname',
+        FIRST_NAME_FIELD: '#order-billing_address_firstname',
+        MENU_BUTTON: '#menuButton',
+        MENU_CONTENT: '#menuContent',
+        SAVE_DATA_BTN: '#saveDataBtn',
+        CLEAR_ITEMS: '#clearItems',
+        LOAD_TEMP_DATA_BTN: '#loadTempDataBtn',
+        USER_DATA_DIALOG: '#userDataDialog',
+        POPUP_CONTENT: '#popupContent',
+        CLOSE_DIALOG_BTN: '#closeDialogBtn',
+        SAVE_SUCCESS_MESSAGE: '#saveSuccessMessage',
+        INIT_BLOCK: '#initBlock',
+        CUSTOMER_EMAIL: '#customerEmail',
+        EMAIL_CONFIRM: '#emailComfirm',
+        TEMP_DATA_LIST: '#tempDataList',
+        ORDER_DETAILS: '.order-details',
+        SALES_ORDER_CREATE_SEARCH_GRID: '#sales_order_create_search_grid',
+        SALES_ORDER_CREATE_SEARCH_GRID_TABLE: '#sales_order_create_search_grid_table tr',
+        ADD_PRODUCTS: '#add_products',
+        ORDER_ITEMS: '#order-items',
+        MRL_UPDATE_ATTRIBUTES: '#mrl_update_attributes',
+        ORDER_HEADER: '#order-header'
+    };
 
-        //載入暫存資料按鈕
-        loadTempDataBtn.addEventListener("click", function () {
-            showStoredDataDialog();
-        });
+    const FIELD_TYPES = {
+        RADIO: 'radio',
+        CHECKBOX: 'checkbox',
+        FIELDSET: 'fieldset'
+    };
 
-        //清除產品清單內容
-        clearItems.addEventListener("click", function () {
-            var sureClear = confirm("確定清除產品清單嗎?");
-            if (sureClear) {
-                removeSelectItem();
-            } else {
-                return;
-            }
-        });
+    const CONFIG = {
+        DATA_EXPIRY_TIME: 48 * 60 * 60 * 1000,
+        SUCCESS_MESSAGE_DISPLAY_TIME: 3000,
+        PRODUCT_REMOVAL_DELAY: 1500,
+        EMAIL_FORMAT_REGEX: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    };
 
-        //取得表單所有欄位元素
-        var fieldIds = [];
-        var allInputs = document.querySelectorAll("input");
-        var allSelects = document.querySelectorAll("select");
-        var allTextareas = document.querySelectorAll("textarea");
+    const MESSAGES = {
+        DATA_SAVED: '資料已儲存!',
+        FIELD_SAVED_SUCCESS: '欄位已成功儲存!',
+        CONFIRM_CLEAR_ITEMS: '確定清除產品清單嗎?',
+        PLEASE_INPUT_EMAIL: '請輸入Email',
+        EMAIL_CHANGED_ALERT: '原儲存資料的Email已被更改，已自動更新暫存資料',
+        NO_TEMP_DATA: '目前沒有任何暫存資料。',
+        NO_CUSTOMER_DATA: '此客戶目前沒有任何暫存資料。'
+    };
 
-        allInputs.forEach(function (input) {
-            fieldIds.push(input.id);
-        });
-        allSelects.forEach(function (select) {
-            fieldIds.push(select.id);
-        });
-        allTextareas.forEach(function (textarea) {
-            fieldIds.push(textarea.id);
-        });
+    const DIALOG_CONTENT = {
+        TEMP_DATA_TITLE: '還原客戶暫存資料',
+        TEMP_DATA_SUBTITLE: '(若資料在48小時內未受到編輯，將會自動刪除)',
+        LOAD_REMINDER_TITLE: '載入提醒',
+        LOAD_REMINDER_MESSAGE: '選取載入的資料Email與原本不同，確認要載入覆蓋嗎?',
+        YES_BUTTON: 'YES',
+        NO_BUTTON: 'NO',
+        CLOSE_BUTTON: '關閉'
+    };
 
-        fieldIds = fieldIds.filter(function (i) {
-            return i !== "";
-        });
+    // ================================
+    // StorageManager 類別
+    // ================================
+    class StorageManager {
+        constructor() {
+            this.storageKeys = LOCAL_STORAGE_KEYS;
+        }
 
-        var fields = {};
-        fieldIds.forEach(function (id) {
-            fields[id] = document.getElementById(id);
-        });
-
-        //紀錄當前用戶輸入的Email
-        var previousEmail = document.querySelector("#email");
-        previousEmail.addEventListener("click", function () {
-            previousEmail.setAttribute("data-previousEmail", email.value);
-        });
-
-        //紀錄當前輸入的欄位資料
-        var orderSheet = document.querySelector(".order-details");
-        orderSheet.addEventListener("change", function (e) {
-            if (
-                e.target.parentNode.id.includes("sales_order_create_search_grid") ||
-                e.target.parentNode.classList.contains("order-tables")
-            ) {
-                return;
-            }
-            saveCurrentDataToLocalStorage(e);
-        });
-
-        //儲存全部欄位資料
-        var emailField = document.querySelector("#email");
-        var lastNameField = document.querySelector(
-            "#order-billing_address_lastname"
-        );
-        var firstNameField = document.querySelector(
-            "#order-billing_address_firstname"
-        );
-
-
-        function saveDataToLocalStorage(e) {
-            var id = e.target.id;
-            var email = emailField.value;
-            var name = lastNameField.value + firstNameField.value;
-            var emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            // 確保電子郵件和姓名存在再進行保存
-            if (email && name) {
-                var userData = {
-                    email: email,
-                    name: name,
-                    data: {},
-                };
-
-                if (!emailFormat.test(email)) {
-                    return;
-                }
-
-                fieldIds.forEach(function (id) {
-                    if (fields[id].type === "radio") {
-                        if (fields[id].checked) {
-                            userData.data[id] = fields[id].value;
-                        }
-                    } else if (fields[id].type === "checkbox") {
-                        userData.data[id] = fields[id].checked;
-                    } else if (fields[id].type === "fieldset") {
-                        userData.data[id] = fields[id].querySelector("textarea").value;
-                    } else {
-                        userData.data[id] = fields[id].value;
-                    }
-                });
-
-                var allUserData = getLocalStorageData("allUserData");
-                allUserData[email] = userData;
-                userData.timestamp = new Date().getTime();
-                localStorage.setItem("allUserData", JSON.stringify(allUserData));
-
-                // 成功儲存後顯示提示訊息
-                var successMessageElement =
-                    document.getElementById("saveSuccessMessage");
-                successMessageElement.classList.add("show");
-
-                setTimeout(function () {
-                    successMessageElement.classList.remove("show");
-                }, 3000);
-            }else if(email){
-                var userData = {
-                    email: email,
-                    name: '客戶',
-                    data: {},
-                };
-
-                if (!emailFormat.test(email)) {
-                    return;
-                }
-
-                fieldIds.forEach(function (id) {
-                    if (fields[id].type === "radio") {
-                        if (fields[id].checked) {
-                            userData.data[id] = fields[id].value;
-                        }
-                    } else if (fields[id].type === "checkbox") {
-                        userData.data[id] = fields[id].checked;
-                    } else if (fields[id].type === "fieldset") {
-                        userData.data[id] = fields[id].querySelector("textarea").value;
-                    } else {
-                        userData.data[id] = fields[id].value;
-                    }
-                });
-
-                var allUserData = getLocalStorageData("allUserData");
-                allUserData[email] = userData;
-                userData.timestamp = new Date().getTime();
-                localStorage.setItem("allUserData", JSON.stringify(allUserData));
-
-                // 成功儲存後顯示提示訊息
-                var successMessageElement =
-                    document.getElementById("saveSuccessMessage");
-                successMessageElement.classList.add("show");
-
-                setTimeout(function () {
-                    successMessageElement.classList.remove("show");
-                }, 3000);
+        getLocalStorageData(key, defaultValue = {}) {
+            try {
+                const data = localStorage.getItem(key);
+                return data ? JSON.parse(data) : defaultValue;
+            } catch (error) {
+                console.error(`Error parsing localStorage data for key "${key}":`, error);
+                return defaultValue;
             }
         }
 
-        //儲存當前欄位資料
-        function saveCurrentDataToLocalStorage(e) {
-            var currentPreviousEmail = emailField.getAttribute("data-previousEmail");
-            var email = emailField.value;
-            var name = lastNameField.value + firstNameField.value;
-            var emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@.]+$/; //檢查email格式
+        setLocalStorageData(key, data) {
+            try {
+                localStorage.setItem(key, JSON.stringify(data));
+                return true;
+            } catch (error) {
+                console.error(`Error saving data to localStorage for key "${key}":`, error);
+                return false;
+            }
+        }
 
-            if (email && name) {
-                var userData = {
-                    email: email,
-                    name: name,
-                    data: {},
-                    timestamp: new Date().getTime(),
-                };
+        removeLocalStorageData(key) {
+            try {
+                localStorage.removeItem(key);
+            } catch (error) {
+                console.error(`Error removing localStorage data for key "${key}":`, error);
+            }
+        }
 
-                if (!emailFormat.test(email)) {
-                    return;
+        getAllUserData() {
+            return this.getLocalStorageData(this.storageKeys.USER_DATA);
+        }
+
+        saveUserData(email, userData) {
+            const allUserData = this.getAllUserData();
+            allUserData[email] = {
+                ...userData,
+                timestamp: new Date().getTime()
+            };
+            return this.setLocalStorageData(this.storageKeys.USER_DATA, allUserData);
+        }
+
+        getUserData(email) {
+            const allUserData = this.getAllUserData();
+            return allUserData[email] || null;
+        }
+
+        deleteUserData(email) {
+            const allUserData = this.getAllUserData();
+            const allItemData = this.getAllItemData();
+            const allCachedItemIDs = this.getAllCachedItemIDs();
+
+            delete allUserData[email];
+            delete allItemData[email];
+            delete allCachedItemIDs[email];
+
+            const userDataSuccess = Object.keys(allUserData).length > 0 
+                ? this.setLocalStorageData(this.storageKeys.USER_DATA, allUserData)
+                : (this.removeLocalStorageData(this.storageKeys.USER_DATA), true);
+
+            const itemDataSuccess = Object.keys(allItemData).length > 0
+                ? this.setLocalStorageData(this.storageKeys.ITEM_DATA, allItemData)
+                : (this.removeLocalStorageData(this.storageKeys.ITEM_DATA), true);
+
+            const cachedItemIDsSuccess = Object.keys(allCachedItemIDs).length > 0
+                ? this.setLocalStorageData(this.storageKeys.CACHED_ITEM_IDS, allCachedItemIDs)
+                : (this.removeLocalStorageData(this.storageKeys.CACHED_ITEM_IDS), true);
+
+            return userDataSuccess && itemDataSuccess && cachedItemIDsSuccess;
+        }
+
+        getAllItemData() {
+            return this.getLocalStorageData(this.storageKeys.ITEM_DATA);
+        }
+
+        saveItemData(email, productSku, itemData) {
+            const allItemData = this.getAllItemData();
+            allItemData[email] = allItemData[email] || {};
+            allItemData[email][productSku] = itemData;
+            return this.setLocalStorageData(this.storageKeys.ITEM_DATA, allItemData);
+        }
+
+        getUserItemData(email) {
+            const allItemData = this.getAllItemData();
+            return allItemData[email] || {};
+        }
+
+        getAllCachedItemIDs() {
+            return this.getLocalStorageData(this.storageKeys.CACHED_ITEM_IDS);
+        }
+
+        saveCachedItemID(email, sku, itemInfo) {
+            const allCachedItemIDs = this.getAllCachedItemIDs();
+            allCachedItemIDs[email] = allCachedItemIDs[email] || {};
+            allCachedItemIDs[email][sku] = itemInfo;
+            return this.setLocalStorageData(this.storageKeys.CACHED_ITEM_IDS, allCachedItemIDs);
+        }
+
+        deleteCachedItemID(email, sku) {
+            const allCachedItemIDs = this.getAllCachedItemIDs();
+            
+            if (allCachedItemIDs[email] && allCachedItemIDs[email][sku]) {
+                delete allCachedItemIDs[email][sku];
+                
+                if (Object.keys(allCachedItemIDs[email]).length === 0) {
+                    delete allCachedItemIDs[email];
+                }
+                
+                return this.setLocalStorageData(this.storageKeys.CACHED_ITEM_IDS, allCachedItemIDs);
+            }
+            
+            return true;
+        }
+
+        getUserCachedItemIDs(email) {
+            const allCachedItemIDs = this.getAllCachedItemIDs();
+            return allCachedItemIDs[email] || {};
+        }
+
+        updateUserEmail(oldEmail, newEmail) {
+            try {
+                const allUserData = this.getAllUserData();
+                const allItemData = this.getAllItemData();
+                const allCachedItemIDs = this.getAllCachedItemIDs();
+
+                if (allUserData[oldEmail]) {
+                    allUserData[newEmail] = allUserData[oldEmail];
+                    delete allUserData[oldEmail];
                 }
 
-                var fieldId = e.target.id;
-                var field = fields[fieldId];
-
-                if (field === null || field === undefined) {
-                    return;
+                if (allItemData[oldEmail]) {
+                    allItemData[newEmail] = allItemData[oldEmail];
+                    delete allItemData[oldEmail];
                 }
 
-                if (fieldId === "order-billing_address_city_id") {
-                    fieldId = "order-billing_address_city";
-                    userData.data[fieldId] = fields[fieldId].value;
-                } else if (fieldId === "email") {
-                    saveDataToLocalStorage(e);
+                if (allCachedItemIDs[oldEmail]) {
+                    allCachedItemIDs[newEmail] = allCachedItemIDs[oldEmail];
+                    delete allCachedItemIDs[oldEmail];
+                }
 
-                    //檢查變動欄位是否為email
-                    var checkQuote = document.querySelector(
-                        "#order-items_grid .empty-text"
-                    );
-                    if (!checkQuote) {
-                        updateStoredDataOnEmailChange(currentPreviousEmail, email);
-                        alert("原儲存資料的Email已被更改，已自動更新暫存資料");
+                const userDataSuccess = this.setLocalStorageData(this.storageKeys.USER_DATA, allUserData);
+                const itemDataSuccess = this.setLocalStorageData(this.storageKeys.ITEM_DATA, allItemData);
+                const cachedItemIDsSuccess = this.setLocalStorageData(this.storageKeys.CACHED_ITEM_IDS, allCachedItemIDs);
+
+                return userDataSuccess && itemDataSuccess && cachedItemIDsSuccess;
+            } catch (error) {
+                console.error('Error updating user email:', error);
+                return false;
+            }
+        }
+
+        cleanupExpiredData() {
+            let cleanedCount = 0;
+            const now = new Date().getTime();
+            
+            try {
+                const allUserData = this.getAllUserData();
+                const allItemData = this.getAllItemData();
+                const allCachedItemIDs = this.getAllCachedItemIDs();
+
+                Object.keys(allUserData).forEach(email => {
+                    const userData = allUserData[email];
+                    if (userData.timestamp && (now - userData.timestamp > CONFIG.DATA_EXPIRY_TIME)) {
+                        delete allUserData[email];
+                        delete allItemData[email];
+                        delete allCachedItemIDs[email];
+                        cleanedCount++;
                     }
+                });
+
+                Object.keys(allItemData).forEach(email => {
+                    if (!allUserData[email]) {
+                        delete allItemData[email];
+                    }
+                });
+
+                Object.keys(allCachedItemIDs).forEach(email => {
+                    if (!allUserData[email]) {
+                        delete allCachedItemIDs[email];
+                    }
+                });
+
+                if (Object.keys(allUserData).length > 0) {
+                    this.setLocalStorageData(this.storageKeys.USER_DATA, allUserData);
                 } else {
-                    if (field.type === "radio") {
-                        if (field.checked) {
-                            userData.data[fieldId] = field.value;
-                        }
-                    } else if (fields[fieldId].type === "checkbox") {
-                        userData.data[fieldId] = field.checked;
-                    } else if (fields[fieldId].type === "fieldset") {
-                        userData.data[fieldId] = field.querySelector("textarea").value;
-                    } else {
-                        userData.data[fieldId] = field.value;
-                    }
+                    this.removeLocalStorageData(this.storageKeys.USER_DATA);
                 }
 
-                //設置localStorage(allUserData)
-                var allUserData = getLocalStorageData("allUserData");
-                allUserData[email] = allUserData[email] || {};
-                allUserData[email].email = email;
-                allUserData[email].name = name;
-                allUserData[email].data = allUserData[email].data || {};
-                allUserData[email].data[fieldId] = userData.data[fieldId];
-                allUserData[email].timestamp = new Date().getTime();
+                if (Object.keys(allItemData).length > 0) {
+                    this.setLocalStorageData(this.storageKeys.ITEM_DATA, allItemData);
+                } else {
+                    this.removeLocalStorageData(this.storageKeys.ITEM_DATA);
+                }
 
-                localStorage.setItem("allUserData", JSON.stringify(allUserData));
+                if (Object.keys(allCachedItemIDs).length > 0) {
+                    this.setLocalStorageData(this.storageKeys.CACHED_ITEM_IDS, allCachedItemIDs);
+                } else {
+                    this.removeLocalStorageData(this.storageKeys.CACHED_ITEM_IDS);
+                }
 
-                //跳出成功儲存訊息
-                var successMessageElement =
-                    document.getElementById("saveSuccessMessage");
-                successMessageElement.classList.add("show");
-                setTimeout(function () {
-                    successMessageElement.classList.remove("show");
-                }, 3000);
+            } catch (error) {
+                console.error('Error cleaning up expired data:', error);
+            }
+
+            return cleanedCount;
+        }
+    }
+
+    // ================================
+    // UIManager 類別
+    // ================================
+    class UIManager {
+        constructor() {
+            this.elements = this._cacheElements();
+            this.menuIsOpen = false;
+        }
+
+        _cacheElements() {
+            const elements = {};
+            Object.entries(SELECTORS).forEach(([key, selector]) => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    elements[key] = element;
+                }
+            });
+            return elements;
+        }
+
+        getElement(elementKey) {
+            if (this.elements[elementKey]) {
+                return this.elements[elementKey];
+            }
+            
+            const selector = SELECTORS[elementKey];
+            if (selector) {
+                const element = document.querySelector(selector);
+                if (element) {
+                    this.elements[elementKey] = element;
+                    return element;
+                }
+            }
+            
+            console.warn(`Element not found: ${elementKey}`);
+            return null;
+        }
+
+        showSaveSuccessMessage(message = MESSAGES.FIELD_SAVED_SUCCESS) {
+            const messageElement = this.getElement('SAVE_SUCCESS_MESSAGE');
+            if (messageElement) {
+                const textElement = messageElement.querySelector('p');
+                if (textElement) {
+                    textElement.textContent = message;
+                }
+                messageElement.classList.add(CSS_CLASSES.VISIBLE);
+                
+                setTimeout(() => {
+                    messageElement.classList.remove(CSS_CLASSES.VISIBLE);
+                }, CONFIG.SUCCESS_MESSAGE_DISPLAY_TIME);
             }
         }
+
+        toggleMenu() {
+            const menuContent = this.getElement('MENU_CONTENT');
+            if (menuContent) {
+                this.menuIsOpen = !this.menuIsOpen;
+                
+                if (this.menuIsOpen) {
+                    menuContent.style.width = '120px';
+                    menuContent.style.height = '150px';
+                } else {
+                    menuContent.style.width = '0';
+                    menuContent.style.height = '0';
+                }
+            }
+        }
+
+        closeMenu() {
+            const menuContent = this.getElement('MENU_CONTENT');
+            if (menuContent) {
+                this.menuIsOpen = false;
+                menuContent.style.width = '0';
+                menuContent.style.height = '0';
+            }
+        }
+
+        buildTempDataListHTML(dataArray, isExistingCustomer = false, currentEmail = '') {
+            if (!Array.isArray(dataArray) || dataArray.length === 0) {
+                return `<p>${MESSAGES.NO_TEMP_DATA}</p>`;
+            }
+
+            let content = '';
+            let hasValidData = false;
+
+            dataArray.forEach((userData, index) => {
+                if (isExistingCustomer && userData.email !== currentEmail) {
+                    return;
+                }
+
+                hasValidData = true;
+                content += this._buildDataOptionHTML(userData, index);
+            });
+
+            if (isExistingCustomer && !hasValidData) {
+                return `<p>${MESSAGES.NO_CUSTOMER_DATA}</p>`;
+            }
+
+            return content || `<p>${MESSAGES.NO_TEMP_DATA}</p>`;
+        }
+
+        _buildDataOptionHTML(userData, index) {
+            return `
+                <div class="${CSS_CLASSES.DIALOG_OPTION}" data-index="${index}">
+                    客戶: ${this._escapeHtml(userData.name)}<br/>
+                    Email: ${this._escapeHtml(userData.email)}<br>
+                </div>
+                <i class="em em-x ${CSS_CLASSES.DELETE_BUTTON}" aria-role="presentation" aria-label="CROSS MARK"></i>
+            `;
+        }
+
+        buildLoadConfirmHTML() {
+            return `
+                <div class="remindText">
+                    <h1 style="color: #f4f446;">${DIALOG_CONTENT.LOAD_REMINDER_TITLE}</h1>
+                    <i class="em em-warning" aria-role="presentation" aria-label="WARNING SIGN"></i>
+                    <br>
+                    <span style="font-size:16px">${DIALOG_CONTENT.LOAD_REMINDER_MESSAGE}</span>
+                </div>
+                <button class="sureBtn">${DIALOG_CONTENT.YES_BUTTON}</button>
+                <button class="closeBtn">${DIALOG_CONTENT.NO_BUTTON}</button>
+            `;
+        }
+
+        showTempDataDialog(content, onOptionClick, onDeleteClick, onClose) {
+            const dialog = this.getElement('USER_DATA_DIALOG');
+            const popupContent = this.getElement('POPUP_CONTENT');
+            
+            if (!dialog || !popupContent) {
+                console.error('Dialog elements not found');
+                return;
+            }
+
+            this._resetDialogContent(dialog);
+            popupContent.innerHTML = content;
+            dialog.showModal();
+            this._attachDialogEvents(dialog, onOptionClick, onDeleteClick, onClose);
+        }
+
+        _resetDialogContent(dialog) {
+            dialog.innerHTML = `
+                <h2 style="color: #fff">
+                    ${DIALOG_CONTENT.TEMP_DATA_TITLE}
+                    <span class="remonded-text">${DIALOG_CONTENT.TEMP_DATA_SUBTITLE}</span>
+                </h2>
+                <div id="popupContent"></div>
+                <button id="closeDialogBtn">${DIALOG_CONTENT.CLOSE_BUTTON}</button>
+            `;
+        }
+
+        _attachDialogEvents(dialog, onOptionClick, onDeleteClick, onClose) {
+            const closeBtn = dialog.querySelector('#closeDialogBtn');
+            if (closeBtn && onClose) {
+                closeBtn.addEventListener('click', onClose);
+            }
+
+            if (onOptionClick) {
+                dialog.addEventListener('click', (e) => {
+                    const option = e.target.closest(`.${CSS_CLASSES.DIALOG_OPTION}`);
+                    if (option) {
+                        const index = parseInt(option.getAttribute('data-index'));
+                        onOptionClick(index, option);
+                    }
+                });
+            }
+
+            if (onDeleteClick) {
+                dialog.addEventListener('click', (e) => {
+                    if (e.target.classList.contains(CSS_CLASSES.DELETE_BUTTON)) {
+                        const index = this._getDeleteButtonIndex(e.target);
+                        onDeleteClick(index, e.target);
+                    }
+                });
+            }
+        }
+
+        _getDeleteButtonIndex(deleteButton) {
+            const allDeleteButtons = document.querySelectorAll(`.${CSS_CLASSES.DELETE_BUTTON}`);
+            return Array.from(allDeleteButtons).indexOf(deleteButton);
+        }
+
+        closeDialog() {
+            const dialog = this.getElement('USER_DATA_DIALOG');
+            if (dialog) {
+                dialog.close();
+            }
+        }
+
+        showInitBlock(content, onEmailConfirm, onOptionClick, onDeleteClick) {
+            const initBlock = this.getElement('INIT_BLOCK');
+            const tempDataList = this.getElement('TEMP_DATA_LIST');
+            
+            if (!initBlock || !tempDataList) {
+                console.error('Init block elements not found');
+                return;
+            }
+
+            tempDataList.innerHTML = content;
+            initBlock.style.display = 'block';
+
+            const emailConfirmBtn = this.getElement('EMAIL_CONFIRM');
+            if (emailConfirmBtn && onEmailConfirm) {
+                emailConfirmBtn.addEventListener('click', onEmailConfirm);
+            }
+
+            this._attachInitBlockEvents(tempDataList, onOptionClick, onDeleteClick);
+        }
+
+        _attachInitBlockEvents(container, onOptionClick, onDeleteClick) {
+            if (onOptionClick) {
+                container.addEventListener('click', (e) => {
+                    const option = e.target.closest(`.${CSS_CLASSES.DIALOG_OPTION}`);
+                    if (option) {
+                        const index = parseInt(option.getAttribute('data-index'));
+                        onOptionClick(index, option);
+                    }
+                });
+            }
+
+            if (onDeleteClick) {
+                container.addEventListener('click', (e) => {
+                    if (e.target.classList.contains(CSS_CLASSES.DELETE_BUTTON)) {
+                        const index = this._getDeleteButtonIndex(e.target);
+                        onDeleteClick(index, e.target);
+                    }
+                });
+            }
+        }
+
+        hideInitBlock() {
+            const initBlock = this.getElement('INIT_BLOCK');
+            if (initBlock) {
+                initBlock.style.display = 'none';
+            }
+        }
+
+        getCustomerEmailInput() {
+            const emailInput = this.getElement('CUSTOMER_EMAIL');
+            return emailInput ? emailInput.value.trim() : '';
+        }
+
+        isExistingCustomerOrder() {
+            const pageTitle = this.getElement('ORDER_HEADER');
+            if (pageTitle) {
+                const titleText = pageTitle.textContent.toLowerCase();
+                return titleText.includes('for') || titleText.includes('中的');
+            }
+            return false;
+        }
+
+        _escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        showAlert(message) {
+            alert(message);
+        }
+
+        showConfirm(message) {
+            return confirm(message);
+        }
+
+        waitForElement(selector, doc = document) {
+            return new Promise((resolve, reject) => {
+                const element = doc.querySelector(selector);
+                if (element) {
+                    return resolve(element);
+                }
+
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        const parentElement = mutation.target.parentElement || doc;
+                        const targetElement = parentElement.querySelector(selector);
+                        if (targetElement) {
+                            observer.disconnect();
+                            resolve(targetElement);
+                        }
+                    });
+                });
+
+                observer.observe(doc, { 
+                    childList: true, 
+                    subtree: true 
+                });
+            });
+        }
+
+        observeLoadingMask(onLoadingComplete) {
+            const popupLoading = document.querySelector('.popup-loading');
+            
+            if (!popupLoading) {
+                console.warn('Loading mask not found');
+                return;
+            }
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            console.log('Popup loading appeared');
+                        } else {
+                            console.log('Popup loading disappeared');
+                            if (onLoadingComplete) {
+                                onLoadingComplete();
+                            }
+                            observer.disconnect();
+                        }
+                    });
+                },
+                { threshold: 0 }
+            );
+
+            observer.observe(popupLoading);
+        }
+    }
+
+
+    // ================================
+    // FormManager 類別
+    // ================================
+    class FormManager {
+        constructor() {
+            this.fieldIds = [];
+            this.fields = {};
+            this._initializeFields();
+        }
+
+        _initializeFields() {
+            this._collectFieldIds();
+            this._cacheFieldElements();
+        }
+
+        _collectFieldIds() {
+            const allInputs = document.querySelectorAll('input');
+            const allSelects = document.querySelectorAll('select');
+            const allTextareas = document.querySelectorAll('textarea');
+
+            [allInputs, allSelects, allTextareas].forEach(nodeList => {
+                nodeList.forEach(element => {
+                    if (element.id && element.id.trim() !== '') {
+                        this.fieldIds.push(element.id);
+                    }
+                });
+            });
+
+            this.fieldIds = [...new Set(this.fieldIds)];
+        }
+
+        _cacheFieldElements() {
+            this.fieldIds.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    this.fields[id] = element;
+                }
+            });
+        }
+
+        getField(fieldId) {
+            if (this.fields[fieldId]) {
+                return this.fields[fieldId];
+            }
+
+            const element = document.getElementById(fieldId);
+            if (element) {
+                this.fields[fieldId] = element;
+                return element;
+            }
+
+            return null;
+        }
+
+        collectAllFormData() {
+            const formData = {};
+
+            this.fieldIds.forEach(id => {
+                const field = this.getField(id);
+                if (field) {
+                    const value = this.getFieldValue(field);
+                    if (value !== null) {
+                        formData[id] = value;
+                    }
+                }
+            });
+
+            return formData;
+        }
+
+        getFieldValue(field) {
+            if (!field) return null;
+
+            try {
+                switch (field.type) {
+                    case FIELD_TYPES.RADIO:
+                        return field.checked ? field.value : null;
+                    case FIELD_TYPES.CHECKBOX:
+                        return field.checked;
+                    case FIELD_TYPES.FIELDSET:
+                        const textarea = field.querySelector('textarea');
+                        return textarea ? textarea.value : '';
+                    default:
+                        return field.value;
+                }
+            } catch (error) {
+                console.error(`Error getting field value for ${field.id}:`, error);
+                return null;
+            }
+        }
+
+        setFieldValue(fieldId, value) {
+            const field = this.getField(fieldId);
+            if (!field) {
+                console.warn(`Field not found: ${fieldId}`);
+                return false;
+            }
+
+            try {
+                switch (field.type) {
+                    case FIELD_TYPES.RADIO:
+                        field.checked = true;
+                        break;
+                    case FIELD_TYPES.CHECKBOX:
+                        field.checked = Boolean(value);
+                        break;
+                    case FIELD_TYPES.FIELDSET:
+                        const textarea = field.querySelector('textarea');
+                        if (textarea) {
+                            textarea.value = value || '';
+                        }
+                        break;
+                    default:
+                        field.value = value || '';
+                        break;
+                }
+                return true;
+            } catch (error) {
+                console.error(`Error setting field value for ${fieldId}:`, error);
+                return false;
+            }
+        }
+
+        clearAllFields() {
+            this.fieldIds.forEach(id => {
+                const field = this.getField(id);
+                if (field) {
+                    this._clearField(field);
+                }
+            });
+        }
+
+        _clearField(field) {
+            try {
+                switch (field.type) {
+                    case FIELD_TYPES.RADIO:
+                    case FIELD_TYPES.CHECKBOX:
+                        field.checked = false;
+                        break;
+                    case FIELD_TYPES.FIELDSET:
+                        const textarea = field.querySelector('textarea');
+                        if (textarea) {
+                            textarea.value = '';
+                        }
+                        break;
+                    default:
+                        field.value = '';
+                        break;
+                }
+            } catch (error) {
+                console.error(`Error clearing field ${field.id}:`, error);
+            }
+        }
+
+        restoreFormData(formData, emailValue = '', lastNameValue = '', firstNameValue = '') {
+            this.clearAllFields();
+
+            if (emailValue) {
+                this.setFieldValue('email', emailValue);
+            }
+            if (lastNameValue) {
+                this.setFieldValue('order-billing_address_lastname', lastNameValue);
+            }
+            if (firstNameValue) {
+                this.setFieldValue('order-billing_address_firstname', firstNameValue);
+            }
+
+            Object.keys(formData).forEach(fieldId => {
+                this.setFieldValue(fieldId, formData[fieldId]);
+            });
+        }
+
+        getUserBasicInfo() {
+            const emailField = document.querySelector(SELECTORS.EMAIL_FIELD);
+            const lastNameField = document.querySelector(SELECTORS.LAST_NAME_FIELD);
+            const firstNameField = document.querySelector(SELECTORS.FIRST_NAME_FIELD);
+
+            return {
+                email: emailField ? emailField.value.trim() : '',
+                lastName: lastNameField ? lastNameField.value.trim() : '',
+                firstName: firstNameField ? firstNameField.value.trim() : '',
+                fullName: this._getFullName(lastNameField, firstNameField)
+            };
+        }
+
+        _getFullName(lastNameField, firstNameField) {
+            const lastName = lastNameField ? lastNameField.value.trim() : '';
+            const firstName = firstNameField ? firstNameField.value.trim() : '';
+            return `${lastName}${firstName}`.trim();
+        }
+
+        validateEmail(email) {
+            if (!email || typeof email !== 'string') {
+                return false;
+            }
+            return CONFIG.EMAIL_FORMAT_REGEX.test(email.trim());
+        }
+
+        getChangedFieldInfo(event) {
+            if (!event || !event.target) {
+                return null;
+            }
+
+            const target = event.target;
+            const fieldId = target.id;
+            
+            if (!fieldId) {
+                return null;
+            }
+
+            if (this._isSpecialField(target)) {
+                return null;
+            }
+
+            const field = this.getField(fieldId);
+            if (!field) {
+                return null;
+            }
+
+            return {
+                fieldId,
+                field,
+                value: this.getFieldValue(field),
+                isEmailField: fieldId === 'email',
+                isCityField: fieldId === 'order-billing_address_city_id'
+            };
+        }
+
+        _isSpecialField(target) {
+            const parentNode = target.parentNode;
+            
+            if (!parentNode) {
+                return false;
+            }
+
+            if (parentNode.id && parentNode.id.includes('sales_order_create_search_grid')) {
+                return true;
+            }
+
+            if (parentNode.classList && parentNode.classList.contains('order-tables')) {
+                return true;
+            }
+
+            return false;
+        }
+
+        setPreviousEmail(email) {
+            const emailField = document.querySelector(SELECTORS.EMAIL_FIELD);
+            if (emailField) {
+                emailField.setAttribute('data-previousEmail', email);
+            }
+        }
+
+        getPreviousEmail() {
+            const emailField = document.querySelector(SELECTORS.EMAIL_FIELD);
+            return emailField ? emailField.getAttribute('data-previousEmail') || '' : '';
+        }
+
+        createUserDataObject(email, name, formData) {
+            return {
+                email: email.trim(),
+                name: name || '客戶',
+                data: formData || {},
+                timestamp: new Date().getTime()
+            };
+        }
+
+        validateRequiredFields() {
+            const basicInfo = this.getUserBasicInfo();
+            
+            return {
+                hasEmail: Boolean(basicInfo.email),
+                hasValidEmail: this.validateEmail(basicInfo.email),
+                hasName: Boolean(basicInfo.fullName),
+                email: basicInfo.email,
+                name: basicInfo.fullName
+            };
+        }
+
+        attachChangeListener(onChange) {
+            const orderSheet = document.querySelector(SELECTORS.ORDER_DETAILS);
+            
+            if (orderSheet && onChange) {
+                orderSheet.addEventListener('change', (event) => {
+                    const fieldInfo = this.getChangedFieldInfo(event);
+                    if (fieldInfo) {
+                        onChange(fieldInfo, event);
+                    }
+                });
+            }
+        }
+
+        attachEmailClickListener(onClick) {
+            const emailField = document.querySelector(SELECTORS.EMAIL_FIELD);
+            
+            if (emailField && onClick) {
+                emailField.addEventListener('click', (event) => {
+                    const currentEmail = emailField.value;
+                    this.setPreviousEmail(currentEmail);
+                    if (onClick) {
+                        onClick(currentEmail, event);
+                    }
+                });
+            }
+        }
+
+        getAllFieldIds() {
+            return [...this.fieldIds];
+        }
+
+        getAllFields() {
+            return { ...this.fields };
+        }
+
+        reinitialize() {
+            this.fieldIds = [];
+            this.fields = {};
+            this._initializeFields();
+        }
+    }
+
+    // ================================
+    // OrderDataManager 類別
+    // ================================
+    class OrderDataManager {
+        constructor(storageManager) {
+            this.storageManager = storageManager;
+            this.removeSelectItemCount = 0;
+            this._setupProductListObserver();
+        }
+
+        _setupProductListObserver() {
+            const addPtForm = document.querySelector(SELECTORS.SALES_ORDER_CREATE_SEARCH_GRID);
+            
+            if (addPtForm) {
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.type === 'childList' || mutation.type === 'attributes' || mutation.type === 'subtree') {
+                            const productItems = document.querySelectorAll(SELECTORS.SALES_ORDER_CREATE_SEARCH_GRID_TABLE);
+                            if (productItems.length > 0) {
+                                this._attachProductItemEvents(productItems);
+                            }
+                        }
+                    });
+                });
+
+                observer.observe(addPtForm, { 
+                    attributes: false, 
+                    childList: true, 
+                    subtree: false 
+                });
+            }
+
+            const addProductBtn = document.querySelector(SELECTORS.ADD_PRODUCTS);
+            if (addProductBtn) {
+                addProductBtn.addEventListener('click', () => {
+                    setTimeout(() => {
+                        const productItems = document.querySelectorAll(SELECTORS.SALES_ORDER_CREATE_SEARCH_GRID_TABLE);
+                        this._attachProductItemEvents(productItems);
+                    }, 100);
+                });
+            }
+        }
+
+        _attachProductItemEvents(productItems) {
+            productItems.forEach((item) => {
+                if (item.dataset.eventAttached) return;
+                
+                item.addEventListener('click', (e) => this._handleProductEvent(e.currentTarget));
+                item.addEventListener('change', (e) => this._handleProductEvent(e.currentTarget));
+                
+                item.dataset.eventAttached = 'true';
+            });
+        }
+
+        _handleProductEvent(element) {
+            try {
+                const productInfo = this._extractProductInfo(element);
+                if (!productInfo) return;
+
+                const { email } = this._getCurrentUserInfo();
+                if (!email) return;
+
+                if (productInfo.isSelected) {
+                    this._saveSelectedProduct(email, productInfo);
+                } else {
+                    this._removeSelectedProduct(email, productInfo.sku);
+                }
+            } catch (error) {
+                console.error('Error handling product event:', error);
+            }
+        }
+
+        _extractProductInfo(element) {
+            try {
+                const row = element.closest('tr');
+                if (!row) return null;
+
+                const idElement = row.querySelector('.col-id');
+                const qtyElement = row.querySelector('.col-qty input');
+                const skuElement = row.querySelector('.col-sku');
+                const selectElement = row.querySelector('.col-select input');
+
+                if (!idElement || !qtyElement || !skuElement || !selectElement) {
+                    return null;
+                }
+
+                return {
+                    itemID: idElement.innerText.trim(),
+                    qty: qtyElement.value,
+                    sku: skuElement.innerText.trim(),
+                    isSelected: selectElement.checked
+                };
+            } catch (error) {
+                console.error('Error extracting product info:', error);
+                return null;
+            }
+        }
+
+        _getCurrentUserInfo() {
+            const emailField = document.querySelector(SELECTORS.EMAIL_FIELD);
+            const lastNameField = document.querySelector(SELECTORS.LAST_NAME_FIELD);
+            const firstNameField = document.querySelector(SELECTORS.FIRST_NAME_FIELD);
+
+            const email = emailField ? emailField.value.trim() : '';
+            const lastName = lastNameField ? lastNameField.value.trim() : '';
+            const firstName = firstNameField ? firstNameField.value.trim() : '';
+
+            return {
+                email,
+                name: `${lastName}${firstName}`.trim()
+            };
+        }
+
+        _saveSelectedProduct(email, productInfo) {
+            const itemKey = `item[${productInfo.itemID}][qty]`;
+            const itemData = {
+                [itemKey]: productInfo.qty
+            };
+
+            this.storageManager.saveCachedItemID(email, productInfo.sku, itemData);
+        }
+
+        _removeSelectedProduct(email, sku) {
+            this.storageManager.deleteCachedItemID(email, sku);
+        }
+
+        saveOrderItemsData(email) {
+            if (!email) return;
+
+            const orderTableRows = document.querySelectorAll(`${SELECTORS.ORDER_TABLES} tbody`);
+            
+            orderTableRows.forEach((row) => {
+                try {
+                    const productSkuElement = row.querySelector('.product-sku-block');
+                    if (!productSkuElement) return;
+
+                    const productSku = productSkuElement.innerText.split(':')[1]?.trim();
+                    if (!productSku) return;
+
+                    const itemDate1Element = row.querySelector('.col-row-from-date-1 .input-date');
+                    const itemDate2Element = row.querySelector('.col-row-to-date-2 .input-date');
+                    const itemNoteElement = row.querySelector('.col-row-free-text textarea');
+
+                    const itemData = {
+                        itemDate_1: itemDate1Element ? itemDate1Element.value : '',
+                        itemDate_2: itemDate2Element ? itemDate2Element.value : '',
+                        itemNote: itemNoteElement ? itemNoteElement.value : ''
+                    };
+
+                    this.storageManager.saveItemData(email, productSku, itemData);
+                } catch (error) {
+                    console.error('Error saving order item data:', error);
+                }
+            });
+        }
+
+        restoreOrderItemsData(email) {
+            if (!email) return;
+
+            const userItemData = this.storageManager.getUserItemData(email);
+            
+            setTimeout(() => {
+                const orderTableRows = document.querySelectorAll(`${SELECTORS.ORDER_TABLES} tbody`);
+                
+                orderTableRows.forEach((row) => {
+                    try {
+                        const productSkuElement = row.querySelector('.product-sku-block');
+                        if (!productSkuElement) return;
+
+                        const productSku = productSkuElement.innerText.split(':')[1]?.trim();
+                        if (!productSku || !userItemData[productSku]) return;
+
+                        const itemData = userItemData[productSku];
+
+                        const itemDate1Element = row.querySelector('.col-row-from-date-1 .input-date');
+                        const itemDate2Element = row.querySelector('.col-row-to-date-2 .input-date');
+                        const itemNoteElement = row.querySelector('.col-row-free-text textarea');
+
+                        if (itemDate1Element) itemDate1Element.value = itemData.itemDate_1 || '';
+                        if (itemDate2Element) itemDate2Element.value = itemData.itemDate_2 || '';
+                        if (itemNoteElement) itemNoteElement.value = itemData.itemNote || '';
+                    } catch (error) {
+                        console.error('Error restoring order item data:', error);
+                    }
+                });
+
+                setTimeout(() => {
+                    const updateAttributesBtn = document.querySelector(SELECTORS.MRL_UPDATE_ATTRIBUTES);
+                    if (updateAttributesBtn) {
+                        updateAttributesBtn.click();
+                    }
+                }, 2000);
+            }, 500);
+        }
+
+        async restoreSelectedProducts(email) {
+            if (!email) {
+                console.warn('Email is required for restoring products');
+                return Promise.resolve();
+            }
+
+            const cachedItemIDs = this.storageManager.getUserCachedItemIDs(email);
+            
+            if (Object.keys(cachedItemIDs).length === 0) {
+                console.log('No cached products found for user');
+                return Promise.resolve();
+            }
+
+            const area = ['search', 'items', 'shipping_method', 'totals', 'giftmessage', 'billing_method'];
+            const fieldsPrepare = {};
+            const itemsFilter = [];
+
+            Object.keys(cachedItemIDs).forEach((sku) => {
+                const itemData = cachedItemIDs[sku];
+                Object.keys(itemData).forEach((key) => {
+                    const itemIdMatch = key.match(/\[(\d+)\]/);
+                    const itemId = itemIdMatch ? itemIdMatch[1] : null;
+                    const qtyKey = `item[${itemId}][qty]`;
+                    const qty = itemData[qtyKey];
+
+                    if (qty !== undefined) {
+                        fieldsPrepare[qtyKey] = qty;
+                        itemsFilter.push({
+                            item_id: itemId,
+                            sku: sku
+                        });
+                    }
+                });
+            });
+
+            if (window.order && window.order.productConfigureSubmit) {
+                try {
+                    window.order.productConfigureSubmit('product_to_add', area, fieldsPrepare, itemsFilter);
+                    return Promise.resolve();
+                } catch (error) {
+                    console.error('Error restoring selected products:', error);
+                    return Promise.reject(error);
+                }
+            } else {
+                console.warn('Order object not found');
+                return Promise.resolve();
+            }
+        }
+
+        async removeAllSelectedProducts() {
+            const existProduct = document.querySelectorAll(`${SELECTORS.ORDER_ITEMS} td.col-product > span`);
+            
+            if (existProduct.length === 0) {
+                return Promise.resolve();
+            }
+
+            const existProductIds = Array.from(existProduct).map(item => {
+                const match = item.id.match(/\d+/);
+                return match ? match[0] : null;
+            }).filter(id => id !== null);
+
+            this.removeSelectItemCount = existProductIds.length;
+
+            existProductIds.forEach(id => {
+                if (window.order && window.order.removeQuoteItem) {
+                    try {
+                        window.order.removeQuoteItem(id);
+                    } catch (error) {
+                        console.error(`Error removing product ${id}:`, error);
+                    }
+                }
+            });
+
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    this.removeSelectItemCount = 0;
+                    resolve();
+                }, CONFIG.PRODUCT_REMOVAL_DELAY * existProductIds.length);
+            });
+        }
+
+        syncTempData(email) {
+            if (!email) return;
+
+            const orderTableRows = document.querySelectorAll(`${SELECTORS.ORDER_TABLES} tbody`);
+
+            orderTableRows.forEach((row) => {
+                try {
+                    const actionsElement = row.querySelector('.col-actions .admin__control-select');
+                    if (!actionsElement || actionsElement.value !== 'remove') return;
+
+                    const productSkuElement = row.querySelector('.product-sku-block');
+                    if (!productSkuElement) return;
+
+                    const productSku = productSkuElement.innerText.split(':')[1]?.trim();
+                    if (!productSku) return;
+
+                    this.storageManager.deleteCachedItemID(email, productSku);
+                    
+                    const allItemData = this.storageManager.getAllItemData();
+                    if (allItemData[email] && allItemData[email][productSku]) {
+                        delete allItemData[email][productSku];
+                        this.storageManager.setLocalStorageData('allItemData', allItemData);
+                    }
+                } catch (error) {
+                    console.error('Error syncing temp data:', error);
+                }
+            });
+        }
+
+        attachApplyButtonListener(onApplyClick) {
+            this.waitForElement(SELECTORS.MRL_UPDATE_ATTRIBUTES)
+                .then((button) => {
+                    button.addEventListener('click', () => {
+                        if (onApplyClick) {
+                            onApplyClick();
+                        }
+                    });
+                })
+                .catch((error) => {
+                    console.error('Apply button not found:', error);
+                });
+        }
+
+        waitForElement(selector, doc = document) {
+            return new Promise((resolve, reject) => {
+                const element = doc.querySelector(selector);
+                if (element) {
+                    return resolve(element);
+                }
+
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        const parentElement = mutation.target.parentElement || doc;
+                        const targetElement = parentElement.querySelector(selector);
+                        if (targetElement) {
+                            observer.disconnect();
+                            resolve(targetElement);
+                        }
+                    });
+                });
+
+                observer.observe(doc, { 
+                    childList: true, 
+                    subtree: true 
+                });
+            });
+        }
+
+        hasEmptyQuoteItems() {
+            const checkQuote = document.querySelector(`${SELECTORS.ORDER_ITEMS} .${CSS_CLASSES.EMPTY_TEXT}`);
+            return Boolean(checkQuote);
+        }
+    }
 
         ////////////Add product to order////////////
 
@@ -1265,28 +2290,394 @@
             return JSON.parse(localStorage.getItem(key)) || {};
         }
 
-        //同步暫存資料
-        function syncTempData(selectedEmail) {
-            var orderTableRows = document.querySelectorAll(".order-tables tbody");
+    // ================================
+    // AppController 主控制器
+    // ================================
+    class AppController {
+        constructor() {
+            this.storageManager = new StorageManager();
+            this.uiManager = new UIManager();
+            this.formManager = new FormManager();
+            this.orderDataManager = new OrderDataManager(this.storageManager);
+            
+            this._initialize();
+        }
 
-            //手動刪除表身產品
-            orderTableRows.forEach(function (row) {
-                var actions = row.querySelector(".col-actions .admin__control-select");
-                if (actions.value === "remove") {
-                    var productSku = row.querySelector(".product-sku-block").innerText.split(":")[1].trim();
-                    var cachedItemIDs = getLocalStorageData("allCachedItemIDs");
-                    var cachedItemDatas = getLocalStorageData("allItemData");
+        _initialize() {
+            this._setupEventListeners();
+            this._initializeOnPageLoad();
+            this._cleanupExpiredData();
+        }
 
-                    if (cachedItemIDs[selectedEmail] && cachedItemIDs[selectedEmail][productSku]) {
-                        delete cachedItemIDs[selectedEmail][productSku];
-                        localStorage.setItem("allCachedItemIDs", JSON.stringify(cachedItemIDs));
-                    }
-                    if (cachedItemDatas[selectedEmail] && cachedItemDatas[selectedEmail][productSku]) {
-                        delete cachedItemDatas[selectedEmail][productSku];
-                        localStorage.setItem("allItemData", JSON.stringify(cachedItemDatas));
-                    }
+        _setupEventListeners() {
+            this._setupMenuEvents();
+            this._setupFormEvents();
+            this._setupOrderEvents();
+        }
+
+        _setupMenuEvents() {
+            const menuButton = this.uiManager.getElement('MENU_BUTTON');
+            if (menuButton) {
+                menuButton.addEventListener('click', () => {
+                    this.uiManager.toggleMenu();
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                const menuButton = this.uiManager.getElement('MENU_BUTTON');
+                const menuContent = this.uiManager.getElement('MENU_CONTENT');
+                
+                if (e.target !== menuButton && e.target !== menuContent) {
+                    this.uiManager.closeMenu();
                 }
             });
+
+            const saveDataBtn = this.uiManager.getElement('SAVE_DATA_BTN');
+            if (saveDataBtn) {
+                saveDataBtn.addEventListener('click', () => {
+                    this._handleSaveAllData();
+                });
+            }
+
+            const loadTempDataBtn = this.uiManager.getElement('LOAD_TEMP_DATA_BTN');
+            if (loadTempDataBtn) {
+                loadTempDataBtn.addEventListener('click', () => {
+                    this._handleShowStoredDataDialog();
+                });
+            }
+
+            const clearItemsBtn = this.uiManager.getElement('CLEAR_ITEMS');
+            if (clearItemsBtn) {
+                clearItemsBtn.addEventListener('click', () => {
+                    this._handleClearItems();
+                });
+            }
         }
-    })();
+
+        _setupFormEvents() {
+            this.formManager.attachChangeListener((fieldInfo, event) => {
+                this._handleFieldChange(fieldInfo, event);
+            });
+
+            this.formManager.attachEmailClickListener((currentEmail) => {
+                this.formManager.setPreviousEmail(currentEmail);
+            });
+        }
+
+        _setupOrderEvents() {
+            this.orderDataManager.attachApplyButtonListener(() => {
+                this._handleApplyButtonClick();
+            });
+        }
+
+        _initializeOnPageLoad() {
+            const basicInfo = this.formManager.getUserBasicInfo();
+            
+            if (!basicInfo.email) {
+                this._showInitialEmailPrompt();
+            }
+        }
+
+        _showInitialEmailPrompt() {
+            const storedData = Object.values(this.storageManager.getAllUserData());
+            const isExistingCustomer = this.uiManager.isExistingCustomerOrder();
+            const currentEmail = this.formManager.getUserBasicInfo().email;
+            
+            const content = this.uiManager.buildTempDataListHTML(storedData, isExistingCustomer, currentEmail);
+            
+            this.uiManager.showInitBlock(
+                content,
+                () => this._handleEmailConfirm(),
+                (index) => this._handleInitialOptionClick(index, storedData),
+                (index) => this._handleDeleteOption(index, storedData)
+            );
+        }
+
+        _handleEmailConfirm() {
+            const emailInput = this.uiManager.getCustomerEmailInput();
+            
+            if (!emailInput) {
+                this.uiManager.showAlert(MESSAGES.PLEASE_INPUT_EMAIL);
+                return;
+            }
+
+            if (!this.formManager.validateEmail(emailInput)) {
+                this.uiManager.showAlert('請輸入有效的Email格式');
+                return;
+            }
+
+            this.formManager.setFieldValue('email', emailInput);
+            
+            const checkEmailBtn = document.querySelector('#checkEmailBtn');
+            if (checkEmailBtn) {
+                checkEmailBtn.click();
+            }
+            
+            this.uiManager.hideInitBlock();
+            this._saveAllDataToStorage();
+        }
+
+        async _handleInitialOptionClick(index, storedData) {
+            if (index >= 0 && index < storedData.length) {
+                const userData = storedData[index];
+                const selectedEmail = userData.email;
+                
+                try {
+                    await this.orderDataManager.restoreSelectedProducts(selectedEmail);
+                    this.uiManager.observeLoadingMask(() => {
+                        this.orderDataManager.restoreOrderItemsData(selectedEmail);
+                    });
+                    this._restoreUserData(userData);
+                    this.uiManager.hideInitBlock();
+                } catch (error) {
+                    console.error('Error restoring initial data:', error);
+                }
+            }
+        }
+
+        _handleFieldChange(fieldInfo, event) {
+            if (fieldInfo.isEmailField) {
+                this._handleEmailFieldChange(fieldInfo, event);
+            } else if (fieldInfo.isCityField) {
+                this._handleCityFieldChange(fieldInfo);
+            } else {
+                this._saveCurrentFieldData(fieldInfo);
+            }
+        }
+
+        _handleEmailFieldChange(fieldInfo, event) {
+            const previousEmail = this.formManager.getPreviousEmail();
+            const newEmail = fieldInfo.value;
+            
+            this._saveAllDataToStorage();
+
+            const hasEmptyQuote = this.orderDataManager.hasEmptyQuoteItems();
+            if (!hasEmptyQuote && previousEmail && previousEmail !== newEmail) {
+                this.storageManager.updateUserEmail(previousEmail, newEmail);
+                this.uiManager.showAlert(MESSAGES.EMAIL_CHANGED_ALERT);
+            }
+        }
+
+        _handleCityFieldChange(fieldInfo) {
+            const cityField = this.formManager.getField('order-billing_address_city');
+            if (cityField) {
+                const currentFieldInfo = {
+                    ...fieldInfo,
+                    fieldId: 'order-billing_address_city',
+                    field: cityField,
+                    value: cityField.value
+                };
+                this._saveCurrentFieldData(currentFieldInfo);
+            }
+        }
+
+        _saveCurrentFieldData(fieldInfo) {
+            const validation = this.formManager.validateRequiredFields();
+            
+            if (validation.hasEmail && validation.hasValidEmail) {
+                const userData = this.formManager.createUserDataObject(
+                    validation.email,
+                    validation.name,
+                    { [fieldInfo.fieldId]: fieldInfo.value }
+                );
+
+                this.storageManager.saveUserData(validation.email, userData);
+                this.uiManager.showSaveSuccessMessage();
+            }
+        }
+
+        _saveAllDataToStorage() {
+            const validation = this.formManager.validateRequiredFields();
+            
+            if (validation.hasEmail && validation.hasValidEmail) {
+                const formData = this.formManager.collectAllFormData();
+                const userData = this.formManager.createUserDataObject(
+                    validation.email,
+                    validation.name,
+                    formData
+                );
+
+                this.storageManager.saveUserData(validation.email, userData);
+                this.uiManager.showSaveSuccessMessage();
+            } else if (validation.hasEmail) {
+                const formData = this.formManager.collectAllFormData();
+                const userData = this.formManager.createUserDataObject(
+                    validation.email,
+                    '客戶',
+                    formData
+                );
+
+                this.storageManager.saveUserData(validation.email, userData);
+                this.uiManager.showSaveSuccessMessage();
+            }
+        }
+
+        _handleSaveAllData() {
+            this._saveAllDataToStorage();
+            this.uiManager.showAlert(MESSAGES.DATA_SAVED);
+        }
+
+        _handleShowStoredDataDialog() {
+            const storedData = Object.values(this.storageManager.getAllUserData());
+            const isExistingCustomer = this.uiManager.isExistingCustomerOrder();
+            const currentEmail = this.formManager.getUserBasicInfo().email;
+            
+            const content = this.uiManager.buildTempDataListHTML(storedData, isExistingCustomer, currentEmail);
+            
+            this.uiManager.showTempDataDialog(
+                content,
+                (index) => this._handleStoredDataOptionClick(index, storedData),
+                (index) => this._handleDeleteOption(index, storedData),
+                () => this.uiManager.closeDialog()
+            );
+        }
+
+        async _handleStoredDataOptionClick(index, storedData) {
+            if (index < 0 || index >= storedData.length) return;
+
+            const userData = storedData[index];
+            const selectedEmail = userData.email;
+            const currentEmail = this.formManager.getUserBasicInfo().email;
+
+            this.uiManager.closeDialog();
+
+            if (currentEmail && currentEmail !== selectedEmail) {
+                this._showOverwriteConfirmation(userData);
+            } else {
+                await this._loadSelectedUserData(userData);
+            }
+        }
+
+        _showOverwriteConfirmation(userData) {
+            const confirmHTML = this.uiManager.buildLoadConfirmHTML();
+            const dialog = this.uiManager.getElement('USER_DATA_DIALOG');
+            
+            if (dialog) {
+                dialog.innerHTML = confirmHTML;
+                dialog.style.cursor = 'unset';
+                dialog.style.opacity = '1';
+                dialog.showModal();
+
+                const sureBtn = dialog.querySelector('.sureBtn');
+                const closeBtn = dialog.querySelector('.closeBtn');
+
+                if (sureBtn) {
+                    sureBtn.addEventListener('click', async () => {
+                        this.uiManager.closeDialog();
+                        await this._overwriteAndLoadData(userData);
+                    });
+                }
+
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        this.uiManager.closeDialog();
+                    });
+                }
+            }
+        }
+
+        async _overwriteAndLoadData(userData) {
+            try {
+                await this.orderDataManager.removeAllSelectedProducts();
+                await this.orderDataManager.restoreSelectedProducts(userData.email);
+                this.uiManager.observeLoadingMask(() => {
+                    this.orderDataManager.restoreOrderItemsData(userData.email);
+                });
+                this._restoreUserData(userData);
+            } catch (error) {
+                console.error('Error overwriting and loading data:', error);
+            }
+        }
+
+        async _loadSelectedUserData(userData) {
+            const currentEmail = this.formManager.getUserBasicInfo().email;
+            
+            if (userData.email === currentEmail) {
+                try {
+                    await this.orderDataManager.removeAllSelectedProducts();
+                    await this.orderDataManager.restoreSelectedProducts(userData.email);
+                    this.uiManager.observeLoadingMask(() => {
+                        this.orderDataManager.restoreOrderItemsData(userData.email);
+                    });
+                } catch (error) {
+                    console.error('Error loading selected user data:', error);
+                }
+            } else {
+                try {
+                    await this.orderDataManager.restoreSelectedProducts(userData.email);
+                    this.uiManager.observeLoadingMask(() => {
+                        this.orderDataManager.restoreOrderItemsData(userData.email);
+                    });
+                    this._restoreUserData(userData);
+                } catch (error) {
+                    console.error('Error loading selected user data:', error);
+                }
+            }
+        }
+
+        _restoreUserData(userData) {
+            const nameParts = userData.name.split(' ');
+            const lastName = nameParts[0] || '';
+            const firstName = nameParts[1] || '';
+
+            this.formManager.restoreFormData(
+                userData.data,
+                userData.email,
+                lastName,
+                firstName
+            );
+        }
+
+        _handleDeleteOption(index, storedData) {
+            if (index >= 0 && index < storedData.length) {
+                const userEmail = storedData[index].email;
+                this.storageManager.deleteUserData(userEmail);
+                
+                this._handleShowStoredDataDialog();
+            }
+        }
+
+        async _handleClearItems() {
+            const confirmed = this.uiManager.showConfirm(MESSAGES.CONFIRM_CLEAR_ITEMS);
+            if (confirmed) {
+                try {
+                    await this.orderDataManager.removeAllSelectedProducts();
+                } catch (error) {
+                    console.error('Error clearing items:', error);
+                }
+            }
+        }
+
+        _handleApplyButtonClick() {
+            const basicInfo = this.formManager.getUserBasicInfo();
+            if (basicInfo.email) {
+                this._saveAllDataToStorage();
+                this.orderDataManager.saveOrderItemsData(basicInfo.email);
+                this.orderDataManager.syncTempData(basicInfo.email);
+            }
+        }
+
+        _cleanupExpiredData() {
+            try {
+                const cleanedCount = this.storageManager.cleanupExpiredData();
+                if (cleanedCount > 0) {
+                    console.log(`Cleaned up ${cleanedCount} expired data entries`);
+                }
+            } catch (error) {
+                console.error('Error cleaning up expired data:', error);
+            }
+        }
+    }
+
+    // ================================
+    // 初始化應用程式
+    // ================================
+    document.addEventListener('DOMContentLoaded', () => {
+        try {
+            const app = new AppController();
+            console.log('Temporary Storage App initialized successfully');
+        } catch (error) {
+            console.error('Failed to initialize Temporary Storage App:', error);
+        }
+    });
 </script>
