@@ -1,0 +1,23 @@
+<script>
+(function () {
+        var emailInput = document.querySelector('#email');
+        var pageTitle = document.querySelector('#order-header');
+
+        if (!emailInput || !pageTitle) {
+            return;
+        }
+
+        if (emailInput.value.trim() !== '') {
+            checkCreateOrderForExistCustomer(pageTitle);
+        }
+
+        function checkCreateOrderForExistCustomer(pageTitle) {
+            pageTitle = pageTitle.textContent.toLowerCase();
+            if (pageTitle.includes('for') || pageTitle.includes('中的')) {
+                emailInput.classList.add('disabled');
+                emailInput.readOnly = true;
+            }
+        }
+    }
+)();
+</script>

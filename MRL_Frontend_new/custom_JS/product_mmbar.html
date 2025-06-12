@@ -87,6 +87,18 @@
     transition: 0.3s ease-in-out;
   }
 
+  .bottomNavHidden {
+    visibility: hidden;
+    transition: ease-in-out 0.2s;
+    transform: translateY(100%);
+  }
+
+  .bottomNavActive {
+    visibility: visible;
+    transition: ease-in-out 0.2s;
+    transform: translateY(0);
+  }
+
   @media (min-width: 1024px) {
     .sticky-addtocart.old-customer-buy-pc {
       width: 25% !important;
@@ -95,7 +107,8 @@
 
   @media (max-width: 767px) {
     .box-tocart .actions {
-      display: none;.sticky-addtocart;
+      display: none;
+      /* .sticky-addtocart; */
     }
 
     .bottom-nav {
@@ -113,6 +126,17 @@
         0 -1px 5px 0 rgba(0, 0, 0, 0.26);
       z-index: 3147483646;
       margin-bottom: 0px;
+    }
+    .bottom-nav::after{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        position: absolute;
+        bottom: -100%;
+        z-index: -1;
     }
 
     .scrollUp {
@@ -141,10 +165,19 @@
       height: 5.6rem;
       background-color: #e4e4e4;
       position: absolute;
-      bottom: -5rem;
+      bottom: 0;
       transition: bottom 0.3s ease-in-out, opacity 0.3s ease-in-out;
       left: 0;
       padding-bottom: 15px;
+    }
+    .add2carOption::after{
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: #e4e4e4;
+        position: fixed;
+        bottom: -100%;
     }
 
     .add2carActive {
@@ -393,22 +426,8 @@
       margin-right: 5px;
     }
 
-    .bottomNavHidden {
-      visibility: hidden;
-      transition: ease-in-out 0.2s;
-      transform: translateY(100%);
-    }
-
-    .bottomNavActive {
-      visibility: visible;
-      transition: ease-in-out 0.2s;
-      transform: translateY(0);
-    }
-
-    .bottomNavHidden {
-      visibility: hidden;
-      transition: ease-in-out 0.2s;
-      transform: translateY(100%);
+    .bottomNavActive-stop {
+      bottom: 0% !important;
     }
 
     .bottom-nav>#menubar-add2wishlist {
@@ -657,7 +676,6 @@
             .querySelector(".wish-icon")
             .classList.add("wishActive");
         } else {
-          console.log('尚未登入')
           clickLogin();
           mmBarAddToWishListBtn
             .querySelector(".wish-icon")
@@ -740,19 +758,19 @@
 
     //老客戶頁面mmbar按鈕切換
     function switchMMbarBtnForOldCus() {
-        // Mobile
-        mmBarAddToCartBtn.classList.add("notActive");
-        $buyNowEl.innerHTML = "老客戶限定加入購物車";
-        $buyNowEl.classList.remove('bottom-nav-buynow');
-        $buyNowEl.classList.add("old-customer-buy");
-        // PC
-        originalAdd2CartBtn = document.querySelector("#product-addtocart-button");
-        originalBuyNowBtn = document.querySelector("#go2buy");
-        originalAdd2CartBtn.classList.add("notActive");
-        originalBuyNowBtn.innerHTML = "老客戶限定加入購物車";
-        originalBuyNowBtn.classList.remove('bottom-nav-buynow');
-        originalBuyNowBtn.classList.add("old-customer-buy");
-        originalBuyNowBtn.classList.add("old-customer-buy-pc");
+      // Mobile
+      mmBarAddToCartBtn.classList.add("notActive");
+      $buyNowEl.innerHTML = "老客戶限定加入購物車";
+      $buyNowEl.classList.remove('bottom-nav-buynow');
+      $buyNowEl.classList.add("old-customer-buy");
+      // PC
+      originalAdd2CartBtn = document.querySelector("#product-addtocart-button");
+      originalBuyNowBtn = document.querySelector("#go2buy");
+      originalAdd2CartBtn.classList.add("notActive");
+      originalBuyNowBtn.innerHTML = "老客戶限定加入購物車";
+      originalBuyNowBtn.classList.remove('bottom-nav-buynow');
+      originalBuyNowBtn.classList.add("old-customer-buy");
+      originalBuyNowBtn.classList.add("old-customer-buy-pc");
     }
 
     //老客戶登入提示訊息跳窗
@@ -902,21 +920,77 @@
       }
     });
 
-    var lastScrollTop = 0;
-    window.addEventListener(
-      "scroll",
-      function () {
-        var currentScroll =
-          window.pageYOffset || document.documentElement.scrollTop;
-        if (currentScroll > lastScrollTop) {
-          document.querySelector(".bottom-nav").classList.add("scrollUp");
-        } else {
-          document.querySelector(".bottom-nav").classList.remove("scrollUp");
+    var lastViewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    var userActivityTimer = null;
+    var viewportChangeTimer = null;
+
+    // 監聽使用者活動
+    function handleUserActivity() {
+      let bottomNav = document.querySelector('.bottom-nav');
+      if (!bottomNav) return;
+
+      if (userActivityTimer !== null) {
+        clearTimeout(userActivityTimer);
+      }
+
+      userActivityTimer = setTimeout(function () {
+        const navOpen = document.querySelector('html').classList.contains('nav-open');
+        if(navOpen) return;
+        if (bottomNav.classList.contains('bottomNavHidden')) {
+          bottomNav.classList.remove('bottomNavHidden');
+          bottomNav.classList.add('bottomNavActive');
+          bottomNav.classList.add('bottomNavActive-stop');
         }
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-      },
-      false
-    );
+      }, 1500);
+    }
+
+    window.addEventListener('scroll', handleUserActivity);
+
+    // 監聽視窗大小變化
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', function () {
+        handleViewportChange();
+      });
+    } else {
+      window.addEventListener('resize', function () {
+        handleViewportChange();
+      });
+    }
+
+    // 處理視窗大小變化
+    function handleViewportChange() {
+      let currentViewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      let bottomNav = document.querySelector('.bottom-nav');
+      if (!bottomNav) return;
+
+      const heightThreshold = 30; // 閾值
+      const heightDifference = Math.abs(currentViewportHeight - lastViewportHeight);
+
+      // 只有當高度變化超過閾值時才處理
+      if (heightDifference > heightThreshold) {
+        if (viewportChangeTimer) {
+          clearTimeout(viewportChangeTimer);
+        }
+
+        // Debouncing
+        viewportChangeTimer = setTimeout(function() {
+          // 工具列出現/消失，控制 mmbar 顯示/隱藏
+          if (currentViewportHeight > lastViewportHeight) {
+            bottomNav.classList.add('bottomNavHidden');
+            bottomNav.classList.remove('bottomNavActive');
+          } else {
+            bottomNav.classList.remove('bottomNavHidden');
+            bottomNav.classList.add('bottomNavActive');
+          }
+          
+          if (bottomNav.classList.contains('bottomNavActive-stop')) {
+            bottomNav.classList.remove('bottomNavActive-stop');
+          }
+          
+          lastViewportHeight = currentViewportHeight;
+        }, 200);
+      }
+    }
 
     require(["jquery", "Mrl_SocialLogin/js/pslogin-mixin"], function (
       $,

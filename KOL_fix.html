@@ -1,0 +1,642 @@
+<style>#html-body [data-pb-style=OLKIII0]{justify-content:flex-start;display:flex;flex-direction:column;background-position:left top;background-size:cover;background-repeat:no-repeat;background-attachment:scroll}#html-body [data-pb-style=W0CRILU],#html-body [data-pb-style=W4FNO9F]{width:100%;border-width:1px;border-color:#cecece;display:inline-block}#html-body [data-pb-style=YPK9YDK]{margin-top:15px;margin-bottom:30px}#html-body [data-pb-style=A8W9P3Y],#html-body [data-pb-style=X2L752Y],#html-body [data-pb-style=X589V26],#html-body [data-pb-style=XK9KHP1]{width:100%;border-width:1px;border-color:#cecece;display:inline-block}#html-body [data-pb-style=WCIXEIB]{margin-top:47px;margin-bottom:40px}#html-body [data-pb-style=DR2LPQ3],#html-body [data-pb-style=J4SJPEF],#html-body [data-pb-style=K7M88EF]{width:100%;border-width:1px;border-color:#cecece;display:inline-block}#html-body [data-pb-style=R3S9MIM]{margin-top:47px;margin-bottom:60px}#html-body [data-pb-style=C4YOJPY]{width:100%;border-width:1px;border-color:#cecece;display:inline-block}#html-body [data-pb-style=D474L75]{margin-top:47px;margin-bottom:60px}</style><div data-content-type="row" data-appearance="full-bleed" data-enable-parallax="0" data-parallax-speed="0.5" data-background-images="{}" data-background-type="image" data-video-loop="true" data-video-play-only-visible="true" data-video-lazy-load="true" data-video-fallback-src="" data-element="main" data-pb-style="OLKIII0"><div data-content-type="html" data-appearance="default" data-element="main">&lt;style&gt;
+    .chromeHack {
+        height: 100vh; /*給 Safari 以外的瀏覽器讀取*/
+        height: calc(var(--vh, 1vh) * 100);
+    }
+        .nav-sections.sections {
+           margin-bottom:0;
+        }
+        .page-header{
+          margin-bottom:0;
+        }
+        .blog-carousel .blog-post-more-link{
+            background-color: #fff;
+            color: #666666;
+            border: 1px solid #666666;
+            font-weight: 600;
+            border-radius: 3px;
+        }
+        .blog-block-content{
+          margin: 0 70px 40px 70px;
+          padding: 20px 0 !important;
+        }
+        [data-content-type=row][data-appearance=contained][data-element=main]{max-width: 1920px;margin-left:auto;margin-right:auto;padding-left:0;padding-right:0;}
+        #maincontent{padding-left: 0;padding-right: 0;max-width: 1920px;}
+        
+        @media (max-width: 768px){
+            .blog-block-content{
+                margin: 0 0 40px 10px;
+            }
+        }
+    &lt;/style&gt;
+        </div><div data-content-type="html" data-appearance="default" data-element="main">&lt;!-- Slider --&gt;
+    
+    &lt;style&gt;
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&amp;display=swap');
+    
+        #space-product-carousel.nocarousel{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        #space-product-carousel.nocarousel .item{
+            display: none;
+        }
+        #space-product-carousel.nocarousel .item:last-child{
+            display: block;
+            width: 50%;
+            margin-left: -25.5%;
+            margin-right: 0.5%;
+            opacity: 0.3;
+            order: 1;
+        }
+        #space-product-carousel.nocarousel .item:nth-child(1){
+            display: block;
+            width: 50%;
+            margin: 0 0%;
+            order: 2;
+        }
+        #space-product-carousel.nocarousel .item:nth-child(2){
+            display: block;
+            width: 50%;
+            margin-right: -25.5%;
+            margin-left: 0.5%;
+            opacity: 0.3;
+            order: 3;
+        }
+        #space-product-carousel .owl-controls{
+            display: block !important;
+        }
+        #space-product-carousel .cat-slider{
+                height: fit-content;
+            }
+            #space-product-carousel .owl-carousel{
+        width:100%;
+        }
+        #space-product-carousel .owl-nav{
+        margin-top: 0 !important;
+        position: absolute;
+        width: 24.5%;
+        height: 100%;
+        top: 0;
+        }
+        #space-product-carousel .owl-next,#space-product-carousel .owl-prev{
+        top:50%;
+        width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: absolute;
+        left: 0;
+        height: 100%;
+        opacity: 0;
+        }
+        #space-product-carousel .owl-next{
+        left: 308%;
+    
+        }
+    
+        #space-product-carousel .owl-item{
+        opacity: 0.3;
+        }
+    
+        #space-product-carousel .center{
+        opacity: 1 !important;
+        }
+        @media(max-width:768px){
+            #space-product-carousel .owl-next{
+                left: 379%;
+            }
+            #space-product-carousel .owl-next, #space-product-carousel .owl-prev{
+                width: 29%;
+            }
+            #space-product-carousel.nocarousel{
+                overflow: hidden;
+            }
+            #space-product-carousel.nocarousel .item:last-child{
+                width: 83%;
+                margin-left: -77%;
+                margin-right: 2.5%;
+            }
+            #space-product-carousel.nocarousel .item:nth-child(1){
+                width: 83%;
+            }
+            #space-product-carousel.nocarousel .item:nth-child(2){
+                width: 83%;
+                margin-right: -77.5%;
+                margin-left: 2.5%;
+            }
+             #space-product-carousel {
+                height: calc(100% + 25px) !important;
+            }
+        }
+        &lt;/style&gt;
+    
+    
+        &lt;div id="space-product-carousel" class="owl-carousel owl-theme nocarousel section" data-section-name="home_Slider"&gt;
+    
+            &lt;div class="item cat-slider"&gt;
+                &lt;a href="{{store direct_url='hotsales/japandi-series.html'}}" aria-label="走進斐莉的一日北歐侘寂"&gt;
+                    &lt;picture&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/25Y6M_WuFeiLi/2025FeiLi_Japandi_sliderM.jpg}}" media="(max-width: 767px)"&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/25Y6M_WuFeiLi/2025FeiLi_Japandi_slider.jpg}}" media="(min-width: 768px)"&gt;
+                        &lt;img class="default_image mrl-click HomeBanner-img1 select-promotion" data-ga-category="MKT-japandi" data-ga-promotion_id="20250625_Japandi_10KDis" data-ga-creative_slot="HomeBanner-img1" alt="走進斐莉的一日北歐侘寂" src="{{media url=wysiwyg/home_page/25Y6M_WuFeiLi/2025FeiLi_Japandi_slider.jpg}}" loading="lazy" style="margin: 0 auto; width: 100%;" fetchpriority="high"/&gt;
+                    &lt;/picture&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+    
+            &lt;div class="item cat-slider"&gt;
+                &lt;a href="{{store direct_url='affordable-sofa-furniture-picks.html'}}" aria-label="上半年最大優惠 年中慶｜滿萬折千＋滿額免運"&gt;
+                    &lt;picture&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_7M/7M_H_0625_SliderM.jpg}}" media="(max-width: 767px)"&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_7M/7M_H_0625_Slider.jpg}}" media="(min-width: 768px)"&gt;
+                        &lt;img class="default_image mrl-click HomeBanner-img2 select-promotion" data-ga-category="MKT-10K-Dis" data-ga-promotion_id="20250625_10KDis_38KFreeDelivery" data-ga-creative_slot="HomeBanner-img2" alt="上半年最大優惠 618年中慶｜滿萬折千＋滿額免運" src="{{media url=wysiwyg/home_page/2025/2025_7M/7M_H_0625_Slider.jpg}}" loading="lazy" style="margin: 0 auto; width: 100%;" fetchpriority="high"/&gt;
+                    &lt;/picture&gt;
+                &lt;/a&gt;
+            &lt;div class="promotion-schedule"&gt;&lt;/div&gt;
+            &lt;/div&gt;
+    
+    
+            &lt;div class="item cat-slider"&gt;
+                &lt;a href="{{store direct_url='furniture/mattress-category/mrl-pillow.html'}}" aria-label="全館減壓記憶枕買1送1"&gt;
+                    &lt;picture&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_pillowBOGO_slider_Mobile.jpg}}" media="(max-width: 767px)"&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_pillowBOGO_slider_PC.jpg}}" media="(min-width: 768px)"&gt;
+                        &lt;img class="default_image mrl-click HomeBanner-img3 select-promotion" data-ga-category="MKT-mattress" data-ga-promotion_id="20250625_pillow_BOGO" data-ga-creative_slot="HomeBanner-img3" alt="全館減壓記憶枕買1送1" src="{{media url=wysiwyg/home_page/2025/2025_4M/2504_pillowBOGO_slider_PC.jpg}}" loading="lazy" style="margin: 0 auto; width: 100%;" fetchpriority="high"/&gt;
+                    &lt;/picture&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+    
+            &lt;div class="item cat-slider"&gt;
+                &lt;a href="{{store direct_url='sofas/style/sofa-pet-friendly.html'}}" aria-label="防潑水防貓抓布沙發"&gt;
+                    &lt;picture&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/04M_PF_SliderM.jpg}}" media="(max-width: 767px)"&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/04M_PF_Slider.jpg}}" media="(min-width: 768px)"&gt;
+                        &lt;img class="default_image mrl-click HomeBanner-img4 select-promotion" data-ga-category="MKT-sofa-pf" data-ga-promotion_id="20250625_SofaPF_10KDis" data-ga-creative_slot="HomeBanner-img4" alt="防潑水防貓抓布沙發" src="{{media url=wysiwyg/home_page/2025/2025_4M/04M_PF_Slider.jpg}}" style="margin: 0 auto; width: 100%;" loading="lazy"/&gt;
+                    &lt;/picture&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+    
+    &lt;div class="item cat-slider"&gt;
+                &lt;a href="{{store direct_url='super-storage-series.html'}}" aria-label="超級收納系列，累積銷售突破1億4409萬"&gt;
+                    &lt;picture&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/storageseries_2504_sliderM.jpg}}" media="(max-width: 767px)"&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/storageseries_2504_slider.jpg}}" media="(min-width: 768px)"&gt;
+                        &lt;img class="default_image mrl-click HomeBanner-img5 select-promotion" data-ga-category="MKT-super-storage" data-ga-promotion_id="20250625_SuperStorage_10KDis" data-ga-creative_slot="HomeBanner-img5" alt="超級收納系列，累積銷售突破1億4409萬" src="{{media url=wysiwyg/home_page/2025/2025_4M/storageseries_2504_slider.jpg}}" loading="lazy" style="margin: 0 auto; width: 100%;" fetchpriority="high"/&gt;
+                    &lt;/picture&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+    
+             &lt;div class="item cat-slider"&gt;
+                &lt;a href="{{store direct_url='sofa-fur.html'}}" aria-label="絕版品８折起，再享全館優惠"&gt;
+                    &lt;picture&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504phaseout_10K_SliderM.jpg}}" media="(max-width: 767px)"&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504phaseout_10K_Slider.jpg}}" media="(min-width: 768px)"&gt;
+                        &lt;img class="default_image mrl-click HomeBanner-img6 select-promotion" data-ga-category="MKT-limited" alt="絕版品８折起，再享全館優惠" data-ga-promotion_id="20250625_out-of-print_20%off" data-ga-creative_slot="HomeBanner-img6" src="{{media url=wysiwyg/home_page/2025/2025_4M/2504phaseout_10K_SliderM.jpg}}" style="margin: 0 auto; width: 100%;" loading="lazy"/&gt;
+                    &lt;/picture&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+    
+            &lt;div class="item cat-slider"&gt;
+                &lt;a href="{{store direct_url='mattress-tw-standard.html'}}" aria-label="不悶熱超透氣、涼爽舒適睡眠，首選涼感減壓記憶床墊！"&gt;
+                    &lt;picture&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_mattress-25_slider_Mobile.jpg}}" media="(max-width: 767px)"&gt;
+                        &lt;source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_mattress-25_slider_PC.jpg}}" media="(min-width: 768px)"&gt;
+                        &lt;img class="default_image mrl-click HomeBanner-img7 select-promotion ga-item" data-ga-category="MKT-mattress" data-ga-promotion_id="20250625_matt-handsel-pillow" data-ga-creative_slot="HomeBanner-img7" data-ga-item-id="30-0001-0-08-v2" data-ga-label="雙人標準(5X6.2)｜涼感減壓記憶床墊｜零干擾 獨立筒" alt="不悶熱超透氣、涼爽舒適睡眠，首選涼感減壓記憶床墊！" src="{{media url=wysiwyg/home_page/2025/2025_4M/2504_mattress-25_slider_PC.jpg}}" style="margin: 0 auto; width: 100%;" loading="lazy"/&gt;
+                    &lt;/picture&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;</div><div data-content-type="divider" data-appearance="default" data-element="main"><hr data-element="line" data-pb-style="W0CRILU"></div><div data-content-type="html" data-appearance="default" data-element="main">&lt;!-- Why --&gt;
+    &lt;div class="why-container section" data-section-name="home_Why"&gt; 
+        &lt;div class="why-content"&gt;
+            &lt;div class="why-icon"&gt;
+                &lt;img src="{{media url=wysiwyg/home_page/2023_Fullview/icon01_mobile_93x93px.png}}" alt="全通路14日買貴退差價" title="全通路14日買貴退差價" loading="lazy"&gt;
+            &lt;/div&gt;
+            &lt;div class="why-text"&gt;
+                &lt;p&gt;全通路14日&lt;br&gt;&lt;span class="why-header"&gt;買貴退差價&lt;/span&gt;&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="why-content"&gt;
+            &lt;div class="why-icon"&gt;
+                &lt;img src="{{media url=wysiwyg/home_page/2023_Fullview/icon02_mobile_93x93px.png}}" alt="訂單滿額1萬分期0利率" title="訂單滿額1萬分期0利率" loading="lazy"&gt;
+            &lt;/div&gt;
+            &lt;div class="why-text"&gt;
+                &lt;p&gt;滿額1萬&lt;br&gt;&lt;span class="why-header"&gt;分期0利率&lt;/span&gt;&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    
+        &lt;div class="why-content"&gt;
+            &lt;div class="why-icon"&gt;
+                &lt;img src="{{media url=wysiwyg/home_page/2023_Fullview/icon03_mobile_93x93px.png}}" alt="商品結帳滿3萬8享免運" title="商品結帳滿3萬8享免運" loading="lazy"&gt;
+            &lt;/div&gt;
+            &lt;div class="why-text"&gt;
+                &lt;p&gt;商品結帳滿3萬8&lt;br&gt;&lt;span class="why-header"&gt;享免運&lt;/span&gt;&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    
+        &lt;div class="why-content"&gt;
+            &lt;div class="why-icon"&gt;
+                &lt;img src="{{media url=wysiwyg/home_page/2023_Fullview/icon04_mobile_93x93px.png}}" alt="保固保修｜沙發家具結構2年/床墊10年" title="保固保修｜沙發家具結構2年/床墊10年" loading="lazy"&gt;
+            &lt;/div&gt;
+            &lt;div class="why-text"&gt;
+                &lt;p&gt;結構2年/床墊10年&lt;br&gt;&lt;span class="why-header"&gt;保固保修&lt;/span&gt;&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="owl-carousel owl-theme picture-carousel homepage_menu nocarousel" id="menu-owl-carousel" &gt;&lt;/div&gt;  
+    &lt;style&gt;
+        .why-container{
+            display: flex;
+            justify-content: space-between;
+            margin: 0 6.4rem;
+        }
+    
+        .why-content{
+            display: flex;
+            width: 100%;
+            max-width: 32rem;
+            margin: 3.2rem 0;
+            padding: 0 4.4rem;
+            border-right: 1px solid #a09c81;
+        }
+    
+        .why-content:last-child{
+            border-right: none;
+        }
+    
+    
+        .why-icon{
+            max-width: 88px;
+            width: 100%;
+        }
+    
+        .why-text{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            color: #A09C8E;
+            font-size: 19px;
+            margin-left: 3.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+    
+        .why-header{
+            font-size: 25px;
+        }
+    
+        .owl-carousel .owl-stage-outer{
+            padding-bottom: 1em;
+        }
+    
+        @media (max-width: 1600px) {
+            .why-container {
+                margin: 0 2.4rem;
+            }
+            .why-content{
+                padding: 0 2rem;
+            }
+        }
+    
+        @media (max-width: 960px){
+            .why-container{
+                flex-wrap: wrap;
+                margin: 0 1rem;
+                position: relative;
+            }
+            .why-content{
+                width: 50%;
+                margin: 2rem 0;
+                padding: 0;
+                border-right: none;
+            }
+            .why-text{
+                font-size: 1.2rem;
+                margin-left: 1.1rem;
+                padding: 0;
+                letter-spacing: 0;
+            }
+            .why-header{
+                font-size: 1.8rem;
+            }
+            .why-icon{
+                max-width: 60px;
+                width: 100%;
+            }
+            .why-container::after{
+                content: '';
+                background-color: #A09C8E;
+                position: absolute;
+                width: 100%;
+                height: 0.5px;
+                bottom: 53%;
+                transform: translateY(50%);
+            }
+            
+        }
+    &lt;/style&gt;
+    
+    </div><div data-content-type="divider" data-appearance="default" data-element="main"><hr data-element="line" data-pb-style="W4FNO9F"></div><div data-content-type="html" data-appearance="default" data-element="main" data-pb-style="YPK9YDK">&lt;!-- 優惠小圖 --&gt;
+    
+    &lt;style&gt;
+      .hs_container {
+          margin: auto 0px;
+          display:grid;
+          grid-template: "img1 img2 img4 img6" 1fr
+                         "img1 img3 img5 img7" 1fr
+                         / 4fr 4fr 4fr 4fr;
+    
+          grid-gap: 10px;
+       }
+    
+      .hs_container :nth-child(1) {
+          grid-area: img1;
+      }
+      .hs_container :nth-child(2) {
+          grid-area: img2;
+      }
+      .hs_container :nth-child(3) {
+          grid-area: img3;
+      }
+      .hs_container :nth-child(4) {
+          grid-area: img4;
+      }
+      .hs_container :nth-child(5) {
+          grid-area: img5;
+      }
+      .hs_container :nth-child(6) {
+          grid-area: img6;
+      }
+      .hs_container :nth-child(7) {
+          grid-area: img7;
+      }
+    
+      .hs_container img{
+              width: 100%;
+          }
+    
+      @media only screen and (max-width: 768px) {
+    
+          .hs_container {
+              margin: auto auto;
+              grid-template: "img1 img1"
+                             "img2 img3"
+                             "img4 img5"
+                             "img6 img7";
+              grid-column-gap: 4px;
+              grid-row-gap: 0px;
+           }
+           .eightpiece{
+              text-align: center;
+           }
+      }
+    &lt;/style&gt;
+    
+    
+    &lt;div class="hs_container section" data-section-name="home_HotSale1"&gt;
+    
+      &lt;div class="eightpiece"&gt;&lt;a href="{{store direct_url='affordable-sofa-furniture-picks.html'}}"&gt;
+          &lt;picture&gt;
+            &lt;source class="mrl-click HS1R1" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/25_7M_HS_PC.jpg}}" media="(min-width:769px)" loading="lazy"&gt;
+            &lt;source class="mrl-click HS1R1" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/25_7M_HS_M.jpg}}" media="(max-width:768px)" loading="lazy"&gt;
+            &lt;img src="{{media url=wysiwyg/home_page/2022/2022_5M/25_7M_HS_M.jpg}}" class="mrl-click HS1R1 select-promotion" data-ga-category="MKT-10K-Dis" alt="上半年最大優惠 年中慶｜滿萬折千＋滿額免運" data-ga-promotion_id="20250625_10KDis_38KFreeDelivery" data-ga-creative_slot="HS1R1" loading="lazy"&gt;
+          &lt;/picture&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    
+      &lt;div class="eightpiece"&gt;&lt;a href="{{store direct_url='sofas/style/modular-floor-couch.html'}}"&gt;
+          &lt;picture&gt;
+              &lt;source class="mrl-click HS1R2" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Pluffy.jpg}}" media="(min-width:769px)" loading="lazy"&gt;
+              &lt;source class="mrl-click HS1R2" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Pluffy.jpg}}" media="(max-width:768px)" loading="lazy"&gt;
+              &lt;img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Pluffy.jpg}}" class="mrl-click HS1R2 select-promotion" data-ga-category="MKT-sofa-modular-floor" alt="泡芙組合落地沙發-明星商品" data-ga-promotion_id="20250625_Pluffy_ModularSofa" data-ga-creative_slot="HS1R2" loading="lazy"&gt;
+          &lt;/picture&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    
+     &lt;div class="eightpiece"&gt;&lt;a href="{{store direct_url='super-storage-series.html'}}"&gt;
+          &lt;picture&gt;
+              &lt;source class="mrl-click HS1R3" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Super.jpg}}" media="(min-width:769px)" loading="lazy"&gt;
+              &lt;source class="mrl-click HS1R3" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Super.jpg}}" media="(max-width:768px)" loading="lazy"&gt;
+              &lt;img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Super.jpg}}" class="mrl-click HS1R3 select-promotion" data-ga-category="MKT-super-storage" alt="超級收納系列，累積銷售數破1.4409萬" data-ga-promotion_id="20250625_SuperStorage_10KDis" data-ga-creative_slot="HS1R3" loading="lazy"&gt;
+          &lt;/picture&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    
+      &lt;div class="eightpiece"&gt;&lt;a href="{{store direct_url='furniture/mattress-category/mrl-mattress.html'}}"&gt;
+          &lt;picture&gt;
+              &lt;source class="mrl-click HS1R4" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Mattress.jpg}}" media="(min-width:768px)" loading="lazy"&gt;
+              &lt;source class="mrl-click HS1R4" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Mattress.jpg}}" media="(max-width:768px)" loading="lazy"&gt;
+              &lt;img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Mattress.jpg}}" class="mrl-click HS1R4 select-promotion" data-ga-category="MKT-mattress" alt="買床墊送涼感減壓枕" data-ga-promotion_id="20250625_matt-handsel-pillow" data-ga-creative_slot="HS1R4" loading="lazy"&gt;
+          &lt;/picture&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    
+    
+      &lt;div class="eightpiece"&gt;&lt;a href="{{store direct_url='sofas/style/sofa-pet-friendly.html'}}"&gt;
+          &lt;picture&gt;
+              &lt;source class="mrl-click HS1R5" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_PFsofa.jpg}}" media="(min-width:769px)" loading="lazy"&gt;
+              &lt;source class="mrl-click HS1R5" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_PFsofa.jpg}}" media="(max-width:768px)" loading="lazy"&gt;
+              &lt;img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_PFsofa.jpg}}" class="mrl-click HS1R5 select-promotion" data-ga-category="MKT-sofa-pf" alt="防貓抓布沙發-萬人首選" data-ga-promotion_id="20250625_SofaPF_10KDis" data-ga-creative_slot="HS1R5" loading="lazy"&gt;
+          &lt;/picture&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    
+      &lt;div class="eightpiece"&gt;&lt;a href="{{store direct_url='hotsales/mcm-series.html'}}"&gt;
+          &lt;picture&gt;
+              &lt;source class="mrl-click HS1R6" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_MCM2.jpg}}" media="(min-width:768px)" loading="lazy" &gt;
+              &lt;source class="mrl-click HS1R6" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_MCM2.jpg}}" media="(max-width:768px)" loading="lazy" &gt;
+              &lt;img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_MCM2.jpg}}" class="mrl-click HS1R6 select-promotion" data-ga-category="MKT-mcm" alt="北歐復古實木家具-熱銷精選" data-ga-promotion_id="20250625_MCM_10KDis" data-ga-creative_slot="HS1R6" loading="lazy"&gt;
+          &lt;/picture&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    
+       &lt;div class="eightpiece"&gt;&lt;a href="{{store direct_url='hotsales/japandi-series.html'}}"&gt;
+          &lt;picture&gt;
+              &lt;source class="mrl-click HS1R7" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Japandi.jpg}}" media="(min-width:769px)" loading="lazy"&gt;
+              &lt;source class="mrl-click HS1R7" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Japandi.jpg}}" media="(max-width:768px)" loading="lazy"&gt;
+              &lt;img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Japandi.jpg}}" class="mrl-click HS1R7 select-promotion" data-ga-category="MKT-japandi" alt="北歐侘寂全室家具-簡約新美學" data-ga-promotion_id="20250625_Japandi_10KDis" data-ga-creative_slot="HS1R7" loading="lazy"&gt;
+          &lt;/picture&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    
+    &lt;/div&gt;</div><div data-content-type="html" data-appearance="default" data-element="main">&lt;!DOCTYPE html&gt;
+    &lt;html lang="zh-TW"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+        &lt;title&gt;北歐佳敘 - Japandi&lt;/title&gt;
+        &lt;style&gt;
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+                background-color: #f5f5f5;
+                overflow-x: hidden;
+            }
+    
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 40px 20px;
+            }
+    
+            .header {
+                margin-bottom: 40px;
+                opacity: 0;
+                transform: translateY(30px);
+                animation: fadeInUp 1s ease forwards;
+            }
+    
+            .header h1 {
+                font-size: 48px;
+                font-weight: 300;
+                color: #333;
+                margin-bottom: 8px;
+                letter-spacing: 2px;
+            }
+    
+            .header .subtitle {
+                font-size: 18px;
+                color: #999;
+                font-weight: 300;
+                letter-spacing: 1px;
+            }
+    
+            /* Desktop Layout */
+            .gallery {
+                display: grid;
+                gap: 20px;
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                height: 600px;
+            }
+    
+            .gallery-item {
+                position: relative;
+                border-radius: 12px;
+                overflow: hidden;
+                background: #f8f5f0;
+                cursor: pointer;
+                transform: translateY(20px);
+                opacity: 0;
+                transition: all 0.4s ease;
+            }
+    
+            /* Main large image - spans 2 rows */
+            .gallery-item:nth-child(1) {
+                grid-column: 1;
+                grid-row: 1 / 3;
+                animation: slideInLeft 1.2s ease 0.2s forwards;
+            }
+    
+            /* Top right image */
+            .gallery-item:nth-child(2) {
+                grid-column: 2;
+                grid-row: 1;
+                animation: slideInRight 1.2s ease 0.4s forwards;
+            }
+    
+            /* Middle right image */
+            .gallery-item:nth-child(3) {
+                grid-column: 3;
+                grid-row: 1;
+                animation: slideInRight 1.2s ease 0.6s forwards;
+            }
+    
+            /* Bottom right large image - spans 2 columns */
+            .gallery-item:nth-child(4) {
+                grid-column: 4;
+                grid-row: 1;
+                animation: slideInRight 1.2s ease 0.8s forwards;
+            }
+    
+            /* Bottom left image */
+            .gallery-item:nth-child(5) {
+                grid-column: 2;
+                grid-row: 2;
+                animation: slideInRight 1.2s ease 1s forwards;
+            }
+    
+            /* Bottom middle image */
+            .gallery-item:nth-child(6) {
+                grid-column: 3;
+                grid-row: 2;
+                animation: slideInRight 1.2s ease 1.2s forwards;
+            }
+    
+            /* Bottom right image */
+            .gallery-item:nth-child(7) {
+                grid-column: 4;
+                grid-row: 2;
+                animation: slideInRight 1.2s ease 1.4s forwards;
+            }
+    
+            .gallery-item:hover {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            }
+    
+            .gallery-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.4s ease;
+            }
+    
+            .gallery-item:hover img {
+                transform: scale(1.1);
+            }
+    
+            .gallery-item .overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(transparent, rgba(0,0,0,0.6));
+                padding: 40px 30px 30px;
+                transform: translateY(100%);
+                transition: transform 0.3s ease;
+            }
+    
+            .gallery-item:hover .overlay {
+                transform: translateY(0);
+            }
+    
+            .gallery-item .tag {
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                background: rgba(0,0,0,0.7);
+                color: white;
+                padding: 8px 16px;
+                border-radius: 4px;
+                font-size: 14px;
+                font-weight: 400;
+                transform: translateY(0);
+                transition: all 0.3s ease;
+                border: none;
+            }
+    
+            .gallery-item:hover .tag {
+                background: rgba(0,0,0,0.9);
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            }
+    
+            .brand-logo {
+                position: absolute;
+                bottom: 20px;
+                left: 20px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                color: white;
+                font-size: 12px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                background: rgba(0,0,0,0.5);
+                padding: 8px 12px;
+                border-radius: 4px;
+            }
+    
+            .gallery-item:hover .brand-logo {
+                opacity: 1;
+            }
+    
+            .brand-logo::before {
+                content: '

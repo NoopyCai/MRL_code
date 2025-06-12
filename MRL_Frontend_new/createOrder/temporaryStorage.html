@@ -867,9 +867,16 @@
         // 建構彈出式視窗的內容
         function buildPopupContent(dataArray) {
             var content = "";
+            var isExistCustomer = checkCreateOrderForExistCustomer();
+            var currentEmail = document.querySelector("#email").value;
 
             if (dataArray.length > 0) {
                 dataArray.forEach(function (userData, index) {
+                    // 既有客戶，顯示相同 email 的資料
+                    if (isExistCustomer && userData.email !== currentEmail) {
+                        return;
+                    }
+                    
                     content += "<div class='dialogOption' data-index= '" + index + "'>";
                     content +=
                         "客戶: " +
@@ -882,12 +889,26 @@
                     content +=
                         '<i class="em em-x deleteButton" aria-role="presentation" aria-label="CROSS MARK"></i>';
                 });
+                
+                if (isExistCustomer && content === "") {
+                    content += "<p>此客戶目前沒有任何暫存資料。</p>";
+                }
             } else {
                 content += "<p>目前沒有任何暫存資料。</p>";
             }
             return content;
         }
 
+        function checkCreateOrderForExistCustomer(){
+            var pageTitle = document.querySelector('#order-header');
+            if (pageTitle) {
+                pageTitle = pageTitle.textContent.toLowerCase();
+                if (pageTitle.includes('for') || pageTitle.includes('中的')) {
+                    return true;
+                }
+            }
+            return false;
+        }
         //提醒用戶是否覆蓋資料視窗
         function coverDataConfirm() {
             var content = "";
@@ -985,11 +1006,10 @@
                                     setTimeout(function () {
                                         restoreLastSelectedProduct(selectedEmail);
                                         loadingMaskShow(selectedEmail);
-                                        selectUserData(storedData[selectedIndex]);
                                     }, 1500 * removeSelectItemNum);
                                     removeSelectItemNum = 0;
                                 });
-                                return console.log("選取資料email與原本相同,不進行刪除與還原");
+                                // return console.log("選取資料email與原本相同,不進行刪除與還原");
                             } else {
                                 restoreLastSelectedProduct(selectedEmail);
                                 loadingMaskShow(selectedEmail);

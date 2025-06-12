@@ -1,0 +1,209 @@
+<script>
+    (function () {
+        var highTrafficSkus = ['1017928', '1018406', '10-0398-0-26-v2', '22-0051-0-19', '1018417', '1017812-v2',
+            'pluffy-fabric-4s-250-elephantgrey', '22-0050-0-19', '1017970', '1017927', '22-0055-0-19', '1017929'];
+
+        getHighTrafficVersionItems();
+
+        function getHighTrafficVersionItems() {
+            
+            var cachedData = getFromLocalStorage('highTrafficItems');
+            
+            if (cachedData && !isDataExpired(cachedData.timestamp)) {
+                var sortedItems = sortItemsBySkuOrder(cachedData.data);
+                updateCrosssellItems(sortedItems);
+                return;
+            }
+            
+            require(["Mrl_ProductElement"], function ($) {
+                mrl_prductElement.getProducts(highTrafficSkus,
+                    ($fields = "entity_id,sku,name,image,price,MRL_discount_price,url_key"),
+                    ($page = 1),
+                    ($page_size = highTrafficSkus.length)
+                )
+                    .done(function (success) {
+                        var responseData = success[0].data.items;
+                        saveToLocalStorage('highTrafficItems', responseData);
+                        
+                        var sortedItems = sortItemsBySkuOrder(responseData);
+                        updateCrosssellItems(sortedItems);
+                    })
+                    .error(function (error) {
+                        console.error('failed to get high traffic version items:', error);
+                    });
+            });
+        }
+
+        function saveToLocalStorage(key, data) {
+            try {
+                var storageData = {
+                    data: data,
+                    timestamp: new Date().getTime()
+                };
+                localStorage.setItem(key, JSON.stringify(storageData));
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        function getFromLocalStorage(key) {
+            try {
+                var data = localStorage.getItem(key);
+                return data ? JSON.parse(data) : null;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function isDataExpired(timestamp) {
+            var currentTime = new Date().getTime();
+            var sixHoursInMs = 6 * 60 * 60 * 1000; // 6小時 
+            return (currentTime - timestamp) > sixHoursInMs;
+        }
+
+        function sortItemsBySkuOrder(items) {
+            return items.sort(function (a, b) {
+                return highTrafficSkus.indexOf(a.sku) - highTrafficSkus.indexOf(b.sku);
+            });
+        }
+
+        function updateCrosssellItems(items) {
+            var originalItems = document.querySelectorAll('.product-items .product-item');
+
+            originalItems.forEach(function (item, index) {
+                if (!items[index]) return;
+
+                updateProductInfo(item, items[index]);
+                updateProductImages(item, items[index]);
+                updateProductLinks(item, items[index]);
+                updateProductPrices(item, items[index]);
+                updateAddToCartForm(item, items[index]);
+            });
+
+            showCrosssellSection();
+        }
+
+        function updateProductInfo(item, productData) {
+            var productInfo = item.querySelector('.product-item-info');
+            if (productInfo) {
+                productInfo.setAttribute('data-mrlsku', productData.sku);
+            }
+        }
+
+        function updateProductImages(item, productData) {
+            var productImgSource = item.querySelector('.product-item-info .product-image-wrapper source');
+            var productImg = item.querySelector('.product-item-info .product-image-wrapper img');
+            var imageUrl = 'https://media.mrliving.com.tw/mf_webp/jpg/media/catalog/product/cache/912f4218b83600a6f47af6c76f1f9667' +
+                productData.image.replace('.jpg', '.webp');
+
+            if (productImgSource) {
+                productImgSource.srcset = imageUrl;
+            }
+            if (productImg) {
+                productImg.src = imageUrl;
+            }
+        }
+
+        function updateProductLinks(item, productData) {
+            var productLink = item.querySelector('.product-item-info > a');
+            var productDetailLink = item.querySelector('.product-item-details .product-item-link');
+            var domain = window.location.origin;
+            var productUrl = domain + '/' + productData.url_key + '.html';
+
+            if (productLink) {
+                productLink.href = productUrl;
+            }
+            if (productDetailLink) {
+                productDetailLink.href = productUrl;
+                productDetailLink.innerText = productData.name;
+            }
+        }
+
+        function updateProductPrices(item, productData) {
+            var productPrice = item.querySelector('.product-item-details .old-price .price');
+            var discountPrice = item.querySelector('#mrl-final_price .special-price .price');
+            var finalPriceContainer = item.querySelector('#mrl-final_price');
+
+            if (!productPrice && finalPriceContainer) {
+                finalPriceContainer.innerHTML =
+                    '<div>' +
+                    '<span style="display: none">discount</span>' +
+                    '<span class="special-price">' +
+                    '<span class="price-container price-final_price tax weee">' +
+                    '<span class="price-label">折抵後價格</span>' +
+                    '<span id="product-price-' + productData.entity_id + '" data-price-amount="' + productData.MRL_discount_price + '" data-price-type="finalPrice" class="price-wrapper">' +
+                    '<span class="price">' + formatPrice(productData.MRL_discount_price) + '</span>' +
+                    '</span>' +
+                    '</span>' +
+                    '<span class="mrl_discount_txt" style="font-size: 1.1rem; color:#666666"> (售價已折) </span>' +
+                    '</span>' +
+                    '<span style="display: none">price</span>' +
+                    '<span class="old-price">' +
+                    '<span class="price-container price-final_price tax weee">' +
+                    '<span class="price-label">售價</span>' +
+                    '<span id="old-price-' + productData.entity_id + '" data-price-amount="' + productData.price + '" data-price-type="oldPrice" class="price-wrapper">' +
+                    '<span class="price">' + formatPrice(productData.price) + '</span>' +
+                    '</span>' +
+                    '</span>' +
+                    '</span>' +
+                    '</div>';
+
+                productPrice = item.querySelector('.product-item-details .old-price .price');
+                discountPrice = item.querySelector('#mrl-final_price .special-price .price');
+            }
+
+            if (productData.MRL_discount_price != 0) {
+                if (productPrice) {
+                    productPrice.innerText = formatPrice(productData.price);
+                }
+                if (discountPrice) {
+                    discountPrice.innerText = formatPrice(productData.MRL_discount_price);
+                }
+            } else {
+                if (discountPrice) {
+                    discountPrice.innerText = formatPrice(productData.price);
+                }
+                if (productPrice) {
+                    productPrice.style.display = 'none';
+                }
+                var discountTxt = item.querySelector('.mrl_discount_txt');
+                if (discountTxt) {
+                    discountTxt.style.display = 'none';
+                }
+            }
+        }
+
+        function formatPrice(price) {
+            return '$' + Math.floor(price);
+        }
+
+        function updateAddToCartForm(item, productData) {
+            var form = item.querySelector('[data-role="tocart-form"]');
+            if (!form) return;
+
+            var formAction = form.getAttribute('action');
+            if (formAction) {
+                var newFormAction = formAction.replace(/\/product\/\d+\//, '/product/' + productData.entity_id + '/');
+                form.setAttribute('action', newFormAction);
+            }
+        }
+
+        function showCrosssellSection() {
+            var crosssellSection = document.querySelector('.products-crosssell');
+            if (crosssellSection) {
+                crosssellSection.classList.add('show-new-crosssell');
+            }
+        }
+
+    })();
+</script>
+
+<style>
+    .products-crosssell {
+        display: none;
+    }
+
+    .products-crosssell.show-new-crosssell {
+        display: block;
+    }
+</style>

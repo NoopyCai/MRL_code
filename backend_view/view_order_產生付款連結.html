@@ -1,0 +1,85 @@
+<script>
+    var hostname = window.location.hostname;
+      console.log('hostname',hostname);
+      
+    var orderStatus = document.querySelector('#order_status').innerText;
+    if(orderStatus){
+        var customerName = document.querySelector('.admin__table-secondary.order-account-information-table').firstElementChild.firstElementChild.lastElementChild.innerText;
+        var additionalInfoTable = document.querySelectorAll('.admin__table-secondary.order-information-table')[1].firstElementChild;
+        var nameOfAttr = additionalInfoTable.querySelectorAll('th');
+        var valueOfAttr = additionalInfoTable.querySelectorAll('strong');
+        var emailElement = document.querySelector('.order-account-information-table tr:nth-child(2) a');
+    
+        var subtotalTable = document.querySelector('.order-subtotal-table');
+       var grandtotal = document.querySelector('.order-subtotal-table .col-0 td').nextElementSibling.innerText;
+    
+        grandtotal = grandtotal.replaceAll(',','').replace('$','');
+      
+        var indexOfPaidStore = getIndexfromInfoTable("付款渠道");
+        var orderId = document.querySelector('h1.page-title').innerText.replace('#','');
+        var genpayment = (hostname == 'dev-dio-m2v243.mrliving.tw')?'http://dev-dio-payment.mrliving.tw/payment/genpayment.php':'http://dev-payment.mrliving.tw/payment/genpayment.php';
+        var payLink = '';
+        var addressContent = document.querySelector('.admin__page-section.order-addresses');
+    
+        if(indexOfPaidStore){
+            var paidStore = valueOfAttr[indexOfPaidStore].innerText;
+            payLink = genpayment +'?cname='+customerName.trim()+'&price='+grandtotal.trim()+'&orderid='+orderId.trim()+'&paid_store='+paidStore+'&mail='+emailElement.innerText;
+            addressContent.innerHTML += '<button id="paylink" title="paylink" type="button" class="action-default primary" style="z-index:22; background-color:#f76a6a;border-color:#f76a6a; position:fixed; top:48%; left:9%"><a href="'+payLink+'" style="text-decoration: none;color:#FFF;" target="_blank">付款連結</a></button>';
+        }else{
+            payLink = genpayment +'?cname='+customerName.trim()+'&price='+grandtotal.trim()+'&orderid='+orderId.trim()+'&paid_store='+'線上刷卡'+'&mail='+emailElement.innerText;
+            addressContent.innerHTML += '<button id="paylink" title="paylink" type="button" class="action-default primary" style="z-index:22; background-color:#f76a6a;border-color:#f76a6a; position:fixed; top:48%; left:9%"><a href="'+payLink+'" style="text-decoration: none;color:#FFF;" target="_blank">付款連結</a></button>';
+        }
+    }
+    
+    function getIndexfromInfoTable(title){
+        var indexOfTitle = undefined;
+        nameOfAttr.forEach(function(n, index){
+            if(n.innerText.indexOf(title)>-1){
+                indexOfTitle = index;
+            }
+        })
+        return indexOfTitle;
+    }
+    </script>
+
+<script>
+    var orderStatus = document.querySelector('#order_status').innerText;
+    if(orderStatus){
+        var customerName = document.querySelector('.admin__table-secondary.order-account-information-table').firstElementChild.firstElementChild.lastElementChild.innerText;
+        var additionalInfoTable = document.querySelectorAll('.admin__table-secondary.order-information-table')[1].firstElementChild;
+        var nameOfAttr = additionalInfoTable.querySelectorAll('th');
+        var valueOfAttr = additionalInfoTable.querySelectorAll('strong');
+        var emailElement = document.querySelector('.order-account-information-table tr:nth-child(2) a');
+    
+        var subtotalTable = document.querySelector('.order-subtotal-table');
+       var grandtotal = document.querySelector('.order-subtotal-table .col-0 td').nextElementSibling.innerText;
+    
+        grandtotal = grandtotal.replaceAll(',','').replace('$','');
+      
+        var indexOfPaidStore = getIndexfromInfoTable("付款渠道");
+        var orderId = document.querySelector('h1.page-title').innerText.replace('#','');
+        var genpayment = 'https://pay.mrliving.com.tw/payment/genpayment.php';
+        var payLink = '';
+        var addressContent = document.querySelector('.admin__page-section.order-addresses');
+    
+        if(indexOfPaidStore){
+            var paidStore = valueOfAttr[indexOfPaidStore].innerText;
+            payLink = genpayment +'?cname='+customerName.trim()+'&price='+grandtotal.trim()+'&orderid='+orderId.trim()+'&paid_store='+paidStore+'&mail='+emailElement.innerText;
+            addressContent.innerHTML += '<button id="paylink" title="paylink" type="button" class="action-default primary" style="z-index:22; background-color:#f76a6a;border-color:#f76a6a; position:fixed; top:48%; left:9%"><a href="'+payLink+'" style="text-decoration: none;color:#FFF;" target="_blank">付款連結</a></button>';
+        }else{
+            payLink = genpayment +'?cname='+customerName.trim()+'&price='+grandtotal.trim()+'&orderid='+orderId.trim()+'&paid_store='+'線上刷卡'+'&mail='+emailElement.innerText;
+            addressContent.innerHTML += '<button id="paylink" title="paylink" type="button" class="action-default primary" style="z-index:22; background-color:#f76a6a;border-color:#f76a6a; position:fixed; top:48%; left:9%"><a href="'+payLink+'" style="text-decoration: none;color:#FFF;" target="_blank">付款連結</a></button>';
+        }
+    }
+    
+    function getIndexfromInfoTable(title){
+        var indexOfTitle = undefined;
+        nameOfAttr.forEach(function(n, index){
+            if(n.innerText.indexOf(title)>-1){
+                indexOfTitle = index;
+            }
+        })
+        return indexOfTitle;
+    }
+    
+    </script>

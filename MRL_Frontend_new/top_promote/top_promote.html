@@ -216,34 +216,35 @@ if(!excludedPaths.some(path => location.pathname.includes(path))){
 
   }
     
-  
-//   function getGaClientId() {
-//     let cookies = document.cookie.split('; ');
-//     let gaCookie = null;
+  getGaClientId();
+  function getGaClientId() {
+    let cookies = document.cookie.split('; ');
+    let gaCookie = null;
     
-//     for (let i = 0; i < cookies.length; i++) {
-//         if (cookies[i].indexOf('_ga=') === 0) {
-//             gaCookie = cookies[i];
-//             break;
-//         }
-//     }
+    for (let i = 0; i < cookies.length; i++) {
+        if (cookies[i].indexOf('_ga=') === 0) {
+            gaCookie = cookies[i];
+            break;
+        }
+    }
 
 
 
-//     if (!gaCookie) {
-//         return null;
-//     }
+    if (!gaCookie) {
+        return null;
+    }
     
-//     let parts = gaCookie.split('.');
+    let parts = gaCookie.split('.');
 
-//     if (parts.length < 4) {
-//         return null;
-//     }
+    if (parts.length < 4) {
+        return null;
+    }
 
-//     let clientId = parts[2] + '.' + parts[3];
-  
-//     return clientId;
-//   }
+    let clientId = parts[2] + '.' + parts[3];
+    
+    console.log(clientId);
+    return clientId;
+  }
   
 //   function waitForGaClientId(callback) {
 //     let attempts = 0;

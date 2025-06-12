@@ -4,7 +4,9 @@
   .kol-cotainer {
     display: flex;
     justify-content: end;
+    margin: 60px auto;
   }
+
   .cotainer-reight {
     display: flex;
     flex-direction: column;
@@ -19,6 +21,7 @@
     margin-bottom: 0;
     color: #575757;
   }
+
   .bg-img {
     width: 100%;
   }
@@ -37,9 +40,11 @@
     margin: 0 auto;
     position: relative;
   }
+
   .vido-title {
     margin: 2rem 0 2.3rem 0;
   }
+
   .vido-title h1 {
     text-align: center;
     font-size: 3.7rem;
@@ -50,6 +55,7 @@
     margin: 0;
     line-height: 5rem;
   }
+
   .item-title h1 {
     text-align: center;
     font-size: 3.7rem;
@@ -58,24 +64,241 @@
     margin: 3.3rem 0 2rem 0;
     letter-spacing: 2px;
   }
+
   .twoitem {
     display: flex;
     justify-content: center;
     gap: 1.5rem;
     margin-bottom: 7rem;
   }
+    /* Desktop Layout */
+    .gallery {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 2.5fr 1fr 1fr 1fr;
+    }
+
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        background: #f8f5f0;
+        cursor: pointer;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.4s ease;
+    }
+
+    /* Main large image - spans 2 rows */
+    .gallery-item:nth-child(1) {
+        grid-column: 1;
+        animation: slideInLeft 1.2s ease 0.2s forwards;
+    }
+
+    /* Top right image */
+    .gallery-item:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1;
+        animation: slideInRight 1.2s ease 0.4s forwards;
+    }
+
+    /* Middle right image */
+    .gallery-item:nth-child(3) {
+        grid-column: 3;
+        grid-row: 1;
+        animation: slideInRight 1.2s ease 0.6s forwards;
+    }
+
+    /* Bottom right large image - spans 2 columns */
+    .gallery-item:nth-child(4) {
+        grid-column: 4;
+        grid-row: 1;
+        animation: slideInRight 1.2s ease 0.8s forwards;
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.1);
+    }
+
+    .gallery-item .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0,0,0,0.6));
+        padding: 40px 30px 30px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .overlay {
+        transform: translateY(0);
+    }
+
+    .gallery-item .tag {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: transparent;
+        color: white;
+        padding: 5.5px 7px 5.5px 10px;
+        border-radius: 3px;
+        font-size: 14px;
+        font-weight: 400;
+        transition: all 0.3s ease;
+        border: 1px solid #fff;
+    }
+
+    .gallery-item:hover .tag {
+        transform: translateY(-5px) translateX(-50%);
+        box-shadow: 0 5px 15px rgba(255,0,0,0.3);
+    }
+
+    /* Mobile Layout */
+    @media (max-width: 768px) {
+        .container {
+            padding: 20px 15px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+        }
+
+        .header .subtitle {
+            font-size: 16px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 10px;
+            height: auto;
+        }
+
+        .gallery-item {
+            grid-column: auto;
+            grid-row: auto;
+        }
+
+        /* 大圖在上方橫跨整個寬度 */
+        .gallery-item:nth-child(1) {
+            grid-column: 1 / span 2;
+            grid-row: 1;
+        }
+
+        /* 左下方一張圖 */
+        .gallery-item:nth-child(2) {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        /* 右下方兩張圖垂直排列 */
+        .gallery-item:nth-child(3),
+        .gallery-item:nth-child(4) {
+            grid-column: 2;
+            height: calc(50% - 5px); /* 減去間距的一半 */
+        }
+
+        .gallery-item:nth-child(3) {
+            grid-row: 2;
+            margin-bottom: 10px;
+        }
+
+        .gallery-item:nth-child(4) {
+            grid-row: 2;
+            margin-top: 0;
+            transform: translateY(calc(100% + 10px)) !important;
+        }
+
+        .gallery-item .tag {
+            bottom: 15px;
+            font-size: 12px;
+            padding: 3.5px 5px 3.5px 8px;
+        }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideInLeft {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideInRight {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Smooth loading effect */
+    /* .gallery-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: left 0.5s ease;
+        z-index: 1;
+    }
+
+    .gallery-item:hover::before {
+        left: 100%;
+    } */
+
+    /* Background gradients for different rooms */
+    .gallery-item:nth-child(1) {
+        background: linear-gradient(135deg, #f4f1eb 0%, #e8ddd4 100%);
+    }
+
+    .gallery-item:nth-child(2) {
+        background: linear-gradient(135deg, #ede6dc 0%, #d4c4b0 100%);
+    }
+
+    .gallery-item:nth-child(3) {
+        background: linear-gradient(135deg, #e8ddd4 0%, #c8b8a4 100%);
+    }
+
+    .gallery-item:nth-child(4) {
+        background: linear-gradient(135deg, #d4c4b0 0%, #b8a694 100%);
+    }
 
   @media (max-width: 1850px) {
     .cotainer-reight {
       width: 28vw;
       top: 6%;
     }
+
     .item-title h1 {
       font-size: 3rem;
     }
+
     .vido-title h1 {
       font-size: 3rem;
     }
+
     .area-title {
       font-size: 3rem;
       margin-top: 25px;
@@ -87,15 +310,19 @@
       width: 25vw;
       top: 10%;
     }
+
     .item-title h1 {
       font-size: 2.6rem;
     }
+
     .vido-title {
       margin: 1rem 0 1.3rem 0;
     }
+
     .vido-title h1 {
       font-size: 2.6rem;
     }
+
     .area-title {
       font-size: 2.6rem;
       margin-top: 25px;
@@ -106,6 +333,7 @@
     .item-title h1 {
       font-size: 2.6rem;
     }
+
     .vido-title h1 {
       font-size: 2.6rem;
     }
@@ -115,26 +343,33 @@
     .cotainer-reight {
       width: 25vw;
     }
+
     .vido-title {
       margin: 1rem 0 0 0;
     }
+
     .item-title h1 {
       margin: 1.3rem 0 1rem 0;
     }
+
     .area-title {
       font-size: 2.4rem;
     }
   }
+
   @media (max-width: 1350px) {
     .area-title {
       font-size: 2.2rem;
     }
+
     .cotainer-reight {
       width: 22vw;
     }
+
     .item-title h1 {
       font-size: 2.2rem;
     }
+
     .vido-title h1 {
       font-size: 2.2rem;
     }
@@ -144,27 +379,34 @@
     .cotainer-reight {
       width: 21vw;
     }
+
     .vido-title h1 {
       font-size: 1.8rem;
     }
+
     .item-title h1 {
       margin: 0 0 1rem 0;
       font-size: 1.8rem;
     }
+
     .area-title {
       font-size: 1.8rem;
     }
   }
+
   @media (max-width: 900px) {
     .cotainer-reight {
       top: -5%;
     }
+
     .area-title {
       font-size: 1.8rem;
     }
+
     .vido-title h1 {
       font-size: 1.8rem;
     }
+
     .item-title h1 {
       margin: 0 0 1rem 0;
       font-size: 1.8rem;
@@ -184,6 +426,7 @@
       margin: 0;
       display: block;
     }
+
     .bg-img {
       width: 100%;
     }
@@ -195,6 +438,7 @@
     .vido-title {
       display: none;
     }
+
     .area-title {
       display: none;
     }
@@ -210,6 +454,7 @@
       flex-direction: column;
       height: auto;
     }
+
     .item-title h1 {
       font-size: 1.8rem;
       margin: 0 0 1rem 0;
@@ -225,107 +470,76 @@
       width: 16.2rem;
       margin-bottom: 1.8rem;
     }
+
     .videoShow iframe {
       height: 24rem;
     }
   }
 </style>
-<div
-  class="kol-cotainer section"
-  style="position: relative; width: 100%; text-align: center; margin: 0 auto"
-  data-section-name="home_HotSale2"
->
-<picture>
-  <source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_Yingtong_mobile_01_375x465px.jpg}}" media="(max-width: 767px)" loading="lazy">
-  <source srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_Yingtong_PC_01_1920x850px.jpg}}" media="(min-width: 768px)" loading="lazy">
-  <img class="bg-img" alt="讓身體徹底放鬆的減壓床墊" loading="lazy" style="display: block; width: 100%" src="{{media url=wysiwyg/home_page/2025/2025_4M/2504_Yingtong_PC_01_1920x850px.jpg}}" loading="lazy"/>
-</picture>
-  <div class="cotainer-reight">
-    <div>
-      <div class="vido-title">
-        <h1>▼ 減壓直擊 ▼</h1>
-      </div>
-
-      <div class="HS2R1 videoShow">
-        <p>
-          <lite-youtube
-            videoid="b1H2UpA3cFQ"
-            style="background-image: url('https://media.mrliving.com.tw/wysiwyg/home_page/2025/2025_4M/homepage_yt_cover_250414_v2.png') !important;"
-            loading="lazy"
-          >
-            <a
-              href="https://www.youtube.com/watch?v=b1H2UpA3cFQ&ab_channel=MR.LIVING%E5%B1%85%E5%AE%B6%E5%85%88%E7%94%9F"
-              class="lty-playbtn"
-              title="讓身體徹底放鬆的減壓床墊｜涼感減壓記憶床墊、護腰護脊減壓記憶床墊"
-            >
-            </a>
-          </lite-youtube>
-        </p>
-      </div>
+<section class="kol-cotainer section"
+  data-section-name="home_HotSale2">
+  <div class="gallery">
+    <!-- Main large image with woman on sofa -->
+    <div class="gallery-item">
+      <picture>
+        <img src="{{media url=wysiwyg/home_page/wufeili/wufeili_cover_pc.png}}"
+          class="mrl-click HS2R2-img select-promotion ga-item" alt="" data-ga-category=""
+          loading="lazy" data-ga-promotion_id="" data-ga-creative_slot="HS2R2"
+          data-ga-item-id="" data-ga-label="" />
+      </picture>
+      <div class="overlay"></div>
     </div>
 
-    <div>
-      <div class="flex_container">
-        <div class="item-title">
-          <h1>| 推薦商品 |</h1>
-        </div>
-        <div class="twoitem">
-          <div>
-            <a href="{{store direct_url='mattress-tw-standard.html'}}">
-              <picture>
-                <source
-                  srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_Yingtong_PC_mattress-25_270x200px.jpg}}"
-                  media="(min-width:768px)"
-                  loading="lazy"
-                />
-                <source
-                  srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_Yingtong_mobile_mattress-25_162x120px.jpg}}"
-                  media="(max-width:767px)"
-                  loading="lazy"
-                />
-                <img
-                  src="{{media url=wysiwyg/home_page/2025/2025_4M/2504_Yingtong_PC_mattress-25_270x200px.jpg}}"
-                  class="mrl-click HS2R2-img select-promotion ga-item"
-                  alt="涼感減壓記憶床墊"
-                  data-ga-category="MKT-mattress"
-                  loading="lazy"
-                  data-ga-promotion_id="20250409_matt-handsel-pillow"
-                  data-ga-creative_slot="HS2R2"
-                  data-ga-item-id="30-0001-0-08-v2"
-                  data-ga-label="雙人標準(5X6.2)｜涼感減壓記憶床墊｜零干擾 獨立筒"
-                />
-              </picture>
-            </a>
-          </div>
-          <div>
-            <a href="{{store direct_url='mattress-double-20tencel.html'}}">
-              <picture>
-                <source
-                  srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_Yingtong_PC_mattress-20_270x200px.jpg}}"
-                  media="(min-width:768px)"
-                  loading="lazy"
-                />
-                <source
-                  srcset="{{media url=wysiwyg/home_page/2025/2025_4M/2504_Yingtong_mobile_mattress-20_162x120px.jpg}}"
-                  media="(max-width:768px)"
-                  loading="lazy"
-                />
-                <img
-                  src="{{media url=wysiwyg/home_page/2025/2025_4M/2504_Yingtong_PC_mattress-20_270x200px.jpg}}"
-                  class="mrl-click HS2R3-img select-promotion ga-item"
-                  alt="護腰護脊減壓記憶床墊"
-                  data-ga-category="MKT-mattress"
-                  loading="lazy"
-                  data-ga-promotion_id="20250409_matt-handsel-pillow"
-                  data-ga-creative_slot="HS2R3"
-                  data-ga-item-id="30-0049-0-08-v2"
-                  data-ga-label="雙人標準(5X6.2)｜護腰護脊減壓記憶床墊｜零干擾 獨立筒"
-                />
-              </picture>
-            </a>
-          </div>
-        </div>
-      </div>
+    <!-- Living room sofa -->
+    <div class="gallery-item">
+      <a href="{{store direct_url='hotsales/japandi-series/japandi-livingroom.html'}}">
+        <picture>
+          <source srcset="{{media url=wysiwyg/home_page/wufeili/wufeili_livingroom.png}}"
+            media="(min-width:768px)" loading="lazy" />
+          <source
+            srcset="{{media url=wysiwyg/home_page/wufeili/wufeili_livingroom.png}}"
+            media="(max-width:767px)" loading="lazy" />
+          <img src="{{media url=wysiwyg/home_page/wufeili/wufeili_livingroom.png}}"
+            class="mrl-click HS2R2-img select-promotion ga-item" alt="" data-ga-category=""/>
+        </picture>
+        <div class="overlay"></div>
+        <div class="tag">客廳空間 ▶</div>
+      </a>
+    </div>
+
+    <!-- Dining room -->
+    <div class="gallery-item">
+      <a href="{{store direct_url='hotsales/japandi-series/japandi-diningroom.html'}}"></a>
+        <picture>
+          <source srcset="{{media url=wysiwyg/home_page/wufeili/wufeili_diningroom.png}}"
+            media="(min-width:768px)" loading="lazy" />
+          <source
+            srcset="{{media url=wysiwyg/home_page/wufeili/wufeili_diningroom_mobile_v2.png}}"
+            media="(max-width:767px)" loading="lazy" />
+          <img src="{{media url=wysiwyg/home_page/wufeili/wufeili_diningroom.png}}"
+            class="mrl-click HS2R2-img select-promotion ga-item" alt="" data-ga-category=""/>
+        </picture>
+        <div class="overlay"></div>
+        <div class="tag">餐廳空間 ▶</div>
+      </a>
+    </div>
+
+    <!-- Bedroom -->
+    <div class="gallery-item">
+      <a href="{{store direct_url='hotsales/japandi-series/japandi-bedroom.html'}}">
+        <picture>
+          <source srcset="{{media url=wysiwyg/home_page/wufeili/wufeili_bedroom.png}}"
+            media="(min-width:768px)" loading="lazy" />
+          <source
+            srcset="{{media url=wysiwyg/home_page/wufeili/wufeili_bedroom_mobile_v2.png}}"
+            media="(max-width:767px)" loading="lazy" />
+          <img src="{{media url=wysiwyg/home_page/wufeili/wufeili_bedroom.png}}"
+            class="mrl-click HS2R2-img select-promotion ga-item" alt="" data-ga-category=""/>
+        </picture>
+        <div class="overlay"></div>
+        <div class="tag">臥室空間 ▶</div>
+      </a>
     </div>
   </div>
-</div>
+
+</section>

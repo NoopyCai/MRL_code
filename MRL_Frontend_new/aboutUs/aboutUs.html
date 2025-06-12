@@ -9,8 +9,15 @@
 
     #maincontent {
         background-color: #E4E4E4;
+        overflow-x: hidden;
     }
-
+    
+    body, html {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+    
     .row {
         margin-right: 0px;
         margin-left: 0px;
@@ -265,11 +272,11 @@
         margin: 0 0 60px 0;
     }
 
-    section.brand-course {
+    /* section.brand-course {
         border-top: 1px solid #a6a6a6;
         border-bottom: 1px solid #a6a6a6;
         padding: 6rem 0
-    }
+    } */
 
     .brand-course-content {
         opacity: 0;
@@ -500,6 +507,19 @@
     .fade-out-right.hidden {
         opacity: 0;
         transform: translateX(50px);
+    }
+    section.brand-course.kvSection.kvSection-part1{
+        padding: 1rem 0 0 0;
+        border-bottom: none;
+    }
+    section.brand-course.kvSection.kvSection-part2{
+        opacity: 1;
+        padding: 0 0 6rem;
+        border-top: none;
+    }
+    section.brand-course.kvSection.kvSection-part2 .brand-course-content{
+        opacity: 1;
+        transform: scale(1);
     }
 
     @keyframes expand {
@@ -783,6 +803,7 @@
             left: 0;
             right: 0;
             bottom: 0%;
+            padding: 0 20px;
         }
 
         .brand-course-content .mobile-content .brand-course-content-detail.y2021 {
@@ -802,7 +823,7 @@
         }
 
         .brand-course-content .mobile-content .brand-course-content-detail span.highlight {
-            font-size: 2.5rem;
+            font-size: 2.4rem;
             font-weight: 600;
         }
 
@@ -1248,13 +1269,14 @@
 </section>
 
 <!-- 品牌歷程 -->
-<section class="brand-course kvSection">
+<section class="brand-course kvSection kvSection-part1">
     <div class="brand-course-title" style="text-align: center;">
         <h2>品牌歷程</h2>
     </div>
     <div class="brand-course-content">
         <div class="pc-content">
-            <img src="{{media url=wysiwyg/about_us/brand_Course_map.jpg}}" style="width: 90%;"
+            <img src="{{media url=wysiwyg/about_us/brand_Course_map_250509_par1_v2.png}}"
+            style="width: 90%;"
                 alt="品牌歷程｜2016年居家先生誕生，2018年創下台灣床墊集資金額冠，2021年獲行政院國發基金投資，2022年世界舉重冠軍郭婞淳成為品牌代言人，2023年全台總計5間門市，2024年服務突破29.7萬名居友" />
         </div>
         <div class="mobile-content">
@@ -1296,23 +1318,47 @@
                 </p>
             </div>
             <div class="brand-course-content-detail">
-                <img src="{{media url=wysiwyg/about_us/brand_road_2023.png}}" style="width: 100%;" alt="2023年品牌里程碑" />
+                <img src="{{media url=wysiwyg/about_us/brand_road_2023_250509_v2.png}}" alt="2023年品牌里程碑" />
+                <p class="brand-course-content-title" style="bottom: 36%;">
+                    化妝桌類<br>
+                    <span class="highlight">募資冠軍</span>
+                </p>
                 <p>
-                    全台總計 5 間門市<br>
-                    (台北/新竹/台中/台南/高雄)
+                    《創下台灣化妝桌類群眾募資銷售冠軍》<br>
+                    三個月創下超過2,800萬銷售紀錄<br>
+                    千人喜愛的「超級收納化妝台」
                 </p>
             </div>
             <div class="brand-course-content-detail">
                 <img src="{{media url=wysiwyg/about_us/brand_road_2024.png}}" style="width: 43%;" alt="2024年品牌里程碑" />
                 <p class="brand-course-content-title">
                     服務突破<br>
-                    <span class="highlight">29.7</span>萬居友
+                    <span class="highlight">29.7萬居友</span>
                 </p>
-                <p>
-                    截至2024年9月<br>
-                    累計服務突破 29.7 萬居友
+                <p style="bottom: -6%;">
+                    《榮獲經濟部第23屆新創事業獎》<br>
+                    同年也獲選「台灣新創100大」企業<br>
+                    由台灣50大創投機構評選
                 </p>
             </div>
+            <div class="brand-course-content-detail">
+                <img src="{{media url=wysiwyg/about_us/brand_road_2025_250509_v2.png}}" alt="2025年品牌里程碑" />
+                <p>
+                    全台首間結合咖啡廳、沉浸式體驗與家具<br>
+                    家飾展示的450坪新莊旗艦店盛大開幕<br>
+                    全台總計６間門市
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="brand-course kvSection kvSection-part2">
+    <div class="brand-course-content">
+        <div class="pc-content">
+            <img src="{{media url=wysiwyg/about_us/brand_Course_map_250509_par2_v2.png}}"
+            style="width: 90%;"
+                alt="品牌歷程｜2016年居家先生誕生，2018年創下台灣床墊集資金額冠，2021年獲行政院國發基金投資，2022年世界舉重冠軍郭婞淳成為品牌代言人，2023年全台總計5間門市，2024年服務突破29.7萬名居友" />
         </div>
     </div>
 </section>
@@ -1325,11 +1371,11 @@
     <div id="store-location-carousel" class="fade-in hidden">
        <div class="item">
             <div class="store-location-img">
-                <img src="{{media url=wysiwyg/store_location/store-location-HC-pic.jpg}}" loading="lazy"
+                <img src="{{media url=wysiwyg/store_location/store-location-XB-pic-0227.jpg}}" loading="lazy"
                     alt="新莊旗艦店展廳一隅｜沙發茶几體驗區" />
             </div>
             <div class="store-location-info">
-                <p><span class="store-name">新莊 旗艦店</span> | 02-85211613</p>
+                <p><span class="store-name">新莊 旗艦店</span> | 02-85211613</span> </p>
                 <p>新北市新莊區新北大道四段135號2&3樓</p>
             </div>
             <div class="store-location-btn mobile-content">
@@ -1338,7 +1384,7 @@
         </div>
         <div class="item">
             <div class="store-location-img">
-                <img src="{{media url=wysiwyg/store_location/store-location-taipei-pic.jpg}}" loading="lazy"
+                <img src="{{media url=wysiwyg/about_us/store-location-NH-2503.jpg}}" loading="lazy"
                     alt="內湖門市展廳一隅｜餐桌椅體驗區" />
             </div>
             <div class="store-location-info">
@@ -1351,7 +1397,7 @@
         </div>
         <div class="item">
             <div class="store-location-img">
-                <img src="{{media url=wysiwyg/about_us/about_us_location_Zhubei.jpg}}" loading="lazy"
+                <img src="{{media url=wysiwyg/about_us/store-location-HC-2503.jpg}}" loading="lazy"
                     alt="竹北門市展廳一隅｜沙發茶几及書桌辦公椅體驗區" />
             </div>
             <div class="store-location-info">
@@ -1369,7 +1415,7 @@
     <div id="store-location-carousel" class="fade-in hidden">
         <div class="item">
             <div class="store-location-img">
-                <img src="{{media url=wysiwyg/about_us/about_us_location_Taichung.jpg}}" loading="lazy"
+                <img src="{{media url=wysiwyg/about_us/store-location-TC-2503.jpg}}" loading="lazy"
                     alt="台中門市展廳一隅｜沙發及餐桌椅體驗區" />
             </div>
             <div class="store-location-info">
@@ -1382,7 +1428,7 @@
         </div>
         <div class="item">
             <div class="store-location-img">
-                <img src="{{media url=wysiwyg/about_us/about_us_location_Tainen.jpg}}" loading="lazy"
+                <img src="{{media url=wysiwyg/about_us/store-location-TN-2503.jpg}}" loading="lazy"
                     alt="台南門市展廳一隅｜沙發茶几體驗區" />
             </div>
             <div class="store-location-info">
@@ -1395,7 +1441,7 @@
         </div>
         <div class="item">
             <div class="store-location-img">
-                <img src="{{media url=wysiwyg/about_us/about_us_location_Kaosiung.jpg}}" loading="lazy"
+                <img src="{{media url=wysiwyg/about_us/store-location-KH-2503.jpg}}" loading="lazy"
                     alt="高雄門市展廳一隅｜沙發與收納櫃架體驗區" />
             </div>
             <div class="store-location-info">

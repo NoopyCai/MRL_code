@@ -1,0 +1,30 @@
+<script>
+    function () {
+        var specItems = [
+            'Jasper 防潑水 防貓抓布沙發 大象灰 3人 221cm',
+            'Jasper 防潑水 防貓抓布沙發 淺駝棕 3人 221cm',
+            'Jasper 防潑水 防貓抓布沙發 深海藍 3人 221cm',
+            'Jasper 防潑水 防貓抓布沙發 象牙白 3人 221cm',
+            'Bruce 防潑水 防貓抓布沙發 大象灰 3人 221cm',
+            'Bruce 防潑水 防貓抓布沙發 淺駝棕 3人 221cm',
+            'Bruce 防潑水 防貓抓布沙發 深海藍 3人 221cm',
+            'Bruce 防潑水 防貓抓布沙發 象牙白 3人 221cm',
+            'Pluffy 泡芙3人座 科技貓抓布落地沙發 淺駝棕 210cm',
+            'Pluffy 泡芙3人座 科技貓抓布落地沙發 大象灰 210cm',
+            'Pluffy 泡芙3人座 科技貓抓布落地沙發 深海藍 210cm',
+            'Pluffy 泡芙3人座 科技貓抓布落地沙發 象牙白 210cm',
+        ]
+
+        function checkSpecItemInCart(cartItems) {
+            return Array.from(cartItems).some(function (item) {
+                return specItems.some(function (specItem) {
+                    return item.title.includes(specItem);
+                });
+            });
+        }
+
+        var cartItems = document.querySelectorAll('.cart.item .item-info >.item > a');
+
+        return checkSpecItemInCart(cartItems)
+    }
+</script>
