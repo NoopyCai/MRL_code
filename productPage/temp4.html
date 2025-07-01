@@ -1,0 +1,549 @@
+<style>
+    .img-wrapper {
+        position: relative;
+    }
+
+    .rwdDot {
+        padding-inline-start: 20px !important;
+        margin-block-end: 0 !important;
+    }
+
+    .img-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        text-align: center;
+    }
+
+    .arrow {
+        margin-left: 12px;
+        font-size: 18px;
+    }
+
+    .btn {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        /* border: 0.5px solid #999; */
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 80px 80px, rgba(0, 0, 0, 0.25) 0px -20px 40px, rgba(0, 0, 0, 0.25) 0px 10px 20px, rgba(0, 0, 0, 0.3) 0px 20px 20px, rgba(0, 0, 0, 0.2) 0px -5px 10px, rgba(0, 0, 0, 0.15) 0px -2px 5px;
+        left: 65%;
+        top: 40%;
+        /* animation: pulse 1.8s ease-in-out infinite;  */
+        animation: fadeInOut 1.8s alternate infinite;
+        transform: translate(-50%, -50%);
+        transition: 0.2s ease-in-out;
+        cursor: pointer;
+    }
+
+    .btn-dot2 .itemInfo {
+        left: 0 !important;
+        bottom: 30px !important;
+    }
+
+    .btn-dot2 .itemInfo::after {
+        right: 50% !important;
+        bottom: -5px !important;
+
+    }
+
+    .btn.Notactive {
+        animation: none;
+    }
+
+    @keyframes fadeInOut {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+    }
+
+
+
+    .itemInfo {
+        visibility: hidden;
+        user-select: none;
+        max-width: 320px;
+        min-width: 310px;
+        opacity: 0;
+        width: auto;
+        height: auto;
+        padding: 15px;
+        position: absolute;
+        bottom: 30px;
+        transform: translateX(-45%) scale(0);
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        transition: 0.3s ease-out;
+    }
+
+    .itemInfo::after {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        right: 50%;
+        background-color: #fff;
+        transform: rotate(45deg);
+        bottom: -5px;
+    }
+
+    .Infoactive {
+        visibility: visible !important;
+        opacity: 1 !important;
+        animation: popup 0.5s;
+        transform: translateX(-44.5%) scale(1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+    }
+
+    @keyframes popup {
+        0% {
+            transform: scale(0) translateX(-45%);
+        }
+
+        20% {
+            transform: scale(1.1) translateX(-45%);
+        }
+
+        50% {
+            transform: scale(0.95) translateX(-45%);
+        }
+
+        80% {
+            transform: scale(1.05) translateX(-45%);
+        }
+
+        100% {
+            transform: scale(1) translateX(-45%);
+        }
+    }
+
+
+
+    .itemInfo p {
+        font-family: Lato, Helvetica, sans-serif;
+        margin-bottom: 0;
+        font-size: 26px;
+    }
+
+    .product-title {
+        letter-spacing: 1px;
+    }
+
+    .product-disPrice {
+        color: #C34135;
+        font-size: 26px;
+    }
+
+    .product-oldPrice {
+        text-decoration: line-through;
+        color: gray;
+        font-size: 24px;
+    }
+
+    .btn a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .ppbd-product-description .block-static-block.widget {
+        margin-bottom: 0 !important;
+    }
+
+    #mattress-add-to-cart {
+        position: relative;
+    }
+
+    #add-pillowcase {
+        position: absolute;
+        background: #1865FF;
+        border: 1px solid #1865FF;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 500;
+        width: 204px;
+        height: 44px;
+        border-radius: 28px;
+        font-size: 26px;
+        padding-right: 35px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        bottom: 7%;
+    }
+
+    #mattress-add-to-cart>button::after {
+        content: '';
+        position: absolute;
+        background-image: url('https://media.mrliving.com.tw/wysiwyg/co_IMG/cart_white.png');
+        background-size: cover;
+        background-position: center;
+        width: 25px;
+        height: 25px;
+        top: 8px;
+        right: 15px;
+    }
+
+    .img1-bt1-itemInfo {
+        bottom: -62.5px;
+        left: -147px;
+    }
+
+    .img1-bt1-itemInfo::after {
+        bottom: 50%;
+        right: -5px;
+    }
+
+    .product-disPrice {
+        line-height: 35px;
+    }
+
+
+
+    @media (max-width: 767px) {
+        #mattress-add-to-cart>button {
+            border: none;
+            width: 120px;
+            height: 26px;
+            font-size: 14px;
+            white-space: nowrap;
+            line-height: 12px;
+        }
+
+        #mattress-add-to-cart>button::after {
+            width: 15px;
+            height: 15px;
+            right: 11px;
+            top: 5px;
+        }
+
+        .bt1-itemInfo::after {
+            bottom: -5px !important;
+
+            right: 47% !important;
+        }
+
+        .blog_table {
+            font-size: 14px;
+        }
+
+        .tableImg {
+            width: 100% !important;
+        }
+
+
+        .btn {
+            left: 70%;
+        }
+
+        .itemInfo {
+            min-width: 180px;
+            padding: 5px 10px;
+
+            width: 100%;
+            height: auto;
+            transform: translateX(-45%) scale(0);
+        }
+
+        .Infoactive {
+            transform: translateX(-45.5%) scale(1);
+        }
+
+        .product-title {
+            font-size: 14px !important;
+            letter-spacing: 0;
+        }
+
+        .product-disPrice {
+            font-size: 13px !important;
+            line-height: 0;
+        }
+
+        .product-oldPrice {
+            font-size: 12px !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #mattress-add-to-cart>button {
+            border: none;
+            width: 120px;
+            height: 26px;
+            font-size: 14px;
+            white-space: nowrap;
+            line-height: 10px;
+        }
+
+        #mattress-add-to-cart>button::after {
+            font-size: 10px;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 979px) {
+        #mattress-add-to-cart>button {
+            border: none;
+            width: 180px;
+            font-size: 20px;
+            white-space: nowrap;
+        }
+        .itemInfo p,
+        .product-disPrice{
+            font-size: 20px;
+        }
+        .product-oldPrice {
+            font-size: 18px;
+        }
+        .itemInfo{
+            min-width: 250px;
+        }
+    }
+</style>
+
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/mattress-spine_promise_01-1_250227_v4.jpg}}" alt="居友推薦｜減壓床墊，累計銷售4億3千萬；期間限定買床墊送減壓枕＋免運" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/mattress-spine_promise_01-2_250227_v4.jpg}}" alt="期間限定買床墊送減壓枕＋免運" loading="lazy"/>
+
+<script>
+    document.querySelectorAll("#cabinet-product-buy-now-btn").forEach(function(btn){
+  btn.addEventListener("click",function(){
+   document.querySelector("#go2buy").click();
+  })
+    })
+</script>
+
+<p>
+    <lite-youtube videoid="Eeg-sZW-S1w" style="background-image:url(https://media.mrliving.com.tw/wysiwyg/co_IMG/Youtube_cover/yuingtong_ytcover.png) !important;" loading="lazy">
+      <a href="https://www.youtube.com/watch?v=Eeg-sZW-S1w" class="lty-playbtn" title="">
+        <span class="lyt-visually-hidden"></span>
+        <noscript>
+          <iframe width="100%" height="300px" src="https://www.youtube.com/watch?v=Eeg-sZW-S1w" frameborder="0"        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>       </noscript>          
+      </a>
+    </lite-youtube>
+  </p>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/mattress-spine_c01_250303_v4.jpg}}" alt="護腰護脊減壓記憶床墊｜好睡四大特點：０干擾獨立筒，減壓專利記憶棉，天絲抗敏透氣布，嬰兒級安全無毒" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/Matress_new_spine-double_c03_230105_v3.jpg}}" alt="全台超過500萬人都有的三大睡眠困擾：易過敏，腰痠背痛，支撐不足影響脊柱發育；減壓床墊推薦適合群族－紅疹過敏、年長或運動傷害、脊柱支撐需求者" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/Matress_new_spine-double_c05_230105_v3.jpg}}" alt="黃金結構舒緩腰背，延長你的熟睡時間，減壓記憶棉與０干擾獨立筒，睡感再升級；透氣減壓舒適層(親膚抗敏，釋放壓力)4cm＋靜音0擾支撐層(高碳鋼獨立筒彈簧，吸震支撐)14cm＋防滑底層(高彈力支撐棉，吸濕排汗抗菌內表布與防滑底布)2cm，打造20cm厚躺感適中偏硬的床墊" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/Matress_new_spine-double_c06_230105_v3.jpg}}" alt="延長深度睡眠的專利恆溫減壓記憶棉｜獨家擁有，使床墊貼合曲線，釋放身體壓力、舒緩腰痠背痛；通過海綿疲勞測試達8萬次，減壓床墊耐用性佳，陪你更長久" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/Matress_new_spine-double_c07_230105_v3.gif}}" alt="手壓在減壓記憶棉上，貼合且慢回彈實境測試" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/Matress_new_spine-double_c08_230105_v3.jpg}}" alt="居友芷涵床墊使用真實評論｜身為瑜珈老師，對脊椎和腰部的支撐是非常重視的！平常除了做瑜珈伸展來放鬆舒緩久坐的緊繃肌肉外，睡眠時透過支撐度良好的床墊給脊椎承托、減少腰部肌肉壓力" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/Matress-spine_selling-point_15_250303_v2.jpg}}" alt="減壓床墊貼合身形深度舒緩腰痠背痛｜支撐肩頸、保護脊椎、放鬆腿部" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/Matress_new_spine-double_c10_230105_v3.jpg}}" alt="靜音熟睡到天亮｜０干擾獨立筒5圈半加粗線徑2.2mm高碳鋼材，優越的硬度及韌性，枕邊人翻身幾乎無聲響或震動" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/mattress-spine_selling-po_10-2_250303_v1.jpg}}" alt="如何動，如何跳，旁邊躺著的人不會感到床墊大搖晃，一點感覺都沒有" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/coolbed_2025/mattress_new_0727_v2_c13.jpg}}" alt="居友Erica Chang靜音０干擾體驗評論｜如何動，如何跳，旁邊躺著的人不會感到床墊大搖晃，一點感覺都沒有" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/Matress_new_spine-double_c12_230105_v3.jpg}}" alt="4國專利減壓記憶棉，床墊舒適度四季不變｜丹麥、美國、加拿大、中國獨家技術，不讓溫度影響睡感" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/Matress_new_spine-double_c13_230105_v3.jpg}}" alt="天絲抗敏透氣表布，吸濕排汗、拒絕悶熱過敏｜奧地利蘭精天絲擁有吸濕透氣、抑菌抗敏、自然環保、親膚滑順特性" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/coolpillow2025/mattress_new_0727_v3_c16.jpg}}" alt="專利內表布，床墊抗菌率超過99%｜石墨烯中的碳原子可破壞細菌細胞膜，抑制生長抗菌率達99%以上,安心入眠" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/coolpillow2025/mattress_new_0727_v3_c17.jpg}}" alt="石墨烯內表布經實驗測試有效抵抗家中常見細菌(大腸桿菌、金黃色葡萄球菌、白色念球菌)，具備優異的物理性抗菌效果，符合適合嬰兒貼身使用的安全標準" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/Matress_new_spine-double_c16_230105_v3.jpg}}" alt="高彈力支撐棉，床墊用更久｜中高密度泡棉全方位包覆保護獨立筒，不受擠壓變形；且底層加厚設計(高彈力支撐棉2cm)能搭配排骨架、床板等床架使用" loading="lazy"/>
+
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/coolpillow2025/mattress_new_0727_v2_c19.jpg}}" alt="床墊用材安全無毒，通過歐美安全無毒認證、嬰幼兒使用等級｜皆通過有害物質(甲醛、重金屬、揮發性有機化合物)檢驗標準，不會造成人體危害" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/mattress-spine_promise_05-1_250303_v4.jpg}}" alt="減壓床墊免費服務，101晚試睡＋10年保固｜到貨後睡感體驗不如預期，將全額退還床墊費用；十年間正常使用，整體高度下陷達3cm以上，享減壓床墊免費維修、退換貨等服務" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/mattress-spine_promise_05-2_250303_v4.jpg}}" alt="居友使用護腰護脊減壓記憶床墊" loading="lazy"/>
+<img style="display: block; width: 100%;" src="{{media url=wysiwyg/matress/Spinebed_2025/mattress-spine_c02_250303_v4.jpg}}" alt="床墊細節｜10秒可拆洗床套方便更換，防滑底布床墊不位移，真空包裝好搬運入戶零煩惱" loading="lazy"/>
+
+<!-- 產品尺寸 -->
+{{widget type="Magento\Cms\Block\Widget\Block" template="widget/static_block/default.phtml" block_id="189"}}
+
+<div class="img-container">
+    <div class="img-wrapper" id="mattress-add-to-cart">
+        <img src="{{media url=wysiwyg/matress/coolbed_2025/mattress_new_c05_250227_v4.jpg}}"
+            alt="推薦組合｜居友都這樣買，臥室熱銷單品" style="width: 100%;" loading="lazy" />
+        <button id="add-pillowcase" class="mrl-click pg-add2cart cta-tocart" data-ga-category="Ecommerce"
+            data-ga-label="活性益生菌防蟎抗敏全包覆式保潔墊">加入購物車</button>
+    </div>
+    <div class="btn Notactive" data-product-id="Addon-CS-23-00110" style="top: 52%; left: 51%;">
+        <a class="product-url" style="text-decoration: none; color: black;" target="_blank">
+            <div class="itemInfo bt1-itemInfo Infoactive">
+                <div class="itemInfo-text">
+                    <p class="product-title"></p>
+                    <p><span class="product-disPrice"></span>
+                        <span class="product-oldPrice"></span>
+                </div>
+                <div class="arrow">
+                    &#10095;
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<style>
+.img1-bt1-itemInfo{
+ bottom: -62.5px;
+ left: -147px;
+}
+.img1-bt1-itemInfo::after{
+ bottom: 50%;
+ right: -5px;
+}
+.img1-bt3-itemInfo{
+ bottom: -150px;
+}
+.img1-bt3-itemInfo::after{
+ bottom: 0;
+ top: -5px;
+ right: 50%;
+}
+.bt4-itemInfo{
+     bottom: -140px !important;
+ }
+.bt4-itemInfo::after{
+     top: -5px !important;
+ }
+.product-disPrice{
+ line-height: 35px;
+}
+
+@media(max-width:768px){
+
+ .bt1-itemInfo{
+     left: 8px;
+ }
+ .bt1-itemInfo::after{
+     bottom: -5px !important;
+     right: 54% !important;
+ }
+
+ .bt3-itemInfo{
+     left: 4px;
+     bottom: 30px !important;
+ }
+ .bt3-itemInfo::after{
+     right: 67%;
+     bottom: 0;
+ }
+ .bt4-itemInfo{
+     left: -22px;
+     bottom: -156px !important;
+ }
+ .bt4-itemInfo::after{
+     right: 30% !important;
+     top: -5px !important;
+ }
+ 
+
+}
+ @media (min-width: 768px) {
+      iframe {
+        height: 70vh !important;
+      }
+    }
+</style>
+
+<script>
+    let addPillowcase = document.querySelector('#add-pillowcase');
+    addPillowcase.addEventListener('click', function (e) {
+        addItemToCart('5108', e.target)
+        .then( () => {
+            addItemToCart('5297', e.target);
+        })
+    }, false)
+
+
+    function addItemToCart(itemId, element) {
+        let addToCartUrl = document.querySelector('#product_addtocart_form').action;
+        let itemIdToAdd = itemId;
+        let newAddToCartUrl = addToCartUrl.replace(/\/\d+\//g, `/${itemIdToAdd}/`);
+
+        let formKey = jQuery.cookie("form_key");
+        let formData = new FormData();
+        formData.append("product", itemIdToAdd);
+        formData.append("selected_configurable_option", "");
+        formData.append("related_product", "");
+        formData.append("form_key", formKey);
+        formData.append("qty", 1);
+
+        btnClickFeedback(element);
+
+        let request = jQuery.ajax({
+            url: newAddToCartUrl,
+            method: "POST",
+            processData: false,
+            contentType: false,
+            data: formData
+        }).done(function (response) {
+            console.log('Success');
+            afterSuccessAddToCart(element);
+            setTimeout(showOriginAddBtn, 1000, element);
+        }).fail(function (jqXHR, textStatus) {
+            console.log("Couldn't add product to cart. " + textStatus);
+        });
+
+        return request;
+    };
+
+    function btnClickFeedback(element) {
+        element.innerText = '加入中…';
+    }
+    function afterSuccessAddToCart(element) {
+        element.innerText = '已經添加';
+    }
+    function showOriginAddBtn(element) {
+        element.innerText = '加入購物車';
+    }
+
+    setTimeout(function () {
+        require(['jquery', 'Mrl_ProductElement'], function ($) {
+            mrl_prductElement.getProducts(['Addon-CS-23-00110'], $fields = 'sku,name,price,MRL_discount_price,url_key', $page = 1, $page_size = 20)
+                .then((success) => {
+                    console.log('success', success);
+
+                    var products = success[0].data.items;
+
+
+                    products.forEach(function (product) {
+                        var productId = product.sku;
+                        // var productName = product.name;
+                        var productDisPrice = parseInt(product.MRL_discount_price).toLocaleString();
+                        var productOldPrice = parseInt(product.price).toLocaleString();
+                        // var productUrl = product.url_key;
+                        var productContainers = document.querySelectorAll('.btn[data-product-id="' + productId + '"]');
+
+                        productContainers.forEach(function (productContainer) {
+
+                            var productTitle = productContainer.querySelector('.product-title');
+                            var productdisPrice = productContainer.querySelector('.product-disPrice')
+                            var productoldPrice = productContainer.querySelector('.product-oldPrice')
+                            var productUrlElement = productContainer.querySelector('.product-url')
+
+                            productTitle.innerHTML = '活性益生菌防蟎抗敏<br>全包覆式保潔墊'
+                            productUrlElement.href = 'https://www.mrliving.com.tw/greatliving-co-branding/gl-protector-anti-allergy.html';
+                            if (productDisPrice !== '0') {
+                                productoldPrice.innerHTML = '$' + productOldPrice;
+                                productdisPrice.innerHTML = '$' + productDisPrice;
+                            } else {
+                                productdisPrice.innerHTML = '$' + productOldPrice;
+                            }
+
+                        })
+
+                    })
+                }, (error) => {
+                    console.log('error', error);
+                });
+        });
+    }, 3000);
+</script>

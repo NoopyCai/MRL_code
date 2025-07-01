@@ -1,0 +1,167 @@
+<div class="PLP-Section">
+    <div class="introTextContainer">
+        <h1 class="desktop-title">實木家具｜嚴選實木，打造高質感北歐風空間</h1>
+        <h1 class="mobile-title">實木家具｜打造高質感北歐風空間</h1>
+        <p>
+            MR. LIVING 居家先生 質感實木家具系列<br>
+            熱銷不斷！北歐風格首選，全室家具一站購足<br>
+            實木家具輕鬆融入客廳、餐廳或臥室<br>
+            全面提升空間質感！<br>
+        </p>
+        <p>
+            嚴選頂級歐美實木，結合精湛工藝<br>
+            紋理細緻溫潤，堅固耐用不易變形<br>
+            歐盟認證，安全環保，守護全家健康<br>
+        </p>
+        <p>
+            居友一致推薦，高CP值質感生活首選<br>
+            輕鬆打造專屬於自己的舒適居家空間<br>
+            邀您親自體驗，MR. LIVING 居家先生實木家具
+        </p>
+    </div>
+    <div class="introImageContainer">
+        <picture>
+            <source srcset="{{media url=catalog/category/PLP/reel_wood_plp_pc.png}}" media="(min-width: 1025px)">
+            <source srcset="{{media url=catalog/category/PLP/reel_wood_plp_mobile.png}}" media="(max-width: 1024px)">
+            <img src="{{media url=catalog/category/PLP/reel_wood_plp_pc.png}}" />
+        </picture>
+    </div>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+TC:wght@200..900&display=swap');
+
+    .PLP-Section {
+        display: flex;
+        justify-content: space-between;
+        background-color: #E3D8CC;
+        align-items: stretch;
+        font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .PLP-Section h1 {
+        font-size: 22px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #B3B3B3;
+        padding-bottom: 20px;
+    }
+
+    .desktop-title {
+        display: block;
+    }
+
+    .mobile-title {
+        display: none;
+    }
+
+    .PLP-Section p {
+        font-size: 18px;
+        margin-bottom: 24px;
+        line-height: 1.5;
+        color: #575757;
+    }
+
+    .introTextContainer {
+        padding: 28px 14px 28px 28px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        max-width: 35%;
+    }
+
+    .introImageContainer {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .introImageContainer img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    /* 響應式設計 */
+    @media (max-width: 1700px) {
+        .PLP-Section h1 {
+            font-size: 18px;
+            padding-bottom: 10px;
+        }
+
+        .PLP-Section p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 1440px) {
+        .PLP-Section h1 {
+            font-size: 16px;
+        }
+
+        .PLP-Section p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    }
+
+    @media (max-width: 1280px) {
+        .PLP-Section h1 {
+            font-size: 14px;
+        }
+
+        .PLP-Section p {
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .page-products .columns {
+            padding-top: 0px;
+        }
+
+        .PLP-Section {
+            flex-direction: column;
+            min-height: auto;
+        }
+
+        .introTextContainer {
+            padding: 28px 18px 14px 18px;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        .desktop-title {
+            display: none;
+        }
+
+        .mobile-title {
+            display: block;
+        }
+
+        .PLP-Section h1 {
+            font-size: 20px;
+        }
+
+        .PLP-Section p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .introImageContainer img{
+            margin-bottom: -3px;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        .PLP-Section h1 {
+            font-size: 18px;
+        }
+
+        .PLP-Section p {
+            font-size: 14px;
+        }
+    }
+</style>

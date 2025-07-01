@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>還原功能表單提交測試</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .test-container { max-width: 1000px; margin: 0 auto; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        .info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        
+        .test-form { background: white; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .form-group { margin: 10px 0; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select, .form-group textarea { 
+            width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; 
+        }
+        
+        button { margin: 5px; padding: 10px 15px; font-size: 14px; cursor: pointer; }
+        .test-button { background-color: #007bff; color: white; border: none; border-radius: 4px; }
+        .test-button:hover { background-color: #0056b3; }
+        .submit-button { background-color: #28a745; color: white; border: none; border-radius: 4px; }
+        .submit-button:hover { background-color: #218838; }
+        
+        .product-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        .product-table th, .product-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .product-table th { background-color: #f2f2f2; }
+        
+        .order-details { background: white; padding: 20px; margin: 10px 0; border-radius: 8px; }
+        .order-tables tbody { background: #f9f9f9; }
+        
+        #test-results { max-height: 300px; overflow-y: auto; background: white; padding: 15px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>還原功能表單提交測試</h1>
+        <div id="test-results"></div>
+        
+        <h2>測試控制面板</h2>
+        <button class="test-button" onclick="setupTestData()">設置測試資料</button>
+        <button class="test-button" onclick="testRestoreFunction()">測試還原功能</button>
+        <button class="test-button" onclick="testFormSubmission()">測試表單提交</button>
+        <button class="test-button" onclick="clearAllData()">清除所有資料</button>
+        
+        <!-- 模擬訂單表單 -->
+        <div class="test-form order-details">
+            <h3>訂單表單</h3>
+            <form id="order-form" onsubmit="return handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="email">客戶Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="order-billing_address_lastname">姓</label>
+                    <input type="text" id="order-billing_address_lastname" name="lastname">
+                </div>
+                
+                <div class="form-group">
+                    <label for="order-billing_address_firstname">名</label>
+                    <input type="text" id="order-billing_address_firstname" name="firstname">
+                </div>
+                
+                <div class="form-group">
+                    <label for="order-billing_address_telephone">電話</label>
+                    <input type="tel" id="order-billing_address_telephone" name="telephone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="order-billing_address_city">城市</label>
+                    <select id="order-billing_address_city" name="city">
+                        <option value="">請選擇城市</option>
+                        <option value="taipei">台北市</option>
+                        <option value="taichung">台中市</option>
+                        <option value="kaohsiung">高雄市</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="order-billing_address_street">地址</label>
+                    <textarea id="order-billing_address_street" name="address" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="order-account_newsletter" name="newsletter" value="1">
+                        訂閱電子報
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label>付款方式：</label>
+                    <label><input type="radio" name="payment_method" value="credit_card" id="payment-credit"> 信用卡</label>
+                    <label><input type="radio" name="payment_method" value="bank_transfer" id="payment-bank"> 銀行轉帳</label>
+                </div>
+                
+                <button type="submit" class="submit-button">提交訂單</button>
+            </form>
+        </div>
+        
+        <!-- 模擬商品表格 -->
+        <div class="test-form">
+            <h3>訂單商品</h3>
+            <div class="order-tables">
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>商品SKU</th>
+                            <th>交期1</th>
+                            <th>交期2</th>
+                            <th>備註</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="product-sku-block">SKU: SOFA001</td>
+                            <td class="col-row-from-date-1"><input type="date" class="input-date"></td>
+                            <td class="col-row-to-date-2"><input type="date" class="input-date"></td>
+                            <td class="col-row-free-text"><textarea rows="2"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td class="product-sku-block">SKU: TABLE001</td>
+                            <td class="col-row-from-date-1"><input type="date" class="input-date"></td>
+                            <td class="col-row-to-date-2"><input type="date" class="input-date"></td>
+                            <td class="col-row-free-text"><textarea rows="2"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" id="mrl_update_attributes" onclick="handleUpdateAttributes()">套用商品資料</button>
+        </div>
+    </div>
+
+    <script>
+        // 引入修復後的代碼邏輯（簡化版）
+        var CONFIG = {
+            STORAGE_KEYS: {
+                USER_DATA: 'test_restore_userData',
+                ITEM_DATA: 'test_restore_itemData', 
+                CACHED_ITEM_IDS: 'test_restore_cachedItemIDs'
+            },
+            EXPIRY_TIME: 48 * 60 * 60 * 1000
+        };
+        
+        var StorageHelper = {
+            get: function(key) {
+                try {
+                    return JSON.parse(localStorage.getItem(key)) || {};
+                } catch (error) {
+                    return {};
+                }
+            },
+            
+            set: function(key, data) {
+                try {
+                    localStorage.setItem(key, JSON.stringify(data));
+                    return true;
+                } catch (error) {
+                    return false;
+                }
+            },
+            
+            remove: function(key) {
+                try {
+                    localStorage.removeItem(key);
+                    return true;
+                } catch (error) {
+                    return false;
+                }
+            }
+        };
+
+        var FormFieldHelper = {
+            fieldIds: [],
+            fields: {},
+            isFormUpdating: false,
+            
+            init: function() {
+                var self = this;
+                var fieldIds = [];
+                var selectors = ['input', 'select', 'textarea'];
+                
+                selectors.forEach(function(selector) {
+                    var elements = document.querySelectorAll(selector);
+                    for (var i = 0; i < elements.length; i++) {
+                        if (elements[i].id) {
+                            fieldIds.push(elements[i].id);
+                        }
+                    }
+                });
+
+                this.fieldIds = fieldIds.filter(function(id) {
+                    return id !== '';
+                });
+                
+                this.fields = {};
+                this.fieldIds.forEach(function(id) {
+                    self.fields[id] = document.getElementById(id);
+                });
+                return this;
+            },
+            
+            getAllFieldData: function() {
+                var data = {};
+                var self = this;
+                
+                this.fieldIds.forEach(function(id) {
+                    var field = self.fields[id];
+                    if (!field) return;
+                    
+                    var value = self.getFieldValue(id, field);
+                    if (value !== null && value !== undefined) {
+                        data[id] = value;
+                    }
+                });
+                return data;
+            },
+            
+            getFieldValue: function(fieldId, field) {
+                if (!field) return null;
+                
+                if (field.type === "radio") {
+                    return field.checked ? field.value : undefined;
+                } else if (field.type === "checkbox") {
+                    return field.checked;
+                } else if (field.type === "fieldset") {
+                    var textarea = field.querySelector("textarea");
+                    return textarea ? textarea.value : "";
+                } else {
+                    return field.value;
+                }
+            },
+            
+            setFieldData: function(userData) {
+                var self = this;
+                
+                // 暫時禁用change事件監聽以避免觸發不必要的事件
+                this.isFormUpdating = true;
+                logTestResult('info', '開始還原表單資料 - 暫時禁用事件監聽');
+                
+                try {
+                    // 清空相關的表單欄位（僅清空userData.data中包含的欄位）
+                    var fieldsToUpdate = Object.keys(userData.data);
+                    fieldsToUpdate.forEach(function(id) {
+                        var field = self.fields[id];
+                        if (!field) return;
+                        
+                        if (field.type === "radio" || field.type === "checkbox") {
+                            field.checked = false;
+                        } else if (field.type === "fieldset") {
+                            var textarea = field.querySelector("textarea");
+                            if (textarea) textarea.value = "";
+                        } else {
+                            field.value = "";
+                        }
+                    });
+
+                    // 設置基本用戶資訊
+                    var emailField = document.querySelector("#email");
+                    var lastNameField = document.querySelector("#order-billing_address_lastname");
+                    var firstNameField = document.querySelector("#order-billing_address_firstname");
+                    
+                    if (emailField) {
+                        emailField.setAttribute("data-previousEmail", emailField.value);
+                        emailField.value = userData.email;
+                    }
+                    if (lastNameField) lastNameField.value = userData.name.split(" ")[0];
+                    if (firstNameField) firstNameField.value = userData.name.split(" ")[1] || "";
+
+                    // 設置表單資料
+                    Object.keys(userData.data).forEach(function(dataId) {
+                        var field = self.fields[dataId];
+                        if (!field) return;
+                        
+                        if (field.type === "radio") {
+                            field.checked = true;
+                        } else if (field.type === "checkbox") {
+                            field.checked = userData.data[dataId];
+                        } else if (field.type === "fieldset") {
+                            var textarea = field.querySelector("textarea");
+                            if (textarea) textarea.value = userData.data[dataId];
+                        } else {
+                            field.value = userData.data[dataId];
+                        }
+                    });
+                    
+                    logTestResult('success', '表單資料還原完成 - Email: ' + userData.email);
+                    
+                } finally {
+                    // 恢復事件監聽
+                    this.isFormUpdating = false;
+                    logTestResult('info', '恢復事件監聽');
+                }
+            }
+        };
+
+        var UserDataHelper = {
+            save: function(email, name, fieldData) {
+                if (!email) return false;
+                
+                var userData = {
+                    email: email,
+                    name: name || '客戶',
+                    data: fieldData,
+                    timestamp: new Date().getTime()
+                };
+
+                var allUserData = StorageHelper.get(CONFIG.STORAGE_KEYS.USER_DATA);
+                allUserData[email] = userData;
+                return StorageHelper.set(CONFIG.STORAGE_KEYS.USER_DATA, allUserData);
+            },
+            
+            loadAll: function() {
+                var userData = StorageHelper.get(CONFIG.STORAGE_KEYS.USER_DATA);
+                return Object.values ? Object.values(userData) : 
+                       Object.keys(userData).map(function(key) {
+                           return userData[key];
+                       });
+            }
+        };
+
+        var ProductItemHelper = {
+            isRestoringItemData: false,
+            
+            saveItemData: function(email) {
+                var orderTableRows = document.querySelectorAll(".order-tables tbody tr");
+                
+                Array.prototype.forEach.call(orderTableRows, function(row) {
+                    var productSkuElement = row.querySelector(".product-sku-block");
+                    if (!productSkuElement) return;
+                    
+                    var productSku = productSkuElement.innerText.split(":")[1];
+                    if (!productSku) return;
+                    productSku = productSku.trim();
+                    
+                    var itemDate_1 = row.querySelector(".col-row-from-date-1 .input-date").value;
+                    var itemDate_2 = row.querySelector(".col-row-to-date-2 .input-date").value;
+                    var itemNote = row.querySelector(".col-row-free-text textarea").value;
+
+                    var items = {
+                        itemDate_1: itemDate_1,
+                        itemDate_2: itemDate_2,
+                        itemNote: itemNote
+                    };
+                    
+                    if (productSku) {
+                        var allItemData = StorageHelper.get(CONFIG.STORAGE_KEYS.ITEM_DATA);
+                        if (!allItemData[email]) allItemData[email] = {};
+                        allItemData[email][productSku] = items;
+                        StorageHelper.set(CONFIG.STORAGE_KEYS.ITEM_DATA, allItemData);
+                    }
+                });
+                
+                logTestResult('success', '商品資料已儲存');
+            },
+            
+            restoreItemData: function(selectedEmail) {
+                var allItemData = StorageHelper.get(CONFIG.STORAGE_KEYS.ITEM_DATA);
+                if (!(selectedEmail in allItemData)) return;
+
+                var items = allItemData[selectedEmail];
+                var orderTableRows = document.querySelectorAll('.order-tables tbody tr');
+                
+                // 設置一個標記表示正在還原商品資料
+                this.isRestoringItemData = true;
+                logTestResult('info', '開始還原商品資料');
+                
+                try {
+                    Array.prototype.forEach.call(orderTableRows, function(row) {
+                        var productSkuElement = row.querySelector(".product-sku-block");
+                        if (!productSkuElement) return;
+                        
+                        var productSku = productSkuElement.innerText.split(":")[1];
+                        if (!productSku) return;
+                        productSku = productSku.trim();
+                        
+                        if (productSku in items) {
+                            var itemData = items[productSku];
+                            var date1Input = row.querySelector(".col-row-from-date-1 .input-date");
+                            var date2Input = row.querySelector(".col-row-to-date-2 .input-date");
+                            var noteTextarea = row.querySelector(".col-row-free-text textarea");
+                            
+                            if (date1Input) date1Input.value = itemData.itemDate_1 || "";
+                            if (date2Input) date2Input.value = itemData.itemDate_2 || "";
+                            if (noteTextarea) noteTextarea.value = itemData.itemNote || "";
+                        }
+                    });
+
+                    logTestResult('success', '商品資料還原完成');
+                    
+                } finally {
+                    // 清除標記
+                    var self = this;
+                    setTimeout(function() {
+                        self.isRestoringItemData = false;
+                        logTestResult('info', '商品資料還原狀態已清除');
+                    }, 1000);
+                }
+            }
+        };
+
+        var DataSaveProcessor = {
+            saveCurrentData: function(e) {
+                // 如果正在進行表單更新（還原資料），跳過自動儲存
+                if (FormFieldHelper.isFormUpdating) {
+                    logTestResult('warning', '跳過自動儲存 - 正在進行表單更新');
+                    return;
+                }
+                
+                logTestResult('info', '執行自動儲存 - 欄位: ' + e.target.id);
+            }
+        };
+
+        // 測試輔助函數
+        function logTestResult(type, message) {
+            var resultsDiv = document.getElementById('test-results');
+            var timestamp = new Date().toLocaleTimeString();
+            var resultDiv = document.createElement('div');
+            resultDiv.className = 'test-result ' + type;
+            resultDiv.innerHTML = '<strong>[' + timestamp + ']</strong> ' + message;
+            resultsDiv.appendChild(resultDiv);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+
+        function setupTestData() {
+            // 初始化表單欄位助手
+            FormFieldHelper.init();
+            
+            // 創建測試用戶資料
+            var testData = {
+                'test1@example.com': {
+                    'order-billing_address_telephone': '0912345678',
+                    'order-billing_address_city': 'taipei',
+                    'order-billing_address_street': '台北市中正區test路123號',
+                    'order-account_newsletter': true,
+                    'payment-credit': true
+                },
+                'test2@example.com': {
+                    'order-billing_address_telephone': '0987654321',
+                    'order-billing_address_city': 'kaohsiung',
+                    'order-billing_address_street': '高雄市前金區test路456號',
+                    'order-account_newsletter': false,
+                    'payment-bank': true
+                }
+            };
+            
+            Object.keys(testData).forEach(function(email) {
+                UserDataHelper.save(email, '測試用戶', testData[email]);
+            });
+            
+            // 創建商品資料
+            var itemData = {};
+            itemData['test1@example.com'] = {
+                'SOFA001': {
+                    itemDate_1: '2024-02-01',
+                    itemDate_2: '2024-02-15',
+                    itemNote: '客戶要求提前交貨'
+                },
+                'TABLE001': {
+                    itemDate_1: '2024-02-10',
+                    itemDate_2: '2024-02-20',
+                    itemNote: '配合沙發一起送達'
+                }
+            };
+            
+            StorageHelper.set(CONFIG.STORAGE_KEYS.ITEM_DATA, itemData);
+            
+            logTestResult('success', '測試資料設置完成');
+        }
+
+        function testRestoreFunction() {
+            var userData = UserDataHelper.loadAll();
+            if (userData.length === 0) {
+                logTestResult('error', '沒有可還原的資料，請先設置測試資料');
+                return;
+            }
+            
+            var testUser = userData[0];
+            logTestResult('info', '開始測試還原功能 - 用戶: ' + testUser.email);
+            
+            // 模擬還原流程
+            FormFieldHelper.setFieldData(testUser);
+            ProductItemHelper.restoreItemData(testUser.email);
+            
+            logTestResult('success', '還原流程完成');
+        }
+
+        function testFormSubmission() {
+            logTestResult('info', '測試表單提交功能');
+            
+            // 檢查表單是否有值
+            var form = document.getElementById('order-form');
+            var formData = new FormData(form);
+            var hasData = false;
+            
+            for (var pair of formData.entries()) {
+                if (pair[1]) {
+                    hasData = true;
+                    break;
+                }
+            }
+            
+            if (!hasData) {
+                logTestResult('warning', '表單沒有資料，請先還原測試資料');
+                return;
+            }
+            
+            // 觸發表單提交
+            if (form.checkValidity()) {
+                logTestResult('success', '表單驗證通過，可以正常提交');
+            } else {
+                logTestResult('error', '表單驗證失敗');
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            logTestResult('info', '表單提交事件被觸發');
+            
+            var formData = new FormData(event.target);
+            var submitData = {};
+            for (var pair of formData.entries()) {
+                submitData[pair[0]] = pair[1];
+            }
+            
+            logTestResult('success', '表單提交成功！資料: ' + JSON.stringify(submitData, null, 2));
+            return false;
+        }
+
+        function handleUpdateAttributes() {
+            // 如果正在還原商品資料，跳過部分操作避免衝突
+            if (ProductItemHelper.isRestoringItemData) {
+                logTestResult('warning', '正在還原商品資料，跳過自動儲存操作');
+                return;
+            }
+            
+            var emailField = document.querySelector("#email");
+            if (emailField.value) {
+                ProductItemHelper.saveItemData(emailField.value);
+            } else {
+                logTestResult('warning', '沒有客戶Email，無法儲存商品資料');
+            }
+        }
+
+        function clearAllData() {
+            Object.values(CONFIG.STORAGE_KEYS).forEach(function(key) {
+                StorageHelper.remove(key);
+            });
+            
+            // 清空表單
+            document.getElementById('order-form').reset();
+            var inputs = document.querySelectorAll('.order-tables input, .order-tables textarea');
+            inputs.forEach(function(input) {
+                input.value = '';
+            });
+            
+            logTestResult('success', '所有資料已清除');
+        }
+
+        // 監聽表單變化事件
+        document.addEventListener('change', function(e) {
+            if (e.target.closest('.order-details')) {
+                DataSaveProcessor.saveCurrentData(e);
+            }
+        });
+
+        // 初始化
+        logTestResult('info', '還原功能測試環境已準備就緒');
+    </script>
+</body>
+</html> 

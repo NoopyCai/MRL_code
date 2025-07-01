@@ -1,0 +1,67 @@
+{
+  "name": "temporarystorage-tests",
+  "version": "1.0.0",
+  "description": "Unit and integration tests for temporaryStorage.html functionality",
+  "scripts": {
+    "test": "node run-tests.js",
+    "test:browser": "echo 'Please open temporaryStorage_unit_tests.html in your browser'",
+    "test:watch": "nodemon run-tests.js",
+    "install-deps": "npm install",
+    "setup": "npm install && echo 'Setup complete! Run npm test to execute tests.'"
+  },
+  "keywords": [
+    "frontend",
+    "testing",
+    "localStorage",
+    "form-management",
+    "unit-tests"
+  ],
+  "author": "MRL Frontend Team",
+  "license": "ISC",
+  "devDependencies": {
+    "puppeteer": "^21.0.0",
+    "nodemon": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-repo/mrl_frontend.git"
+  },
+  "testEnvironment": {
+    "browsers": [
+      "Chrome 70+",
+      "Firefox 65+",
+      "Safari 12+",
+      "Edge 79+"
+    ],
+    "requirements": [
+      "localStorage support",
+      "ES5+ JavaScript support",
+      "DOM API support"
+    ]
+  },
+  "testCoverage": {
+    "modules": [
+      "StorageHelper",
+      "FormFieldHelper", 
+      "UserDataHelper",
+      "ProductItemHelper",
+      "DialogHelper",
+      "NotificationHelper",
+      "DataSaveProcessor",
+      "DialogProcessor"
+    ],
+    "features": [
+      "Data persistence",
+      "Form field management",
+      "User data validation",
+      "Product item handling",
+      "Dialog management",
+      "Notification system",
+      "Error handling",
+      "Performance optimization"
+    ]
+  }
+} 

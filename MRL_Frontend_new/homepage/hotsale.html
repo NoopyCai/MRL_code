@@ -1,0 +1,123 @@
+<!-- 優惠小圖 -->
+
+<style>
+    .hs_container {
+        margin: auto 0px;
+        display:grid;
+        grid-template: "img1 img2 img4 img6" 1fr
+                       "img1 img3 img5 img7" 1fr
+                       / 4fr 4fr 4fr 4fr;
+  
+        grid-gap: 10px;
+     }
+  
+    .hs_container :nth-child(1) {
+        grid-area: img1;
+    }
+    .hs_container :nth-child(2) {
+        grid-area: img2;
+    }
+    .hs_container :nth-child(3) {
+        grid-area: img3;
+    }
+    .hs_container :nth-child(4) {
+        grid-area: img4;
+    }
+    .hs_container :nth-child(5) {
+        grid-area: img5;
+    }
+    .hs_container :nth-child(6) {
+        grid-area: img6;
+    }
+    .hs_container :nth-child(7) {
+        grid-area: img7;
+    }
+    .eightpiece{
+        overflow: hidden;
+    }
+    .hs_container img{
+            width: 100%;
+            transition: transform 0.4s ease;
+        }
+    .hs_container img:hover{
+        transform: scale(1.1);
+    }
+
+    @media only screen and (max-width: 768px) {
+  
+        .hs_container {
+            margin: auto auto;
+            grid-template: "img1 img1"
+                           "img2 img3"
+                           "img4 img5"
+                           "img6 img7";
+            grid-column-gap: 4px;
+            grid-row-gap: 0px;
+         }
+         .eightpiece{
+            text-align: center;
+         }
+    }
+  </style>
+  
+  
+  <div class="hs_container section" data-section-name="home_HotSale1">
+  
+    <div class="eightpiece"><a href="{{store direct_url='affordable-sofa-furniture-picks.html'}}">
+        <picture>
+          <source class="mrl-click HS1R1" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/25_6M_HS_PC.jpg}}" media="(min-width:769px)" loading="lazy">
+          <source class="mrl-click HS1R1" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/25_6M_HS_M.jpg}}" media="(max-width:768px)" loading="lazy">
+          <img src="{{media url=wysiwyg/home_page/2022/2022_5M/25_6M_HS_M.jpg}}" class="mrl-click HS1R1 select-promotion" data-ga-category="MKT-10K-Dis" alt="上半年最大優惠 年中慶｜滿萬折千＋滿額免運" data-ga-promotion_id="20250528_10KDis_38KFreeDelivery" data-ga-creative_slot="HS1R1" loading="lazy">
+        </picture></a>
+    </div>
+  
+    <div class="eightpiece"><a href="{{store direct_url='sofas/style/modular-floor-couch.html'}}">
+        <picture>
+            <source class="mrl-click HS1R2" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Pluffy.jpg}}" media="(min-width:769px)" loading="lazy">
+            <source class="mrl-click HS1R2" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Pluffy.jpg}}" media="(max-width:768px)" loading="lazy">
+            <img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Pluffy.jpg}}" class="mrl-click HS1R2 select-promotion" data-ga-category="MKT-sofa-modular-floor" alt="泡芙組合落地沙發-明星商品" data-ga-promotion_id="20250528_Pluffy_ModularSofa" data-ga-creative_slot="HS1R2" loading="lazy">
+        </picture></a>
+    </div>
+  
+   <div class="eightpiece"><a href="{{store direct_url='super-storage-series.html'}}">
+        <picture>
+            <source class="mrl-click HS1R3" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Super.jpg}}" media="(min-width:769px)" loading="lazy">
+            <source class="mrl-click HS1R3" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Super.jpg}}" media="(max-width:768px)" loading="lazy">
+            <img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Super.jpg}}" class="mrl-click HS1R3 select-promotion" data-ga-category="MKT-super-storage" alt="超級收納系列，累積銷售數破1.4409萬" data-ga-promotion_id="20250528_SuperStorage_10KDis" data-ga-creative_slot="HS1R3" loading="lazy">
+        </picture></a>
+    </div>
+  
+    <div class="eightpiece"><a href="{{store direct_url='furniture/mattress-category/mrl-mattress.html'}}">
+        <picture>
+            <source class="mrl-click HS1R4" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Mattress.jpg}}" media="(min-width:768px)" loading="lazy">
+            <source class="mrl-click HS1R4" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Mattress.jpg}}" media="(max-width:768px)" loading="lazy">
+            <img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Mattress.jpg}}" class="mrl-click HS1R4 select-promotion" data-ga-category="MKT-mattress" alt="買床墊送涼感減壓枕" data-ga-promotion_id="20250528_matt-handsel-pillow" data-ga-creative_slot="HS1R4" loading="lazy">
+        </picture></a>
+    </div>
+  
+  
+    <div class="eightpiece"><a href="{{store direct_url='sofas/style/sofa-pet-friendly.html'}}">
+        <picture>
+            <source class="mrl-click HS1R5" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_PFsofa.jpg}}" media="(min-width:769px)" loading="lazy">
+            <source class="mrl-click HS1R5" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_PFsofa.jpg}}" media="(max-width:768px)" loading="lazy">
+            <img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_PFsofa.jpg}}" class="mrl-click HS1R5 select-promotion" data-ga-category="MKT-sofa-pf" alt="防貓抓布沙發-萬人首選" data-ga-promotion_id="20250528_SofaPF_10KDis" data-ga-creative_slot="HS1R5" loading="lazy">
+        </picture></a>
+    </div>
+  
+    <div class="eightpiece"><a href="{{store direct_url='hotsales/mcm-series.html'}}">
+        <picture>
+            <source class="mrl-click HS1R6" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_MCM2.jpg}}" media="(min-width:768px)" loading="lazy" >
+            <source class="mrl-click HS1R6" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_MCM2.jpg}}" media="(max-width:768px)" loading="lazy" >
+            <img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_MCM2.jpg}}" class="mrl-click HS1R6 select-promotion" data-ga-category="MKT-mcm" alt="北歐復古實木家具-熱銷精選" data-ga-promotion_id="20250528_MCM_10KDis" data-ga-creative_slot="HS1R6" loading="lazy">
+        </picture></a>
+    </div>
+  
+     <div class="eightpiece"><a href="{{store direct_url='hotsales/japandi-series.html'}}">
+        <picture>
+            <source class="mrl-click HS1R7" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Japandi.jpg}}" media="(min-width:769px)" loading="lazy">
+            <source class="mrl-click HS1R7" srcset="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Japandi.jpg}}" media="(max-width:768px)" loading="lazy">
+            <img src="{{media url=wysiwyg/home_page/2022/2022_5M/250629Hotsales_Japandi.jpg}}" class="mrl-click HS1R7 select-promotion" data-ga-category="MKT-japandi" alt="北歐侘寂全室家具-簡約新美學" data-ga-promotion_id="20250611_Japandi_10KDis" data-ga-creative_slot="HS1R7" loading="lazy">
+        </picture></a>
+    </div>
+  
+  </div>

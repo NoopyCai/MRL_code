@@ -1,0 +1,92 @@
+<script>
+    var currentIsMobile = window.innerWidth <= 767;
+    var resizeTimer;
+
+    updateHotsaleSection();
+    updateHotsaleBtnPosition();
+    
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            var newIsMobile = window.innerWidth <= 767;
+            if (newIsMobile !== currentIsMobile) {
+                currentIsMobile = newIsMobile;
+                updateHotsaleBtnPosition();
+            }
+        }, 500); 
+    });
+
+    function updateHotsaleSection() {
+        var vidoTitle = document.querySelector('.vido-title h1');
+        var kolCotainerImg = document.querySelector('#kol-cotainer-img');
+        var kolCotainerPcImg = document.querySelector('#kol-cotainer-pc-img');
+        var kolCotainerMobileImg = document.querySelector('#kol-cotainer-mobile-img'); 
+        var kolContainerItemLinks = document.querySelectorAll('.kol-cotainer .twoitem a');
+        var kolContainerItemImgs = document.querySelectorAll('.kol-cotainer .twoitem img');
+        var kolYtaVideo = document.querySelector('.kol-cotainer lite-youtube')
+        var imageLinkBtns = document.querySelectorAll('.kol-cotainer .image-link-overlay');
+        var itemTitle = document.querySelector('.kol-cotainer  .item-title h1');
+        
+        vidoTitle.innerHTML = '▼ 夏日好眠有秘訣 ▼';
+        kolCotainerImg.src = 'https://d1bbx7pumsnd9q.cloudfront.net/wysiwyg/home_page/2025/2025_7M/2506_hotsale_Crowd_PC_1920x850px.jpg';
+        kolCotainerPcImg.srcset = 'https://d1bbx7pumsnd9q.cloudfront.net/wysiwyg/home_page/2025/2025_7M/2506_hotsale_Crowd_PC_1920x850px.jpg';
+        kolCotainerMobileImg.srcset = 'https://d1bbx7pumsnd9q.cloudfront.net/wysiwyg/home_page/2025/2025_7M/2506_hotsale_Crowd_mobile_01_375x465px.jpg';
+
+        // 商品連結
+        if(kolContainerItemLinks.length > 0) {
+            kolContainerItemLinks.forEach(function(item, index) {
+              if(index === 0){
+                item.href = 'https://www.mrliving.com.tw/memory-pillow-kid.html';
+              }else if(index === 1){
+                item.href = 'https://www.mrliving.com.tw/gl-quilt-anti-winnie.html';
+              }
+            })
+        }
+
+        // GA參數
+        if(kolContainerItemImgs.length > 0) {
+            kolContainerItemImgs.forEach(function(item, index) {
+              if(index === 0){
+                item.setAttribute('data-ga-item-id', '1018407');
+                item.setAttribute('data-ga-label', '冰絲涼感兒童記憶枕｜冰絲表布 專利記憶棉');
+              }else if(index === 1){
+                item.setAttribute('data-ga-item-id', 'CS-23-00125');
+                item.setAttribute('data-ga-label', '【義大利La Belle】迪士尼授權款 眠綿冰抗菌涼感涼被-楓糖維尼(5x6.5尺)');
+              }
+            })
+        }
+
+        // YT影片
+        if(kolYtaVideo){
+            kolYtaVideo.style.setProperty('background-image', "url('https://d1bbx7pumsnd9q.cloudfront.net/wysiwyg/home_page/2025/2025_7M/mattress_children_yt_cover_250624.png')", 'important');
+            kolYtaVideo.setAttribute('videoid', 'pDpdNn54MJw');
+            var videoLink = kolYtaVideo.querySelector('a');
+            videoLink.href = 'https://www.youtube.com/watch?v=pDpdNn54MJw';
+            videoLink.target = '_blank';
+        }
+
+        if(imageLinkBtns.length > 0) {
+            imageLinkBtns.forEach(function(btn) {
+                btn.setAttribute('data-ga-label', '體驗舒爽共眠');
+            })
+        }
+
+        if(itemTitle){
+            itemTitle.innerText = '| 給寶貝最好的 |';
+        }
+    }
+
+    function updateHotsaleBtnPosition() {
+        var imageLinkBtn = document.querySelector('.image-link-overlay.btn-desktop');
+        
+        if (window.innerWidth > 767) {
+            if (imageLinkBtn) {
+                imageLinkBtn.classList.add('crowd-version-desktop');
+            }
+        } else {
+            if (imageLinkBtn) {
+                imageLinkBtn.classList.remove('crowd-version-desktop');
+            }
+        }
+    }
+</script>

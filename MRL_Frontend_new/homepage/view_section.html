@@ -2,30 +2,50 @@
     (function () {
         var sections = document.querySelectorAll('.section, .blog-block-content , .top-promo, #search, .nav-sections, .footer');
 
-        var viewSectionObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
+        var viewSectionObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                console.log('entry', entry);
                 if (entry.isIntersecting) {
                     window.dataLayer = window.dataLayer || [];
 
                     var sectionName = entry.target.dataset.sectionName;
+                    console.log('sectionName', sectionName);
                     if (entry.target.classList.contains('blog-block-content')) {
                         sectionName = 'home_Blog';
                     } else if (entry.target.id === 'search') {
                         sectionName = 'home_SearchTerm';
-                    }else if (entry.target.classList.contains('nav-sections')) {
-                        if(window.innerWidth < 768){
+                    } else if (entry.target.classList.contains('nav-sections')) {
+                        if (window.innerWidth < 768) {
                             return;
                         }
                         sectionName = 'home_Menu';
-                    }else if (entry.target.classList.contains('footer')) {
+                    } else if (entry.target.classList.contains('footer')) {
                         sectionName = 'home_Footer';
                     }
-                    console.log('發送view_section', sectionName);
+                    
+                    if (sectionName == 'home_HotSale2') {
+                        var hotsaleVersionKey = localStorage.getItem('nantu_tests');
+                        var hotsaleVersion;
+                        console.log('hotsaleVersionKey', hotsaleVersionKey);
+                        if(hotsaleVersionKey === '[2:c]'){
+                            hotsaleVersion ='首頁_HS床寢_優惠版(限時加贈)';
+                        }else{
+                            hotsaleVersion ='首頁_HS床寢_人群版(親子推薦)';
+                        }
 
-                    window.dataLayer.push({
-                        event: 'view_section',
-                        section_name: sectionName,
-                    });
+                        window.dataLayer.push({
+                            event: 'view_section',
+                            section_name: sectionName,
+                            hotsale_version: hotsaleVersion,
+                        }); 
+                    } else {
+                        window.dataLayer.push({
+                            event: 'view_section',
+                            section_name: sectionName,
+                            hotsale_version: undefined,
+                        });
+                    }
+
                     // 取消對該區塊observer
                     viewSectionObserver.unobserve(entry.target);
                 }
@@ -35,13 +55,8 @@
             threshold: 0.5,
         });
 
-        sections.forEach(function(section) {
+        sections.forEach(function (section) {
             viewSectionObserver.observe(section);
         });
     })();
-</script>
-
-<script>
-        topPromotionContent.classList.add('section');
-        topPromotionContent.setAttribute('data-section-name', 'home_TopPromotion');
 </script>

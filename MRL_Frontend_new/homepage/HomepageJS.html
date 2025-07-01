@@ -1,7 +1,7 @@
 <script defer>
-  require(["jquery", "owlcarousel", "Mrl_ProductElement","fancybox",], function ($) {
-    jQuery("#space-product-carousel").owlCarousel({   
-      autoplay: false,
+  require(["jquery", "owlcarousel", "Mrl_ProductElement"], function ($) {
+    jQuery("#space-product-carousel").owlCarousel({
+      autoplay: true,
       autoplayTimeout: 6500,
       margin: 10,
       dots: true,
@@ -21,8 +21,9 @@
         },
       },
     });
-    
-    document.querySelector("#space-product-carousel").classList.remove("nocarousel");
+    document
+      .querySelector("#space-product-carousel")
+      .classList.remove("nocarousel");
 
     jQuery("#menu-owl-carousel").owlCarousel({
       autoplay: false,
@@ -55,6 +56,8 @@
         },
       },
     });
+    document.querySelector("#menu-owl-carousel").classList.remove("nocarousel");
+
     jQuery("#media-report-carousel").owlCarousel({
       autoplay: false,
       navRewind: true,
@@ -74,7 +77,6 @@
         },
       },
     });
-    document.querySelector("#menu-owl-carousel").classList.remove("nocarousel");
 
     jQuery(".sleepcarousel_top10").owlCarousel({
       loop: true,
@@ -118,8 +120,8 @@
       autoplay: false,
       dotsEach: 2,
       mouseDrag: true, 
-      touchDrag: true,
-      dragEndSpeed: 800,
+      touchDrag: true, 
+      dragEndSpeed: 800, 
       smartSpeed: 800,   
       pullDrag: false,   
       responsive: {
@@ -165,80 +167,6 @@
         }
       });
     }
-
-    //設計師牆
-    function designerCarouselPopup(designerDataNum, height) {
-      // 初始化
-      let $designerCarousel = $("#designerCarousel");
-      if ($designerCarousel.hasClass("owl-loaded")) {
-        $designerCarousel
-          .trigger("destroy.owl.carousel")
-          .removeClass("owl-loaded owl-hidden")
-          .find(".owl-stage-outer")
-          .children()
-          .unwrap();
-      }
-
-      $("#designerCarousel").owlCarousel({
-        loop: true,
-        nav: true,
-        items: 1.4,
-        center: true,
-        startPosition: designerDataNum,
-        navText: [
-          '<svg width="100%" height="34px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 3px;stroke: #fff; opacity:0.9;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
-          '<svg width="100%" height="34px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 3px;stroke: #fff;opacity:0.9;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>',
-        ],
-        responsive: {
-          0: {
-            loop: true,
-            items: 1.2,
-            center: true,
-            dots: true,
-            margin: 10,
-          },
-          768: {
-            loop: true,
-            items: 1.4,
-            margin: 0,
-            dots: true,
-          },
-        },
-      });
-    }
-
-    //首頁設計師牆-取得點擊的位置數
-    let designerOwl = document.querySelector(".designerCarousel.nocarousel");
-    //  const $designerOwl = $(".designerCarousel .owl-carousel");
-    let designerOwlItem = document.querySelectorAll("#designerCarousel .item");
-    let designerOwlCloseBtn = document.querySelector("#designerCloseBtn");
-    let designerDataNum;
-
-    $(document).on("click", ".designer-block-item-txt-btn", function () {
-      designerDataNum = $(this).data("position");
-      designerOwl.classList.add("expanded");
-      designerCarouselPopup(designerDataNum, 900);
-      if (window.innerWidth < 768) {
-        if(designerOwl.classList.contains("expanded")){
-          designerOwl.addEventListener("touchmove", function(e){
-            e.preventDefault();
-          });
-        }
-        document.querySelector(".designerCarousel").addEventListener("click", function(e){
-          if(!e.target.classList.contains("item-main-img-container")){
-            if (designerOwl.classList.contains("expanded")) {
-              designerOwl.classList.remove("expanded");
-            }
-          }
-        })
-      }
-      designerOwlCloseBtn.addEventListener("click",function () {
-          if (designerOwl.classList.contains("expanded")) {
-            designerOwl.classList.remove("expanded");
-          }
-        }
-      );
-    });
 
     document.querySelector("#menu-owl-carousel").classList.remove("nocarousel");
 
@@ -289,7 +217,7 @@
               );
               ori = ori.replace(
                 "{$item-bottom-product--src}",
-                success[0].data.items[tempIndex].image.replace("jpg", "webp")
+                success[0].data.items[tempIndex].image
               );
               ori = ori.replace(
                 "{$item-bottom-product--name-1}",
@@ -365,24 +293,21 @@
     function KOLfriendHomeInitial(dataNum, height) {
       $("#KOLfriendHome").owlCarousel({
         loop: true,
-        margin: 20,
-        nav: false,
-        autoWidth: false,
+        margin: 6,
+        nav: true,
+        center: true,
+        autoWidth: true,
         startPosition: dataNum,
-        slideBy: 3, // Move 6 items at a time
-        dotsEach: 3,
         navText: [
           '<svg width="100%" height="34px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 3px;stroke: #fff; opacity:0.9;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
           '<svg width="100%" height="34px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 3px;stroke: #fff;opacity:0.9;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>',
         ],
         responsive: {
           0: {
-            items: 1.4,
-            center: true,
+            loop: false,
           },
           768: {
             loop: true,
-            items: 6,
           },
         },
       });
@@ -397,7 +322,6 @@
         nav: true,
         items: 1.4,
         center: true,
-        dots: false,
         startPosition: dataNum,
         navText: [
           '<svg width="100%" height="34px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 3px;stroke: #fff; opacity:0.9;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
@@ -406,131 +330,20 @@
         responsive: {
           0: {
             loop: false,
-            margin: 10,
-            items: 1,
-            dots: true,
           },
           768: {
             loop: true,
           },
         },
       });
-      setTimeout(function(){
-       $("#KOLfriendHome").trigger("refresh.owl.carousel");
-       }, 500);
+       $("#KOLfriendHome").on("changed.owl.carousel", function (event) {
+          KOLfriendHomeLastIndex = createCarouselEvent(event, KOLfriendHomeLastIndex, "首頁-居友的家");
+      });
     }
     function getHeight() {
       return document.querySelector(".KOLfriendHome .owl-item").offsetHeight;
     }
 
-    
- $(document).on("click", ".owl-item>div", function () {
-        dataNum = $(this).data("position");
-      });
-  
-      $(document).on("click", function (event) {
-        if (
-          $(event.target).closest(".KOLfriendHome .owl-carousel .owl-nav").length
-        ) {
-          return;
-        } else if (
-          $(event.target).closest(".KOLfriendHome .owl-carousel .owl-item")
-            .length &&
-          isLoad
-        ) {
-          //展開
-          yTemp = window.scrollY;
-          if (!$(".KOLfriendHome").hasClass("expanded")) {
-            $("body").css("overflow", "hidden"); //禁止滾動
-            KOLTempHeight = KOLOwl.clientHeight;
-            $KOLOwl.trigger("destroy.owl.carousel");
-            console.log("KOLOwl", $KOLOwl);
-            KOLOwl.innerHTML = ori;
-            KOLfriendHomePopup(dataNum);
-            $(".KOLfriendHome .owl-carousel .owl-item")
-              .eq(dataNum)
-              .addClass("mobileExpanded");
-            $(".KOLfriendHome").addClass("expanded");
-            $("html").addClass("KOLfriendHomeExpanded");
-            // $(".top-btn").addClass("KOLfriendHomeExpanded");
-            if (window.innerWidth < 768) {
-              KOLOwl.style.height = "fit-content";
-              KOLOwl.scrollIntoView({ block: "start", inline: "nearest" });
-            }
-            
-            const allMoreBtns =  document.querySelectorAll(".KOL-more-container")
-            allMoreBtns.forEach(function(moreBtn){
-              moreBtn.addEventListener('click', function(event){
-                let parentKOLfriendHome = event.target.closest(".owl-item.active");
-                let expandedItem = parentKOLfriendHome.querySelector(".item");
-                let expandedItemBottomOtherBuy = parentKOLfriendHome.querySelector(".item .item-bottom .item-bottom-expanded .item-bottom-other-buy");
-                let scrollTarget = parentKOLfriendHome.querySelector(".item-bottom-expanded p.content");
-                
-                if (expandedItem && expandedItemBottomOtherBuy && scrollTarget) {
-                  if (expandedItem.classList.contains("click-more-half")) {
-                     // 打開狀態
-                      expandedItemBottomOtherBuy.classList.add("click-more-half");
-                      let scrollTargetPosition = scrollTarget.getBoundingClientRect().top - expandedItem.getBoundingClientRect().top - 80;
-                      // 檢查是否可以滾動
-                      expandedItem.scrollTo({
-                        top: scrollTargetPosition,
-                        behavior: 'auto'
-                      });
-
-                      //隱藏after的元素
-                      event.target.closest(".KOL-more").classList.add("hide-more-after");
-                      expandedItem.classList.remove("click-more-half");
-                      event.target.closest("a").innerHTML = "CLOSE<br>▲";
-                  }else{
-                      expandedItem.scrollTo({
-                        top: 0,
-                        behavior: 'auto'
-                      });
-                       // 關閉狀態
-                      expandedItemBottomOtherBuy.classList.remove("click-more-half");
-
-                      event.target.closest(".KOL-more").classList.remove("hide-more-after");
-                      event.target.closest("a").innerHTML = "MORE<br>▼";
-                      expandedItem.classList.add("click-more-half");
-                  }
-                }
-                });
-              })
-          }
-        } else if ($(event.target).closest("#KOLCloseBtn").length) {
-          //收合
-          if ($(".KOLfriendHome").hasClass("expanded")) {
-            $("body").css("overflow", "auto"); //恢復滾動
-            dataNum = $(
-              ".KOLfriendHome .owl-carousel .center.owl-item .item"
-            ).data("position");
-            $(".KOLfriendHome").removeClass("expanded");
-            $("html").removeClass("KOLfriendHomeExpanded");
-            // $(".top-btn").removeClass("KOLfriendHomeExpanded");
-            $(".KOLfriendHome").removeClass("open-more");
-            $KOLOwl.trigger("destroy.owl.carousel");
-            KOLOwl.innerHTML = ori;
-            KOLfriendHomeInitial(dataNum, KOLTempHeight);
-            if (window.innerWidth < 768) {
-              if (
-                KOLOwl.clientHeight + (getHeight() * 2 + 20) >
-                108 + ((KOLOwlItem.length + 4) / 2) * (getHeight() + 10)
-              ) {
-                document.querySelector(
-                  ".KOLfriendHome .KOL-more-container a"
-                ).innerHTML = "&#9650;<br>close";
-                document.querySelector(".KOLfriendHome .KOL-more").style.bottom =
-                  "-5rem";
-              }
-              window.scrollTo({
-                top: yTemp,
-                behavior: "smooth",
-              });
-            }
-          }
-        }
-      });
-      
     KOLfriendHomeInitial(0, 692);
     KOLOwl.classList.remove("nocarousel");
 
@@ -539,10 +352,123 @@
       dataNum = $(this).data("position");
     });
 
+    $(document).on("click", function (event) {
+      if ($(event.target).closest("#KOLfriendHomeMore").length) {
+        //點擊手機板more按鈕
+        if (
+          KOLOwl.clientHeight + (getHeight() * 2 + 20) >
+          108 + ((KOLOwlItem.length + 4) / 2) * (getHeight() + 10)
+        ) {
+          document.querySelector(
+            ".KOLfriendHome .KOL-more-container a"
+          ).innerHTML = "more<br>&#9660;";
+          KOLOwl.style.height = getHeight() * 2 + 158 + "px";
+          KOLOwl.scrollIntoView({ block: "start", inline: "nearest" });
+          document.querySelector(".KOLfriendHome .KOL-more").style.bottom =
+            "1rem";
+        } else if (
+          KOLOwl.clientHeight + (getHeight() * 2 + 20) >
+          108 + (KOLOwlItem.length / 2) * (getHeight() + 10)
+        ) {
+          window.scrollTo({
+            top:
+              window.scrollY +
+              KOLOwl.getBoundingClientRect().top +
+              2 *
+                (getHeight() + 10) *
+                (parseInt(KOLOwl.clientHeight / getHeight()) / 2) +
+              70,
+            behavior: "smooth",
+          });
+          KOLOwl.style.height =
+            KOLOwl.clientHeight + (getHeight() * 2 + 20) + "px";
+          document.querySelector(
+            ".KOLfriendHome .KOL-more-container a"
+          ).innerHTML = "&#9650;<br>close";
+          document.querySelector(".KOLfriendHome .KOL-more").style.bottom =
+            "-5rem";
+        } else {
+          window.scrollTo({
+            top:
+              window.scrollY +
+              KOLOwl.getBoundingClientRect().top +
+              2 *
+                (getHeight() + 10) *
+                (parseInt(KOLOwl.clientHeight / getHeight()) / 2) +
+              70,
+            behavior: "smooth",
+          });
+          KOLOwl.style.height =
+            KOLOwl.clientHeight + (getHeight() * 2 + 20) + "px";
+          document.querySelector(
+            ".KOLfriendHome .KOL-more-container a"
+          ).innerHTML = "more<br>&#9660;";
+        }
+      }
+      if (
+        $(event.target).closest(".KOLfriendHome .owl-carousel .owl-nav").length
+      ) {
+        return;
+      } else if (
+        $(event.target).closest(".KOLfriendHome .owl-carousel .owl-item")
+          .length &&
+        isLoad
+      ) {
+        //展開
+        yTemp = window.scrollY;
+        if (!$(".KOLfriendHome").hasClass("expanded")) {
+          KOLTempHeight = KOLOwl.clientHeight;
+          $KOLOwl.trigger("destroy.owl.carousel");
+          KOLOwl.innerHTML = ori;
+          KOLfriendHomePopup(dataNum);
+          $(".KOLfriendHome .owl-carousel .owl-item")
+            .eq(dataNum)
+            .addClass("mobileExpanded");
+          $(".KOLfriendHome").addClass("expanded");
+          $("html").addClass("KOLfriendHomeExpanded");
+          $(".top-btn").addClass("KOLfriendHomeExpanded");
+          if (window.innerWidth < 768) {
+            KOLOwl.style.height = "fit-content";
+            KOLOwl.scrollIntoView({ block: "start", inline: "nearest" });
+          }
+        }
+      } else if ($(event.target).closest("#KOLCloseBtn").length) {
+        //收合
+        if ($(".KOLfriendHome").hasClass("expanded")) {
+          dataNum = $(
+            ".KOLfriendHome .owl-carousel .center.owl-item .item"
+          ).data("position");
+          $(".KOLfriendHome").removeClass("expanded");
+          $("html").removeClass("KOLfriendHomeExpanded");
+          $(".top-btn").removeClass("KOLfriendHomeExpanded");
+          $(".KOLfriendHome").removeClass("open-more");
+          $KOLOwl.trigger("destroy.owl.carousel");
+          KOLOwl.innerHTML = ori;
+          KOLfriendHomeInitial(dataNum, KOLTempHeight);
+          if (window.innerWidth < 768) {
+            if (
+              KOLOwl.clientHeight + (getHeight() * 2 + 20) >
+              108 + ((KOLOwlItem.length + 4) / 2) * (getHeight() + 10)
+            ) {
+              document.querySelector(
+                ".KOLfriendHome .KOL-more-container a"
+              ).innerHTML = "&#9650;<br>close";
+              document.querySelector(".KOLfriendHome .KOL-more").style.bottom =
+                "-5rem";
+            }
+            window.scrollTo({
+              top: yTemp,
+              behavior: "smooth",
+            });
+          }
+        }
+      }
+    });
+
     //紅藍貨架自動取商品資料
     function RedblueCarAutoGetItem() {
       const storedProductData = JSON.parse(
-        localStorage.getItem("storedProductData")
+        localStorage.getItem("productdata")  
       );
       const DataTimestamp = JSON.parse(
         localStorage.getItem("DataTimestamp_update")
@@ -564,7 +490,7 @@
 
         fetchProductData(combinedSkuList);
 
-        localStorage.setItem("storedProductData", Date.now());
+        localStorage.setItem("productdata", Date.now());
       } else {
         const redblueCarItem = document.querySelectorAll(
           ".sleepcarousel_top10 .owl-stage .item_top10"
@@ -577,7 +503,6 @@
 
     //檢查資料是否過期
     function isDataExpired(refreshTime) {
-      console.log(refreshTime, "refreshTime");
       // const expirationTime = 24 * 60 * 60 * 1000;
       const expirationTime = 1000;
       const currentTime = Date.now();
@@ -630,7 +555,6 @@
           redBlueCartNav.forEach(function (nav) {
             nav.style.display = "none";
           });
-          console.log("error", error);
         });
     }
 
@@ -696,27 +620,27 @@
         if (skuIndex >= 0) {
           let product = success[0].data.items[skuIndex];
 
-          let productId = product.sku;
-          let productName = product.name;
-          let productUrl = product.url_key;
-          let productImgPath = product.image.replace(/\\/g, "");
-          let productDisPrice = parseInt(
+          var productId = product.sku;
+          var productName = product.name;
+          var productUrl = product.url_key;
+          var productImgPath = product.image.replace(/\\/g, "");
+          var productDisPrice = parseInt(
             product.MRL_discount_price
           ).toLocaleString();
-          let productOldPrice = parseInt(product.price).toLocaleString();
-          let productContainers = document.querySelectorAll(
+          var productOldPrice = parseInt(product.price).toLocaleString();
+          var productContainers = document.querySelectorAll(
             '.btn[data-ga-item-id="' + productId + '"]'
           );
 
           productContainers.forEach(function (productContainer) {
-            let productTitle = productContainer.querySelector(".product-title");
-            let productdisPrice =
+            var productTitle = productContainer.querySelector(".product-title");
+            var productdisPrice =
               productContainer.querySelector(".product-disPrice");
-            let productoldPrice =
+            var productoldPrice =
               productContainer.querySelector(".product-oldPrice");
-            let productLink = productContainer.querySelector("a");
-            let productImg = productContainer.querySelector(".itemImg");
-            let productSource = productContainer.querySelector("source");
+            var productLink = productContainer.querySelector("a");
+            var productImg = productContainer.querySelector(".itemImg");
+            var productSource = productContainer.querySelector("source");
 
             productSource.srcset = `{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667${productImgPath}}}`;
             productImg.src = `{{media url=catalog/product/cache/912f4218b83600a6f47af6c76f1f9667${productImgPath}}}`;
@@ -736,18 +660,49 @@
       });
     }
 
-     function createCarouselEvent(event, lastIndex, carouselTitle){
-            const currentIndex = event.item.index;
-            const slideDirection = currentIndex > lastIndex ? "-right" : "-left";
+    
+      let KOLfriendHomeLastIndex = 0;
+      let inspireLastIndex = 0;
+      $("#KOLfriendHome").on("changed.owl.carousel", function (event) {
+          if(window.innerWidth > 768){
+             KOLfriendHomeLastIndex = createCarouselEvent(event, KOLfriendHomeLastIndex, "首頁-居友的家");
+          }
+      });
+      $("[data-ga-item-list-name='空間靈感佈置_客廳空間']").on("changed.owl.carousel", function (event) {
+          inspireLastIndex = createCarouselEvent(event, inspireLastIndex, "首頁-空間佈置靈感-客廳空間");
+      });
+      $("[data-ga-item-list-name='空間靈感佈置_餐廳空間']").on("changed.owl.carousel", function (event) {
+          inspireLastIndex = createCarouselEvent(event, inspireLastIndex, "首頁-空間佈置靈感-餐廳空間");
+      });
+      $("[data-ga-item-list-name='空間靈感佈置_臥室空間']").on("changed.owl.carousel", function (event) {
+          inspireLastIndex = createCarouselEvent(event, inspireLastIndex, "首頁-空間佈置靈感-臥室空間");
+      });
+function createCarouselEvent(event, lastIndex, carouselTitle){
+          const currentIndex = event.item.index;
+          const itemCount = event.item.count;
+          let slideDirection;
 
-            lastIndex = currentIndex;
+          const indexDiff = currentIndex - lastIndex;
 
-            dataLayer = window.dataLayer || [];
-            dataLayer.push({
-                event: "carousel",
-                carousel_title: carouselTitle,
-                slide_direction: carouselTitle + slideDirection
-            });
-        }
+          if (indexDiff > 0 && indexDiff < itemCount / 2 || indexDiff < -itemCount / 2) {
+              slideDirection = "-right";
+          } else if (indexDiff < 0 && indexDiff > -itemCount / 2 || indexDiff > itemCount / 2) {
+              slideDirection = "-left";
+          } else {
+              slideDirection = "";
+          }
+
+          
+          lastIndex = currentIndex;
+
+          dataLayer = window.dataLayer || [];
+          dataLayer.push({
+              event: "carousel",
+              carousel_title: carouselTitle,
+              slide_direction: carouselTitle + slideDirection
+          });
+
+          return lastIndex;
+      }
   });
 </script>

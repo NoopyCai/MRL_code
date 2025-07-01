@@ -1,0 +1,386 @@
+<!-- HOTSALE床寢區 -->
+
+<style>
+    .kol-cotainer {
+        display: flex;
+        justify-content: end;
+    }
+
+    .cotainer-reight {
+        display: flex;
+        flex-direction: column;
+        width: 55.5rem;
+        position: absolute;
+        right: 5%;
+        top: 5%;
+    }
+
+    .area-title {
+        font-size: 3.7rem;
+        margin-bottom: 0;
+        color: #575757;
+    }
+
+    .bg-img {
+        width: 100%;
+    }
+
+    .videoShow iframe {
+        height: 100% !important;
+    }
+
+    .flex_container {
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .vido-title {
+        margin: 2rem 0 2.3rem 0;
+    }
+
+    .vido-title h1 {
+        text-align: center;
+        font-size: 3.7rem;
+        font-weight: bold;
+        color: #575757;
+        margin-bottom: 0;
+        letter-spacing: 2px;
+        margin: 0;
+        line-height: 5rem;
+    }
+
+    .item-title h1 {
+        text-align: center;
+        font-size: 3.7rem;
+        font-weight: bold;
+        color: #575757;
+        margin: 3.3rem 0 2rem 0;
+        letter-spacing: 2px;
+    }
+
+    .twoitem {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 7rem;
+    }
+
+    .twoitem div {
+        flex: 1;
+    }
+
+    .image-link-overlay {
+        position: absolute;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .btn-desktop {
+        left: 0%;
+        bottom: 8.2%;
+        width: 22.4%;
+        height: 15.5%;
+    }
+
+    .btn-mobile {
+        left: 19%;
+        bottom: 45%;
+        width: 60%;
+        height: 10%;
+        display: none;
+    }
+    .crowd-version-desktop{
+        left: 35% !important;
+        bottom: 49% !important;
+    }
+
+    @media (max-width: 1850px) {
+        .cotainer-reight {
+            width: 28vw;
+            top: 6%;
+        }
+
+        .item-title h1 {
+            font-size: 3rem;
+        }
+
+        .vido-title h1 {
+            font-size: 3rem;
+        }
+
+        .area-title {
+            font-size: 3rem;
+            margin-top: 25px;
+        }
+    }
+
+    @media (max-width: 1600px) {
+        .cotainer-reight {
+            width: 25vw;
+            top: 10%;
+        }
+
+        .item-title h1 {
+            font-size: 2.6rem;
+        }
+
+        .vido-title {
+            margin: 1rem 0 1.3rem 0;
+        }
+
+        .vido-title h1 {
+            font-size: 2.6rem;
+        }
+
+        .area-title {
+            font-size: 2.6rem;
+            margin-top: 25px;
+        }
+    }
+
+    @media (max-width: 1500px) {
+        .item-title h1 {
+            font-size: 2.6rem;
+        }
+
+        .vido-title h1 {
+            font-size: 2.6rem;
+        }
+    }
+
+    @media (max-width: 1440px) {
+        .cotainer-reight {
+            width: 25vw;
+        }
+
+        .vido-title {
+            margin: 1rem 0 0 0;
+        }
+
+        .item-title h1 {
+            margin: 1.3rem 0 1rem 0;
+        }
+
+        .area-title {
+            font-size: 2.4rem;
+        }
+    }
+
+    @media (max-width: 1350px) {
+        .area-title {
+            font-size: 2.2rem;
+        }
+
+        .cotainer-reight {
+            width: 22vw;
+        }
+
+        .item-title h1 {
+            font-size: 2.2rem;
+        }
+
+        .vido-title h1 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .cotainer-reight {
+            width: 21vw;
+        }
+
+        .vido-title h1 {
+            font-size: 1.8rem;
+        }
+
+        .item-title h1 {
+            margin: 0 0 1rem 0;
+            font-size: 1.8rem;
+        }
+
+        .area-title {
+            font-size: 1.8rem;
+        }
+    }
+
+    @media (max-width: 900px) {
+        .cotainer-reight {
+            top: -5%;
+        }
+
+        .area-title {
+            font-size: 1.8rem;
+        }
+
+        .vido-title h1 {
+            font-size: 1.8rem;
+        }
+
+        .item-title h1 {
+            margin: 0 0 1rem 0;
+            font-size: 1.8rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .cotainer-reight {
+            width: auto;
+            position: unset;
+            background-color: #dfdfdf;
+            margin: -5px 0 0 0;
+        }
+
+        .kol-cotainer {
+            flex-direction: column;
+            margin: 0;
+            display: block;
+        }
+
+        .bg-img {
+            width: 100%;
+        }
+
+        .vido-title {
+            margin: 1rem 0 1rem 0;
+        }
+
+        .vido-title {
+            display: none;
+        }
+
+        .area-title {
+            display: none;
+        }
+
+        .videoShow {
+            position: relative;
+            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .flex_container {
+            flex-direction: column;
+            height: auto;
+        }
+
+        .item-title h1 {
+            font-size: 1.8rem;
+            margin: 0 0 1rem 0;
+            letter-spacing: 3px;
+        }
+
+        .twoitem {
+            margin-bottom: 0;
+        }
+
+        .twoitem img {
+            height: 12rem;
+            width: 16.2rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .videoShow iframe {
+            height: 24rem;
+        }
+        .btn-desktop {
+            display: none;
+        }
+
+        .btn-mobile {
+            display: block;
+        }
+    }
+</style>
+
+<div class="kol-cotainer section" style="position: relative; width: 100%; text-align: center; margin: 0 auto"
+    data-section-name="home_HotSale2">
+    <picture>
+        <source id="kol-cotainer-mobile-img" srcset="{{media url=wysiwyg/home_page/2025/2025_7M/2506_hotsale_Preferential_mobile_01_375x465px.jpg}}"
+            media="(max-width: 767px)" loading="lazy">
+        <source id="kol-cotainer-pc-img" srcset="{{media url=wysiwyg/home_page/2025/2025_7M/2506_hotsale_Preferential_PC_01_1920x850px.jpg}}"
+            media="(min-width: 768px)" loading="lazy">
+        <img id="kol-cotainer-img" class="bg-img" alt="讓身體徹底放鬆的減壓床墊" loading="lazy" style="display: block; width: 100%"
+            src="{{media url=wysiwyg/home_page/2025/2025_7M/2506_hotsale_Preferential_PC_01_1920x850px.jpg}}"
+            loading="lazy" />
+    </picture>
+
+    <!-- PC button -->
+    <a href="{{store direct_url='furniture/mattress-category/cool-bedpillow.html'}}"
+        class="image-link-overlay btn-desktop" title="涼感床寢商品" aria-label="前往涼感床寢商品頁面"></a>
+
+    <!-- Mobile button -->
+    <a href="{{store direct_url='furniture/mattress-category/cool-bedpillow.html'}}"
+        class="image-link-overlay btn-mobile" title="涼感床寢商品" aria-label="前往涼感床寢商品頁面"></a>
+    <div class="cotainer-reight">
+        <div>
+            <div class="vido-title">
+                <h1>▼ 好眠關鍵技術 ▼</h1>
+            </div>
+
+            <div class="HS2R1 videoShow">
+                <p>
+                    <lite-youtube videoid="b1H2UpA3cFQ"
+                        style="background-image: url('https://media.mrliving.com.tw/wysiwyg/home_page/2025/2025_4M/homepage_yt_cover_250414_v2.png') !important;"
+                        loading="lazy">
+                        <a href="https://www.youtube.com/watch?v=b1H2UpA3cFQ&ab_channel=MR.LIVING%E5%B1%85%E5%AE%B6%E5%85%88%E7%94%9F"
+                            class="lty-playbtn" title="讓身體徹底放鬆的減壓床墊｜涼感減壓記憶床墊、護腰護脊減壓記憶床墊">
+                        </a>
+                    </lite-youtube>
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <div class="flex_container">
+                <div class="item-title">
+                    <h1>| 推薦商品 |</h1>
+                </div>
+                <div class="twoitem">
+                    <div>
+                        <a href="{{store direct_url='mattress-double-20tencel.html'}}">
+                            <picture>
+                                <source
+                                    srcset="{{media url=wysiwyg/home_page/2025/2025_7M/2504_hotsale_Preferential_PC_pillow_270x200px.jpg}}"
+                                    media="(min-width:768px)" loading="lazy" />
+                                <source
+                                    srcset="{{media url=wysiwyg/home_page/2025/2025_7M/2504_hotsale_Preferential_mobile_pillow_162x120px.jpg}}"
+                                    media="(max-width:768px)" loading="lazy" />
+                                <img src="{{media url=wysiwyg/home_page/2025/2025_7M/2504_hotsale_Preferential_PC_pillow_270x200px.jpg}}"
+                                    class="mrl-click HS2R3-img select-promotion select-item ga-item" alt="護腰護脊減壓記憶床墊"
+                                    data-ga-category="MKT-mattress" loading="lazy"
+                                    data-ga-promotion_id="20250528_matt-handsel-pillow" data-ga-creative_slot="HS2R3"
+                                    data-ga-item-id="30-0049-0-08-v2" data-ga-label="雙人標準(5X6.2)｜護腰護脊減壓記憶床墊｜零干擾 獨立筒" />
+                            </picture>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{{store direct_url='mattress-double-20tencel.html'}}">
+                            <picture>
+                                <source
+                                    srcset="{{media url=wysiwyg/home_page/2025/2025_7M/2506_hotsale_Preferential_PC_quilt_270x200px.jpg}}"
+                                    media="(min-width:768px)" loading="lazy" />
+                                <source
+                                    srcset="{{media url=wysiwyg/home_page/2025/2025_7M/2506_hotsale_Preferential_mobile_quilt_162x120px.jpg}}"
+                                    media="(max-width:768px)" loading="lazy" />
+                                <img src="{{media url=wysiwyg/home_page/2025/2025_7M/2506_hotsale_Preferential_PC_quilt_270x200px.jpg}}"
+                                    class="mrl-click HS2R3-img select-promotion select-item ga-item" alt="護腰護脊減壓記憶床墊"
+                                    data-ga-category="MKT-mattress" loading="lazy"
+                                    data-ga-promotion_id="20250528_matt-handsel-pillow" data-ga-creative_slot="HS2R3"
+                                    data-ga-item-id="30-0049-0-08-v2" data-ga-label="雙人標準(5X6.2)｜護腰護脊減壓記憶床墊｜零干擾 獨立筒" />
+                            </picture>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

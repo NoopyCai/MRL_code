@@ -1,0 +1,53 @@
+<script>
+    var inputfield = document.getElementById('deposit_date');
+    var saveBtn = document.querySelector('button#save');
+
+    if (inputfield) {
+        autoCheckDepositStatus(inputfield);
+
+        inputfield.autocomplete = 'off'; // 不儲存歷史紀錄
+        inputfield.addEventListener('focusout', function (event) {
+            var timestamp = Date.parse(event.target.value);
+            if (isNaN(timestamp) === false) {
+                var inputDate = new Date(timestamp);
+                var isValidDepositDate = isToday(inputDate);
+                if (!isValidDepositDate) {
+                    event.target.style.background = 'pink';
+                    saveBtn.disabled = true;
+                    alert('收單日期請填今天日期！');
+                } else {
+                    event.target.removeAttribute("style");
+                    saveBtn.disabled = false;
+                }
+            } else {
+                console.log('日期格式錯誤');
+            }
+        });
+    }
+
+
+
+    function isToday(someDate) {
+        var today = new Date();
+        return someDate.getDate() == today.getDate() &&
+            someDate.getMonth() == today.getMonth() &&
+            someDate.getFullYear() == today.getFullYear()
+    }
+
+    // 檢查收單日期並自動勾選「已收單完畢」
+    function autoCheckDepositStatus(depositDateElm) {
+        if (depositDateElm) {
+            try {
+                if (depositDateElm.value) {
+                    var alreadySet = document.querySelector('#contact_return_161');
+                    if (alreadySet) {
+                        alreadySet.click();
+                        alreadySet.checked = true;
+                    }
+                }
+            } catch (error) {
+                console.error('[AutoCheck] 自動勾選押金狀態時發生錯誤:', error);
+            }
+        }
+    }
+</script>

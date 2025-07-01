@@ -1,0 +1,170 @@
+<div class="PLP-Section">
+    <div class="introTextContainer">
+        <h1 class="desktop-version">實木床架｜北歐風實木單人床架 / 雙人床架</h1>
+        <h1 class="mobile-version">實木床架｜實木單人床架 / 雙人床架</h1>
+        <p>
+            MR. LIVING 實木床架嚴選北美黃楊實木、白橡木實木<br>
+            展現自然復古木質溫潤質感<br>
+            <span class="desktop-version">專為台灣氣候設計—雲杉木實木排骨架<br>
+            透氣通風，更耐用<br></span>
+            <span class="mobile-version">專為台灣氣候設計—雲杉實木排骨架，通風耐用</span>
+        </p>
+        <p>
+            實木床架微傾床頭板靠墊，符合人體工學<br>
+            鋅合金、黃銅巧妙鑲嵌提升床架質感<br>
+            實木床架床底空間寬敞，掃地機器人輕鬆通過<br>
+            酒杯造型床腳提升實木床架優雅感<br>
+        </p>
+        <p>
+            體驗舒適、品味與設計的完美結合<br>
+            居家先生精選實木床架系列，等你來享受<br>
+        </p>
+    </div>
+    <div class="introImageContainer">
+        <picture>
+            <source srcset="{{media url=catalog/category/PLP/reel_wood_bed_plp_pc.png}}" media="(min-width: 1025px)">
+            <source srcset="{{media url=catalog/category/PLP/reel_wood_bed_plp_mobile.png}}"
+                media="(max-width: 1024px)">
+            <img src="{{media url=catalog/category/PLP/reel_wood_bed_plp_pc.png}}" />
+        </picture>
+    </div>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+TC:wght@200..900&display=swap');
+
+    .PLP-Section {
+        display: flex;
+        justify-content: space-between;
+        background-color: #CFD2D5;
+        align-items: stretch;
+        font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .PLP-Section h1 {
+        font-size: 22px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #B3B3B3;
+        padding-bottom: 20px;
+    }
+
+    .desktop-version {
+        display: block;
+    }
+
+    .mobile-version {
+        display: none;
+    }
+
+    .PLP-Section p {
+        font-size: 18px;
+        margin-bottom: 24px;
+        line-height: 1.5;
+        color: #575757;
+    }
+
+    .introTextContainer {
+        padding: 28px 14px 28px 28px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        max-width: 35%;
+    }
+
+    .introImageContainer {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .introImageContainer img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    /* 響應式設計 */
+    @media (max-width: 1700px) {
+        .PLP-Section h1 {
+            font-size: 18px;
+            padding-bottom: 10px;
+        }
+
+        .PLP-Section p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 1440px) {
+        .PLP-Section h1 {
+            font-size: 16px;
+        }
+
+        .PLP-Section p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    }
+
+    @media (max-width: 1280px) {
+        .PLP-Section h1 {
+            font-size: 14px;
+        }
+
+        .PLP-Section p {
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .page-products .columns {
+            padding-top: 0px;
+        }
+
+        .PLP-Section {
+            flex-direction: column;
+            min-height: auto;
+        }
+
+        .introTextContainer {
+            padding: 28px 18px 14px 18px;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        .desktop-version {
+            display: none;
+        }
+
+        .mobile-version {
+            display: block;
+        }
+
+        .PLP-Section h1 {
+            font-size: 20px;
+        }
+
+        .PLP-Section p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .introImageContainer img {
+            margin-bottom: -3px;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        .PLP-Section h1 {
+            font-size: 18px;
+        }
+
+        .PLP-Section p {
+            font-size: 14px;
+        }
+    }
+</style>

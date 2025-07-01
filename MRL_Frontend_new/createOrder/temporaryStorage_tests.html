@@ -1,11 +1,3 @@
-/**
- * 訂單暫存功能
- * 1. 表單資料的儲存與還原
- * 2. 產品清單的暫存與還原
- * 3. 使用者介面的互動處理
- * 4. 資料的過期清理
- */
-
 <link href="/static/frontend/Mrl/mrl_luma/zh_Hant_TW/css/emoji.min.css" rel="stylesheet" />
 
 <!-- 功能選單 -->
@@ -323,14 +315,9 @@
     }
 </style>
 <script>
+// ES5語法重構 - 保持原有功能，使用var和傳統function
 (function () {
-    /**
-     * 全域設定
-     * USER_DATA: 使用者基本資料
-     * ITEM_DATA: 商品相關資料(交期、備註)
-     * CACHED_ITEM_IDS: 已選商品的ID
-     * EXPIRY_TIME: 資料過期時間(48小時)
-     */
+    // ===== 配置常量 =====
     var CONFIG = {
         STORAGE_KEYS: {
             USER_DATA: 'allUserData',
@@ -340,16 +327,10 @@
         EXPIRY_TIME: 48 * 60 * 60 * 1000 // 48小時
     };
     
-    /**
-     * LocalStorage 操作模組
-     * 處理所有與 localStorage 相關的操作，包括資料的讀取、儲存和刪除
-     */
+    // ===== 1. SRP: 將相關功能分組到物件中 =====
+    
+    // 本地儲存相關操作
     var StorageHelper = {
-        /**
-         * 從 localStorage 獲取資料
-         * @param {string} key - 儲存的鍵值
-         * @returns {Object} 解析後的資料物件，如果出錯則返回空物件
-         */
         get: function(key) {
             try {
                 return JSON.parse(localStorage.getItem(key)) || {};
@@ -358,12 +339,6 @@
             }
         },
         
-        /**
-         * 將資料儲存到 localStorage
-         * @param {string} key - 儲存的鍵值
-         * @param {Object} data - 要儲存的資料
-         * @returns {boolean} 儲存是否成功
-         */
         set: function(key, data) {
             try {
                 localStorage.setItem(key, JSON.stringify(data));
@@ -372,41 +347,30 @@
                 return ErrorHandler.handleStorageError('set', key, error);
             }
         },
-
-        /**
-         * 從 localStorage 刪除資料
-         * @param {string} key - 要刪除的鍵值
-         * @returns {boolean} 刪除是否成功
-         */
-        remove: function(key){
-            try{
+        
+        // 移除留在storage的'{}'
+        remove: function(key) {
+            try {
                 localStorage.removeItem(key);
                 return true;
-            }catch(error){
-                return ErrorHandler.handleStorageError("remove", key, error)
+            } catch (error) {
+                return ErrorHandler.handleStorageError('remove', key, error);
             }
         },
         
-        /**
-         * 清理過期資料
-         * 檢查並刪除超過 48 小時未更新的資料
-         * 同時清理沒有對應使用者資料的商品資料
-         */
+        // 清理過期資料
         cleanExpiredData: function() {
             var now = new Date().getTime();
             var self = this;
             
-            // 取得所有儲存的鍵值
             var dataKeys = Object.keys(CONFIG.STORAGE_KEYS).map(function(key) {
                 return CONFIG.STORAGE_KEYS[key];
             });
             
-            // 檢查每個儲存區域的資料是否過期
             dataKeys.forEach(function(key) {
                 var data = self.get(key);
                 var hasExpiredData = false;
                 
-                // 檢查每個使用者的資料時間戳記
                 Object.keys(data).forEach(function(userKey) {
                     if (data[userKey].timestamp && (now - data[userKey].timestamp > CONFIG.EXPIRY_TIME)) {
                         delete data[userKey];
@@ -414,7 +378,6 @@
                     }
                 });
                 
-                // 如果有過期資料，更新儲存區
                 if (hasExpiredData) {
                     if (Object.keys(data).length === 0) {
                         self.remove(key);
@@ -464,16 +427,12 @@
         }
     };
 
-    /**
-     * 表單欄位操作模組
-     * 處理表單欄位的初始化、資料獲取和設置
-     */
+    // 表單欄位相關操作
     var FormFieldHelper = {
-        /**
-         * 初始化表單欄位
-         * 獲取所有具有 id 的輸入欄位，包括 input、select 和 textarea
-         * @returns {Object} FormFieldHelper 實例
-         */
+        fieldIds: [],
+        fields: {},
+        
+        // 取有設定id的欄位
         init: function() {
             var self = this;
             var fieldIds = [];
@@ -496,13 +455,10 @@
             this.fieldIds.forEach(function(id) {
                 self.fields[id] = document.getElementById(id);
             });
+            
             return this;
         },
         
-        /**
-         * 獲取所有表單欄位的值
-         * @returns {Object} 欄位ID和值的對應物件
-         */
         getAllFieldData: function() {
             var data = {};
             var self = this;
@@ -511,40 +467,22 @@
                 var field = self.fields[id];
                 if (!field) return;
                 
-                var value = self.getFieldValue(id, field);
-                if (value !== null && value !== undefined) {
-                    data[id] = value;
+                if (field.type === "radio") {
+                    if (field.checked) data[id] = field.value;
+                } else if (field.type === "checkbox") {
+                    data[id] = field.checked;
+                } else if (field.type === "fieldset") {
+                    data[id] = field.querySelector("textarea").value;
+                } else {
+                    data[id] = field.value;
                 }
             });
             return data;
         },
         
-        getFieldValue: function(fieldId, field) {
-            if (fieldId === "order-billing_address_city_id") {
-                return this.fields["order-billing_address_city"].value;
-            }
-            
-            if (!field) return null;
-            
-            if (field.type === "radio") {
-                return field.checked ? field.value : undefined;
-            } else if (field.type === "checkbox") {
-                return field.checked;
-            } else if (field.type === "fieldset") {
-                return field.querySelector("textarea").value;
-            } else {
-                return field.value;
-            }
-        },
-        
-        /**
-         * 設置表單欄位的值
-         * @param {Object} userData - 包含要設置的使用者資料
-         */
         setFieldData: function(userData) {
             var self = this;
             
-            // 清空所有表單欄位
             Object.keys(this.fields).forEach(function(id) {
                 var field = self.fields[id];
                 if (!field) return;
@@ -558,7 +496,6 @@
                 }
             });
 
-            // 設置暫存資料
             var emailField = document.querySelector("#email");
             var lastNameField = document.querySelector("#order-billing_address_lastname");
             var firstNameField = document.querySelector("#order-billing_address_firstname");
@@ -584,10 +521,7 @@
         }
     };
 
-    /**
-     * 使用者資料操作模組
-     * 處理使用者資料的驗證、儲存、載入和刪除
-     */
+    // 用戶資料相關操作
     var UserDataHelper = {
         validateEmail: function(email) {
             if (!email) {
@@ -653,23 +587,9 @@
                 var data = StorageHelper.get(storageKey);
                 if (data[oldEmail]) {
                     data[newEmail] = data[oldEmail];
-                    
-                    // 更新USER_DATA中的email相關欄位
                     if (storageKey === CONFIG.STORAGE_KEYS.USER_DATA) {
-                        // 更新頂層email
                         data[newEmail].email = newEmail;
-                        
-                        // 更新data中所有email相關欄位
-                        if (data[newEmail].data) {
-                            var aboutEmailFields = ['email', 'einvoice_email', 'customerEmail'];
-                            aboutEmailFields.forEach(function(fieldName) {
-                                if (data[newEmail].data.hasOwnProperty(fieldName)) {
-                                    data[newEmail].data[fieldName] = newEmail;
-                                }
-                            });
-                        }
                     }
-                    
                     delete data[oldEmail];
                     StorageHelper.set(storageKey, data);
                 }
@@ -677,10 +597,7 @@
         }
     };
 
-    /**
-     * 產品項目操作模組
-     * 處理產品相關的資料儲存、刪除和還原
-     */
+    // 產品項目相關操作
     var ProductItemHelper = {
         generateItemKey: function(itemID) {
             return "item" + "[" + itemID + "]" + "[qty]";
@@ -697,24 +614,13 @@
             StorageHelper.set(CONFIG.STORAGE_KEYS.CACHED_ITEM_IDS, allCachedItemIDs);
         },
         
-        deleteItem: function(email, itemID, itemSku) {
+        deleteItem: function(email, itemID) {
             var allCachedItemIDs = StorageHelper.get(CONFIG.STORAGE_KEYS.CACHED_ITEM_IDS);
+            var itemKey = this.generateItemKey(itemID);
 
             if (email in allCachedItemIDs) {
                 var userCachedItemIDs = allCachedItemIDs[email];
-                
-                // 如果提供了itemSku，直接刪除
-                if (itemSku && userCachedItemIDs[itemSku]) {
-                    delete userCachedItemIDs[itemSku];
-                } else {
-                    // 如果沒有itemSku，通過itemID在所有SKU中查找並刪除
-                    var itemKey = this.generateItemKey(itemID);
-                    Object.keys(userCachedItemIDs).forEach(function(sku) {
-                        if (userCachedItemIDs[sku] && userCachedItemIDs[sku][itemKey]) {
-                            delete userCachedItemIDs[sku];
-                        }
-                    });
-                }
+                delete userCachedItemIDs[itemKey];
 
                 if (Object.keys(userCachedItemIDs).length === 0) {
                     delete allCachedItemIDs[email];
@@ -742,16 +648,16 @@
                 };
                 
                 if (productSku) {
-                    var allItemData = StorageHelper.get(CONFIG.STORAGE_KEYS.ITEM_DATA);
+                    var allItemData = StorageHelper.get('allItemData');
                     if (!allItemData[email]) allItemData[email] = {};
                     allItemData[email][productSku] = items;
-                    StorageHelper.set(CONFIG.STORAGE_KEYS.ITEM_DATA, allItemData);
+                    StorageHelper.set('allItemData', allItemData);
                 }
             });
         },
         
         restoreItemData: function(selectedEmail) {
-            var allItemData = StorageHelper.get(CONFIG.STORAGE_KEYS.ITEM_DATA);
+            var allItemData = StorageHelper.get('allItemData');
             if (!(selectedEmail in allItemData)) return;
 
             var items = allItemData[selectedEmail];
@@ -776,8 +682,9 @@
         
         // 還原購物車商品資料
         restoreSelectedProducts: function(selectedEmail) {
-            var cacheditemIDs = StorageHelper.get(CONFIG.STORAGE_KEYS.CACHED_ITEM_IDS);
+            var cacheditemIDs = StorageHelper.get('allCachedItemIDs');
             if (!(selectedEmail in cacheditemIDs)) {
+                console.log("暫存的商品資料不存在");
                 return;
             }
 
@@ -812,26 +719,23 @@
                 var actions = row.querySelector(".col-actions .admin__control-select");
                 if (actions.value === "remove") {
                     var productSku = row.querySelector(".product-sku-block").innerText.split(":")[1].trim();
-                    var cachedItemIDs = StorageHelper.get(CONFIG.STORAGE_KEYS.CACHED_ITEM_IDS);
-                    var cachedItemDatas = StorageHelper.get(CONFIG.STORAGE_KEYS.ITEM_DATA);
+                    var cachedItemIDs = StorageHelper.get('allCachedItemIDs');
+                    var cachedItemDatas = StorageHelper.get('allItemData');
 
                     if (cachedItemIDs[selectedEmail] && cachedItemIDs[selectedEmail][productSku]) {
                         delete cachedItemIDs[selectedEmail][productSku];
-                        StorageHelper.set(CONFIG.STORAGE_KEYS.CACHED_ITEM_IDS, cachedItemIDs);
+                        StorageHelper.set('allCachedItemIDs', cachedItemIDs);
                     }
                     if (cachedItemDatas[selectedEmail] && cachedItemDatas[selectedEmail][productSku]) {
                         delete cachedItemDatas[selectedEmail][productSku];
-                        StorageHelper.set(CONFIG.STORAGE_KEYS.ITEM_DATA, cachedItemDatas);
+                        StorageHelper.set('allItemData', cachedItemDatas);
                     }
                 }
             });
         }
     };
 
-    /**
-     * 錯誤處理模組
-     * 統一處理各種錯誤情況並提供適當的錯誤回饋
-     */
+    // ===== 2. 統一錯誤處理和通知系統 =====
     var ErrorHandler = {
         logError: function(context, error, data) {
             console.error('[' + context + '] Error:', error, data || '');
@@ -848,10 +752,6 @@
         }
     };
 
-    /**
-     * 通知處理模組
-     * 處理各種使用者通知，包括成功訊息、警告和確認對話框
-     */
     var NotificationHelper = {
         showSuccess: function(message) {
             var successMessageElement = document.getElementById("saveSuccessMessage");
@@ -873,10 +773,6 @@
         }
     };
 
-    /**
-     * 對話框處理模組
-     * 處理所有彈出對話框的建立和內容管理
-     */
     var DialogHelper = {
         buildPopupContent: function(dataArray) {
             var content = "";
@@ -922,19 +818,28 @@
                    "</div>" +
                    "<button class='sureBtn'> YES </button>" +
                    "<button class='closeBtn'> NO </button>";
-        },
-        
-        buildBasicDialog: function() {
-            return "<h2>還原客戶暫存資料 <span class='remonded-text'>(若資料在48小時內未受到編輯，將會自動刪除)</span></h2>" +
-                   "<div id='popupContent'></div>" +
-                   "<button id='closeDialogBtn'>關閉</button>";
         }
     };
-    
-    /**
-     * 應用程式控制器
-     * 負責初始化應用程式和協調各個模組
-     */
+
+    // ===== 工具函數 =====
+    function waitForElm(selector, doc) {
+        var scopeDoc = doc || document;
+        return new Promise(function(resolve) {
+            var el = scopeDoc.querySelector(selector);
+            if (el) return resolve(el);
+
+            var observer = new MutationObserver(function() {
+                var targetEl = scopeDoc.querySelector(selector);
+                if (targetEl) {
+                    resolve(targetEl);
+                    observer.disconnect();
+                }
+            });
+            observer.observe(scopeDoc, { childList: true, subtree: true });
+        });
+    }
+
+    // ===== 應用程序主控制器 =====
     var AppController = {
         // 應用初始化
         init: function() {
@@ -958,10 +863,7 @@
         }
     };
 
-    /**
-     * UI 控制器
-     * 處理所有使用者介面相關的操作和更新
-     */
+    // ===== UI 控制器 =====
     var UIController = {
         makeUserInputEmail: function() {
             if (document.querySelector("#email").value !== "") return;
@@ -973,7 +875,6 @@
             document.getElementById("tempDataList").innerHTML = popupContent;
             initBlock.style.display = "block";
 
-            this.cleanupEventListeners();
             this.attachUserEmailDialogListeners(storedData, initBlock);
             this.attachDeleteListeners();
         },
@@ -1041,13 +942,10 @@
                     if (storedData[index]) {
                         UserDataHelper.delete(storedData[index].email);
                         
-                        // 檢查當前哪個對話框是打開的，並重新顯示
-                        var userDataDialog = document.getElementById("userDataDialog");
-                        var initBlock = document.getElementById("initBlock");
-                        
-                        if (userDataDialog && userDataDialog.open) {
+                        // 重新顯示對話框
+                        if (document.querySelector("#popupContent")) {
                             self.showStoredDataDialog();
-                        } else if (initBlock && initBlock.style.display === "block") {
+                        } else if (document.querySelector("#tempDataList")) {
                             self.makeUserInputEmail();
                         }
                     }
@@ -1069,22 +967,10 @@
             }, { threshold: 0 });
 
             observer.observe(popupLoading);
-        },
-        
-        cleanupEventListeners: function() {
-            // 通過替換元素來清除所有事件監聽器
-            var emailConfirmBtn = document.getElementById("emailComfirm");
-            if (emailConfirmBtn) {
-                var newBtn = emailConfirmBtn.cloneNode(true);
-                emailConfirmBtn.parentNode.replaceChild(newBtn, emailConfirmBtn);
-            }
         }
     };
 
-    /**
-     * 事件控制器
-     * 處理所有事件監聽器的註冊和管理
-     */
+    // ===== 事件控制器 =====
     var EventController = {
         initializeEventListeners: function(formFields, emailField, lastNameField, firstNameField) {
             this.initializeMenuListeners();
@@ -1154,10 +1040,7 @@
         }
     };
 
-    /**
-     * 產品控制器
-     * 處理所有產品相關的操作和狀態管理
-     */
+    // ===== 產品控制器 =====
     var ProductController = {
         removeSelectItemNum: 0,
 
@@ -1230,14 +1113,10 @@
             if (status) {
                 ProductItemHelper.saveItem(email, itemID, itemQty, itemSku);
             } else {
-                ProductItemHelper.deleteItem(email, itemID, itemSku);
+                ProductItemHelper.deleteItem(email, itemID);
             }
         },
 
-        /**
-         * 移除所有已選擇的商品
-         * 同時清理相關的暫存資料
-         */
         removeSelectItem: function() {
             var existProduct = document.querySelectorAll("#order-items td.col-product > span");
             var existProductArr = [];
@@ -1250,62 +1129,23 @@
                 }
             });
 
-            // 間隔時間移除商品
-            existProductArr.forEach(function(id, index) {
-                setTimeout(function() {
-                    self.removeSelectItemNum++;
-                    order.removeQuoteItem(id);
-                }, index * 2000); 
+            existProductArr.forEach(function(id) {
+                self.removeSelectItemNum++;
+                order.removeQuoteItem(id);
             });
-            
-            // 清理storage中的商品暫存資料
-            var emailField = document.querySelector("#email");
-            if (emailField && emailField.value) {
-                var email = emailField.value;
-                var allCachedItemIDs = StorageHelper.get(CONFIG.STORAGE_KEYS.CACHED_ITEM_IDS);
-                var allItemData = StorageHelper.get(CONFIG.STORAGE_KEYS.ITEM_DATA);
-                
-                if (allCachedItemIDs[email]) {
-                    delete allCachedItemIDs[email];
-                    StorageHelper.set(CONFIG.STORAGE_KEYS.CACHED_ITEM_IDS, allCachedItemIDs);
-                }
-                if (allItemData[email]) {
-                    delete allItemData[email];
-                    StorageHelper.set(CONFIG.STORAGE_KEYS.ITEM_DATA, allItemData);
-                }
-            }
         },
 
         restoreSelectedProducts: function(selectedEmail) {
             ProductItemHelper.restoreSelectedProducts(selectedEmail);
         },
 
-        /**
-         * 處理資料還原
-         * 如果是同一個客戶，直接還原資料
-         * 如果是不同客戶，先清除現有商品再還原
-         * @param {string} selectedEmail - 選擇還原的客戶 email
-         * @param {Object} userData - 要還原的使用者資料
-         */
         handleDataRestore: function(selectedEmail, userData) {
             var self = this;
-            var currentEmail = document.querySelector("#email").value;
-            
-            // 如果是還原同一個客戶的資料，直接還原
-            if (currentEmail === selectedEmail) {
-                self.restoreSelectedProducts(selectedEmail);
-                UIController.showLoadingMask(selectedEmail);
-                FormFieldHelper.setFieldData(userData);
-                return;
-            }
-            
-            // 如果是不同客戶，需要先清除現有商品再還原
             var waitRemoveItem = new Promise(function(resolve) {
                 self.removeSelectItem();
                 resolve();
             });
             
-            // 等待清除完成後再還原資料
             waitRemoveItem.then(function() {
                 setTimeout(function() {
                     self.restoreSelectedProducts(selectedEmail);
@@ -1334,18 +1174,26 @@
         }
     };
 
-    /**
-     * 資料儲存處理器
-     * 處理資料的儲存邏輯和相關操作
-     */
+    // ===== 資料儲存處理器 =====
     var DataSaveProcessor = {
-        /**
-         * 處理 Email 變更
-         * 儲存新的使用者資料，並在必要時更新暫存資料的 Email
-         * @param {string} email - 新的 email
-         * @param {string} name - 使用者名稱
-         * @param {string} currentPreviousEmail - 原本的 email
-         */
+        getFieldValue: function(fieldId, field) {
+            if (fieldId === "order-billing_address_city_id") {
+                return FormFieldHelper.fields["order-billing_address_city"].value;
+            }
+            
+            if (!field) return null;
+            
+            if (field.type === "radio" && field.checked) {
+                return field.value;
+            } else if (field.type === "checkbox") {
+                return field.checked;
+            } else if (field.type === "fieldset") {
+                return field.querySelector("textarea").value;
+            } else {
+                return field.value;
+            }
+        },
+        
         handleEmailChange: function(email, name, currentPreviousEmail) {
             var fieldData = FormFieldHelper.getAllFieldData();
             UserDataHelper.save(email, name, fieldData);
@@ -1359,25 +1207,20 @@
         },
         
         updateUserFieldData: function(email, name, fieldId, fieldValue) {
-            // 取得現有資料
             var allUserData = StorageHelper.get(CONFIG.STORAGE_KEYS.USER_DATA);
-            var existingData = allUserData[email] ? allUserData[email].data : {};
+            if (!allUserData[email]) allUserData[email] = {};
             
-            // 更新單個欄位
-            existingData[fieldId] = fieldValue;
+            if (!allUserData[email].data) allUserData[email].data = {};
+            allUserData[email].email = email;
+            allUserData[email].name = name;
+            allUserData[email].data[fieldId] = fieldValue;
+            allUserData[email].timestamp = new Date().getTime();
             
-            // 使用 UserDataHelper 儲存
-            UserDataHelper.save(email, name, existingData);
+            StorageHelper.set(CONFIG.STORAGE_KEYS.USER_DATA, allUserData);
             NotificationHelper.showSuccess();
         },
 
-        /**
-         * 儲存當前資料
-         * 處理表單欄位變更時的資料儲存
-         * @param {Event} e - 變更事件物件
-         */
         saveCurrentData: function(e) {
-            // 取得必要的表單欄位
             var emailField = document.querySelector("#email");
             var lastNameField = document.querySelector("#order-billing_address_lastname");
             var firstNameField = document.querySelector("#order-billing_address_firstname");
@@ -1387,8 +1230,8 @@
             var name = (lastNameField.value || '') + (firstNameField.value || '');
             var emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@.]+$/;
 
+            // 完全按照原始邏輯：只有在有email和name時才執行
             if (email && name) {
-                // 驗證 email 格式
                 if (!emailFormat.test(email)) {
                     return;
                 }
@@ -1400,17 +1243,21 @@
                     return;
                 }
 
-                // 特殊欄位處理
                 if (fieldId === "order-billing_address_city_id") {
-                    // 城市欄位需要特別處理
                     fieldId = "order-billing_address_city";
                     this.updateUserFieldData(email, name, fieldId, FormFieldHelper.fields[fieldId].value);
                 } else if (fieldId === "email") {
-                    // email 變更需要特別處理
-                    this.handleEmailChange(email, name, currentPreviousEmail);
+                    var fieldData = FormFieldHelper.getAllFieldData();
+                    UserDataHelper.save(email, name, fieldData);
+                    
+                    // 檢查變動欄位是否為email
+                    var checkQuote = document.querySelector("#order-items_grid .empty-text");
+                    if (!checkQuote) {
+                        UserDataHelper.updateEmailKey(currentPreviousEmail, email);
+                        NotificationHelper.showAlert("原儲存資料的Email已被更改，已自動更新暫存資料");
+                    }
                 } else {
-                    // 一般欄位處理
-                    var fieldValue = FormFieldHelper.getFieldValue(fieldId, field);
+                    var fieldValue = this.getFieldValue(fieldId, field);
                     if (fieldValue !== null) {
                         this.updateUserFieldData(email, name, fieldId, fieldValue);
                     }
@@ -1419,15 +1266,15 @@
         }
     };
 
-    /**
-     * 對話框處理器
-     * 處理對話框的初始化和事件處理
-     */
+    // ===== 對話框處理器 =====
     var DialogProcessor = {
         initializeDialog: function(userDataDialog) {
             var popupContentElement = document.getElementById("popupContent");
             if (!popupContentElement) {
-                userDataDialog.innerHTML = DialogHelper.buildBasicDialog();
+                userDataDialog.innerHTML = 
+                    "<h2>還原客戶暫存資料 <span class='remonded-text'>(若資料在48小時內未受到編輯，將會自動刪除)</span></h2>" +
+                    "<div id='popupContent'></div>" +
+                    "<button id='closeDialogBtn'>關閉</button>";
                 popupContentElement = document.getElementById("popupContent");
             }
             return popupContentElement;
@@ -1470,10 +1317,10 @@
                 ProductController.handleDataRestore(selectedEmail, userData);
                 userDataDialog.close();
             });
-        }
-    };
+                 }
+     };
 
-    // 初始化應用程式
+    // ===== 初始化應用程序 =====
     AppController.init();
 })();
 </script>

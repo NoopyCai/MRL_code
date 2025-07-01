@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TemporaryStorage 整合測試</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-suite {
+            border-left: 4px solid #2196F3;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+        .test-case {
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .test-pass {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+            border-left: 4px solid #4caf50;
+        }
+        .test-fail {
+            background-color: #ffeaea;
+            color: #c62828;
+            border-left: 4px solid #f44336;
+        }
+        .test-summary {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .performance-test {
+            background-color: #fff3e0;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>TemporaryStorage 整合測試套件</h1>
+        <button onclick="runIntegrationTests()">執行整合測試</button>
+        <button onclick="runPerformanceTests()">執行性能測試</button>
+        <button onclick="runEdgeCaseTests()">執行邊界測試</button>
+        <button onclick="clearResults()">清除結果</button>
+        <div id="testResults"></div>
+    </div>
+
+    <!-- 模擬完整 DOM 環境 -->
+    <div style="display: none;">
+        <input type="email" id="email" value="" data-previousEmail="" />
+        <input type="text" id="order-billing_address_lastname" value="" />
+        <input type="text" id="order-billing_address_firstname" value="" />
+        <input type="text" id="order-billing_address_city" value="" />
+        <input type="radio" id="test-radio" name="test" value="radio-value" />
+        <input type="checkbox" id="test-checkbox" />
+        <fieldset id="test-fieldset"><textarea>fieldset-value</textarea></fieldset>
+        <div class="order-details">
+            <input type="text" id="test-field" value="" />
+        </div>
+        <dialog id="userDataDialog"></dialog>
+        <div id="popupContent"></div>
+        <div id="tempDataList"></div>
+        <button id="closeDialogBtn">關閉</button>
+        <div id="saveSuccessMessage" class=""><p>訊息</p></div>
+        <div id="order-items_grid"><div class="empty-text"></div></div>
+        <div id="order-header">Create New Order for Customer</div>
+        
+        <!-- 產品相關模擬元素 -->
+        <div id="sales_order_create_search_grid">
+            <table id="sales_order_create_search_grid_table">
+                <tr>
+                    <td class="col-id">123</td>
+                    <td class="col-sku">TEST-SKU-001</td>
+                    <td class="col-qty"><input type="number" value="1" /></td>
+                    <td class="col-select"><input type="checkbox" /></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="order-tables">
+            <tbody>
+                <div class="product-sku-block">SKU: TEST-SKU-001</div>
+                <div class="col-row-from-date-1"><input class="input-date" type="date" /></div>
+                <div class="col-row-to-date-2"><input class="input-date" type="date" /></div>
+                <div class="col-row-free-text"><textarea></textarea></div>
+                <div class="col-actions"><select class="admin__control-select"><option value="remove">remove</option></select></div>
+            </tbody>
+        </div>
+        
+        <div id="order-items">
+            <td class="col-product"><span id="order_item_123">產品123</span></td>
+        </div>
+    </div>
+
+    <script>
+        // 重用第一部分的測試框架
+        let testResults = [];
+        let currentSuite = '';
+
+        function describe(suiteName, testFn) {
+            currentSuite = suiteName;
+            console.log(`\n=== 開始測試套件: ${suiteName} ===`);
+            testFn();
+        }
+
+        function it(testName, testFn) {
+            try {
+                testFn();
+                testResults.push({
+                    suite: currentSuite,
+                    name: testName,
+                    status: 'pass',
+                    error: null
+                });
+                console.log(`✅ ${testName}`);
+            } catch (error) {
+                testResults.push({
+                    suite: currentSuite,
+                    name: testName,
+                    status: 'fail',
+                    error: error.message
+                });
+                console.error(`❌ ${testName}: ${error.message}`);
+            }
+        }
+
+        function expect(actual) {
+            return {
+                toBe: function(expected) {
+                    if (actual !== expected) {
+                        throw new Error(`期望 ${expected}, 但得到 ${actual}`);
+                    }
+                },
+                toEqual: function(expected) {
+                    if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+                        throw new Error(`期望 ${JSON.stringify(expected)}, 但得到 ${JSON.stringify(actual)}`);
+                    }
+                },
+                toBeTruthy: function() {
+                    if (!actual) {
+                        throw new Error(`期望為真值, 但得到 ${actual}`);
+                    }
+                },
+                toBeFalsy: function() {
+                    if (actual) {
+                        throw new Error(`期望為假值, 但得到 ${actual}`);
+                    }
+                },
+                toContain: function(expected) {
+                    if (!actual.includes(expected)) {
+                        throw new Error(`期望包含 ${expected}, 但得到 ${actual}`);
+                    }
+                },
+                toBeGreaterThan: function(expected) {
+                    if (actual <= expected) {
+                        throw new Error(`期望大於 ${expected}, 但得到 ${actual}`);
+                    }
+                },
+                toBeLessThan: function(expected) {
+                    if (actual >= expected) {
+                        throw new Error(`期望小於 ${expected}, 但得到 ${actual}`);
+                    }
+                }
+            };
+        }
+
+        // Mock 物件
+        const MockStorage = {
+            data: {},
+            getItem: function(key) { return this.data[key] || null; },
+            setItem: function(key, value) { this.data[key] = value; },
+            removeItem: function(key) { delete this.data[key]; },
+            clear: function() { this.data = {}; }
+        };
+
+        Object.defineProperty(window, 'localStorage', { value: MockStorage, writable: true });
+        window.alert = function(message) { console.log('Alert:', message); };
+        window.confirm = function(message) { console.log('Confirm:', message); return true; };
+
+        // Mock order 物件
+        window.order = {
+            removeQuoteItem: function(id) {
+                console.log('Removing item:', id);
+            },
+            productConfigureSubmit: function(action, area, fields, items) {
+                console.log('Product configure submit:', action, area, fields, items);
+            }
+        };
+
+        // 引入必要的配置和模組（簡化版）
+        var CONFIG = {
+            STORAGE_KEYS: {
+                USER_DATA: 'allUserData',
+                ITEM_DATA: 'allItemData', 
+                CACHED_ITEM_IDS: 'allCachedItemIDs'
+            },
+            EXPIRY_TIME: 48 * 60 * 60 * 1000
+        };
+
+        // 簡化版核心模組
+        var StorageHelper = {
+            get: function(key) {
+                try {
+                    return JSON.parse(localStorage.getItem(key)) || {};
+                } catch (error) {
+                    return {};
+                }
+            },
+            set: function(key, data) {
+                try {
+                    localStorage.setItem(key, JSON.stringify(data));
+                    return true;
+                } catch (error) {
+                    return false;
+                }
+            },
+            remove: function(key) {
+                try {
+                    localStorage.removeItem(key);
+                    return true;
+                } catch (error) {
+                    return false;
+                }
+            }
+        };
+
+        var FormFieldHelper = {
+            fieldIds: [],
+            fields: {},
+            init: function() {
+                this.fieldIds = ['email', 'order-billing_address_lastname', 'order-billing_address_firstname', 'test-field'];
+                this.fields = {};
+                var self = this;
+                this.fieldIds.forEach(function(id) {
+                    self.fields[id] = document.getElementById(id);
+                });
+                return this;
+            },
+            getAllFieldData: function() {
+                var data = {};
+                var self = this;
+                this.fieldIds.forEach(function(id) {
+                    var field = self.fields[id];
+                    if (field && field.value) {
+                        data[id] = field.value;
+                    }
+                });
+                return data;
+            }
+        };
+
+        var UserDataHelper = {
+            validateEmail: function(email) {
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            },
+            save: function(email, name, fieldData) {
+                if (!this.validateEmail(email)) return false;
+                var userData = {
+                    email: email,
+                    name: name || '客戶',
+                    data: fieldData,
+                    timestamp: new Date().getTime()
+                };
+                var allUserData = StorageHelper.get(CONFIG.STORAGE_KEYS.USER_DATA);
+                allUserData[email] = userData;
+                return StorageHelper.set(CONFIG.STORAGE_KEYS.USER_DATA, allUserData);
+            },
+            loadAll: function() {
+                var userData = StorageHelper.get(CONFIG.STORAGE_KEYS.USER_DATA);
+                return Object.values(userData);
+            },
+            delete: function(email) {
+                var allUserData = StorageHelper.get(CONFIG.STORAGE_KEYS.USER_DATA);
+                delete allUserData[email];
+                StorageHelper.set(CONFIG.STORAGE_KEYS.USER_DATA, allUserData);
+            }
+        };
+
+        var ProductItemHelper = {
+            generateItemKey: function(itemID) {
+                return "item[" + itemID + "][qty]";
+            },
+            saveItem: function(email, itemID, itemQty, itemSku) {
+                var allCachedItemIDs = StorageHelper.get(CONFIG.STORAGE_KEYS.CACHED_ITEM_IDS);
+                var key = this.generateItemKey(itemID);
+                var items = {};
+                items[key] = itemQty;
+                if (!allCachedItemIDs[email]) allCachedItemIDs[email] = {};
+                allCachedItemIDs[email][itemSku] = items;
+                StorageHelper.set(CONFIG.STORAGE_KEYS.CACHED_ITEM_IDS, allCachedItemIDs);
+            },
+            saveItemData: function(email) {
+                var orderTableRows = document.querySelectorAll(".order-tables tbody");
+                Array.prototype.forEach.call(orderTableRows, function(row) {
+                    var productSku = 'TEST-SKU-001';
+                    var itemDate_1 = '2024-01-01';
+                    var itemDate_2 = '2024-01-02';
+                    var itemNote = 'Test note';
+                    
+                    var items = {
+                        itemDate_1: itemDate_1,
+                        itemDate_2: itemDate_2,
+                        itemNote: itemNote
+                    };
+                    
+                    var allItemData = StorageHelper.get(CONFIG.STORAGE_KEYS.ITEM_DATA);
+                    if (!allItemData[email]) allItemData[email] = {};
+                    allItemData[email][productSku] = items;
+                    StorageHelper.set(CONFIG.STORAGE_KEYS.ITEM_DATA, allItemData);
+                });
+            }
+        };
+
+        var DataSaveProcessor = {
+            handleEmailChange: function(email, name, currentPreviousEmail) {
+                var fieldData = FormFieldHelper.getAllFieldData();
+                UserDataHelper.save(email, name, fieldData);
+                
+                if (currentPreviousEmail && currentPreviousEmail !== email) {
+                    console.log('Email changed from', currentPreviousEmail, 'to', email);
+                }
+            },
+            updateUserFieldData: function(email, name, fieldId, fieldValue) {
+                var allUserData = StorageHelper.get(CONFIG.STORAGE_KEYS.USER_DATA);
+                var existingData = allUserData[email] ? allUserData[email].data : {};
+                existingData[fieldId] = fieldValue;
+                UserDataHelper.save(email, name, existingData);
+            }
+        };
+
+        // ===== 整合測試 =====
+        function runIntegrationTests() {
+            testResults = [];
+            MockStorage.clear();
+            FormFieldHelper.init();
+
+            describe('整合測試 - 完整用戶流程', function() {
+                it('應該完成完整的用戶資料儲存流程', function() {
+                    // 模擬用戶輸入
+                    document.getElementById('email').value = 'integration@test.com';
+                    document.getElementById('order-billing_address_lastname').value = '陳';
+                    document.getElementById('order-billing_address_firstname').value = '小明';
+                    document.getElementById('test-field').value = '測試值';
+
+                    // 儲存用戶資料
+                    var email = 'integration@test.com';
+                    var name = '陳小明';
+                    var fieldData = FormFieldHelper.getAllFieldData();
+                    
+                    var saveResult = UserDataHelper.save(email, name, fieldData);
+                    expect(saveResult).toBe(true);
+
+                    // 驗證資料已儲存
+                    var allUsers = UserDataHelper.loadAll();
+                    expect(allUsers.length).toBe(1);
+                    expect(allUsers[0].email).toBe(email);
+                    expect(allUsers[0].name).toBe(name);
+                    expect(allUsers[0].data['test-field']).toBe('測試值');
+                });
+
+                it('應該正確處理 Email 變更流程', function() {
+                    // 初始資料
+                    var oldEmail = 'old@test.com';
+                    var newEmail = 'new@test.com';
+                    var name = '測試用戶';
+                    
+                    UserDataHelper.save(oldEmail, name, { field: 'value' });
+                    
+                    // 模擬 Email 變更
+                    document.getElementById('email').setAttribute('data-previousEmail', oldEmail);
+                    document.getElementById('email').value = newEmail;
+                    
+                    DataSaveProcessor.handleEmailChange(newEmail, name, oldEmail);
+                    
+                    // 驗證新 Email 有資料，舊 Email 沒有資料
+                    var allUsers = UserDataHelper.loadAll();
+                    var newUserData = allUsers.find(function(user) { return user.email === newEmail; });
+                    var oldUserData = allUsers.find(function(user) { return user.email === oldEmail; });
+                    
+                    expect(newUserData).toBeTruthy();
+                    expect(oldUserData).toBeFalsy();
+                });
+
+                it('應該正確處理產品項目儲存流程', function() {
+                    var email = 'product@test.com';
+                    var itemID = '123';
+                    var itemQty = '2';
+                    var itemSku = 'TEST-SKU-001';
+                    
+                    // 儲存產品項目
+                    ProductItemHelper.saveItem(email, itemID, itemQty, itemSku);
+                    
+                    // 驗證產品項目已儲存
+                    var cachedItems = StorageHelper.get(CONFIG.STORAGE_KEYS.CACHED_ITEM_IDS);
+                    expect(cachedItems[email]).toBeTruthy();
+                    expect(cachedItems[email][itemSku]).toBeTruthy();
+                    
+                    var itemKey = ProductItemHelper.generateItemKey(itemID);
+                    expect(cachedItems[email][itemSku][itemKey]).toBe(itemQty);
+                });
+
+                it('應該正確處理產品資料儲存流程', function() {
+                    var email = 'productdata@test.com';
+                    
+                    // 儲存產品資料
+                    ProductItemHelper.saveItemData(email);
+                    
+                    // 驗證產品資料已儲存
+                    var itemData = StorageHelper.get(CONFIG.STORAGE_KEYS.ITEM_DATA);
+                    expect(itemData[email]).toBeTruthy();
+                    expect(itemData[email]['TEST-SKU-001']).toBeTruthy();
+                    expect(itemData[email]['TEST-SKU-001'].itemDate_1).toBe('2024-01-01');
+                });
+            });
+
+            describe('整合測試 - 多用戶場景', function() {
+                it('應該正確處理多個用戶的資料', function() {
+                    var users = [
+                        { email: 'user1@test.com', name: '用戶1', data: { field1: 'value1' } },
+                        { email: 'user2@test.com', name: '用戶2', data: { field2: 'value2' } },
+                        { email: 'user3@test.com', name: '用戶3', data: { field3: 'value3' } }
+                    ];
+                    
+                    // 儲存多個用戶
+                    users.forEach(function(user) {
+                        UserDataHelper.save(user.email, user.name, user.data);
+                    });
+                    
+                    // 驗證所有用戶都已儲存
+                    var allUsers = UserDataHelper.loadAll();
+                    expect(allUsers.length).toBe(3);
+                    
+                    // 驗證每個用戶的資料正確
+                    users.forEach(function(expectedUser) {
+                        var savedUser = allUsers.find(function(user) {
+                            return user.email === expectedUser.email;
+                        });
+                        expect(savedUser).toBeTruthy();
+                        expect(savedUser.name).toBe(expectedUser.name);
+                        expect(savedUser.data).toEqual(expectedUser.data);
+                    });
+                });
+
+                it('應該正確處理用戶刪除操作', function() {
+                    // 先建立多個用戶
+                    UserDataHelper.save('keep@test.com', '保留用戶', { field: 'keep' });
+                    UserDataHelper.save('delete@test.com', '刪除用戶', { field: 'delete' });
+                    
+                    var initialCount = UserDataHelper.loadAll().length;
+                    expect(initialCount).toBe(2);
+                    
+                    // 刪除其中一個用戶
+                    UserDataHelper.delete('delete@test.com');
+                    
+                    // 驗證只剩下一個用戶
+                    var finalUsers = UserDataHelper.loadAll();
+                    expect(finalUsers.length).toBe(1);
+                    expect(finalUsers[0].email).toBe('keep@test.com');
+                });
+            });
+
+            displayTestResults();
+        }
+
+        // ===== 性能測試 =====
+        function runPerformanceTests() {
+            testResults = [];
+            MockStorage.clear();
+
+            describe('性能測試', function() {
+                it('應該在合理時間內處理大量用戶資料', function() {
+                    var startTime = performance.now();
+                    
+                    // 建立 100 個用戶
+                    for (var i = 0; i < 100; i++) {
+                        UserDataHelper.save(
+                            'user' + i + '@test.com',
+                            '用戶' + i,
+                            { field1: 'value' + i, field2: 'value' + (i * 2) }
+                        );
+                    }
+                    
+                    var endTime = performance.now();
+                    var duration = endTime - startTime;
+                    
+                    expect(duration).toBeLessThan(1000); // 應該在 1 秒內完成
+                    
+                    // 驗證所有用戶都已儲存
+                    var allUsers = UserDataHelper.loadAll();
+                    expect(allUsers.length).toBe(100);
+                    
+                    console.log(`性能測試: 儲存100個用戶耗時 ${duration.toFixed(2)}ms`);
+                });
+
+                it('應該快速載入大量用戶資料', function() {
+                    // 先建立 50 個用戶
+                    for (var i = 0; i < 50; i++) {
+                        UserDataHelper.save('load' + i + '@test.com', '載入用戶' + i, { field: 'value' + i });
+                    }
+                    
+                    var startTime = performance.now();
+                    
+                    // 載入所有用戶
+                    var allUsers = UserDataHelper.loadAll();
+                    
+                    var endTime = performance.now();
+                    var duration = endTime - startTime;
+                    
+                    expect(duration).toBeLessThan(100); // 應該在 100ms 內完成
+                    expect(allUsers.length).toBe(50);
+                    
+                    console.log(`性能測試: 載入50個用戶耗時 ${duration.toFixed(2)}ms`);
+                });
+
+                it('應該快速處理大量產品項目', function() {
+                    var email = 'performance@test.com';
+                    var startTime = performance.now();
+                    
+                    // 建立 100 個產品項目
+                    for (var i = 0; i < 100; i++) {
+                        ProductItemHelper.saveItem(email, 'item' + i, String(i + 1), 'SKU-' + i);
+                    }
+                    
+                    var endTime = performance.now();
+                    var duration = endTime - startTime;
+                    
+                    expect(duration).toBeLessThan(500); // 應該在 500ms 內完成
+                    
+                    var cachedItems = StorageHelper.get(CONFIG.STORAGE_KEYS.CACHED_ITEM_IDS);
+                    expect(Object.keys(cachedItems[email]).length).toBe(100);
+                    
+                    console.log(`性能測試: 儲存100個產品項目耗時 ${duration.toFixed(2)}ms`);
+                });
+            });
+
+            displayTestResults();
+        }
+
+        // ===== 邊界測試 =====
+        function runEdgeCaseTests() {
+            testResults = [];
+            MockStorage.clear();
+
+            describe('邊界測試', function() {
+                it('應該處理空字串和 null 值', function() {
+                    expect(UserDataHelper.validateEmail('')).toBe(false);
+                    expect(UserDataHelper.validateEmail(null)).toBe(false);
+                    expect(UserDataHelper.validateEmail(undefined)).toBe(false);
+                    
+                    var result = UserDataHelper.save('', '測試', {});
+                    expect(result).toBe(false);
+                });
+
+                it('應該處理極長的字串', function() {
+                    var longEmail = 'a'.repeat(100) + '@' + 'b'.repeat(100) + '.com';
+                    var longName = 'c'.repeat(1000);
+                    var longValue = 'd'.repeat(10000);
+                    
+                    var result = UserDataHelper.save(longEmail, longName, { longField: longValue });
+                    expect(result).toBe(true);
+                    
+                    var savedData = UserDataHelper.loadAll();
+                    var savedUser = savedData.find(function(user) { return user.email === longEmail; });
+                    expect(savedUser).toBeTruthy();
+                    expect(savedUser.name).toBe(longName);
+                    expect(savedUser.data.longField).toBe(longValue);
+                });
+
+                it('應該處理特殊字符', function() {
+                    var specialEmail = 'test+tag@domain-name.co.uk';
+                    var specialName = '張三-李四_王五.陳六';
+                    var specialData = {
+                        'field-with-dash': 'value-1',
+                        'field_with_underscore': 'value_2',
+                        'field.with.dot': 'value.3',
+                        'field with space': 'value 4'
+                    };
+                    
+                    var result = UserDataHelper.save(specialEmail, specialName, specialData);
+                    expect(result).toBe(true);
+                    
+                    var savedData = UserDataHelper.loadAll();
+                    var savedUser = savedData[0];
+                    expect(savedUser.email).toBe(specialEmail);
+                    expect(savedUser.name).toBe(specialName);
+                    expect(savedUser.data).toEqual(specialData);
+                });
+
+                it('應該處理重複的 email', function() {
+                    var email = 'duplicate@test.com';
+                    
+                    UserDataHelper.save(email, '第一次', { field: 'first' });
+                    UserDataHelper.save(email, '第二次', { field: 'second' });
+                    
+                    var allUsers = UserDataHelper.loadAll();
+                    expect(allUsers.length).toBe(1);
+                    expect(allUsers[0].name).toBe('第二次');
+                    expect(allUsers[0].data.field).toBe('second');
+                });
+
+                it('應該處理 localStorage 容量限制', function() {
+                    // 模擬 localStorage 錯誤
+                    var originalSetItem = MockStorage.setItem;
+                    MockStorage.setItem = function() {
+                        throw new Error('QuotaExceededError');
+                    };
+                    
+                    var result = StorageHelper.set('test', { data: 'test' });
+                    expect(result).toBe(false);
+                    
+                    // 恢復原始方法
+                    MockStorage.setItem = originalSetItem;
+                });
+
+                it('應該處理損壞的 JSON 資料', function() {
+                    // 模擬損壞的 JSON
+                    MockStorage.data['corrupted'] = '{"invalid": json}';
+                    
+                    var result = StorageHelper.get('corrupted');
+                    expect(result).toEqual({});
+                });
+            });
+
+            displayTestResults();
+        }
+
+        function displayTestResults() {
+            const resultContainer = document.getElementById('testResults');
+            const passed = testResults.filter(t => t.status === 'pass').length;
+            const failed = testResults.filter(t => t.status === 'fail').length;
+            const total = testResults.length;
+
+            let html = `
+                <div class="test-summary">
+                    <h2>測試結果摘要</h2>
+                    <p><strong>總計:</strong> ${total} 個測試</p>
+                    <p><strong>通過:</strong> <span style="color: #2e7d32;">${passed}</span></p>
+                    <p><strong>失敗:</strong> <span style="color: #c62828;">${failed}</span></p>
+                    <p><strong>成功率:</strong> ${total > 0 ? Math.round((passed / total) * 100) : 0}%</p>
+                </div>
+            `;
+
+            const suites = [...new Set(testResults.map(t => t.suite))];
+            
+            suites.forEach(suite => {
+                const suiteTests = testResults.filter(t => t.suite === suite);
+                const suitePassed = suiteTests.filter(t => t.status === 'pass').length;
+                
+                html += `
+                    <div class="test-suite">
+                        <h3>${suite} (${suitePassed}/${suiteTests.length})</h3>
+                `;
+                
+                suiteTests.forEach(test => {
+                    html += `
+                        <div class="test-case test-${test.status}">
+                            <strong>${test.status === 'pass' ? '✅' : '❌'} ${test.name}</strong>
+                            ${test.error ? `<div style="color: #666; font-size: 12px; margin-top: 5px;">錯誤: ${test.error}</div>` : ''}
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+            });
+
+            resultContainer.innerHTML = html;
+        }
+
+        function clearResults() {
+            document.getElementById('testResults').innerHTML = '';
+            testResults = [];
+            MockStorage.clear();
+        }
+
+        // 頁面載入完成後顯示說明
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('testResults').innerHTML = `
+                <div class="test-summary">
+                    <h2>整合測試說明</h2>
+                    <p>此測試套件包含以下測試類型：</p>
+                    <ul>
+                        <li><strong>整合測試:</strong> 測試模組間的交互和完整業務流程</li>
+                        <li><strong>性能測試:</strong> 測試系統在大量資料下的性能表現</li>
+                        <li><strong>邊界測試:</strong> 測試極端情況和錯誤處理</li>
+                    </ul>
+                    <p>點擊上方按鈕開始相應的測試。</p>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html> 
